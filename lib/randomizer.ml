@@ -3,7 +3,7 @@
 type seed = [ `Int of int | `Array of int array ]
 
 type t = {
-  next : unit -> float;  (** A float in [0, 1). *)
+  next : unit -> float;  (** A float from 0 (inclusive) to 1 (exclusive). *)
   seed : seed -> unit;
 }
 

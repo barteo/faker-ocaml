@@ -3,8 +3,8 @@
 (generate_opam_files true)
 (source (github barteo/faker-ocaml))
 (license MIT)
-(authors "Bartek Teodorczyk")
-(maintainers "Bartek Teodorczyk")
+(authors "Bartek Teodorczyk <barteo@gmail.com>")
+(maintainers "Bartek Teodorczyk <barteo@gmail.com>")
 (package
  (name faker)
  (synopsis "Generate massive amounts of fake (but realistic) data for testing and development")
