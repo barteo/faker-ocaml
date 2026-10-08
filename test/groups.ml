@@ -5,6 +5,7 @@ let groups =
       Expected_unicode.locale,
       Expected_unicode.cases,
       Cases_unicode.cases );
+    ("bigint", Expected_bigint.locale, Expected_bigint.cases, Cases_bigint.cases);
     ("core", Expected_core.locale, Expected_core.cases, Cases_core.cases);
     ("number", Expected_number.locale, Expected_number.cases, Cases_number.cases);
     ( "datatype",

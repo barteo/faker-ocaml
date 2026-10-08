@@ -36,6 +36,9 @@ harness converts `Faker.Faker_error msg` in the same way.
   `` Types.range = [`N of int | `Range of int * int] ``.
 - Dates are `float` epoch milliseconds. The default reference date is `Core.ref_date f`. Use
   `Date_util` for UTC parts, `Date.UTC`, `to_iso` and `of_iso`.
+- JS `bigint` is `Bigint.t` (`lib/internal/bigint.ml`). Its `div` and `rem` follow JS: `/`
+  truncates toward zero and `%` takes the sign of the dividend. `BigInt(x)` conversions are
+  `Bigint.of_string`, `of_float` and `of_bool`, which raise V8's messages.
 - Upstream return types map to `string`, `int`, `float`, `bool`, `'a array`, records, or tuples.
   If a method returns an object, define a small record type in your module.
 - When upstream *validates* input and throws, raise with the **exact same message** through

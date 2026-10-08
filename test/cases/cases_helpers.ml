@@ -133,6 +133,27 @@ let cases : case list =
               {{helpers.objectEntry({\"a\":1,\"b\":2})}} \
               {{helpers.enumValue({\"A\":\"x\",\"B\":\"y\"})}}"
              f) );
+    ( "fake/bigInt",
+      fun f ->
+        s
+          (H.fake
+             "{{number.bigInt({\"min\":\"-1000000000000000000000\",\"max\":\"1000000000000000000000\"})}} \
+              {{number.bigInt(\"0x1fffffffffffffffffff\")}} \
+              {{number.bigInt(true)}} \
+              {{number.bigInt({\"max\":1e21,\"multipleOf\":\"1000\"})}}"
+             f) );
+    ( "fake/bigInt/errSyntax",
+      fun f -> s (H.fake "{{number.bigInt(\"12abc\")}}" f) );
+    ("fake/bigInt/errRange", fun f -> s (H.fake "{{number.bigInt(1.5)}}" f));
+    ( "fake/bigInt/errOrder",
+      fun f ->
+        s
+          (H.fake
+             "{{number.bigInt({\"min\":10,\"max\":5,\"multipleOf\":\"x\"})}}" f)
+    );
+    ( "fake/bigInt/errMultSyntax",
+      fun f ->
+        s (H.fake "{{number.bigInt({\"max\":5,\"multipleOf\":\"x\"})}}" f) );
     ("fake/literal", fun f -> s (H.fake "no tokens here" f));
     ( "fake/number",
       fun f ->

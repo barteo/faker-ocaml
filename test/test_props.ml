@@ -60,8 +60,18 @@ let () =
               | None -> true
               | Some i -> String.length s - i - 1 <= 2);
           for_seeds "bigInt in range" (fun f ->
-              let v = Faker.Number.big_int ~min:10 ~max:20 f in
-              v >= 10 && v <= 20);
+              let min = Faker.Bigint.of_int 10
+              and max = Faker.Bigint.of_int 20 in
+              let v = Faker.Number.big_int ~min ~max f in
+              Faker.Bigint.compare v min >= 0 && Faker.Bigint.compare v max <= 0);
+          for_seeds "bigInt in a wide range" (fun f ->
+              let min =
+                Faker.Bigint.of_string "-1000000000000000000000000000000"
+              and max =
+                Faker.Bigint.of_string "5000000000000000000000000000000"
+              in
+              let v = Faker.Number.big_int ~min ~max f in
+              Faker.Bigint.compare v min >= 0 && Faker.Bigint.compare v max <= 0);
           for_seeds "roman numeral" (fun f ->
               all_chars
                 (fun c -> String.contains "MDCLXVI" c)

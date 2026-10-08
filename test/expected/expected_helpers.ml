@@ -283,6 +283,66 @@ let cases =
       7,
       {x|["747955024683029 2 9 1 y","591576424343873 8 9 1 x","749174465400756 8 5 1 x"]|x}
     );
+    ( "fake/bigInt",
+      42,
+      {x|["975110867098211354260 83599778658154417302654 1 519798590103328320000","809710877703186303376 86197108141920358280661 1 688185883124880534000","393573992432065029214 20033001797338679496531 1 319826855208963377000"]|x}
+    );
+    ( "fake/bigInt",
+      1337,
+      {x|["-875647028638052265430 113025854493679264522035 1 498659200994370754000","-80627485562522602159 58601359640630915459604 1 340977002126495113000","-939239262648172404993 114428372516605141014017 1 558760057712246224000"]|x}
+    );
+    ( "fake/bigInt",
+      7,
+      {x|["-252044975316970750931 108041914982558705598075 0 174465400756960343000","984813474133314477543 113329610456895223679080 1 891261251780579212000","147816851028003010560 135992089478680221906034 1 537113329813242588000"]|x}
+    );
+    ( "fake/bigInt/errSyntax",
+      42,
+      {x|[{"error":"Cannot convert 12abc to a BigInt"},{"error":"Cannot convert 12abc to a BigInt"},{"error":"Cannot convert 12abc to a BigInt"}]|x}
+    );
+    ( "fake/bigInt/errSyntax",
+      1337,
+      {x|[{"error":"Cannot convert 12abc to a BigInt"},{"error":"Cannot convert 12abc to a BigInt"},{"error":"Cannot convert 12abc to a BigInt"}]|x}
+    );
+    ( "fake/bigInt/errSyntax",
+      7,
+      {x|[{"error":"Cannot convert 12abc to a BigInt"},{"error":"Cannot convert 12abc to a BigInt"},{"error":"Cannot convert 12abc to a BigInt"}]|x}
+    );
+    ( "fake/bigInt/errRange",
+      42,
+      {x|[{"error":"The number 1.5 cannot be converted to a BigInt because it is not an integer"},{"error":"The number 1.5 cannot be converted to a BigInt because it is not an integer"},{"error":"The number 1.5 cannot be converted to a BigInt because it is not an integer"}]|x}
+    );
+    ( "fake/bigInt/errRange",
+      1337,
+      {x|[{"error":"The number 1.5 cannot be converted to a BigInt because it is not an integer"},{"error":"The number 1.5 cannot be converted to a BigInt because it is not an integer"},{"error":"The number 1.5 cannot be converted to a BigInt because it is not an integer"}]|x}
+    );
+    ( "fake/bigInt/errRange",
+      7,
+      {x|[{"error":"The number 1.5 cannot be converted to a BigInt because it is not an integer"},{"error":"The number 1.5 cannot be converted to a BigInt because it is not an integer"},{"error":"The number 1.5 cannot be converted to a BigInt because it is not an integer"}]|x}
+    );
+    ( "fake/bigInt/errOrder",
+      42,
+      {x|[{"error":"Max 5 should be larger than min 10."},{"error":"Max 5 should be larger than min 10."},{"error":"Max 5 should be larger than min 10."}]|x}
+    );
+    ( "fake/bigInt/errOrder",
+      1337,
+      {x|[{"error":"Max 5 should be larger than min 10."},{"error":"Max 5 should be larger than min 10."},{"error":"Max 5 should be larger than min 10."}]|x}
+    );
+    ( "fake/bigInt/errOrder",
+      7,
+      {x|[{"error":"Max 5 should be larger than min 10."},{"error":"Max 5 should be larger than min 10."},{"error":"Max 5 should be larger than min 10."}]|x}
+    );
+    ( "fake/bigInt/errMultSyntax",
+      42,
+      {x|[{"error":"Cannot convert x to a BigInt"},{"error":"Cannot convert x to a BigInt"},{"error":"Cannot convert x to a BigInt"}]|x}
+    );
+    ( "fake/bigInt/errMultSyntax",
+      1337,
+      {x|[{"error":"Cannot convert x to a BigInt"},{"error":"Cannot convert x to a BigInt"},{"error":"Cannot convert x to a BigInt"}]|x}
+    );
+    ( "fake/bigInt/errMultSyntax",
+      7,
+      {x|[{"error":"Cannot convert x to a BigInt"},{"error":"Cannot convert x to a BigInt"},{"error":"Cannot convert x to a BigInt"}]|x}
+    );
     ( "fake/unresolvable",
       42,
       {x|[{"error":"Cannot resolve expression 'foo.bar'"},{"error":"Cannot resolve expression 'foo.bar'"},{"error":"Cannot resolve expression 'foo.bar'"}]|x}

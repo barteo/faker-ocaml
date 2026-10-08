@@ -159,6 +159,120 @@ let cases =
     ("bigInt/mult", 42, {x|["278264","76076","68754"]|x});
     ("bigInt/mult", 1337, {x|["148708","370804","253365"]|x});
     ("bigInt/mult", 7, {x|["52360","385175","478121"]|x});
+    ( "bigInt/wide",
+      42,
+      {x|["975110867098211354261234715503","99830641409263551979859010331","325180971087770318630337684169"]|x}
+    );
+    ( "bigInt/wide",
+      1337,
+      {x|["124352971361947734571264141579","455079113603073749865920099428","761691937251443747739784496529"]|x}
+    );
+    ( "bigInt/wide",
+      7,
+      {x|["747955024683029249069259157642","343873524363474917446540075692","352998481347413331447754786890"]|x}
+    );
+    ( "bigInt/wideNeg",
+      42,
+      {x|["-6024889132901788645738765284493890016936","-8590736448020140989667167481902891222969","-1369662315822425459893640752797801311815"]|x}
+    );
+    ( "bigInt/wideNeg",
+      1337,
+      {x|["-7875647028638052265428735858418054492089","-6396926250134079900562923830806274855626","-2260215503470427564839720351076369659023"]|x}
+    );
+    ( "bigInt/wideNeg",
+      7,
+      {x|["-9252044975316970750930740842357565612648","-5636525082553459924303964700151865258667","-8552245213109175228396154212955943108739"]|x}
+    );
+    ( "bigInt/wideMult",
+      42,
+      {x|["49075442352002632096157408786144790","43735954499525307156428071170691290","12324770423430583698121310665590150"]|x}
+    );
+    ( "bigInt/wideMult",
+      1337,
+      {x|["26226579647318151396287849343181830","90687809561659323800778154284551910","56182606102019960232989469962334930"]|x}
+    );
+    ( "bigInt/wideMult",
+      7,
+      {x|["9234012557301651660025925040438810","30749290967286304701674737560525360","42453521134273232240098888012709610"]|x}
+    );
+    ("bigInt/negMult", 42, {x|["-21","-63","-21"]|x});
+    ("bigInt/negMult", 1337, {x|["-49","-28","-49"]|x});
+    ("bigInt/negMult", 7, {x|["-49","-63","-21"]|x});
+    ( "bigInt/string",
+      42,
+      {x|["27140719672784098722419767877","117171150364709919914860318539","81411602946396412516161201902"]|x}
+    );
+    ( "bigInt/string",
+      1337,
+      {x|["88978508123849094555891846267","71094002123685058597424633103","391324900214407044036080823"]|x}
+    );
+    ( "bigInt/string",
+      7,
+      {x|["74795502468302924906925915764","119981946231289070273230832865","96155475394927661022805779549"]|x}
+    );
+    ("bigInt/true", 42, {x|["1","1","1"]|x});
+    ("bigInt/true", 1337, {x|["0","1","0"]|x});
+    ("bigInt/true", 7, {x|["0","1","0"]|x});
+    ( "bigInt/same",
+      42,
+      {x|["100000000000000000000","100000000000000000000","100000000000000000000"]|x}
+    );
+    ( "bigInt/same",
+      1337,
+      {x|["100000000000000000000","100000000000000000000","100000000000000000000"]|x}
+    );
+    ( "bigInt/same",
+      7,
+      {x|["100000000000000000000","100000000000000000000","100000000000000000000"]|x}
+    );
+    ( "bigInt/errMax",
+      42,
+      {x|[{"error":"Max -1000000000000000000000000000000 should be larger than min 1000000000000000000000000000000."},{"error":"Max -1000000000000000000000000000000 should be larger than min 1000000000000000000000000000000."},{"error":"Max -1000000000000000000000000000000 should be larger than min 1000000000000000000000000000000."}]|x}
+    );
+    ( "bigInt/errMax",
+      1337,
+      {x|[{"error":"Max -1000000000000000000000000000000 should be larger than min 1000000000000000000000000000000."},{"error":"Max -1000000000000000000000000000000 should be larger than min 1000000000000000000000000000000."},{"error":"Max -1000000000000000000000000000000 should be larger than min 1000000000000000000000000000000."}]|x}
+    );
+    ( "bigInt/errMax",
+      7,
+      {x|[{"error":"Max -1000000000000000000000000000000 should be larger than min 1000000000000000000000000000000."},{"error":"Max -1000000000000000000000000000000 should be larger than min 1000000000000000000000000000000."},{"error":"Max -1000000000000000000000000000000 should be larger than min 1000000000000000000000000000000."}]|x}
+    );
+    ( "bigInt/errMult",
+      42,
+      {x|[{"error":"multipleOf should be greater than 0."},{"error":"multipleOf should be greater than 0."},{"error":"multipleOf should be greater than 0."}]|x}
+    );
+    ( "bigInt/errMult",
+      1337,
+      {x|[{"error":"multipleOf should be greater than 0."},{"error":"multipleOf should be greater than 0."},{"error":"multipleOf should be greater than 0."}]|x}
+    );
+    ( "bigInt/errMult",
+      7,
+      {x|[{"error":"multipleOf should be greater than 0."},{"error":"multipleOf should be greater than 0."},{"error":"multipleOf should be greater than 0."}]|x}
+    );
+    ( "bigInt/errMultNeg",
+      42,
+      {x|[{"error":"multipleOf should be greater than 0."},{"error":"multipleOf should be greater than 0."},{"error":"multipleOf should be greater than 0."}]|x}
+    );
+    ( "bigInt/errMultNeg",
+      1337,
+      {x|[{"error":"multipleOf should be greater than 0."},{"error":"multipleOf should be greater than 0."},{"error":"multipleOf should be greater than 0."}]|x}
+    );
+    ( "bigInt/errMultNeg",
+      7,
+      {x|[{"error":"multipleOf should be greater than 0."},{"error":"multipleOf should be greater than 0."},{"error":"multipleOf should be greater than 0."}]|x}
+    );
+    ( "bigInt/noSuitable",
+      42,
+      {x|[{"error":"No suitable bigint value between 100000000000000000001 and 100000000000000000005 found."},{"error":"No suitable bigint value between 100000000000000000001 and 100000000000000000005 found."},{"error":"No suitable bigint value between 100000000000000000001 and 100000000000000000005 found."}]|x}
+    );
+    ( "bigInt/noSuitable",
+      1337,
+      {x|[{"error":"No suitable bigint value between 100000000000000000001 and 100000000000000000005 found."},{"error":"No suitable bigint value between 100000000000000000001 and 100000000000000000005 found."},{"error":"No suitable bigint value between 100000000000000000001 and 100000000000000000005 found."}]|x}
+    );
+    ( "bigInt/noSuitable",
+      7,
+      {x|[{"error":"No suitable bigint value between 100000000000000000001 and 100000000000000000005 found."},{"error":"No suitable bigint value between 100000000000000000001 and 100000000000000000005 found."},{"error":"No suitable bigint value between 100000000000000000001 and 100000000000000000005 found."}]|x}
+    );
     ("romanNumeral", 42, {x|["MCDXCVIII","MMMDCCCII","MMCMXXVIII"]|x});
     ("romanNumeral", 1337, {x|["MXLVIII","DCXXXV","MCXIII"]|x});
     ("romanNumeral", 7, {x|["CCCVI","MMMCXIX","MDCCLIV"]|x});

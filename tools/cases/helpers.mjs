@@ -51,5 +51,10 @@ export const cases = [
   ['fake/helpers', (f) => f.helpers.fake('{{helpers.arrayElement(["a","b","c"])}}{{helpers.fromRegExp(X{3})}}')],
   ['fake/array', (f) => f.helpers.fake(['{{number.int(9)}}', 'x{{datatype.boolean}}'])],
   ['fake/registry', (f) => f.helpers.fake('{{number.bigInt}} {{number.bigInt(10)}} {{number.bigInt({"min":5,"max":9})}} {{helpers.objectEntry({"a":1,"b":2})}} {{helpers.enumValue({"A":"x","B":"y"})}}')],
+  ['fake/bigInt', (f) => f.helpers.fake('{{number.bigInt({"min":"-1000000000000000000000","max":"1000000000000000000000"})}} {{number.bigInt("0x1fffffffffffffffffff")}} {{number.bigInt(true)}} {{number.bigInt({"max":1e21,"multipleOf":"1000"})}}')],
+  ['fake/bigInt/errSyntax', (f) => f.helpers.fake('{{number.bigInt("12abc")}}')],
+  ['fake/bigInt/errRange', (f) => f.helpers.fake('{{number.bigInt(1.5)}}')],
+  ['fake/bigInt/errOrder', (f) => f.helpers.fake('{{number.bigInt({"min":10,"max":5,"multipleOf":"x"})}}')],
+  ['fake/bigInt/errMultSyntax', (f) => f.helpers.fake('{{number.bigInt({"max":5,"multipleOf":"x"})}}')],
   ['fake/unresolvable', (f) => f.helpers.fake('{{foo.bar}}')],
 ];
