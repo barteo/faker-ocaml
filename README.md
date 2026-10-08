@@ -28,7 +28,11 @@
 
 ## 📦 Install
 
-The package isn't on opam yet. Pin it from git:
+```sh
+opam install faker
+```
+
+For the development version, pin it from git:
 
 ```sh
 opam pin add faker https://github.com/barteo/faker-ocaml.git

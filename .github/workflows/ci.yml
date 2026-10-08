@@ -23,7 +23,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        ocaml-compiler: ["5"]
+        # 5.0 is the lower bound in dune-project; 5 is the newest release.
+        ocaml-compiler: ["5.0", "5"]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
