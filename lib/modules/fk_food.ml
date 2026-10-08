@@ -4,14 +4,16 @@ let pick entry f = Fk_helpers.array_element (Locale.strings f "food" entry) f
 
 (* text.split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') *)
 let to_title_case text =
-  String.concat " " (List.map Unicode.js_upper_first (String.split_on_char ' ' text))
+  String.concat " "
+    (List.map Unicode.js_upper_first (String.split_on_char ' ' text))
 
 let adjective f = pick "adjective" f
 let description f = Fake.fake_json (Locale.get f "food" "description_pattern") f
 
 let dish f =
   (* A 50/50 mix of specific dishes and dish_patterns *)
-  if Fk_datatype.boolean f then to_title_case (Fake.fake_json (Locale.get f "food" "dish_pattern") f)
+  if Fk_datatype.boolean f then
+    to_title_case (Fake.fake_json (Locale.get f "food" "dish_pattern") f)
   else to_title_case (pick "dish" f)
 
 let ethnic_category f = pick "ethnic_category" f

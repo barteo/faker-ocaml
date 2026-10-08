@@ -2,167 +2,399 @@
 
 let locale = "ru"
 
-let cases = [
-  ("person.firstName(\"female\")", 42, {x|["Елизавета","Фёкла"]|x});
-  ("person.firstName(\"female\")", 1337, {x|["Галина","Антонина"]|x});
-  ("person.firstName(\"female\")", 7, {x|["Алла","Пелагея"]|x});
-  ("person.firstName(\"male\")", 42, {x|["Измаил","Эдуард"]|x});
-  ("person.firstName(\"male\")", 1337, {x|["Григорий","Валерьян"]|x});
-  ("person.firstName(\"male\")", 7, {x|["Анисим","Селиван"]|x});
-  ("person.lastName(\"female\")", 42, {x|["Чернова","Морозова"]|x});
-  ("person.lastName(\"female\")", 1337, {x|["Воронцова","Крылова"]|x});
-  ("person.lastName(\"female\")", 7, {x|["Селезнева","Прохорова"]|x});
-  ("person.lastName(\"male\")", 42, {x|["Чернов","Морозов"]|x});
-  ("person.lastName(\"male\")", 1337, {x|["Воронцов","Крылов"]|x});
-  ("person.lastName(\"male\")", 7, {x|["Селезнев","Прохоров"]|x});
-  ("person.middleName(\"female\")", 42, {x|["Евгеньевна","Эльдаровна"]|x});
-  ("person.middleName(\"female\")", 1337, {x|["Владимировна","Болеславовна"]|x});
-  ("person.middleName(\"female\")", 7, {x|["Аркадьевна","Руслановна"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 42, {x|["Елизавета Болеславовна Родионова","Антонина Павловна Тимофеева"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 1337, {x|["Ермакова Галина","Евсеева Евпраксия Робертовна"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 7, {x|["Алла Юрьевна Королева","Беспалова Лукия"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 42, {x|["Измаил Артёмович Родионов","Валерьян Исидорович Тимофеев"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 1337, {x|["Ермаков Григорий","Евсеев Егор Тарасович"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 7, {x|["Анисим Яковлевич Королев","Беспалов Мартын"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 42, {x|["Anna Болеславовна Родионова","Anna Павловна Тимофеева"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 1337, {x|["Ермакова Anna","Евсеева Anna Робертовна"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 7, {x|["Anna Юрьевна Королева","Беспалов Anna"]|x});
-  ("person.prefix(\"female\")", 42, {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.prefix(\"female\")", 1337, {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.prefix(\"female\")", 7, {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.prefix(\"male\")", 42, {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.prefix(\"male\")", 1337, {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.prefix(\"male\")", 7, {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.suffix()", 42, {x|[{"error":"The locale data for 'person.suffix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.suffix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.suffix()", 1337, {x|[{"error":"The locale data for 'person.suffix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.suffix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.suffix()", 7, {x|[{"error":"The locale data for 'person.suffix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.suffix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 42, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 1337, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 7, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 42, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 1337, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 7, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode(\"###\")", 42, {x|["397","511"]|x});
-  ("location.zipCode(\"###\")", 1337, {x|["212","435"]|x});
-  ("location.zipCode(\"###\")", 7, {x|["074","795"]|x});
-  ("location.state({\"abbreviated\":true})", 42, {x|["ME","WV"]|x});
-  ("location.state({\"abbreviated\":true})", 1337, {x|["IN","DE"]|x});
-  ("location.state({\"abbreviated\":true})", 7, {x|["AR","RI"]|x});
-  ("location.streetAddress(true)", 42, {x|["ул. Сахалинская, 611 кв. 186","Лесная ул., 821 кв. 235"]|x});
-  ("location.streetAddress(true)", 1337, {x|["ал. Тихая, 535 кв. 397","наб. Саратовская, 294 кв. 873"]|x});
-  ("location.streetAddress(true)", 7, {x|["улица Полярная, 795 кв. 502","пл. Лесозаводская, 402 кв. 924"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 42, {x|["ул. Сахалинская, 611 кв. 186","Лесная ул., 821 кв. 235"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 1337, {x|["ал. Тихая, 535 кв. 397","наб. Саратовская, 294 кв. 873"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 7, {x|["улица Полярная, 795 кв. 502","пл. Лесозаводская, 402 кв. 924"]|x});
-  ("location.countryCode(\"alpha-3\")", 42, {x|["GUY","VCT"]|x});
-  ("location.countryCode(\"alpha-3\")", 1337, {x|["ESH","COD"]|x});
-  ("location.countryCode(\"alpha-3\")", 7, {x|["BEL","SYC"]|x});
-  ("location.countryCode(\"numeric\")", 42, {x|["328","670"]|x});
-  ("location.countryCode(\"numeric\")", 1337, {x|["732","180"]|x});
-  ("location.countryCode(\"numeric\")", 7, {x|["056","690"]|x});
-  ("location.timeZone()", 42, {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x});
-  ("location.timeZone()", 1337, {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x});
-  ("location.timeZone()", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
-  ("date.month({\"abbreviated\":true})", 42, {x|["июнь","янв."]|x});
-  ("date.month({\"abbreviated\":true})", 1337, {x|["июль","апр."]|x});
-  ("date.month({\"abbreviated\":true})", 7, {x|["авг.","сент."]|x});
-  ("date.month({\"context\":true})", 42, {x|["июня","января"]|x});
-  ("date.month({\"context\":true})", 1337, {x|["июля","апреля"]|x});
-  ("date.month({\"context\":true})", 7, {x|["августа","сентября"]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 42, {x|["июня","янв."]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 1337, {x|["июля","апр."]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 7, {x|["авг.","сент."]|x});
-  ("date.weekday({\"abbreviated\":true})", 42, {x|["Пн","Чт"]|x});
-  ("date.weekday({\"abbreviated\":true})", 1337, {x|["Вт","Вт"]|x});
-  ("date.weekday({\"abbreviated\":true})", 7, {x|["Вс","Ср"]|x});
-  ("date.weekday({\"context\":true})", 42, {x|["понедельник","четверг"]|x});
-  ("date.weekday({\"context\":true})", 1337, {x|["вторник","вторник"]|x});
-  ("date.weekday({\"context\":true})", 7, {x|["воскресенье","суббота"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 42, {x|["пн","чт"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 1337, {x|["вт","вт"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 7, {x|["вс","ср"]|x});
-  ("phone.number({\"style\":\"human\"})", 42, {x|["(939)751-10-86","(970)982-11-35"]|x});
-  ("phone.number({\"style\":\"human\"})", 1337, {x|["(921)243-52-97","(913)619-47-73"]|x});
-  ("phone.number({\"style\":\"human\"})", 7, {x|["(907)479-55-02","(946)830-29-24"]|x});
-  ("phone.number({\"style\":\"national\"})", 42, {x|["8 (939) 751-10-86","8 (970) 982-11-35"]|x});
-  ("phone.number({\"style\":\"national\"})", 1337, {x|["8 (921) 243-52-97","8 (913) 619-47-73"]|x});
-  ("phone.number({\"style\":\"national\"})", 7, {x|["8 (907) 479-55-02","8 (946) 830-29-24"]|x});
-  ("phone.number({\"style\":\"international\"})", 42, {x|["+79397511086","+79709821135"]|x});
-  ("phone.number({\"style\":\"international\"})", 1337, {x|["+79212435297","+79136194773"]|x});
-  ("phone.number({\"style\":\"international\"})", 7, {x|["+79074795502","+79468302924"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 42, {x|["jagged","whole"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 1337, {x|["french","dapper"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 7, {x|["bogus","stale"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 42, {x|["guide","whack"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 1337, {x|["equal","daddy"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 7, {x|["brief","stall"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 42, {x|["jot","veg"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 1337, {x|["gad","cow"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 7, {x|["bus","sit"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 42, {x|["even","deer"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 1337, {x|["once","when"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 7, {x|["lend","anti"]|x});
-  ("word.words(5)", 42, {x|["bleakly custody gee psst why","meh ugh utilized wherever without"]|x});
-  ("word.words(5)", 1337, {x|["how yet smooth councilman including","safely junior actually accredit vaguely"]|x});
-  ("word.words(5)", 7, {x|["masticate afore eek requirement circa","forswear delicious yuck bank linear"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 42, {x|["нами","этих"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 1337, {x|["мира","курс"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 7, {x|["базы","рост"]|x});
-  ("lorem.sentences(3)", 42, {x|["Формированию роль правительством за за. Сущности правительством разнообразный. Шагов способствует играет.","Задача место повышение общества. Предложений для массового насущным опыт. Значимость повседневная потребностям богатый практика задания влечёт формированию что."]|x});
-  ("lorem.sentences(3)", 1337, {x|["За концепция опыт модель повседневная. Широким роль гражданского не прежде. Широкому обществом сознания сомнений.","Образом постоянный следует занимаемых курс. Очевидна задач образом значимость повышению способствует занимаемых формирования. Плановых по активизации роль эксперимент забывать."]|x});
-  ("lorem.sentences(3)", 7, {x|["Создаёт общественной реализация. Подготовке очевидна внедрения количественный очевидна путь соображения начало влечёт курс. Играет определения участниками активом правительством формированию инновационный позиции уровня деятельности.","Систему профессионального организационной значительной отношении национальный от. Степени собой модели поставленных концепция. Напрямую прогрессивного насущным опыт рамки образом."]|x});
-  ("lorem.paragraphs(2)", 42, {x|["Формированию роль правительством за за. Сущности правительством разнообразный. Шагов способствует играет.\nЗадача место повышение общества. Предложений для массового насущным опыт. Значимость повседневная потребностям богатый практика задания влечёт формированию что.","Место выполнять работы обществом дальнейших оценить анализа уровня качества. Мира повседневной позиции задача шагов современного форм укрепления. Участия выбранный значимость богатый модернизации не консультация.\nНас кругу позволяет для соображения воздействия экономической собой значимость. Социально-ориентированный разнообразный ресурсосберегающих. Внедрения нас гражданского сущности представляет на влечёт мира модернизации."]|x});
-  ("lorem.paragraphs(2)", 1337, {x|["За концепция опыт модель повседневная. Широким роль гражданского не прежде. Широкому обществом сознания сомнений.\nОбразом постоянный следует занимаемых курс. Очевидна задач образом значимость повышению способствует занимаемых формирования. Плановых по активизации роль эксперимент забывать.","Национальный развития а насущным. Сознания напрямую различных. Шагов способствует предложений порядка этих качества.\nВыбранный форм шагов. Нами реализация активизации следует профессионального занимаемых. Условий забывать условий модернизации различных количественный повседневной задач."]|x});
-  ("lorem.paragraphs(2)", 7, {x|["Создаёт общественной реализация. Подготовке очевидна внедрения количественный очевидна путь соображения начало влечёт курс. Играет определения участниками активом правительством формированию инновационный позиции уровня деятельности.\nСистему профессионального организационной значительной отношении национальный от. Степени собой модели поставленных концепция. Напрямую прогрессивного насущным опыт рамки образом.","Задача с обуславливает обучения принимаемых повседневной образом а вызывает разработке. Развития формирования работы важную мира поэтапного интересный. Формировании структура особенности стороны демократической мира организации с отметить деятельности.\nМодернизации материально-технической зависит образом однако. Сомнений повседневной организации создаёт технологий процесс соображения форм базы. Концепция особенности сомнений рамки другой прогрессивного внедрения нас соответствующих обучения."]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 42, {x|["Jurgen_60degard@mail.ru","Jurgen.60degard@gmail.com"]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 1337, {x|["Jurgen.60degard27@hotmail.com","Jurgen_60degard@hotmail.com"]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 7, {x|["Jurgen_60degard@gmail.com","Jurgen_60degard50@yandex.ru"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 42, {x|["Anna.8xukasz","Anna_8xukasz15"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 1337, {x|["Anna.8xukasz15","Anna.8xukasz"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 7, {x|["Anna.8xukasz77","Anna_8xukasz"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 42, {x|["Zoë15","Zoë_Муравьева2"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 1337, {x|["Zoë.Ермакова","Zoë.Рожкова"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 7, {x|["Zoë_Королева","Zoë.Елисеев67"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 42, {x|["Ratmir.Voronov@mail.ru","Vsevolod#Zaitseva43@yandex.ru"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 1337, {x|["Darukya97@hotmail.com","Emiliya.Sidorova@ya.ru"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 7, {x|["Kir^Maksimov7@gmail.com","Alina.Guseva93@yahoo.com"]|x});
-  ("internet.domainWord()", 42, {x|["hospitable-unit","shameful-negotiation"]|x});
-  ("internet.domainWord()", 1337, {x|["fatal-co-producer","flickering-in-joke"]|x});
-  ("internet.domainWord()", 7, {x|["blushing-saw","jittery-puritan"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 42, {x|["€375.15","€599.09"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 1337, {x|["€262.79","€459.85"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 7, {x|["€77.29","€723.75"]|x});
-  ("commerce.productName()", 42, {x|["Лоснящийся Хлопковый Ремень","Потрясающий Гранитный Кепка"]|x});
-  ("commerce.productName()", 1337, {x|["Интеллектуальный Гранитный Компьютер","Маленький Кожанный Ножницы"]|x});
-  ("commerce.productName()", 7, {x|["Большой Резиновый Куртка","Практичный Хлопковый Ножницы"]|x});
-  ("company.name()", 42, {x|["ФГУП СлюдянкаСбыт","ГУП ГруппТоргСистемс"]|x});
-  ("company.name()", 1337, {x|["ГУП ИгнашиноРус","ОАО ЗавьялихаТрейд"]|x});
-  ("company.name()", 7, {x|["ПАО РусСнаб","ОАО Лапин"]|x});
-  ("finance.currencyName()", 42, {x|["New Israeli Sheqel","CFA Franc BCEAO"]|x});
-  ("finance.currencyName()", 1337, {x|["Ethiopian Birr","Canadian Dollar"]|x});
-  ("finance.currencyName()", 7, {x|["Barbados Dollar","Somali Shilling"]|x});
-  ("finance.creditCardNumber(\"visa\")", 42, {x|["4975110867099","4211-3542-6123-4718"]|x});
-  ("finance.creditCardNumber(\"visa\")", 1337, {x|["4124352971364","4947734571266"]|x});
-  ("finance.creditCardNumber(\"visa\")", 7, {x|["4747955024684","4029249069258"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 42, {x|["2696-7511-0867-0988","2311-1354-2612-3471"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 1337, {x|["2300-2435-2971-3611","5377-3457-1264-1417"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 7, {x|["2610-4795-5024-6833","2365-9249-0692-5918"]|x});
-  ("animal.type()", 42, {x|["frog","whale"]|x});
-  ("animal.type()", 1337, {x|["eagle","cow"]|x});
-  ("animal.type()", 7, {x|["bird","rhinoceros"]|x});
-  ("system.fileName({\"extensionCount\":2})", 42, {x|["unnaturally_dreamily.mar.xlw","following_huzzah.dot.m1v"]|x});
-  ("system.fileName({\"extensionCount\":2})", 1337, {x|["wallaby.jpg.distz","circa_masquerade.lrf.vsw"]|x});
-  ("system.fileName({\"extensionCount\":2})", 7, {x|["bleak.xla.xhtml","drat_who_jungle.xlsx.sh"]|x});
-  ("food.dish()", 42, {x|["Jicama Salad","Tangy Parsnip And White Flour Bowl"]|x});
-  ("food.dish()", 1337, {x|["Moist Green Beans And White Wine Vinegar Bowl","Bruschette With Tomato"]|x});
-  ("food.dish()", 7, {x|["Parsley-rubbed Ostrich Salad","Baba Ganoush"]|x});
-  ("music.songName()", 42, {x|["I Honestly Love You","Why Do Fools Fall in Love?"]|x});
-  ("music.songName()", 1337, {x|["Frankenstein","Cars"]|x});
-  ("music.songName()", 7, {x|["Bad Day","Take Me Home, Country Roads"]|x});
-  ("book.title()", 42, {x|["Котлован","Чапаев и Пустота"]|x});
-  ("book.title()", 1337, {x|["Жизнь и судьба","Война и мир"]|x});
-  ("book.title()", 7, {x|["Белая гвардия","Собачье сердце"]|x});
-  ("vehicle.vehicle()", 42, {x|["Jeep Wrangler","Renault Impala"]|x});
-  ("vehicle.vehicle()", 1337, {x|["Fiat Aventador","Ford Explorer"]|x});
-  ("vehicle.vehicle()", 7, {x|["BYD Mustang","Land Rover Model X"]|x});
-]
+let cases =
+  [
+    ("person.firstName(\"female\")", 42, {x|["Елизавета","Фёкла"]|x});
+    ("person.firstName(\"female\")", 1337, {x|["Галина","Антонина"]|x});
+    ("person.firstName(\"female\")", 7, {x|["Алла","Пелагея"]|x});
+    ("person.firstName(\"male\")", 42, {x|["Измаил","Эдуард"]|x});
+    ("person.firstName(\"male\")", 1337, {x|["Григорий","Валерьян"]|x});
+    ("person.firstName(\"male\")", 7, {x|["Анисим","Селиван"]|x});
+    ("person.lastName(\"female\")", 42, {x|["Чернова","Морозова"]|x});
+    ("person.lastName(\"female\")", 1337, {x|["Воронцова","Крылова"]|x});
+    ("person.lastName(\"female\")", 7, {x|["Селезнева","Прохорова"]|x});
+    ("person.lastName(\"male\")", 42, {x|["Чернов","Морозов"]|x});
+    ("person.lastName(\"male\")", 1337, {x|["Воронцов","Крылов"]|x});
+    ("person.lastName(\"male\")", 7, {x|["Селезнев","Прохоров"]|x});
+    ("person.middleName(\"female\")", 42, {x|["Евгеньевна","Эльдаровна"]|x});
+    ( "person.middleName(\"female\")",
+      1337,
+      {x|["Владимировна","Болеславовна"]|x} );
+    ("person.middleName(\"female\")", 7, {x|["Аркадьевна","Руслановна"]|x});
+    ( "person.fullName({\"sex\":\"female\"})",
+      42,
+      {x|["Елизавета Болеславовна Родионова","Антонина Павловна Тимофеева"]|x}
+    );
+    ( "person.fullName({\"sex\":\"female\"})",
+      1337,
+      {x|["Ермакова Галина","Евсеева Евпраксия Робертовна"]|x} );
+    ( "person.fullName({\"sex\":\"female\"})",
+      7,
+      {x|["Алла Юрьевна Королева","Беспалова Лукия"]|x} );
+    ( "person.fullName({\"sex\":\"male\"})",
+      42,
+      {x|["Измаил Артёмович Родионов","Валерьян Исидорович Тимофеев"]|x} );
+    ( "person.fullName({\"sex\":\"male\"})",
+      1337,
+      {x|["Ермаков Григорий","Евсеев Егор Тарасович"]|x} );
+    ( "person.fullName({\"sex\":\"male\"})",
+      7,
+      {x|["Анисим Яковлевич Королев","Беспалов Мартын"]|x} );
+    ( "person.fullName({\"firstName\":\"Anna\"})",
+      42,
+      {x|["Anna Болеславовна Родионова","Anna Павловна Тимофеева"]|x} );
+    ( "person.fullName({\"firstName\":\"Anna\"})",
+      1337,
+      {x|["Ермакова Anna","Евсеева Anna Робертовна"]|x} );
+    ( "person.fullName({\"firstName\":\"Anna\"})",
+      7,
+      {x|["Anna Юрьевна Королева","Беспалов Anna"]|x} );
+    ( "person.prefix(\"female\")",
+      42,
+      {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "person.prefix(\"female\")",
+      1337,
+      {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "person.prefix(\"female\")",
+      7,
+      {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "person.prefix(\"male\")",
+      42,
+      {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "person.prefix(\"male\")",
+      1337,
+      {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "person.prefix(\"male\")",
+      7,
+      {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "person.suffix()",
+      42,
+      {x|[{"error":"The locale data for 'person.suffix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.suffix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "person.suffix()",
+      1337,
+      {x|[{"error":"The locale data for 'person.suffix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.suffix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "person.suffix()",
+      7,
+      {x|[{"error":"The locale data for 'person.suffix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.suffix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"CA\"})",
+      42,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"CA\"})",
+      1337,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"CA\"})",
+      7,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      42,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      1337,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      7,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ("location.zipCode(\"###\")", 42, {x|["397","511"]|x});
+    ("location.zipCode(\"###\")", 1337, {x|["212","435"]|x});
+    ("location.zipCode(\"###\")", 7, {x|["074","795"]|x});
+    ("location.state({\"abbreviated\":true})", 42, {x|["ME","WV"]|x});
+    ("location.state({\"abbreviated\":true})", 1337, {x|["IN","DE"]|x});
+    ("location.state({\"abbreviated\":true})", 7, {x|["AR","RI"]|x});
+    ( "location.streetAddress(true)",
+      42,
+      {x|["ул. Сахалинская, 611 кв. 186","Лесная ул., 821 кв. 235"]|x} );
+    ( "location.streetAddress(true)",
+      1337,
+      {x|["ал. Тихая, 535 кв. 397","наб. Саратовская, 294 кв. 873"]|x} );
+    ( "location.streetAddress(true)",
+      7,
+      {x|["улица Полярная, 795 кв. 502","пл. Лесозаводская, 402 кв. 924"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      42,
+      {x|["ул. Сахалинская, 611 кв. 186","Лесная ул., 821 кв. 235"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      1337,
+      {x|["ал. Тихая, 535 кв. 397","наб. Саратовская, 294 кв. 873"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      7,
+      {x|["улица Полярная, 795 кв. 502","пл. Лесозаводская, 402 кв. 924"]|x} );
+    ("location.countryCode(\"alpha-3\")", 42, {x|["GUY","VCT"]|x});
+    ("location.countryCode(\"alpha-3\")", 1337, {x|["ESH","COD"]|x});
+    ("location.countryCode(\"alpha-3\")", 7, {x|["BEL","SYC"]|x});
+    ("location.countryCode(\"numeric\")", 42, {x|["328","670"]|x});
+    ("location.countryCode(\"numeric\")", 1337, {x|["732","180"]|x});
+    ("location.countryCode(\"numeric\")", 7, {x|["056","690"]|x});
+    ( "location.timeZone()",
+      42,
+      {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x} );
+    ( "location.timeZone()",
+      1337,
+      {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x} );
+    ("location.timeZone()", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
+    ("date.month({\"abbreviated\":true})", 42, {x|["июнь","янв."]|x});
+    ("date.month({\"abbreviated\":true})", 1337, {x|["июль","апр."]|x});
+    ("date.month({\"abbreviated\":true})", 7, {x|["авг.","сент."]|x});
+    ("date.month({\"context\":true})", 42, {x|["июня","января"]|x});
+    ("date.month({\"context\":true})", 1337, {x|["июля","апреля"]|x});
+    ("date.month({\"context\":true})", 7, {x|["августа","сентября"]|x});
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      42,
+      {x|["июня","янв."]|x} );
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      1337,
+      {x|["июля","апр."]|x} );
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      7,
+      {x|["авг.","сент."]|x} );
+    ("date.weekday({\"abbreviated\":true})", 42, {x|["Пн","Чт"]|x});
+    ("date.weekday({\"abbreviated\":true})", 1337, {x|["Вт","Вт"]|x});
+    ("date.weekday({\"abbreviated\":true})", 7, {x|["Вс","Ср"]|x});
+    ("date.weekday({\"context\":true})", 42, {x|["понедельник","четверг"]|x});
+    ("date.weekday({\"context\":true})", 1337, {x|["вторник","вторник"]|x});
+    ("date.weekday({\"context\":true})", 7, {x|["воскресенье","суббота"]|x});
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      42,
+      {x|["пн","чт"]|x} );
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      1337,
+      {x|["вт","вт"]|x} );
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      7,
+      {x|["вс","ср"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      42,
+      {x|["(939)751-10-86","(970)982-11-35"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      1337,
+      {x|["(921)243-52-97","(913)619-47-73"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      7,
+      {x|["(907)479-55-02","(946)830-29-24"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      42,
+      {x|["8 (939) 751-10-86","8 (970) 982-11-35"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      1337,
+      {x|["8 (921) 243-52-97","8 (913) 619-47-73"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      7,
+      {x|["8 (907) 479-55-02","8 (946) 830-29-24"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      42,
+      {x|["+79397511086","+79709821135"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      1337,
+      {x|["+79212435297","+79136194773"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      7,
+      {x|["+79074795502","+79468302924"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      42,
+      {x|["jagged","whole"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      1337,
+      {x|["french","dapper"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      7,
+      {x|["bogus","stale"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      42,
+      {x|["guide","whack"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      1337,
+      {x|["equal","daddy"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      7,
+      {x|["brief","stall"]|x} );
+    ( "word.verb({\"length\":20,\"strategy\":\"shortest\"})",
+      42,
+      {x|["jot","veg"]|x} );
+    ( "word.verb({\"length\":20,\"strategy\":\"shortest\"})",
+      1337,
+      {x|["gad","cow"]|x} );
+    ( "word.verb({\"length\":20,\"strategy\":\"shortest\"})",
+      7,
+      {x|["bus","sit"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      42,
+      {x|["even","deer"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      1337,
+      {x|["once","when"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      7,
+      {x|["lend","anti"]|x} );
+    ( "word.words(5)",
+      42,
+      {x|["bleakly custody gee psst why","meh ugh utilized wherever without"]|x}
+    );
+    ( "word.words(5)",
+      1337,
+      {x|["how yet smooth councilman including","safely junior actually accredit vaguely"]|x}
+    );
+    ( "word.words(5)",
+      7,
+      {x|["masticate afore eek requirement circa","forswear delicious yuck bank linear"]|x}
+    );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      42,
+      {x|["нами","этих"]|x} );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      1337,
+      {x|["мира","курс"]|x} );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      7,
+      {x|["базы","рост"]|x} );
+    ( "lorem.sentences(3)",
+      42,
+      {x|["Формированию роль правительством за за. Сущности правительством разнообразный. Шагов способствует играет.","Задача место повышение общества. Предложений для массового насущным опыт. Значимость повседневная потребностям богатый практика задания влечёт формированию что."]|x}
+    );
+    ( "lorem.sentences(3)",
+      1337,
+      {x|["За концепция опыт модель повседневная. Широким роль гражданского не прежде. Широкому обществом сознания сомнений.","Образом постоянный следует занимаемых курс. Очевидна задач образом значимость повышению способствует занимаемых формирования. Плановых по активизации роль эксперимент забывать."]|x}
+    );
+    ( "lorem.sentences(3)",
+      7,
+      {x|["Создаёт общественной реализация. Подготовке очевидна внедрения количественный очевидна путь соображения начало влечёт курс. Играет определения участниками активом правительством формированию инновационный позиции уровня деятельности.","Систему профессионального организационной значительной отношении национальный от. Степени собой модели поставленных концепция. Напрямую прогрессивного насущным опыт рамки образом."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      42,
+      {x|["Формированию роль правительством за за. Сущности правительством разнообразный. Шагов способствует играет.\nЗадача место повышение общества. Предложений для массового насущным опыт. Значимость повседневная потребностям богатый практика задания влечёт формированию что.","Место выполнять работы обществом дальнейших оценить анализа уровня качества. Мира повседневной позиции задача шагов современного форм укрепления. Участия выбранный значимость богатый модернизации не консультация.\nНас кругу позволяет для соображения воздействия экономической собой значимость. Социально-ориентированный разнообразный ресурсосберегающих. Внедрения нас гражданского сущности представляет на влечёт мира модернизации."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      1337,
+      {x|["За концепция опыт модель повседневная. Широким роль гражданского не прежде. Широкому обществом сознания сомнений.\nОбразом постоянный следует занимаемых курс. Очевидна задач образом значимость повышению способствует занимаемых формирования. Плановых по активизации роль эксперимент забывать.","Национальный развития а насущным. Сознания напрямую различных. Шагов способствует предложений порядка этих качества.\nВыбранный форм шагов. Нами реализация активизации следует профессионального занимаемых. Условий забывать условий модернизации различных количественный повседневной задач."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      7,
+      {x|["Создаёт общественной реализация. Подготовке очевидна внедрения количественный очевидна путь соображения начало влечёт курс. Играет определения участниками активом правительством формированию инновационный позиции уровня деятельности.\nСистему профессионального организационной значительной отношении национальный от. Степени собой модели поставленных концепция. Напрямую прогрессивного насущным опыт рамки образом.","Задача с обуславливает обучения принимаемых повседневной образом а вызывает разработке. Развития формирования работы важную мира поэтапного интересный. Формировании структура особенности стороны демократической мира организации с отметить деятельности.\nМодернизации материально-технической зависит образом однако. Сомнений повседневной организации создаёт технологий процесс соображения форм базы. Концепция особенности сомнений рамки другой прогрессивного внедрения нас соответствующих обучения."]|x}
+    );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      42,
+      {x|["Jurgen_60degard@mail.ru","Jurgen.60degard@gmail.com"]|x} );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      1337,
+      {x|["Jurgen.60degard27@hotmail.com","Jurgen_60degard@hotmail.com"]|x} );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      7,
+      {x|["Jurgen_60degard@gmail.com","Jurgen_60degard50@yandex.ru"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      42,
+      {x|["Anna.8xukasz","Anna_8xukasz15"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      1337,
+      {x|["Anna.8xukasz15","Anna.8xukasz"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      7,
+      {x|["Anna.8xukasz77","Anna_8xukasz"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      42,
+      {x|["Zoë15","Zoë_Муравьева2"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      1337,
+      {x|["Zoë.Ермакова","Zoë.Рожкова"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      7,
+      {x|["Zoë_Королева","Zoë.Елисеев67"]|x} );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      42,
+      {x|["Ratmir.Voronov@mail.ru","Vsevolod#Zaitseva43@yandex.ru"]|x} );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      1337,
+      {x|["Darukya97@hotmail.com","Emiliya.Sidorova@ya.ru"]|x} );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      7,
+      {x|["Kir^Maksimov7@gmail.com","Alina.Guseva93@yahoo.com"]|x} );
+    ( "internet.domainWord()",
+      42,
+      {x|["hospitable-unit","shameful-negotiation"]|x} );
+    ( "internet.domainWord()",
+      1337,
+      {x|["fatal-co-producer","flickering-in-joke"]|x} );
+    ("internet.domainWord()", 7, {x|["blushing-saw","jittery-puritan"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 42, {x|["€375.15","€599.09"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 1337, {x|["€262.79","€459.85"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 7, {x|["€77.29","€723.75"]|x});
+    ( "commerce.productName()",
+      42,
+      {x|["Лоснящийся Хлопковый Ремень","Потрясающий Гранитный Кепка"]|x} );
+    ( "commerce.productName()",
+      1337,
+      {x|["Интеллектуальный Гранитный Компьютер","Маленький Кожанный Ножницы"]|x}
+    );
+    ( "commerce.productName()",
+      7,
+      {x|["Большой Резиновый Куртка","Практичный Хлопковый Ножницы"]|x} );
+    ("company.name()", 42, {x|["ФГУП СлюдянкаСбыт","ГУП ГруппТоргСистемс"]|x});
+    ("company.name()", 1337, {x|["ГУП ИгнашиноРус","ОАО ЗавьялихаТрейд"]|x});
+    ("company.name()", 7, {x|["ПАО РусСнаб","ОАО Лапин"]|x});
+    ( "finance.currencyName()",
+      42,
+      {x|["New Israeli Sheqel","CFA Franc BCEAO"]|x} );
+    ("finance.currencyName()", 1337, {x|["Ethiopian Birr","Canadian Dollar"]|x});
+    ("finance.currencyName()", 7, {x|["Barbados Dollar","Somali Shilling"]|x});
+    ( "finance.creditCardNumber(\"visa\")",
+      42,
+      {x|["4975110867099","4211-3542-6123-4718"]|x} );
+    ( "finance.creditCardNumber(\"visa\")",
+      1337,
+      {x|["4124352971364","4947734571266"]|x} );
+    ( "finance.creditCardNumber(\"visa\")",
+      7,
+      {x|["4747955024684","4029249069258"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      42,
+      {x|["2696-7511-0867-0988","2311-1354-2612-3471"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      1337,
+      {x|["2300-2435-2971-3611","5377-3457-1264-1417"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      7,
+      {x|["2610-4795-5024-6833","2365-9249-0692-5918"]|x} );
+    ("animal.type()", 42, {x|["frog","whale"]|x});
+    ("animal.type()", 1337, {x|["eagle","cow"]|x});
+    ("animal.type()", 7, {x|["bird","rhinoceros"]|x});
+    ( "system.fileName({\"extensionCount\":2})",
+      42,
+      {x|["unnaturally_dreamily.mar.xlw","following_huzzah.dot.m1v"]|x} );
+    ( "system.fileName({\"extensionCount\":2})",
+      1337,
+      {x|["wallaby.jpg.distz","circa_masquerade.lrf.vsw"]|x} );
+    ( "system.fileName({\"extensionCount\":2})",
+      7,
+      {x|["bleak.xla.xhtml","drat_who_jungle.xlsx.sh"]|x} );
+    ( "food.dish()",
+      42,
+      {x|["Jicama Salad","Tangy Parsnip And White Flour Bowl"]|x} );
+    ( "food.dish()",
+      1337,
+      {x|["Moist Green Beans And White Wine Vinegar Bowl","Bruschette With Tomato"]|x}
+    );
+    ("food.dish()", 7, {x|["Parsley-rubbed Ostrich Salad","Baba Ganoush"]|x});
+    ( "music.songName()",
+      42,
+      {x|["I Honestly Love You","Why Do Fools Fall in Love?"]|x} );
+    ("music.songName()", 1337, {x|["Frankenstein","Cars"]|x});
+    ("music.songName()", 7, {x|["Bad Day","Take Me Home, Country Roads"]|x});
+    ("book.title()", 42, {x|["Котлован","Чапаев и Пустота"]|x});
+    ("book.title()", 1337, {x|["Жизнь и судьба","Война и мир"]|x});
+    ("book.title()", 7, {x|["Белая гвардия","Собачье сердце"]|x});
+    ("vehicle.vehicle()", 42, {x|["Jeep Wrangler","Renault Impala"]|x});
+    ("vehicle.vehicle()", 1337, {x|["Fiat Aventador","Ford Explorer"]|x});
+    ("vehicle.vehicle()", 7, {x|["BYD Mustang","Land Rover Model X"]|x});
+  ]

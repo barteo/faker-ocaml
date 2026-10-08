@@ -6,4 +6,9 @@ let boolean ?(probability = 0.5) f =
   else Fk_number.float f < probability
 
 let registry : (string * Registry.fn) list =
-  [ ("boolean", fun f a -> let o = Args.opts ~shorthand:"probability" a in Args.bool_ (boolean ?probability:(Args.float o "probability") f)) ]
+  [
+    ( "boolean",
+      fun f a ->
+        let o = Args.opts ~shorthand:"probability" a in
+        Args.bool_ (boolean ?probability:(Args.float o "probability") f) );
+  ]

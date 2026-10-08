@@ -2,26 +2,51 @@
 
 let locale = "en"
 
-let cases = [
-  ("author", 42, {x|["Henry David Thoreau","W.K. Marriott","Paulo Coelho"]|x});
-  ("author", 1337, {x|["Frances Hodgson Burnett","Clifford R. Adams","Friedrich Wilhelm Nietzsche"]|x});
-  ("author", 7, {x|["Aylmer Maude","Richard Wright","J.M. Barrie"]|x});
-  ("format", 42, {x|["Ebook","Paperback","Hardcover"]|x});
-  ("format", 1337, {x|["Ebook","Audiobook","Ebook"]|x});
-  ("format", 7, {x|["Audiobook","Paperback","Ebook"]|x});
-  ("genre", 42, {x|["Fantasy","Western","Psychology"]|x});
-  ("genre", 1337, {x|["Comic","Children's Literature","Comic"]|x});
-  ("genre", 7, {x|["Biography","Religion","Graphic Novel"]|x});
-  ("publisher", 42, {x|["Flame Tree Publishing","University of Nebraska Press","O'Reilly Media"]|x});
-  ("publisher", 1337, {x|["City Lights Publishers","Borgo Press","DAW Books"]|x});
-  ("publisher", 7, {x|["Bantam Books","Parragon","Happy House"]|x});
-  ("series", 42, {x|["Sherlock Holmes","Twilight","The Inheritance Cycle"]|x});
-  ("series", 1337, {x|["Jane Austen Murder Mysteries","Harry Potter","Little Women"]|x});
-  ("series", 7, {x|["Colonel Race","The Maze Runner","The Bartimaeus Trilogy"]|x});
-  ("title", 42, {x|["Lord Jim","Tropic of Cancer","The Kite Runner"]|x});
-  ("title", 1337, {x|["Gone with the Wind","Candide","Hamlet"]|x});
-  ("title", 7, {x|["All Quiet on the Western Front","The Pickwick Papers","Native Son"]|x});
-  ("fake", 42, {x|["W.K. Marriott|Hardcover|Children's Literature|Signet Books|The Inheritance Cycle|Under the Volcano|","E.M. Forster|Audiobook|Memoir|Dalkey Archive Press|Dune|Lolita|","Richard Yates|Hardcover|Biography|Breslov Research Institute|Twilight|The Prince|"]|x});
-  ("fake", 1337, {x|["Clifford R. Adams|Ebook|Horror|Vintage Books at Random House|Discworld|The Canterbury Tales|","William Golding|Paperback|Fantasy|Leaf Books|Hercule Poirot|The Enchanted April|","Dan Brown|Audiobook|Romance|Velazquez Press|The Dark Tower|A Brief History of Time|"]|x});
-  ("fake", 7, {x|["Richard Wright|Hardcover|Memoir|Banner of Truth Trust|The Chronicles of Narnia|The Prime of Miss Jean Brodie|","Anton Pavlovich Chekhov|Paperback|Historical Fiction|Andrews McMeel Publishing|Twilight|Second Treatise of Government|","Carson McCallers|Paperback|Historical Fiction|Hay House|The Chronicles of Narnia|The Republic|"]|x});
-]
+let cases =
+  [
+    ("author", 42, {x|["Henry David Thoreau","W.K. Marriott","Paulo Coelho"]|x});
+    ( "author",
+      1337,
+      {x|["Frances Hodgson Burnett","Clifford R. Adams","Friedrich Wilhelm Nietzsche"]|x}
+    );
+    ("author", 7, {x|["Aylmer Maude","Richard Wright","J.M. Barrie"]|x});
+    ("format", 42, {x|["Ebook","Paperback","Hardcover"]|x});
+    ("format", 1337, {x|["Ebook","Audiobook","Ebook"]|x});
+    ("format", 7, {x|["Audiobook","Paperback","Ebook"]|x});
+    ("genre", 42, {x|["Fantasy","Western","Psychology"]|x});
+    ("genre", 1337, {x|["Comic","Children's Literature","Comic"]|x});
+    ("genre", 7, {x|["Biography","Religion","Graphic Novel"]|x});
+    ( "publisher",
+      42,
+      {x|["Flame Tree Publishing","University of Nebraska Press","O'Reilly Media"]|x}
+    );
+    ( "publisher",
+      1337,
+      {x|["City Lights Publishers","Borgo Press","DAW Books"]|x} );
+    ("publisher", 7, {x|["Bantam Books","Parragon","Happy House"]|x});
+    ("series", 42, {x|["Sherlock Holmes","Twilight","The Inheritance Cycle"]|x});
+    ( "series",
+      1337,
+      {x|["Jane Austen Murder Mysteries","Harry Potter","Little Women"]|x} );
+    ( "series",
+      7,
+      {x|["Colonel Race","The Maze Runner","The Bartimaeus Trilogy"]|x} );
+    ("title", 42, {x|["Lord Jim","Tropic of Cancer","The Kite Runner"]|x});
+    ("title", 1337, {x|["Gone with the Wind","Candide","Hamlet"]|x});
+    ( "title",
+      7,
+      {x|["All Quiet on the Western Front","The Pickwick Papers","Native Son"]|x}
+    );
+    ( "fake",
+      42,
+      {x|["W.K. Marriott|Hardcover|Children's Literature|Signet Books|The Inheritance Cycle|Under the Volcano|","E.M. Forster|Audiobook|Memoir|Dalkey Archive Press|Dune|Lolita|","Richard Yates|Hardcover|Biography|Breslov Research Institute|Twilight|The Prince|"]|x}
+    );
+    ( "fake",
+      1337,
+      {x|["Clifford R. Adams|Ebook|Horror|Vintage Books at Random House|Discworld|The Canterbury Tales|","William Golding|Paperback|Fantasy|Leaf Books|Hercule Poirot|The Enchanted April|","Dan Brown|Audiobook|Romance|Velazquez Press|The Dark Tower|A Brief History of Time|"]|x}
+    );
+    ( "fake",
+      7,
+      {x|["Richard Wright|Hardcover|Memoir|Banner of Truth Trust|The Chronicles of Narnia|The Prime of Miss Jean Brodie|","Anton Pavlovich Chekhov|Paperback|Historical Fiction|Andrews McMeel Publishing|Twilight|Second Treatise of Government|","Carson McCallers|Paperback|Historical Fiction|Hay House|The Chronicles of Narnia|The Republic|"]|x}
+    );
+  ]

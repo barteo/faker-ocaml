@@ -2,167 +2,374 @@
 
 let locale = "pl"
 
-let cases = [
-  ("person.firstName(\"female\")", 42, {x|["Izabela","Wiara"]|x});
-  ("person.firstName(\"female\")", 1337, {x|["Ewa","Cecylia"]|x});
-  ("person.firstName(\"female\")", 7, {x|["Andżelika","Penelopa"]|x});
-  ("person.firstName(\"male\")", 42, {x|["Hieronim","Wiktor"]|x});
-  ("person.firstName(\"male\")", 1337, {x|["Emil","Bruno"]|x});
-  ("person.firstName(\"male\")", 7, {x|["Apollo","Rajmund"]|x});
-  ("person.lastName(\"female\")", 42, {x|["Zajączkowski","Niedźwiecki"]|x});
-  ("person.lastName(\"female\")", 1337, {x|["Duda","Kuś"]|x});
-  ("person.lastName(\"female\")", 7, {x|["Sołtysiak","Rutkowski"]|x});
-  ("person.lastName(\"male\")", 42, {x|["Zajączkowski","Niedźwiecki"]|x});
-  ("person.lastName(\"male\")", 1337, {x|["Duda","Kuś"]|x});
-  ("person.lastName(\"male\")", 7, {x|["Sołtysiak","Rutkowski"]|x});
-  ("person.middleName(\"female\")", 42, {x|["Venus","Kali"]|x});
-  ("person.middleName(\"female\")", 1337, {x|["Brielle","Hippolyta"]|x});
-  ("person.middleName(\"female\")", 7, {x|["Michelle","Maddie"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 42, {x|["Izabela Różycki","Cecylia Biernat"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 1337, {x|["Ewa Janiak","Gracja Herman"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 7, {x|["Andżelika Kuc","Pani Zofia Mackiewicz"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 42, {x|["Hieronim Różycki","Brajan Biernat"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 1337, {x|["Emil Janiak","Gabriel Herman"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 7, {x|["Apollo Kuc","Pan Włodzimierz Mackiewicz"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 42, {x|["Anna Różycki","Anna Biernat"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 1337, {x|["Anna Janiak","Anna Herman"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 7, {x|["Anna Kuc","Pan Anna Mackiewicz"]|x});
-  ("person.prefix(\"female\")", 42, {x|["Pani","Pani"]|x});
-  ("person.prefix(\"female\")", 1337, {x|["Pani","Pani"]|x});
-  ("person.prefix(\"female\")", 7, {x|["Pani","Pani"]|x});
-  ("person.prefix(\"male\")", 42, {x|["Pan","Pan"]|x});
-  ("person.prefix(\"male\")", 1337, {x|["Pan","Pan"]|x});
-  ("person.prefix(\"male\")", 7, {x|["Pan","Pan"]|x});
-  ("person.suffix()", 42, {x|["III","DVM"]|x});
-  ("person.suffix()", 1337, {x|["I","Sr."]|x});
-  ("person.suffix()", 7, {x|["Jr.","DDS"]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 42, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 1337, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 7, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 42, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 1337, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 7, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode(\"###\")", 42, {x|["397","511"]|x});
-  ("location.zipCode(\"###\")", 1337, {x|["212","435"]|x});
-  ("location.zipCode(\"###\")", 7, {x|["074","795"]|x});
-  ("location.state({\"abbreviated\":true})", 42, {x|["MA","ZP"]|x});
-  ("location.state({\"abbreviated\":true})", 1337, {x|["LD","LU"]|x});
-  ("location.state({\"abbreviated\":true})", 7, {x|["KP","SK"]|x});
-  ("location.streetAddress(true)", 42, {x|["park Niedźwiecki 208 m. 670","wyspa Filipiak 35 m. 426"]|x});
-  ("location.streetAddress(true)", 1337, {x|["ogród Kuś 52 m. 971","park Ślusarczyk 87a m. 445"]|x});
-  ("location.streetAddress(true)", 7, {x|["bulw. Rutkowski 5/5 m. 124","skwer Bogucki 92 m. 590"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 42, {x|["park Niedźwiecki 208 m. 670","wyspa Filipiak 35 m. 426"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 1337, {x|["ogród Kuś 52 m. 971","park Ślusarczyk 87a m. 445"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 7, {x|["bulw. Rutkowski 5/5 m. 124","skwer Bogucki 92 m. 590"]|x});
-  ("location.countryCode(\"alpha-3\")", 42, {x|["GUY","VCT"]|x});
-  ("location.countryCode(\"alpha-3\")", 1337, {x|["ESH","COD"]|x});
-  ("location.countryCode(\"alpha-3\")", 7, {x|["BEL","SYC"]|x});
-  ("location.countryCode(\"numeric\")", 42, {x|["328","670"]|x});
-  ("location.countryCode(\"numeric\")", 1337, {x|["732","180"]|x});
-  ("location.countryCode(\"numeric\")", 7, {x|["056","690"]|x});
-  ("location.timeZone()", 42, {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x});
-  ("location.timeZone()", 1337, {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x});
-  ("location.timeZone()", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
-  ("date.month({\"abbreviated\":true})", 42, {x|["Jan","Sep"]|x});
-  ("date.month({\"abbreviated\":true})", 1337, {x|["Feb","Aug"]|x});
-  ("date.month({\"abbreviated\":true})", 7, {x|["Apr","Nov"]|x});
-  ("date.month({\"context\":true})", 42, {x|["January","September"]|x});
-  ("date.month({\"context\":true})", 1337, {x|["February","August"]|x});
-  ("date.month({\"context\":true})", 7, {x|["April","November"]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 42, {x|["Jan","Sep"]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 1337, {x|["Feb","Aug"]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 7, {x|["Apr","Nov"]|x});
-  ("date.weekday({\"abbreviated\":true})", 42, {x|["Sat","Wed"]|x});
-  ("date.weekday({\"abbreviated\":true})", 1337, {x|["Mon","Mon"]|x});
-  ("date.weekday({\"abbreviated\":true})", 7, {x|["Fri","Tue"]|x});
-  ("date.weekday({\"context\":true})", 42, {x|["Saturday","Wednesday"]|x});
-  ("date.weekday({\"context\":true})", 1337, {x|["Monday","Monday"]|x});
-  ("date.weekday({\"context\":true})", 7, {x|["Friday","Tuesday"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 42, {x|["Sat","Wed"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 1337, {x|["Mon","Mon"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 7, {x|["Fri","Tue"]|x});
-  ("phone.number({\"style\":\"human\"})", 42, {x|["44-975-11-08","63-709-82-11"]|x});
-  ("phone.number({\"style\":\"human\"})", 1337, {x|["32-124-35-29","75-136-19-47"]|x});
-  ("phone.number({\"style\":\"human\"})", 7, {x|["15-747-95-50","33-468-30-29"]|x});
-  ("phone.number({\"style\":\"national\"})", 42, {x|["44 975 11 08","63 709 82 11"]|x});
-  ("phone.number({\"style\":\"national\"})", 1337, {x|["32 124 35 29","75 136 19 47"]|x});
-  ("phone.number({\"style\":\"national\"})", 7, {x|["15 747 95 50","33 468 30 29"]|x});
-  ("phone.number({\"style\":\"international\"})", 42, {x|["+48449751108","+48637098211"]|x});
-  ("phone.number({\"style\":\"international\"})", 1337, {x|["+48321243529","+48751361947"]|x});
-  ("phone.number({\"style\":\"international\"})", 7, {x|["+48157479550","+48334683029"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 42, {x|["jagged","whole"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 1337, {x|["french","dapper"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 7, {x|["bogus","stale"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 42, {x|["guide","whack"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 1337, {x|["equal","daddy"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 7, {x|["brief","stall"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 42, {x|["jot","veg"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 1337, {x|["gad","cow"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 7, {x|["bus","sit"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 42, {x|["even","deer"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 1337, {x|["once","when"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 7, {x|["lend","anti"]|x});
-  ("word.words(5)", 42, {x|["bleakly custody gee psst why","meh ugh utilized wherever without"]|x});
-  ("word.words(5)", 1337, {x|["how yet smooth councilman including","safely junior actually accredit vaguely"]|x});
-  ("word.words(5)", 7, {x|["masticate afore eek requirement circa","forswear delicious yuck bank linear"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 42, {x|["enim","quod"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 1337, {x|["amet","sunt"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 7, {x|["quae","sint"]|x});
-  ("lorem.sentences(3)", 42, {x|["A tempore perspiciatis quia quia. Pariatur unde facilis. Reiciendis repellendus dolorem.","Qui aliquam rem eum. Iste odit dolore nemo esse. Nesciunt laudantium provident aperiam omnis dolores quae tenetur delectus."]|x});
-  ("lorem.sentences(3)", 1337, {x|["Quia incidunt esse ad totam. Voluptatibus tempore vitae laboriosam similique. Doloribus reprehenderit quisquam minus.","Commodi cupiditate optio ratione labore. Ducimus eos commodi nesciunt voluptatum repellendus qui sapiente. Blanditiis praesentium aut tempore asperiores consequuntur."]|x});
-  ("lorem.sentences(3)", 7, {x|["Quo iure nam. Atque blanditiis illo modi ducimus dolorum maxime suscipit ab labore. Dolorem voluptate itaque sit unde tenetur amet corrupti eveniet aspernatur.","Nobis est nihil neque dignissimos ipsam molestiae. Temporibus cumque enim sint incidunt. Ullam animi ipsam esse distinctio commodi."]|x});
-  ("lorem.paragraphs(2)", 42, {x|["A tempore perspiciatis quia quia. Pariatur unde facilis. Reiciendis repellendus dolorem.\nQui aliquam rem eum. Iste odit dolore nemo esse. Nesciunt laudantium provident aperiam omnis dolores quae tenetur delectus.","Aliquam quasi fuga reprehenderit sunt ducimus accusantium eveniet eius. Quaerat totam corrupti qui reiciendis quo earum debitis. Repudiandae et sequi aperiam minima laboriosam tempora.\nUllam ut atque odit quod illo doloribus impedit nesciunt. Facere facilis libero. Illo corporis dicta pariatur error veniam quae quaerat minima."]|x});
-  ("lorem.paragraphs(2)", 1337, {x|["Quia incidunt esse ad totam. Voluptatibus tempore vitae laboriosam similique. Doloribus reprehenderit quisquam minus.\nCommodi cupiditate optio ratione labore. Ducimus eos commodi nesciunt voluptatum repellendus qui sapiente. Blanditiis praesentium aut tempore asperiores consequuntur.","Voluptas quidem alias ipsam. Quisquam exercitationem rerum. Voluptatibus temporibus iste molestias repellat numquam.\nEt earum voluptatibus. Nostrum nam consequatur optio laborum ratione. Eveniet consequuntur eveniet minima rerum modi totam eos."]|x});
-  ("lorem.paragraphs(2)", 7, {x|["Quo iure nam. Atque blanditiis illo modi ducimus dolorum maxime suscipit ab labore. Dolorem voluptate itaque sit unde tenetur amet corrupti eveniet aspernatur.\nNobis est nihil neque dignissimos ipsam molestiae. Temporibus cumque enim sint incidunt. Ullam animi ipsam esse distinctio commodi.","Eos cum autem vel culpa rem commodi alias et expedita. Quidem a fuga eaque quaerat provident consectetur. Hic illum nihil quibusdam explicabo quaerat quam soluta odio aspernatur.\nMinima magnam magni commodi in. Minus rem esse quo officiis laborum quod earum doloremque. Incidunt molestiae quod distinctio fugit animi ab ullam placeat vel."]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 42, {x|["Jurgen_60degard@hotmail.com","Jurgen.60degard@gmail.com"]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 1337, {x|["Jurgen.60degard27@gmail.com","Jurgen_60degard@gmail.com"]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 7, {x|["Jurgen_60degard@gmail.com","Jurgen_60degard50@yahoo.com"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 42, {x|["Anna.8xukasz","Anna_8xukasz15"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 1337, {x|["Anna.8xukasz15","Anna.8xukasz"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 7, {x|["Anna.8xukasz77","Anna_8xukasz"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 42, {x|["Zoë15","Zoë_Niemczyk2"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 1337, {x|["Zoë.Janiak","Zoë.Różycki"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 7, {x|["Zoë_Kuc","Zoë.Jackowski67"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 42, {x|["Patryk.Dubiel@hotmail.com","Dominik#Jurek43@yahoo.com"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 1337, {x|["Filipa97@gmail.com","Zuzanna.Stasiak@hotmail.com"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 7, {x|["Jakub^Mazurek7@gmail.com","Amanda.Golec93@yahoo.com"]|x});
-  ("internet.domainWord()", 42, {x|["hospitable-unit","shameful-negotiation"]|x});
-  ("internet.domainWord()", 1337, {x|["fatal-co-producer","flickering-in-joke"]|x});
-  ("internet.domainWord()", 7, {x|["blushing-saw","jittery-puritan"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 42, {x|["€375.15","€599.09"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 1337, {x|["€262.79","€459.85"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 7, {x|["€77.29","€723.75"]|x});
-  ("commerce.productName()", 42, {x|["Handcrafted Wooden Sausages","Modern Bronze Car"]|x});
-  ("commerce.productName()", 1337, {x|["Frozen Bronze Chicken","Incredible Concrete Keyboard"]|x});
-  ("commerce.productName()", 7, {x|["Electronic Rubber Gloves","Recycled Wooden Keyboard"]|x});
-  ("company.name()", 42, {x|["Niedźwiecki, Biernat and Rogowski","Golec SKA"]|x});
-  ("company.name()", 1337, {x|["Kuś Sp. j.","Różycki, Paczkowski and Kuchta"]|x});
-  ("company.name()", 7, {x|["Rutkowski z o.o","Jackowski, Stolarczyk and Janus"]|x});
-  ("finance.currencyName()", 42, {x|["New Israeli Sheqel","CFA Franc BCEAO"]|x});
-  ("finance.currencyName()", 1337, {x|["Ethiopian Birr","Canadian Dollar"]|x});
-  ("finance.currencyName()", 7, {x|["Barbados Dollar","Somali Shilling"]|x});
-  ("finance.creditCardNumber(\"visa\")", 42, {x|["4975110867099","4211-3542-6123-4718"]|x});
-  ("finance.creditCardNumber(\"visa\")", 1337, {x|["4124352971364","4947734571266"]|x});
-  ("finance.creditCardNumber(\"visa\")", 7, {x|["4747955024684","4029249069258"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 42, {x|["2696-7511-0867-0988","2311-1354-2612-3471"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 1337, {x|["2300-2435-2971-3611","5377-3457-1264-1417"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 7, {x|["2610-4795-5024-6833","2365-9249-0692-5918"]|x});
-  ("animal.type()", 42, {x|["frog","whale"]|x});
-  ("animal.type()", 1337, {x|["eagle","cow"]|x});
-  ("animal.type()", 7, {x|["bird","rhinoceros"]|x});
-  ("system.fileName({\"extensionCount\":2})", 42, {x|["unnaturally_dreamily.mar.xlw","following_huzzah.dot.m1v"]|x});
-  ("system.fileName({\"extensionCount\":2})", 1337, {x|["wallaby.jpg.distz","circa_masquerade.lrf.vsw"]|x});
-  ("system.fileName({\"extensionCount\":2})", 7, {x|["bleak.xla.xhtml","drat_who_jungle.xlsx.sh"]|x});
-  ("food.dish()", 42, {x|["Jicama Salad","Tangy Parsnip And White Flour Bowl"]|x});
-  ("food.dish()", 1337, {x|["Moist Green Beans And White Wine Vinegar Bowl","Bruschette With Tomato"]|x});
-  ("food.dish()", 7, {x|["Parsley-rubbed Ostrich Salad","Baba Ganoush"]|x});
-  ("music.songName()", 42, {x|["Kocham Wolność","Zanim Zrozumiesz"]|x});
-  ("music.songName()", 1337, {x|["I Ciebie Też, Bardzo","Dla Ciebie"]|x});
-  ("music.songName()", 7, {x|["Butelki Z Benzyną I Kamienie","Słodkiego Miłego Życia"]|x});
-  ("book.title()", 42, {x|["Myśli nieuczesane","Zimne kraje"]|x});
-  ("book.title()", 1337, {x|["Kamień na kamieniu","Dziennik 1954"]|x});
-  ("book.title()", 7, {x|["Cantus","Sól ziemi"]|x});
-  ("vehicle.vehicle()", 42, {x|["Jeep Wrangler","Renault Impala"]|x});
-  ("vehicle.vehicle()", 1337, {x|["Fiat Aventador","Ford Explorer"]|x});
-  ("vehicle.vehicle()", 7, {x|["BYD Mustang","Land Rover Model X"]|x});
-]
+let cases =
+  [
+    ("person.firstName(\"female\")", 42, {x|["Izabela","Wiara"]|x});
+    ("person.firstName(\"female\")", 1337, {x|["Ewa","Cecylia"]|x});
+    ("person.firstName(\"female\")", 7, {x|["Andżelika","Penelopa"]|x});
+    ("person.firstName(\"male\")", 42, {x|["Hieronim","Wiktor"]|x});
+    ("person.firstName(\"male\")", 1337, {x|["Emil","Bruno"]|x});
+    ("person.firstName(\"male\")", 7, {x|["Apollo","Rajmund"]|x});
+    ("person.lastName(\"female\")", 42, {x|["Zajączkowski","Niedźwiecki"]|x});
+    ("person.lastName(\"female\")", 1337, {x|["Duda","Kuś"]|x});
+    ("person.lastName(\"female\")", 7, {x|["Sołtysiak","Rutkowski"]|x});
+    ("person.lastName(\"male\")", 42, {x|["Zajączkowski","Niedźwiecki"]|x});
+    ("person.lastName(\"male\")", 1337, {x|["Duda","Kuś"]|x});
+    ("person.lastName(\"male\")", 7, {x|["Sołtysiak","Rutkowski"]|x});
+    ("person.middleName(\"female\")", 42, {x|["Venus","Kali"]|x});
+    ("person.middleName(\"female\")", 1337, {x|["Brielle","Hippolyta"]|x});
+    ("person.middleName(\"female\")", 7, {x|["Michelle","Maddie"]|x});
+    ( "person.fullName({\"sex\":\"female\"})",
+      42,
+      {x|["Izabela Różycki","Cecylia Biernat"]|x} );
+    ( "person.fullName({\"sex\":\"female\"})",
+      1337,
+      {x|["Ewa Janiak","Gracja Herman"]|x} );
+    ( "person.fullName({\"sex\":\"female\"})",
+      7,
+      {x|["Andżelika Kuc","Pani Zofia Mackiewicz"]|x} );
+    ( "person.fullName({\"sex\":\"male\"})",
+      42,
+      {x|["Hieronim Różycki","Brajan Biernat"]|x} );
+    ( "person.fullName({\"sex\":\"male\"})",
+      1337,
+      {x|["Emil Janiak","Gabriel Herman"]|x} );
+    ( "person.fullName({\"sex\":\"male\"})",
+      7,
+      {x|["Apollo Kuc","Pan Włodzimierz Mackiewicz"]|x} );
+    ( "person.fullName({\"firstName\":\"Anna\"})",
+      42,
+      {x|["Anna Różycki","Anna Biernat"]|x} );
+    ( "person.fullName({\"firstName\":\"Anna\"})",
+      1337,
+      {x|["Anna Janiak","Anna Herman"]|x} );
+    ( "person.fullName({\"firstName\":\"Anna\"})",
+      7,
+      {x|["Anna Kuc","Pan Anna Mackiewicz"]|x} );
+    ("person.prefix(\"female\")", 42, {x|["Pani","Pani"]|x});
+    ("person.prefix(\"female\")", 1337, {x|["Pani","Pani"]|x});
+    ("person.prefix(\"female\")", 7, {x|["Pani","Pani"]|x});
+    ("person.prefix(\"male\")", 42, {x|["Pan","Pan"]|x});
+    ("person.prefix(\"male\")", 1337, {x|["Pan","Pan"]|x});
+    ("person.prefix(\"male\")", 7, {x|["Pan","Pan"]|x});
+    ("person.suffix()", 42, {x|["III","DVM"]|x});
+    ("person.suffix()", 1337, {x|["I","Sr."]|x});
+    ("person.suffix()", 7, {x|["Jr.","DDS"]|x});
+    ( "location.zipCode({\"state\":\"CA\"})",
+      42,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"CA\"})",
+      1337,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"CA\"})",
+      7,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      42,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      1337,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      7,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ("location.zipCode(\"###\")", 42, {x|["397","511"]|x});
+    ("location.zipCode(\"###\")", 1337, {x|["212","435"]|x});
+    ("location.zipCode(\"###\")", 7, {x|["074","795"]|x});
+    ("location.state({\"abbreviated\":true})", 42, {x|["MA","ZP"]|x});
+    ("location.state({\"abbreviated\":true})", 1337, {x|["LD","LU"]|x});
+    ("location.state({\"abbreviated\":true})", 7, {x|["KP","SK"]|x});
+    ( "location.streetAddress(true)",
+      42,
+      {x|["park Niedźwiecki 208 m. 670","wyspa Filipiak 35 m. 426"]|x} );
+    ( "location.streetAddress(true)",
+      1337,
+      {x|["ogród Kuś 52 m. 971","park Ślusarczyk 87a m. 445"]|x} );
+    ( "location.streetAddress(true)",
+      7,
+      {x|["bulw. Rutkowski 5/5 m. 124","skwer Bogucki 92 m. 590"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      42,
+      {x|["park Niedźwiecki 208 m. 670","wyspa Filipiak 35 m. 426"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      1337,
+      {x|["ogród Kuś 52 m. 971","park Ślusarczyk 87a m. 445"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      7,
+      {x|["bulw. Rutkowski 5/5 m. 124","skwer Bogucki 92 m. 590"]|x} );
+    ("location.countryCode(\"alpha-3\")", 42, {x|["GUY","VCT"]|x});
+    ("location.countryCode(\"alpha-3\")", 1337, {x|["ESH","COD"]|x});
+    ("location.countryCode(\"alpha-3\")", 7, {x|["BEL","SYC"]|x});
+    ("location.countryCode(\"numeric\")", 42, {x|["328","670"]|x});
+    ("location.countryCode(\"numeric\")", 1337, {x|["732","180"]|x});
+    ("location.countryCode(\"numeric\")", 7, {x|["056","690"]|x});
+    ( "location.timeZone()",
+      42,
+      {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x} );
+    ( "location.timeZone()",
+      1337,
+      {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x} );
+    ("location.timeZone()", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
+    ("date.month({\"abbreviated\":true})", 42, {x|["Jan","Sep"]|x});
+    ("date.month({\"abbreviated\":true})", 1337, {x|["Feb","Aug"]|x});
+    ("date.month({\"abbreviated\":true})", 7, {x|["Apr","Nov"]|x});
+    ("date.month({\"context\":true})", 42, {x|["January","September"]|x});
+    ("date.month({\"context\":true})", 1337, {x|["February","August"]|x});
+    ("date.month({\"context\":true})", 7, {x|["April","November"]|x});
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      42,
+      {x|["Jan","Sep"]|x} );
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      1337,
+      {x|["Feb","Aug"]|x} );
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      7,
+      {x|["Apr","Nov"]|x} );
+    ("date.weekday({\"abbreviated\":true})", 42, {x|["Sat","Wed"]|x});
+    ("date.weekday({\"abbreviated\":true})", 1337, {x|["Mon","Mon"]|x});
+    ("date.weekday({\"abbreviated\":true})", 7, {x|["Fri","Tue"]|x});
+    ("date.weekday({\"context\":true})", 42, {x|["Saturday","Wednesday"]|x});
+    ("date.weekday({\"context\":true})", 1337, {x|["Monday","Monday"]|x});
+    ("date.weekday({\"context\":true})", 7, {x|["Friday","Tuesday"]|x});
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      42,
+      {x|["Sat","Wed"]|x} );
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      1337,
+      {x|["Mon","Mon"]|x} );
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      7,
+      {x|["Fri","Tue"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      42,
+      {x|["44-975-11-08","63-709-82-11"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      1337,
+      {x|["32-124-35-29","75-136-19-47"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      7,
+      {x|["15-747-95-50","33-468-30-29"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      42,
+      {x|["44 975 11 08","63 709 82 11"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      1337,
+      {x|["32 124 35 29","75 136 19 47"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      7,
+      {x|["15 747 95 50","33 468 30 29"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      42,
+      {x|["+48449751108","+48637098211"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      1337,
+      {x|["+48321243529","+48751361947"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      7,
+      {x|["+48157479550","+48334683029"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      42,
+      {x|["jagged","whole"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      1337,
+      {x|["french","dapper"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      7,
+      {x|["bogus","stale"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      42,
+      {x|["guide","whack"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      1337,
+      {x|["equal","daddy"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      7,
+      {x|["brief","stall"]|x} );
+    ( "word.verb({\"length\":20,\"strategy\":\"shortest\"})",
+      42,
+      {x|["jot","veg"]|x} );
+    ( "word.verb({\"length\":20,\"strategy\":\"shortest\"})",
+      1337,
+      {x|["gad","cow"]|x} );
+    ( "word.verb({\"length\":20,\"strategy\":\"shortest\"})",
+      7,
+      {x|["bus","sit"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      42,
+      {x|["even","deer"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      1337,
+      {x|["once","when"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      7,
+      {x|["lend","anti"]|x} );
+    ( "word.words(5)",
+      42,
+      {x|["bleakly custody gee psst why","meh ugh utilized wherever without"]|x}
+    );
+    ( "word.words(5)",
+      1337,
+      {x|["how yet smooth councilman including","safely junior actually accredit vaguely"]|x}
+    );
+    ( "word.words(5)",
+      7,
+      {x|["masticate afore eek requirement circa","forswear delicious yuck bank linear"]|x}
+    );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      42,
+      {x|["enim","quod"]|x} );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      1337,
+      {x|["amet","sunt"]|x} );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      7,
+      {x|["quae","sint"]|x} );
+    ( "lorem.sentences(3)",
+      42,
+      {x|["A tempore perspiciatis quia quia. Pariatur unde facilis. Reiciendis repellendus dolorem.","Qui aliquam rem eum. Iste odit dolore nemo esse. Nesciunt laudantium provident aperiam omnis dolores quae tenetur delectus."]|x}
+    );
+    ( "lorem.sentences(3)",
+      1337,
+      {x|["Quia incidunt esse ad totam. Voluptatibus tempore vitae laboriosam similique. Doloribus reprehenderit quisquam minus.","Commodi cupiditate optio ratione labore. Ducimus eos commodi nesciunt voluptatum repellendus qui sapiente. Blanditiis praesentium aut tempore asperiores consequuntur."]|x}
+    );
+    ( "lorem.sentences(3)",
+      7,
+      {x|["Quo iure nam. Atque blanditiis illo modi ducimus dolorum maxime suscipit ab labore. Dolorem voluptate itaque sit unde tenetur amet corrupti eveniet aspernatur.","Nobis est nihil neque dignissimos ipsam molestiae. Temporibus cumque enim sint incidunt. Ullam animi ipsam esse distinctio commodi."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      42,
+      {x|["A tempore perspiciatis quia quia. Pariatur unde facilis. Reiciendis repellendus dolorem.\nQui aliquam rem eum. Iste odit dolore nemo esse. Nesciunt laudantium provident aperiam omnis dolores quae tenetur delectus.","Aliquam quasi fuga reprehenderit sunt ducimus accusantium eveniet eius. Quaerat totam corrupti qui reiciendis quo earum debitis. Repudiandae et sequi aperiam minima laboriosam tempora.\nUllam ut atque odit quod illo doloribus impedit nesciunt. Facere facilis libero. Illo corporis dicta pariatur error veniam quae quaerat minima."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      1337,
+      {x|["Quia incidunt esse ad totam. Voluptatibus tempore vitae laboriosam similique. Doloribus reprehenderit quisquam minus.\nCommodi cupiditate optio ratione labore. Ducimus eos commodi nesciunt voluptatum repellendus qui sapiente. Blanditiis praesentium aut tempore asperiores consequuntur.","Voluptas quidem alias ipsam. Quisquam exercitationem rerum. Voluptatibus temporibus iste molestias repellat numquam.\nEt earum voluptatibus. Nostrum nam consequatur optio laborum ratione. Eveniet consequuntur eveniet minima rerum modi totam eos."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      7,
+      {x|["Quo iure nam. Atque blanditiis illo modi ducimus dolorum maxime suscipit ab labore. Dolorem voluptate itaque sit unde tenetur amet corrupti eveniet aspernatur.\nNobis est nihil neque dignissimos ipsam molestiae. Temporibus cumque enim sint incidunt. Ullam animi ipsam esse distinctio commodi.","Eos cum autem vel culpa rem commodi alias et expedita. Quidem a fuga eaque quaerat provident consectetur. Hic illum nihil quibusdam explicabo quaerat quam soluta odio aspernatur.\nMinima magnam magni commodi in. Minus rem esse quo officiis laborum quod earum doloremque. Incidunt molestiae quod distinctio fugit animi ab ullam placeat vel."]|x}
+    );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      42,
+      {x|["Jurgen_60degard@hotmail.com","Jurgen.60degard@gmail.com"]|x} );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      1337,
+      {x|["Jurgen.60degard27@gmail.com","Jurgen_60degard@gmail.com"]|x} );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      7,
+      {x|["Jurgen_60degard@gmail.com","Jurgen_60degard50@yahoo.com"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      42,
+      {x|["Anna.8xukasz","Anna_8xukasz15"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      1337,
+      {x|["Anna.8xukasz15","Anna.8xukasz"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      7,
+      {x|["Anna.8xukasz77","Anna_8xukasz"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      42,
+      {x|["Zoë15","Zoë_Niemczyk2"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      1337,
+      {x|["Zoë.Janiak","Zoë.Różycki"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      7,
+      {x|["Zoë_Kuc","Zoë.Jackowski67"]|x} );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      42,
+      {x|["Patryk.Dubiel@hotmail.com","Dominik#Jurek43@yahoo.com"]|x} );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      1337,
+      {x|["Filipa97@gmail.com","Zuzanna.Stasiak@hotmail.com"]|x} );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      7,
+      {x|["Jakub^Mazurek7@gmail.com","Amanda.Golec93@yahoo.com"]|x} );
+    ( "internet.domainWord()",
+      42,
+      {x|["hospitable-unit","shameful-negotiation"]|x} );
+    ( "internet.domainWord()",
+      1337,
+      {x|["fatal-co-producer","flickering-in-joke"]|x} );
+    ("internet.domainWord()", 7, {x|["blushing-saw","jittery-puritan"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 42, {x|["€375.15","€599.09"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 1337, {x|["€262.79","€459.85"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 7, {x|["€77.29","€723.75"]|x});
+    ( "commerce.productName()",
+      42,
+      {x|["Handcrafted Wooden Sausages","Modern Bronze Car"]|x} );
+    ( "commerce.productName()",
+      1337,
+      {x|["Frozen Bronze Chicken","Incredible Concrete Keyboard"]|x} );
+    ( "commerce.productName()",
+      7,
+      {x|["Electronic Rubber Gloves","Recycled Wooden Keyboard"]|x} );
+    ( "company.name()",
+      42,
+      {x|["Niedźwiecki, Biernat and Rogowski","Golec SKA"]|x} );
+    ( "company.name()",
+      1337,
+      {x|["Kuś Sp. j.","Różycki, Paczkowski and Kuchta"]|x} );
+    ( "company.name()",
+      7,
+      {x|["Rutkowski z o.o","Jackowski, Stolarczyk and Janus"]|x} );
+    ( "finance.currencyName()",
+      42,
+      {x|["New Israeli Sheqel","CFA Franc BCEAO"]|x} );
+    ("finance.currencyName()", 1337, {x|["Ethiopian Birr","Canadian Dollar"]|x});
+    ("finance.currencyName()", 7, {x|["Barbados Dollar","Somali Shilling"]|x});
+    ( "finance.creditCardNumber(\"visa\")",
+      42,
+      {x|["4975110867099","4211-3542-6123-4718"]|x} );
+    ( "finance.creditCardNumber(\"visa\")",
+      1337,
+      {x|["4124352971364","4947734571266"]|x} );
+    ( "finance.creditCardNumber(\"visa\")",
+      7,
+      {x|["4747955024684","4029249069258"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      42,
+      {x|["2696-7511-0867-0988","2311-1354-2612-3471"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      1337,
+      {x|["2300-2435-2971-3611","5377-3457-1264-1417"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      7,
+      {x|["2610-4795-5024-6833","2365-9249-0692-5918"]|x} );
+    ("animal.type()", 42, {x|["frog","whale"]|x});
+    ("animal.type()", 1337, {x|["eagle","cow"]|x});
+    ("animal.type()", 7, {x|["bird","rhinoceros"]|x});
+    ( "system.fileName({\"extensionCount\":2})",
+      42,
+      {x|["unnaturally_dreamily.mar.xlw","following_huzzah.dot.m1v"]|x} );
+    ( "system.fileName({\"extensionCount\":2})",
+      1337,
+      {x|["wallaby.jpg.distz","circa_masquerade.lrf.vsw"]|x} );
+    ( "system.fileName({\"extensionCount\":2})",
+      7,
+      {x|["bleak.xla.xhtml","drat_who_jungle.xlsx.sh"]|x} );
+    ( "food.dish()",
+      42,
+      {x|["Jicama Salad","Tangy Parsnip And White Flour Bowl"]|x} );
+    ( "food.dish()",
+      1337,
+      {x|["Moist Green Beans And White Wine Vinegar Bowl","Bruschette With Tomato"]|x}
+    );
+    ("food.dish()", 7, {x|["Parsley-rubbed Ostrich Salad","Baba Ganoush"]|x});
+    ("music.songName()", 42, {x|["Kocham Wolność","Zanim Zrozumiesz"]|x});
+    ("music.songName()", 1337, {x|["I Ciebie Też, Bardzo","Dla Ciebie"]|x});
+    ( "music.songName()",
+      7,
+      {x|["Butelki Z Benzyną I Kamienie","Słodkiego Miłego Życia"]|x} );
+    ("book.title()", 42, {x|["Myśli nieuczesane","Zimne kraje"]|x});
+    ("book.title()", 1337, {x|["Kamień na kamieniu","Dziennik 1954"]|x});
+    ("book.title()", 7, {x|["Cantus","Sól ziemi"]|x});
+    ("vehicle.vehicle()", 42, {x|["Jeep Wrangler","Renault Impala"]|x});
+    ("vehicle.vehicle()", 1337, {x|["Fiat Aventador","Ford Explorer"]|x});
+    ("vehicle.vehicle()", 7, {x|["BYD Mustang","Land Rover Model X"]|x});
+  ]

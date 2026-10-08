@@ -2,215 +2,764 @@
 
 let locale = "en"
 
-let cases = [
-  ("anytime", 42, {x|["2024-10-01T09:56:34.376Z","2025-11-26T00:30:52.734Z","2025-06-19T08:32:01.898Z"]|x});
-  ("anytime", 1337, {x|["2024-07-11T06:40:20.302Z","2024-04-26T20:08:35.491Z","2024-07-23T00:46:35.837Z"]|x});
-  ("anytime", 7, {x|["2024-02-26T16:55:16.427Z","2025-07-24T08:10:38.064Z","2024-11-17T00:55:47.045Z"]|x});
-  ("anytime/ref", 42, {x|["2019-10-01T09:56:34.376Z","2020-11-25T00:30:52.734Z","2020-06-18T08:32:01.898Z"]|x});
-  ("anytime/ref", 1337, {x|["2019-07-11T06:40:20.302Z","2019-04-26T20:08:35.491Z","2019-07-23T00:46:35.837Z"]|x});
-  ("anytime/ref", 7, {x|["2019-02-25T16:55:16.427Z","2020-07-23T08:10:38.064Z","2019-11-17T00:55:47.045Z"]|x});
-  ("anytime/refnum", 42, {x|["2020-06-13T22:23:14.499Z","2021-08-08T12:57:32.857Z","2021-03-01T20:58:42.021Z"]|x});
-  ("anytime/refnum", 1337, {x|["2020-03-23T19:07:00.425Z","2020-01-08T08:35:15.614Z","2020-04-04T13:13:15.960Z"]|x});
-  ("anytime/refnum", 7, {x|["2019-11-09T05:21:56.550Z","2021-04-05T20:37:18.187Z","2020-07-30T13:22:27.168Z"]|x});
-  ("anytime/err", 42, {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x});
-  ("anytime/err", 1337, {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x});
-  ("anytime/err", 7, {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x});
-  ("past", 42, {x|["2024-05-17T01:57:37.080Z","2024-12-13T23:04:27.133Z","2024-09-24T21:50:04.494Z"]|x});
-  ("past", 1337, {x|["2024-04-05T21:37:28.821Z","2024-02-28T01:52:47.882Z","2024-04-11T19:03:47.772Z"]|x});
-  ("past", 7, {x|["2024-01-28T22:17:31.173Z","2024-10-12T10:48:23.236Z","2024-06-09T10:59:11.642Z"]|x});
-  ("past/10", 42, {x|["2018-09-30T04:40:52.304Z","2024-07-04T23:01:27.867Z","2022-04-27T23:22:21.588Z"]|x});
-  ("past/10", 1337, {x|["2017-08-15T04:13:38.046Z","2016-08-02T16:08:28.185Z","2017-10-12T23:54:29.303Z"]|x});
-  ("past/10", 7, {x|["2015-10-06T18:06:01.169Z","2022-10-20T01:02:24.492Z","2019-05-21T12:12:50.462Z"]|x});
-  ("past/range", 42, {x|["2019-02-15T11:54:11.456Z","2020-11-07T23:35:19.867Z","2020-03-13T06:22:06.392Z"]|x});
-  ("past/range", 1337, {x|["2018-10-15T04:17:49.124Z","2018-06-23T22:01:23.374Z","2018-11-01T19:50:23.609Z"]|x});
-  ("past/range", 7, {x|["2018-03-25T15:12:47.601Z","2020-05-04T18:59:01.300Z","2019-04-26T11:54:58.687Z"]|x});
-  ("past/ref", 42, {x|["2013-09-29T19:41:32.038Z","2019-07-05T00:12:26.151Z","2017-04-27T05:48:17.311Z"]|x});
-  ("past/ref", 1337, {x|["2012-08-14T21:56:19.114Z","2011-08-03T12:19:57.890Z","2012-10-12T17:13:59.172Z"]|x});
-  ("past/ref", 7, {x|["2010-10-06T16:16:08.133Z","2017-10-19T06:19:19.509Z","2014-05-21T01:41:31.904Z"]|x});
-  ("past/leap", 42, {x|["2023-07-16T05:33:13.602Z","2024-02-11T12:50:22.206Z","2023-11-23T16:50:57.006Z"]|x});
-  ("past/leap", 1337, {x|["2023-06-05T03:55:06.678Z","2023-04-28T10:39:14.376Z","2023-06-11T00:58:14.429Z"]|x});
-  ("past/leap", 7, {x|["2023-03-29T09:02:34.926Z","2023-12-11T04:40:15.041Z","2023-08-08T13:02:49.873Z"]|x});
-  ("past/old", 42, {x|["1957-04-29T14:59:16.209Z","1960-03-17T07:04:24.428Z","1959-02-11T16:37:22.677Z"]|x});
-  ("past/old", 1337, {x|["1956-10-06T01:24:38.469Z","1956-03-31T06:07:39.272Z","1956-11-04T11:26:39.689Z"]|x});
-  ("past/old", 7, {x|["1955-11-01T18:07:07.175Z","1959-05-10T06:01:54.459Z","1957-08-24T07:31:14.401Z"]|x});
-  ("past/err0", 42, {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x});
-  ("past/err0", 1337, {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x});
-  ("past/err0", 7, {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x});
-  ("past/errneg", 42, {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x});
-  ("past/errneg", 1337, {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x});
-  ("past/errneg", 7, {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x});
-  ("past/errrange", 42, {x|[{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."}]|x});
-  ("past/errrange", 1337, {x|[{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."}]|x});
-  ("past/errrange", 7, {x|[{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."}]|x});
-  ("past/errref", 42, {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x});
-  ("past/errref", 1337, {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x});
-  ("past/errref", 7, {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x});
-  ("past/errhuge", 42, {x|[{"error":"Invalid from date: Invalid Date"},{"error":"Invalid from date: Invalid Date"},{"error":"Invalid from date: Invalid Date"}]|x});
-  ("past/errhuge", 1337, {x|[{"error":"Invalid from date: Invalid Date"},{"error":"Invalid from date: Invalid Date"},{"error":"Invalid from date: Invalid Date"}]|x});
-  ("past/errhuge", 7, {x|[{"error":"Invalid from date: Invalid Date"},{"error":"Invalid from date: Invalid Date"},{"error":"Invalid from date: Invalid Date"}]|x});
-  ("future", 42, {x|["2025-05-17T16:58:17.813Z","2025-12-14T00:15:26.417Z","2025-09-25T04:16:01.217Z"]|x});
-  ("future", 1337, {x|["2025-04-06T15:20:10.889Z","2025-02-27T22:04:18.587Z","2025-04-12T12:23:18.640Z"]|x});
-  ("future", 7, {x|["2025-01-28T20:27:39.137Z","2025-10-12T16:05:19.252Z","2025-06-10T00:27:54.084Z"]|x});
-  ("future/10", 42, {x|["2028-09-29T19:41:33.038Z","2034-07-05T00:12:27.151Z","2032-04-27T05:48:18.311Z"]|x});
-  ("future/10", 1337, {x|["2027-08-15T21:56:20.114Z","2026-08-03T12:19:58.890Z","2027-10-13T17:14:00.172Z"]|x});
-  ("future/10", 7, {x|["2025-10-06T16:16:09.133Z","2032-10-19T06:19:20.509Z","2029-05-21T01:41:32.904Z"]|x});
-  ("future/range", 42, {x|["2030-02-15T02:54:52.189Z","2031-11-08T00:46:19.151Z","2031-03-13T12:48:03.115Z"]|x});
-  ("future/range", 1337, {x|["2029-10-14T22:00:31.192Z","2029-06-23T18:12:54.079Z","2029-11-01T13:09:54.478Z"]|x});
-  ("future/range", 7, {x|["2029-03-25T13:22:55.564Z","2031-05-05T00:15:57.317Z","2030-04-26T01:23:41.130Z"]|x});
-  ("future/ref", 42, {x|["2023-09-30T04:40:53.304Z","2029-07-04T23:01:28.867Z","2027-04-27T23:22:22.588Z"]|x});
-  ("future/ref", 1337, {x|["2022-08-15T04:13:39.046Z","2021-08-02T16:08:29.185Z","2022-10-12T23:54:30.303Z"]|x});
-  ("future/ref", 7, {x|["2020-10-05T18:06:02.169Z","2027-10-20T01:02:25.492Z","2024-05-20T12:12:51.462Z"]|x});
-  ("future/leap", 42, {x|["2025-04-15T00:29:09.245Z","2027-01-06T12:10:17.656Z","2026-05-11T18:57:04.181Z"]|x});
-  ("future/leap", 1337, {x|["2024-12-12T16:52:46.913Z","2024-08-21T10:36:21.163Z","2024-12-30T08:25:21.398Z"]|x});
-  ("future/leap", 7, {x|["2024-05-23T03:47:45.390Z","2026-07-03T07:33:59.089Z","2025-06-24T00:29:56.476Z"]|x});
-  ("future/err0", 42, {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x});
-  ("future/err0", 1337, {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x});
-  ("future/err0", 7, {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x});
-  ("future/errrange", 42, {x|[{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."}]|x});
-  ("future/errrange", 1337, {x|[{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."}]|x});
-  ("future/errrange", 7, {x|[{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."}]|x});
-  ("future/errhuge", 42, {x|[{"error":"Invalid to date: Invalid Date"},{"error":"Invalid to date: Invalid Date"},{"error":"Invalid to date: Invalid Date"}]|x});
-  ("future/errhuge", 1337, {x|[{"error":"Invalid to date: Invalid Date"},{"error":"Invalid to date: Invalid Date"},{"error":"Invalid to date: Invalid Date"}]|x});
-  ("future/errhuge", 7, {x|[{"error":"Invalid to date: Invalid Date"},{"error":"Invalid to date: Invalid Date"},{"error":"Invalid to date: Invalid Date"}]|x});
-  ("between", 42, {x|["2023-09-30T04:40:52.678Z","2029-07-04T23:01:28.818Z","2027-04-27T23:22:22.320Z"]|x});
-  ("between", 1337, {x|["2022-08-15T04:13:38.308Z","2021-08-02T16:08:28.344Z","2022-10-12T23:54:29.581Z"]|x});
-  ("between", 7, {x|["2020-10-05T18:06:01.245Z","2027-10-20T01:02:25.272Z","2024-05-20T12:12:50.900Z"]|x});
-  ("between/num", 42, {x|["1970-01-01T00:06:14.540Z","1970-01-01T00:15:50.715Z","1970-01-01T00:12:11.994Z"]|x});
-  ("between/num", 1337, {x|["1970-01-01T00:04:22.024Z","1970-01-01T00:02:38.684Z","1970-01-01T00:04:38.126Z"]|x});
-  ("between/num", 7, {x|["1970-01-01T00:01:16.308Z","1970-01-01T00:12:59.919Z","1970-01-01T00:07:18.409Z"]|x});
-  ("between/old", 42, {x|["1860-02-05T16:13:57.188Z","1952-07-18T23:37:12.361Z","1917-06-15T00:31:08.359Z"]|x});
-  ("between/old", 1337, {x|["1842-01-16T18:47:36.772Z","1825-06-18T13:39:56.950Z","1844-08-17T10:06:16.830Z"]|x});
-  ("between/old", 7, {x|["1812-03-30T23:55:33.233Z","1925-02-21T15:01:12.501Z","1870-05-06T16:24:16.744Z"]|x});
-  ("between/same", 42, {x|["2020-01-01T00:00:00.000Z","2020-01-01T00:00:00.000Z","2020-01-01T00:00:00.000Z"]|x});
-  ("between/same", 1337, {x|["2020-01-01T00:00:00.000Z","2020-01-01T00:00:00.000Z","2020-01-01T00:00:00.000Z"]|x});
-  ("between/same", 7, {x|["2020-01-01T00:00:00.000Z","2020-01-01T00:00:00.000Z","2020-01-01T00:00:00.000Z"]|x});
-  ("between/err", 42, {x|[{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."}]|x});
-  ("between/err", 1337, {x|[{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."}]|x});
-  ("between/err", 7, {x|[{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."}]|x});
-  ("between/errfrom", 42, {x|[{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"}]|x});
-  ("between/errfrom", 1337, {x|[{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"}]|x});
-  ("between/errfrom", 7, {x|[{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"}]|x});
-  ("between/errto", 42, {x|[{"error":"Invalid to date: 9000000000000000"},{"error":"Invalid to date: 9000000000000000"},{"error":"Invalid to date: 9000000000000000"}]|x});
-  ("between/errto", 1337, {x|[{"error":"Invalid to date: 9000000000000000"},{"error":"Invalid to date: 9000000000000000"},{"error":"Invalid to date: 9000000000000000"}]|x});
-  ("between/errto", 7, {x|[{"error":"Invalid to date: 9000000000000000"},{"error":"Invalid to date: 9000000000000000"},{"error":"Invalid to date: 9000000000000000"}]|x});
-  ("betweens", 42, {x|[["2023-09-30T04:40:52.678Z","2027-04-27T23:22:22.320Z","2029-07-04T23:01:28.818Z"],["2021-07-23T20:21:05.713Z","2021-07-23T22:27:58.481Z","2025-12-26T21:35:11.856Z"],["2020-07-31T04:18:23.205Z","2026-01-04T20:57:19.114Z","2028-08-30T03:23:42.189Z"]]|x});
-  ("betweens", 1337, {x|[["2021-08-02T16:08:28.344Z","2022-08-15T04:13:38.308Z","2022-10-12T23:54:29.581Z"],["2023-03-18T14:45:33.798Z","2024-08-04T21:13:48.489Z","2025-03-08T16:32:07.323Z"],["2022-08-14T21:03:36.612Z","2027-04-30T23:19:02.869Z","2029-10-05T15:20:56.745Z"]]|x});
-  ("betweens", 7, {x|[["2020-10-05T18:06:01.245Z","2024-05-20T12:12:50.900Z","2027-10-20T01:02:25.272Z"],["2025-05-21T03:00:35.822Z","2027-03-27T19:38:20.655Z","2029-10-12T14:17:47.385Z"],["2020-09-20T04:52:01.070Z","2022-09-07T14:34:56.148Z","2025-01-04T14:13:59.844Z"]]|x});
-  ("betweens/2", 42, {x|[["2023-09-30T04:40:52.678Z","2029-07-04T23:01:28.818Z"],["2025-12-26T21:35:11.856Z","2027-04-27T23:22:22.320Z"],["2021-07-23T20:21:05.713Z","2021-07-23T22:27:58.481Z"]]|x});
-  ("betweens/2", 1337, {x|[["2021-08-02T16:08:28.344Z","2022-08-15T04:13:38.308Z"],["2022-10-12T23:54:29.581Z","2024-08-04T21:13:48.489Z"],["2023-03-18T14:45:33.798Z","2025-03-08T16:32:07.323Z"]]|x});
-  ("betweens/2", 7, {x|[["2020-10-05T18:06:01.245Z","2027-10-20T01:02:25.272Z"],["2024-05-20T12:12:50.900Z","2027-03-27T19:38:20.655Z"],["2025-05-21T03:00:35.822Z","2029-10-12T14:17:47.385Z"]]|x});
-  ("betweens/range", 42, {x|[["1970-01-01T00:00:59.866Z","1970-01-01T00:01:13.200Z","1970-01-01T00:01:35.072Z"],["1970-01-01T00:00:05.808Z","1970-01-01T00:00:15.599Z"],["1970-01-01T00:00:02.058Z","1970-01-01T00:00:21.234Z","1970-01-01T00:01:00.112Z","1970-01-01T00:01:10.807Z","1970-01-01T00:01:23.245Z","1970-01-01T00:01:36.991Z"]]|x});
-  ("betweens/range", 1337, {x|[["1970-01-01T00:00:15.868Z","1970-01-01T00:00:27.812Z","1970-01-01T00:00:45.932Z"],["1970-01-01T00:00:26.194Z","1970-01-01T00:00:51.839Z","1970-01-01T00:01:37.609Z"],["1970-01-01T00:00:11.527Z","1970-01-01T00:00:12.505Z","1970-01-01T00:00:38.627Z","1970-01-01T00:01:02.850Z","1970-01-01T00:01:38.355Z"]]|x});
-  ("betweens/range", 7, {x|[["1970-01-01T00:00:43.841Z","1970-01-01T00:01:17.992Z"],["1970-01-01T00:00:07.205Z","1970-01-01T00:00:26.844Z","1970-01-01T00:00:50.112Z","1970-01-01T00:00:53.850Z","1970-01-01T00:01:37.799Z"],["1970-01-01T00:00:06.593Z","1970-01-01T00:00:38.094Z","1970-01-01T00:01:07.923Z","1970-01-01T00:01:20.374Z"]]|x});
-  ("betweens/0", 42, {x|[[],[],[]]|x});
-  ("betweens/0", 1337, {x|[[],[],[]]|x});
-  ("betweens/0", 7, {x|[[],[],[]]|x});
-  ("betweens/err", 42, {x|[{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."}]|x});
-  ("betweens/err", 1337, {x|[{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."}]|x});
-  ("betweens/err", 7, {x|[{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."}]|x});
-  ("recent", 42, {x|["2024-12-31T08:59:19.892Z","2024-12-31T22:49:00.766Z","2024-12-31T17:34:03.545Z"]|x});
-  ("recent", 1337, {x|["2024-12-31T06:17:18.670Z","2024-12-31T03:48:30.136Z","2024-12-31T06:40:29.853Z"]|x});
-  ("recent", 7, {x|["2024-12-31T01:49:52.959Z","2024-12-31T18:43:04.204Z","2024-12-31T10:31:18.119Z"]|x});
-  ("recent/10", 42, {x|["2024-12-25T17:53:22.288Z","2024-12-31T12:10:16.210Z","2024-12-29T07:40:42.034Z"]|x});
-  ("recent/10", 1337, {x|["2024-12-24T14:53:09.057Z","2024-12-23T14:05:02.793Z","2024-12-24T18:45:01.034Z"]|x});
-  ("recent/10", 7, {x|["2024-12-22T18:18:50.285Z","2024-12-29T19:10:49.057Z","2024-12-26T09:13:05.137Z"]|x});
-  ("recent/range", 42, {x|["2024-12-26T02:58:00.424Z","2024-12-27T20:27:04.198Z","2024-12-27T04:42:12.098Z"]|x});
-  ("recent/range", 1337, {x|["2024-12-25T18:51:56.534Z","2024-12-25T11:25:30.727Z","2024-12-25T20:01:30.116Z"]|x});
-  ("recent/range", 7, {x|["2024-12-25T05:29:39.032Z","2024-12-27T08:09:14.171Z","2024-12-26T07:33:55.234Z"]|x});
-  ("recent/ref", 42, {x|["2025-02-04T09:33:30.276Z","2025-02-27T10:41:07.693Z","2025-02-18T16:42:50.331Z"]|x});
-  ("recent/ref", 1337, {x|["2025-01-30T21:32:37.015Z","2025-01-26T18:20:11.649Z","2025-01-31T13:00:04.973Z"]|x});
-  ("recent/ref", 7, {x|["2025-01-23T11:15:21.371Z","2025-02-20T14:43:18.566Z","2025-02-06T22:52:21.865Z"]|x});
-  ("recent/err0", 42, {x|[{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."}]|x});
-  ("recent/err0", 1337, {x|[{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."}]|x});
-  ("recent/err0", 7, {x|[{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."}]|x});
-  ("recent/errrange", 42, {x|[{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."}]|x});
-  ("recent/errrange", 1337, {x|[{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."}]|x});
-  ("recent/errrange", 7, {x|[{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."}]|x});
-  ("soon", 42, {x|["2025-01-01T08:59:20.892Z","2025-01-01T22:49:01.766Z","2025-01-01T17:34:04.545Z"]|x});
-  ("soon", 1337, {x|["2025-01-01T06:17:19.670Z","2025-01-01T03:48:31.136Z","2025-01-01T06:40:30.853Z"]|x});
-  ("soon", 7, {x|["2025-01-01T01:49:53.959Z","2025-01-01T18:43:05.204Z","2025-01-01T10:31:19.119Z"]|x});
-  ("soon/10", 42, {x|["2025-01-04T17:53:23.288Z","2025-01-10T12:10:17.210Z","2025-01-08T07:40:43.034Z"]|x});
-  ("soon/10", 1337, {x|["2025-01-03T14:53:10.057Z","2025-01-02T14:05:03.793Z","2025-01-03T18:45:02.034Z"]|x});
-  ("soon/10", 7, {x|["2025-01-01T18:18:51.285Z","2025-01-08T19:10:50.057Z","2025-01-05T09:13:06.137Z"]|x});
-  ("soon/range", 42, {x|["2025-01-06T02:58:01.424Z","2025-01-07T20:27:05.198Z","2025-01-07T04:42:13.098Z"]|x});
-  ("soon/range", 1337, {x|["2025-01-05T18:51:57.534Z","2025-01-05T11:25:31.727Z","2025-01-05T20:01:31.116Z"]|x});
-  ("soon/range", 7, {x|["2025-01-05T05:29:40.032Z","2025-01-07T08:09:15.171Z","2025-01-06T07:33:56.234Z"]|x});
-  ("soon/ref", 42, {x|["2024-07-28T08:10:03.922Z","2025-03-15T19:26:23.268Z","2024-12-18T07:43:27.686Z"]|x});
-  ("soon/ref", 1337, {x|["2024-06-13T08:01:10.295Z","2024-05-02T23:56:55.708Z","2024-06-19T18:35:50.024Z"]|x});
-  ("soon/ref", 7, {x|["2024-03-31T01:08:32.193Z","2025-01-06T11:48:10.469Z","2024-08-22T21:18:40.389Z"]|x});
-  ("soon/err0", 42, {x|[{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."}]|x});
-  ("soon/err0", 1337, {x|[{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."}]|x});
-  ("soon/err0", 7, {x|[{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."}]|x});
-  ("soon/errrange", 42, {x|[{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."}]|x});
-  ("soon/errrange", 1337, {x|[{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."}]|x});
-  ("soon/errrange", 7, {x|[{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."}]|x});
-  ("birthdate", 42, {x|["1967-08-07T04:02:06.836Z","2003-11-23T22:28:06.859Z","1990-02-12T04:20:03.934Z"]|x});
-  ("birthdate", 1337, {x|["1960-07-05T04:30:23.510Z","1953-12-31T07:38:12.417Z","1961-07-10T16:35:20.852Z"]|x});
-  ("birthdate", 7, {x|["1948-10-22T20:29:23.006Z","1993-02-18T22:21:13.776Z","1971-08-15T19:06:50.295Z"]|x});
-  ("birthdate/age", 42, {x|["1976-12-24T01:30:27.951Z","2004-08-19T23:20:24.491Z","1994-02-19T14:03:32.593Z"]|x});
-  ("birthdate/age", 1337, {x|["1971-07-31T13:18:35.513Z","1966-08-14T21:19:45.048Z","1972-05-08T20:03:51.545Z"]|x});
-  ("birthdate/age", 7, {x|["1962-08-31T18:15:17.655Z","1996-06-08T18:09:08.360Z","1980-01-17T18:03:13.224Z"]|x});
-  ("birthdate/ageref", 42, {x|["2020-07-16T05:33:13.977Z","2021-02-11T12:50:23.156Z","2020-11-23T16:50:57.738Z"]|x});
-  ("birthdate/ageref", 1337, {x|["2020-06-05T03:55:06.940Z","2020-04-28T10:39:14.535Z","2020-06-11T00:58:14.708Z"]|x});
-  ("birthdate/ageref", 7, {x|["2020-03-29T09:02:35.002Z","2020-12-11T04:40:15.821Z","2020-08-08T13:02:50.312Z"]|x});
-  ("birthdate/agedefault", 42, {x|["1903-01-20T03:11:56.681Z","1939-05-08T07:48:15.254Z","1925-07-27T18:55:09.768Z"]|x});
-  ("birthdate/agedefault", 1337, {x|["1895-12-18T06:22:14.689Z","1889-06-14T11:58:52.233Z","1896-12-22T18:04:00.832Z"]|x});
-  ("birthdate/agedefault", 7, {x|["1884-04-06T02:48:40.080Z","1928-08-03T11:47:18.904Z","1907-01-28T16:44:41.849Z"]|x});
-  ("birthdate/ageerr", 42, {x|[{"error":"Max age 20 should be greater than or equal to min age 40."},{"error":"Max age 20 should be greater than or equal to min age 40."},{"error":"Max age 20 should be greater than or equal to min age 40."}]|x});
-  ("birthdate/ageerr", 1337, {x|[{"error":"Max age 20 should be greater than or equal to min age 40."},{"error":"Max age 20 should be greater than or equal to min age 40."},{"error":"Max age 20 should be greater than or equal to min age 40."}]|x});
-  ("birthdate/ageerr", 7, {x|[{"error":"Max age 20 should be greater than or equal to min age 40."},{"error":"Max age 20 should be greater than or equal to min age 40."},{"error":"Max age 20 should be greater than or equal to min age 40."}]|x});
-  ("birthdate/year", 42, {x|["1937-10-30T15:52:21.843Z","1996-01-07T23:58:00.815Z","1973-12-06T01:27:09.930Z"]|x});
-  ("birthdate/year", 1337, {x|["1926-06-20T07:18:01.782Z","1916-01-12T09:00:58.826Z","1928-02-04T06:04:12.684Z"]|x});
-  ("birthdate/year", 7, {x|["1907-09-17T18:48:46.379Z","1978-10-08T20:44:51.881Z","1944-04-12T14:25:54.062Z"]|x});
-  ("birthdate/yearsame", 42, {x|["1999-05-17T14:00:16.389Z","1999-12-12T03:48:21.219Z","1999-09-23T23:33:48.119Z"]|x});
-  ("birthdate/yearsame", 1337, {x|["1999-04-06T20:28:13.355Z","1999-02-28T10:38:46.860Z","1999-04-12T16:21:47.525Z"]|x});
-  ("birthdate/yearsame", 7, {x|["1999-01-29T14:57:59.105Z","1999-10-11T07:56:04.081Z","1999-06-09T16:53:57.850Z"]|x});
-  ("birthdate/yeardefault", 42, {x|["0041-08-06T10:03:26.304Z","0077-11-22T00:50:03.427Z","0064-02-11T17:11:55.380Z"]|x});
-  ("birthdate/yeardefault", 1337, {x|["0034-07-05T15:55:45.646Z","0028-01-01T00:01:11.827Z","0035-07-11T03:14:20.589Z"]|x});
-  ("birthdate/yeardefault", 7, {x|["0022-10-23T16:49:36.933Z","0067-02-18T08:55:03.809Z","0045-08-14T22:04:13.180Z"]|x});
-  ("birthdate/yearerr", 42, {x|[{"error":"Max year 1990 should be greater than or equal to min year 2000."},{"error":"Max year 1990 should be greater than or equal to min year 2000."},{"error":"Max year 1990 should be greater than or equal to min year 2000."}]|x});
-  ("birthdate/yearerr", 1337, {x|[{"error":"Max year 1990 should be greater than or equal to min year 2000."},{"error":"Max year 1990 should be greater than or equal to min year 2000."},{"error":"Max year 1990 should be greater than or equal to min year 2000."}]|x});
-  ("birthdate/yearerr", 7, {x|[{"error":"Max year 1990 should be greater than or equal to min year 2000."},{"error":"Max year 1990 should be greater than or equal to min year 2000."},{"error":"Max year 1990 should be greater than or equal to min year 2000."}]|x});
-  ("birthdate/yearhuge", 42, {x|[{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"}]|x});
-  ("birthdate/yearhuge", 1337, {x|[{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"}]|x});
-  ("birthdate/yearhuge", 7, {x|[{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"}]|x});
-  ("birthdate/errref", 42, {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x});
-  ("birthdate/errref", 1337, {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x});
-  ("birthdate/errref", 7, {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x});
-  ("month", 42, {x|["January","September","May"]|x});
-  ("month", 1337, {x|["February","August","February"]|x});
-  ("month", 7, {x|["April","November","July"]|x});
-  ("month/abbr", 42, {x|["Jan","Sep","May"]|x});
-  ("month/abbr", 1337, {x|["Feb","Aug","Feb"]|x});
-  ("month/abbr", 7, {x|["Apr","Nov","Jul"]|x});
-  ("month/context", 42, {x|["January","September","May"]|x});
-  ("month/context", 1337, {x|["February","August","February"]|x});
-  ("month/context", 7, {x|["April","November","July"]|x});
-  ("month/abbrctx", 42, {x|["Jan","Sep","May"]|x});
-  ("month/abbrctx", 1337, {x|["Feb","Aug","Feb"]|x});
-  ("month/abbrctx", 7, {x|["Apr","Nov","Jul"]|x});
-  ("weekday", 42, {x|["Saturday","Wednesday","Tuesday"]|x});
-  ("weekday", 1337, {x|["Monday","Monday","Monday"]|x});
-  ("weekday", 7, {x|["Friday","Tuesday","Sunday"]|x});
-  ("weekday/abbr", 42, {x|["Sat","Wed","Tue"]|x});
-  ("weekday/abbr", 1337, {x|["Mon","Mon","Mon"]|x});
-  ("weekday/abbr", 7, {x|["Fri","Tue","Sun"]|x});
-  ("weekday/context", 42, {x|["Saturday","Wednesday","Tuesday"]|x});
-  ("weekday/context", 1337, {x|["Monday","Monday","Monday"]|x});
-  ("weekday/context", 7, {x|["Friday","Tuesday","Sunday"]|x});
-  ("weekday/abbrctx", 42, {x|["Sat","Wed","Tue"]|x});
-  ("weekday/abbrctx", 1337, {x|["Mon","Mon","Mon"]|x});
-  ("weekday/abbrctx", 7, {x|["Fri","Tue","Sun"]|x});
-  ("timeZone", 42, {x|["America/North_Dakota/Center","Pacific/Kosrae","Australia/Hobart"]|x});
-  ("timeZone", 1337, {x|["America/Guadeloupe","America/Argentina/San_Luis","America/Indiana/Indianapolis"]|x});
-  ("timeZone", 7, {x|["Africa/Libreville","Europe/Gibraltar","America/St_Thomas"]|x});
-  ("fake/month", 42, {x|["January / Wed / Australia/Hobart","March / Mon / America/Argentina/San_Juan","April / Wed / Asia/Kuwait"]|x});
-  ("fake/month", 1337, {x|["February / Mon / America/Indiana/Indianapolis","July / Sat / Asia/Bahrain","February / Wed / Australia/Lindeman"]|x});
-  ("fake/month", 7, {x|["April / Tue / America/St_Thomas","May / Wed / Asia/Choibalsan","June / Fri / America/Guyana"]|x});
-  ("fake/errref", 42, {x|[{"error":"Invalid refDate date: foo"},{"error":"Invalid refDate date: foo"},{"error":"Invalid refDate date: foo"}]|x});
-  ("fake/errref", 1337, {x|[{"error":"Invalid refDate date: foo"},{"error":"Invalid refDate date: foo"},{"error":"Invalid refDate date: foo"}]|x});
-  ("fake/errref", 7, {x|[{"error":"Invalid refDate date: foo"},{"error":"Invalid refDate date: foo"},{"error":"Invalid refDate date: foo"}]|x});
-  ("fake/errbetween", 42, {x|[{"error":"Cannot read properties of undefined (reading 'toString')"},{"error":"Cannot read properties of undefined (reading 'toString')"},{"error":"Cannot read properties of undefined (reading 'toString')"}]|x});
-  ("fake/errbetween", 1337, {x|[{"error":"Cannot read properties of undefined (reading 'toString')"},{"error":"Cannot read properties of undefined (reading 'toString')"},{"error":"Cannot read properties of undefined (reading 'toString')"}]|x});
-  ("fake/errbetween", 7, {x|[{"error":"Cannot read properties of undefined (reading 'toString')"},{"error":"Cannot read properties of undefined (reading 'toString')"},{"error":"Cannot read properties of undefined (reading 'toString')"}]|x});
-]
+let cases =
+  [
+    ( "anytime",
+      42,
+      {x|["2024-10-01T09:56:34.376Z","2025-11-26T00:30:52.734Z","2025-06-19T08:32:01.898Z"]|x}
+    );
+    ( "anytime",
+      1337,
+      {x|["2024-07-11T06:40:20.302Z","2024-04-26T20:08:35.491Z","2024-07-23T00:46:35.837Z"]|x}
+    );
+    ( "anytime",
+      7,
+      {x|["2024-02-26T16:55:16.427Z","2025-07-24T08:10:38.064Z","2024-11-17T00:55:47.045Z"]|x}
+    );
+    ( "anytime/ref",
+      42,
+      {x|["2019-10-01T09:56:34.376Z","2020-11-25T00:30:52.734Z","2020-06-18T08:32:01.898Z"]|x}
+    );
+    ( "anytime/ref",
+      1337,
+      {x|["2019-07-11T06:40:20.302Z","2019-04-26T20:08:35.491Z","2019-07-23T00:46:35.837Z"]|x}
+    );
+    ( "anytime/ref",
+      7,
+      {x|["2019-02-25T16:55:16.427Z","2020-07-23T08:10:38.064Z","2019-11-17T00:55:47.045Z"]|x}
+    );
+    ( "anytime/refnum",
+      42,
+      {x|["2020-06-13T22:23:14.499Z","2021-08-08T12:57:32.857Z","2021-03-01T20:58:42.021Z"]|x}
+    );
+    ( "anytime/refnum",
+      1337,
+      {x|["2020-03-23T19:07:00.425Z","2020-01-08T08:35:15.614Z","2020-04-04T13:13:15.960Z"]|x}
+    );
+    ( "anytime/refnum",
+      7,
+      {x|["2019-11-09T05:21:56.550Z","2021-04-05T20:37:18.187Z","2020-07-30T13:22:27.168Z"]|x}
+    );
+    ( "anytime/err",
+      42,
+      {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x}
+    );
+    ( "anytime/err",
+      1337,
+      {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x}
+    );
+    ( "anytime/err",
+      7,
+      {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x}
+    );
+    ( "past",
+      42,
+      {x|["2024-05-17T01:57:37.080Z","2024-12-13T23:04:27.133Z","2024-09-24T21:50:04.494Z"]|x}
+    );
+    ( "past",
+      1337,
+      {x|["2024-04-05T21:37:28.821Z","2024-02-28T01:52:47.882Z","2024-04-11T19:03:47.772Z"]|x}
+    );
+    ( "past",
+      7,
+      {x|["2024-01-28T22:17:31.173Z","2024-10-12T10:48:23.236Z","2024-06-09T10:59:11.642Z"]|x}
+    );
+    ( "past/10",
+      42,
+      {x|["2018-09-30T04:40:52.304Z","2024-07-04T23:01:27.867Z","2022-04-27T23:22:21.588Z"]|x}
+    );
+    ( "past/10",
+      1337,
+      {x|["2017-08-15T04:13:38.046Z","2016-08-02T16:08:28.185Z","2017-10-12T23:54:29.303Z"]|x}
+    );
+    ( "past/10",
+      7,
+      {x|["2015-10-06T18:06:01.169Z","2022-10-20T01:02:24.492Z","2019-05-21T12:12:50.462Z"]|x}
+    );
+    ( "past/range",
+      42,
+      {x|["2019-02-15T11:54:11.456Z","2020-11-07T23:35:19.867Z","2020-03-13T06:22:06.392Z"]|x}
+    );
+    ( "past/range",
+      1337,
+      {x|["2018-10-15T04:17:49.124Z","2018-06-23T22:01:23.374Z","2018-11-01T19:50:23.609Z"]|x}
+    );
+    ( "past/range",
+      7,
+      {x|["2018-03-25T15:12:47.601Z","2020-05-04T18:59:01.300Z","2019-04-26T11:54:58.687Z"]|x}
+    );
+    ( "past/ref",
+      42,
+      {x|["2013-09-29T19:41:32.038Z","2019-07-05T00:12:26.151Z","2017-04-27T05:48:17.311Z"]|x}
+    );
+    ( "past/ref",
+      1337,
+      {x|["2012-08-14T21:56:19.114Z","2011-08-03T12:19:57.890Z","2012-10-12T17:13:59.172Z"]|x}
+    );
+    ( "past/ref",
+      7,
+      {x|["2010-10-06T16:16:08.133Z","2017-10-19T06:19:19.509Z","2014-05-21T01:41:31.904Z"]|x}
+    );
+    ( "past/leap",
+      42,
+      {x|["2023-07-16T05:33:13.602Z","2024-02-11T12:50:22.206Z","2023-11-23T16:50:57.006Z"]|x}
+    );
+    ( "past/leap",
+      1337,
+      {x|["2023-06-05T03:55:06.678Z","2023-04-28T10:39:14.376Z","2023-06-11T00:58:14.429Z"]|x}
+    );
+    ( "past/leap",
+      7,
+      {x|["2023-03-29T09:02:34.926Z","2023-12-11T04:40:15.041Z","2023-08-08T13:02:49.873Z"]|x}
+    );
+    ( "past/old",
+      42,
+      {x|["1957-04-29T14:59:16.209Z","1960-03-17T07:04:24.428Z","1959-02-11T16:37:22.677Z"]|x}
+    );
+    ( "past/old",
+      1337,
+      {x|["1956-10-06T01:24:38.469Z","1956-03-31T06:07:39.272Z","1956-11-04T11:26:39.689Z"]|x}
+    );
+    ( "past/old",
+      7,
+      {x|["1955-11-01T18:07:07.175Z","1959-05-10T06:01:54.459Z","1957-08-24T07:31:14.401Z"]|x}
+    );
+    ( "past/err0",
+      42,
+      {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x}
+    );
+    ( "past/err0",
+      1337,
+      {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x}
+    );
+    ( "past/err0",
+      7,
+      {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x}
+    );
+    ( "past/errneg",
+      42,
+      {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x}
+    );
+    ( "past/errneg",
+      1337,
+      {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x}
+    );
+    ( "past/errneg",
+      7,
+      {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x}
+    );
+    ( "past/errrange",
+      42,
+      {x|[{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."}]|x}
+    );
+    ( "past/errrange",
+      1337,
+      {x|[{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."}]|x}
+    );
+    ( "past/errrange",
+      7,
+      {x|[{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."}]|x}
+    );
+    ( "past/errref",
+      42,
+      {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x}
+    );
+    ( "past/errref",
+      1337,
+      {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x}
+    );
+    ( "past/errref",
+      7,
+      {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x}
+    );
+    ( "past/errhuge",
+      42,
+      {x|[{"error":"Invalid from date: Invalid Date"},{"error":"Invalid from date: Invalid Date"},{"error":"Invalid from date: Invalid Date"}]|x}
+    );
+    ( "past/errhuge",
+      1337,
+      {x|[{"error":"Invalid from date: Invalid Date"},{"error":"Invalid from date: Invalid Date"},{"error":"Invalid from date: Invalid Date"}]|x}
+    );
+    ( "past/errhuge",
+      7,
+      {x|[{"error":"Invalid from date: Invalid Date"},{"error":"Invalid from date: Invalid Date"},{"error":"Invalid from date: Invalid Date"}]|x}
+    );
+    ( "future",
+      42,
+      {x|["2025-05-17T16:58:17.813Z","2025-12-14T00:15:26.417Z","2025-09-25T04:16:01.217Z"]|x}
+    );
+    ( "future",
+      1337,
+      {x|["2025-04-06T15:20:10.889Z","2025-02-27T22:04:18.587Z","2025-04-12T12:23:18.640Z"]|x}
+    );
+    ( "future",
+      7,
+      {x|["2025-01-28T20:27:39.137Z","2025-10-12T16:05:19.252Z","2025-06-10T00:27:54.084Z"]|x}
+    );
+    ( "future/10",
+      42,
+      {x|["2028-09-29T19:41:33.038Z","2034-07-05T00:12:27.151Z","2032-04-27T05:48:18.311Z"]|x}
+    );
+    ( "future/10",
+      1337,
+      {x|["2027-08-15T21:56:20.114Z","2026-08-03T12:19:58.890Z","2027-10-13T17:14:00.172Z"]|x}
+    );
+    ( "future/10",
+      7,
+      {x|["2025-10-06T16:16:09.133Z","2032-10-19T06:19:20.509Z","2029-05-21T01:41:32.904Z"]|x}
+    );
+    ( "future/range",
+      42,
+      {x|["2030-02-15T02:54:52.189Z","2031-11-08T00:46:19.151Z","2031-03-13T12:48:03.115Z"]|x}
+    );
+    ( "future/range",
+      1337,
+      {x|["2029-10-14T22:00:31.192Z","2029-06-23T18:12:54.079Z","2029-11-01T13:09:54.478Z"]|x}
+    );
+    ( "future/range",
+      7,
+      {x|["2029-03-25T13:22:55.564Z","2031-05-05T00:15:57.317Z","2030-04-26T01:23:41.130Z"]|x}
+    );
+    ( "future/ref",
+      42,
+      {x|["2023-09-30T04:40:53.304Z","2029-07-04T23:01:28.867Z","2027-04-27T23:22:22.588Z"]|x}
+    );
+    ( "future/ref",
+      1337,
+      {x|["2022-08-15T04:13:39.046Z","2021-08-02T16:08:29.185Z","2022-10-12T23:54:30.303Z"]|x}
+    );
+    ( "future/ref",
+      7,
+      {x|["2020-10-05T18:06:02.169Z","2027-10-20T01:02:25.492Z","2024-05-20T12:12:51.462Z"]|x}
+    );
+    ( "future/leap",
+      42,
+      {x|["2025-04-15T00:29:09.245Z","2027-01-06T12:10:17.656Z","2026-05-11T18:57:04.181Z"]|x}
+    );
+    ( "future/leap",
+      1337,
+      {x|["2024-12-12T16:52:46.913Z","2024-08-21T10:36:21.163Z","2024-12-30T08:25:21.398Z"]|x}
+    );
+    ( "future/leap",
+      7,
+      {x|["2024-05-23T03:47:45.390Z","2026-07-03T07:33:59.089Z","2025-06-24T00:29:56.476Z"]|x}
+    );
+    ( "future/err0",
+      42,
+      {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x}
+    );
+    ( "future/err0",
+      1337,
+      {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x}
+    );
+    ( "future/err0",
+      7,
+      {x|[{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."},{"error":"Years must be greater than 0."}]|x}
+    );
+    ( "future/errrange",
+      42,
+      {x|[{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."}]|x}
+    );
+    ( "future/errrange",
+      1337,
+      {x|[{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."}]|x}
+    );
+    ( "future/errrange",
+      7,
+      {x|[{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."},{"error":"The maximum amount of years must be greater than the minimum amount of years."}]|x}
+    );
+    ( "future/errhuge",
+      42,
+      {x|[{"error":"Invalid to date: Invalid Date"},{"error":"Invalid to date: Invalid Date"},{"error":"Invalid to date: Invalid Date"}]|x}
+    );
+    ( "future/errhuge",
+      1337,
+      {x|[{"error":"Invalid to date: Invalid Date"},{"error":"Invalid to date: Invalid Date"},{"error":"Invalid to date: Invalid Date"}]|x}
+    );
+    ( "future/errhuge",
+      7,
+      {x|[{"error":"Invalid to date: Invalid Date"},{"error":"Invalid to date: Invalid Date"},{"error":"Invalid to date: Invalid Date"}]|x}
+    );
+    ( "between",
+      42,
+      {x|["2023-09-30T04:40:52.678Z","2029-07-04T23:01:28.818Z","2027-04-27T23:22:22.320Z"]|x}
+    );
+    ( "between",
+      1337,
+      {x|["2022-08-15T04:13:38.308Z","2021-08-02T16:08:28.344Z","2022-10-12T23:54:29.581Z"]|x}
+    );
+    ( "between",
+      7,
+      {x|["2020-10-05T18:06:01.245Z","2027-10-20T01:02:25.272Z","2024-05-20T12:12:50.900Z"]|x}
+    );
+    ( "between/num",
+      42,
+      {x|["1970-01-01T00:06:14.540Z","1970-01-01T00:15:50.715Z","1970-01-01T00:12:11.994Z"]|x}
+    );
+    ( "between/num",
+      1337,
+      {x|["1970-01-01T00:04:22.024Z","1970-01-01T00:02:38.684Z","1970-01-01T00:04:38.126Z"]|x}
+    );
+    ( "between/num",
+      7,
+      {x|["1970-01-01T00:01:16.308Z","1970-01-01T00:12:59.919Z","1970-01-01T00:07:18.409Z"]|x}
+    );
+    ( "between/old",
+      42,
+      {x|["1860-02-05T16:13:57.188Z","1952-07-18T23:37:12.361Z","1917-06-15T00:31:08.359Z"]|x}
+    );
+    ( "between/old",
+      1337,
+      {x|["1842-01-16T18:47:36.772Z","1825-06-18T13:39:56.950Z","1844-08-17T10:06:16.830Z"]|x}
+    );
+    ( "between/old",
+      7,
+      {x|["1812-03-30T23:55:33.233Z","1925-02-21T15:01:12.501Z","1870-05-06T16:24:16.744Z"]|x}
+    );
+    ( "between/same",
+      42,
+      {x|["2020-01-01T00:00:00.000Z","2020-01-01T00:00:00.000Z","2020-01-01T00:00:00.000Z"]|x}
+    );
+    ( "between/same",
+      1337,
+      {x|["2020-01-01T00:00:00.000Z","2020-01-01T00:00:00.000Z","2020-01-01T00:00:00.000Z"]|x}
+    );
+    ( "between/same",
+      7,
+      {x|["2020-01-01T00:00:00.000Z","2020-01-01T00:00:00.000Z","2020-01-01T00:00:00.000Z"]|x}
+    );
+    ( "between/err",
+      42,
+      {x|[{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."}]|x}
+    );
+    ( "between/err",
+      1337,
+      {x|[{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."}]|x}
+    );
+    ( "between/err",
+      7,
+      {x|[{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."}]|x}
+    );
+    ( "between/errfrom",
+      42,
+      {x|[{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"}]|x}
+    );
+    ( "between/errfrom",
+      1337,
+      {x|[{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"}]|x}
+    );
+    ( "between/errfrom",
+      7,
+      {x|[{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"}]|x}
+    );
+    ( "between/errto",
+      42,
+      {x|[{"error":"Invalid to date: 9000000000000000"},{"error":"Invalid to date: 9000000000000000"},{"error":"Invalid to date: 9000000000000000"}]|x}
+    );
+    ( "between/errto",
+      1337,
+      {x|[{"error":"Invalid to date: 9000000000000000"},{"error":"Invalid to date: 9000000000000000"},{"error":"Invalid to date: 9000000000000000"}]|x}
+    );
+    ( "between/errto",
+      7,
+      {x|[{"error":"Invalid to date: 9000000000000000"},{"error":"Invalid to date: 9000000000000000"},{"error":"Invalid to date: 9000000000000000"}]|x}
+    );
+    ( "betweens",
+      42,
+      {x|[["2023-09-30T04:40:52.678Z","2027-04-27T23:22:22.320Z","2029-07-04T23:01:28.818Z"],["2021-07-23T20:21:05.713Z","2021-07-23T22:27:58.481Z","2025-12-26T21:35:11.856Z"],["2020-07-31T04:18:23.205Z","2026-01-04T20:57:19.114Z","2028-08-30T03:23:42.189Z"]]|x}
+    );
+    ( "betweens",
+      1337,
+      {x|[["2021-08-02T16:08:28.344Z","2022-08-15T04:13:38.308Z","2022-10-12T23:54:29.581Z"],["2023-03-18T14:45:33.798Z","2024-08-04T21:13:48.489Z","2025-03-08T16:32:07.323Z"],["2022-08-14T21:03:36.612Z","2027-04-30T23:19:02.869Z","2029-10-05T15:20:56.745Z"]]|x}
+    );
+    ( "betweens",
+      7,
+      {x|[["2020-10-05T18:06:01.245Z","2024-05-20T12:12:50.900Z","2027-10-20T01:02:25.272Z"],["2025-05-21T03:00:35.822Z","2027-03-27T19:38:20.655Z","2029-10-12T14:17:47.385Z"],["2020-09-20T04:52:01.070Z","2022-09-07T14:34:56.148Z","2025-01-04T14:13:59.844Z"]]|x}
+    );
+    ( "betweens/2",
+      42,
+      {x|[["2023-09-30T04:40:52.678Z","2029-07-04T23:01:28.818Z"],["2025-12-26T21:35:11.856Z","2027-04-27T23:22:22.320Z"],["2021-07-23T20:21:05.713Z","2021-07-23T22:27:58.481Z"]]|x}
+    );
+    ( "betweens/2",
+      1337,
+      {x|[["2021-08-02T16:08:28.344Z","2022-08-15T04:13:38.308Z"],["2022-10-12T23:54:29.581Z","2024-08-04T21:13:48.489Z"],["2023-03-18T14:45:33.798Z","2025-03-08T16:32:07.323Z"]]|x}
+    );
+    ( "betweens/2",
+      7,
+      {x|[["2020-10-05T18:06:01.245Z","2027-10-20T01:02:25.272Z"],["2024-05-20T12:12:50.900Z","2027-03-27T19:38:20.655Z"],["2025-05-21T03:00:35.822Z","2029-10-12T14:17:47.385Z"]]|x}
+    );
+    ( "betweens/range",
+      42,
+      {x|[["1970-01-01T00:00:59.866Z","1970-01-01T00:01:13.200Z","1970-01-01T00:01:35.072Z"],["1970-01-01T00:00:05.808Z","1970-01-01T00:00:15.599Z"],["1970-01-01T00:00:02.058Z","1970-01-01T00:00:21.234Z","1970-01-01T00:01:00.112Z","1970-01-01T00:01:10.807Z","1970-01-01T00:01:23.245Z","1970-01-01T00:01:36.991Z"]]|x}
+    );
+    ( "betweens/range",
+      1337,
+      {x|[["1970-01-01T00:00:15.868Z","1970-01-01T00:00:27.812Z","1970-01-01T00:00:45.932Z"],["1970-01-01T00:00:26.194Z","1970-01-01T00:00:51.839Z","1970-01-01T00:01:37.609Z"],["1970-01-01T00:00:11.527Z","1970-01-01T00:00:12.505Z","1970-01-01T00:00:38.627Z","1970-01-01T00:01:02.850Z","1970-01-01T00:01:38.355Z"]]|x}
+    );
+    ( "betweens/range",
+      7,
+      {x|[["1970-01-01T00:00:43.841Z","1970-01-01T00:01:17.992Z"],["1970-01-01T00:00:07.205Z","1970-01-01T00:00:26.844Z","1970-01-01T00:00:50.112Z","1970-01-01T00:00:53.850Z","1970-01-01T00:01:37.799Z"],["1970-01-01T00:00:06.593Z","1970-01-01T00:00:38.094Z","1970-01-01T00:01:07.923Z","1970-01-01T00:01:20.374Z"]]|x}
+    );
+    ("betweens/0", 42, {x|[[],[],[]]|x});
+    ("betweens/0", 1337, {x|[[],[],[]]|x});
+    ("betweens/0", 7, {x|[[],[],[]]|x});
+    ( "betweens/err",
+      42,
+      {x|[{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."}]|x}
+    );
+    ( "betweens/err",
+      1337,
+      {x|[{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."}]|x}
+    );
+    ( "betweens/err",
+      7,
+      {x|[{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."},{"error":"`from` date must be before `to` date."}]|x}
+    );
+    ( "recent",
+      42,
+      {x|["2024-12-31T08:59:19.892Z","2024-12-31T22:49:00.766Z","2024-12-31T17:34:03.545Z"]|x}
+    );
+    ( "recent",
+      1337,
+      {x|["2024-12-31T06:17:18.670Z","2024-12-31T03:48:30.136Z","2024-12-31T06:40:29.853Z"]|x}
+    );
+    ( "recent",
+      7,
+      {x|["2024-12-31T01:49:52.959Z","2024-12-31T18:43:04.204Z","2024-12-31T10:31:18.119Z"]|x}
+    );
+    ( "recent/10",
+      42,
+      {x|["2024-12-25T17:53:22.288Z","2024-12-31T12:10:16.210Z","2024-12-29T07:40:42.034Z"]|x}
+    );
+    ( "recent/10",
+      1337,
+      {x|["2024-12-24T14:53:09.057Z","2024-12-23T14:05:02.793Z","2024-12-24T18:45:01.034Z"]|x}
+    );
+    ( "recent/10",
+      7,
+      {x|["2024-12-22T18:18:50.285Z","2024-12-29T19:10:49.057Z","2024-12-26T09:13:05.137Z"]|x}
+    );
+    ( "recent/range",
+      42,
+      {x|["2024-12-26T02:58:00.424Z","2024-12-27T20:27:04.198Z","2024-12-27T04:42:12.098Z"]|x}
+    );
+    ( "recent/range",
+      1337,
+      {x|["2024-12-25T18:51:56.534Z","2024-12-25T11:25:30.727Z","2024-12-25T20:01:30.116Z"]|x}
+    );
+    ( "recent/range",
+      7,
+      {x|["2024-12-25T05:29:39.032Z","2024-12-27T08:09:14.171Z","2024-12-26T07:33:55.234Z"]|x}
+    );
+    ( "recent/ref",
+      42,
+      {x|["2025-02-04T09:33:30.276Z","2025-02-27T10:41:07.693Z","2025-02-18T16:42:50.331Z"]|x}
+    );
+    ( "recent/ref",
+      1337,
+      {x|["2025-01-30T21:32:37.015Z","2025-01-26T18:20:11.649Z","2025-01-31T13:00:04.973Z"]|x}
+    );
+    ( "recent/ref",
+      7,
+      {x|["2025-01-23T11:15:21.371Z","2025-02-20T14:43:18.566Z","2025-02-06T22:52:21.865Z"]|x}
+    );
+    ( "recent/err0",
+      42,
+      {x|[{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."}]|x}
+    );
+    ( "recent/err0",
+      1337,
+      {x|[{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."}]|x}
+    );
+    ( "recent/err0",
+      7,
+      {x|[{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."}]|x}
+    );
+    ( "recent/errrange",
+      42,
+      {x|[{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."}]|x}
+    );
+    ( "recent/errrange",
+      1337,
+      {x|[{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."}]|x}
+    );
+    ( "recent/errrange",
+      7,
+      {x|[{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."}]|x}
+    );
+    ( "soon",
+      42,
+      {x|["2025-01-01T08:59:20.892Z","2025-01-01T22:49:01.766Z","2025-01-01T17:34:04.545Z"]|x}
+    );
+    ( "soon",
+      1337,
+      {x|["2025-01-01T06:17:19.670Z","2025-01-01T03:48:31.136Z","2025-01-01T06:40:30.853Z"]|x}
+    );
+    ( "soon",
+      7,
+      {x|["2025-01-01T01:49:53.959Z","2025-01-01T18:43:05.204Z","2025-01-01T10:31:19.119Z"]|x}
+    );
+    ( "soon/10",
+      42,
+      {x|["2025-01-04T17:53:23.288Z","2025-01-10T12:10:17.210Z","2025-01-08T07:40:43.034Z"]|x}
+    );
+    ( "soon/10",
+      1337,
+      {x|["2025-01-03T14:53:10.057Z","2025-01-02T14:05:03.793Z","2025-01-03T18:45:02.034Z"]|x}
+    );
+    ( "soon/10",
+      7,
+      {x|["2025-01-01T18:18:51.285Z","2025-01-08T19:10:50.057Z","2025-01-05T09:13:06.137Z"]|x}
+    );
+    ( "soon/range",
+      42,
+      {x|["2025-01-06T02:58:01.424Z","2025-01-07T20:27:05.198Z","2025-01-07T04:42:13.098Z"]|x}
+    );
+    ( "soon/range",
+      1337,
+      {x|["2025-01-05T18:51:57.534Z","2025-01-05T11:25:31.727Z","2025-01-05T20:01:31.116Z"]|x}
+    );
+    ( "soon/range",
+      7,
+      {x|["2025-01-05T05:29:40.032Z","2025-01-07T08:09:15.171Z","2025-01-06T07:33:56.234Z"]|x}
+    );
+    ( "soon/ref",
+      42,
+      {x|["2024-07-28T08:10:03.922Z","2025-03-15T19:26:23.268Z","2024-12-18T07:43:27.686Z"]|x}
+    );
+    ( "soon/ref",
+      1337,
+      {x|["2024-06-13T08:01:10.295Z","2024-05-02T23:56:55.708Z","2024-06-19T18:35:50.024Z"]|x}
+    );
+    ( "soon/ref",
+      7,
+      {x|["2024-03-31T01:08:32.193Z","2025-01-06T11:48:10.469Z","2024-08-22T21:18:40.389Z"]|x}
+    );
+    ( "soon/err0",
+      42,
+      {x|[{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."}]|x}
+    );
+    ( "soon/err0",
+      1337,
+      {x|[{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."}]|x}
+    );
+    ( "soon/err0",
+      7,
+      {x|[{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."},{"error":"Days must be greater than 0."}]|x}
+    );
+    ( "soon/errrange",
+      42,
+      {x|[{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."}]|x}
+    );
+    ( "soon/errrange",
+      1337,
+      {x|[{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."}]|x}
+    );
+    ( "soon/errrange",
+      7,
+      {x|[{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."},{"error":"The maximum amount of days must be greater than the minimum amount of days."}]|x}
+    );
+    ( "birthdate",
+      42,
+      {x|["1967-08-07T04:02:06.836Z","2003-11-23T22:28:06.859Z","1990-02-12T04:20:03.934Z"]|x}
+    );
+    ( "birthdate",
+      1337,
+      {x|["1960-07-05T04:30:23.510Z","1953-12-31T07:38:12.417Z","1961-07-10T16:35:20.852Z"]|x}
+    );
+    ( "birthdate",
+      7,
+      {x|["1948-10-22T20:29:23.006Z","1993-02-18T22:21:13.776Z","1971-08-15T19:06:50.295Z"]|x}
+    );
+    ( "birthdate/age",
+      42,
+      {x|["1976-12-24T01:30:27.951Z","2004-08-19T23:20:24.491Z","1994-02-19T14:03:32.593Z"]|x}
+    );
+    ( "birthdate/age",
+      1337,
+      {x|["1971-07-31T13:18:35.513Z","1966-08-14T21:19:45.048Z","1972-05-08T20:03:51.545Z"]|x}
+    );
+    ( "birthdate/age",
+      7,
+      {x|["1962-08-31T18:15:17.655Z","1996-06-08T18:09:08.360Z","1980-01-17T18:03:13.224Z"]|x}
+    );
+    ( "birthdate/ageref",
+      42,
+      {x|["2020-07-16T05:33:13.977Z","2021-02-11T12:50:23.156Z","2020-11-23T16:50:57.738Z"]|x}
+    );
+    ( "birthdate/ageref",
+      1337,
+      {x|["2020-06-05T03:55:06.940Z","2020-04-28T10:39:14.535Z","2020-06-11T00:58:14.708Z"]|x}
+    );
+    ( "birthdate/ageref",
+      7,
+      {x|["2020-03-29T09:02:35.002Z","2020-12-11T04:40:15.821Z","2020-08-08T13:02:50.312Z"]|x}
+    );
+    ( "birthdate/agedefault",
+      42,
+      {x|["1903-01-20T03:11:56.681Z","1939-05-08T07:48:15.254Z","1925-07-27T18:55:09.768Z"]|x}
+    );
+    ( "birthdate/agedefault",
+      1337,
+      {x|["1895-12-18T06:22:14.689Z","1889-06-14T11:58:52.233Z","1896-12-22T18:04:00.832Z"]|x}
+    );
+    ( "birthdate/agedefault",
+      7,
+      {x|["1884-04-06T02:48:40.080Z","1928-08-03T11:47:18.904Z","1907-01-28T16:44:41.849Z"]|x}
+    );
+    ( "birthdate/ageerr",
+      42,
+      {x|[{"error":"Max age 20 should be greater than or equal to min age 40."},{"error":"Max age 20 should be greater than or equal to min age 40."},{"error":"Max age 20 should be greater than or equal to min age 40."}]|x}
+    );
+    ( "birthdate/ageerr",
+      1337,
+      {x|[{"error":"Max age 20 should be greater than or equal to min age 40."},{"error":"Max age 20 should be greater than or equal to min age 40."},{"error":"Max age 20 should be greater than or equal to min age 40."}]|x}
+    );
+    ( "birthdate/ageerr",
+      7,
+      {x|[{"error":"Max age 20 should be greater than or equal to min age 40."},{"error":"Max age 20 should be greater than or equal to min age 40."},{"error":"Max age 20 should be greater than or equal to min age 40."}]|x}
+    );
+    ( "birthdate/year",
+      42,
+      {x|["1937-10-30T15:52:21.843Z","1996-01-07T23:58:00.815Z","1973-12-06T01:27:09.930Z"]|x}
+    );
+    ( "birthdate/year",
+      1337,
+      {x|["1926-06-20T07:18:01.782Z","1916-01-12T09:00:58.826Z","1928-02-04T06:04:12.684Z"]|x}
+    );
+    ( "birthdate/year",
+      7,
+      {x|["1907-09-17T18:48:46.379Z","1978-10-08T20:44:51.881Z","1944-04-12T14:25:54.062Z"]|x}
+    );
+    ( "birthdate/yearsame",
+      42,
+      {x|["1999-05-17T14:00:16.389Z","1999-12-12T03:48:21.219Z","1999-09-23T23:33:48.119Z"]|x}
+    );
+    ( "birthdate/yearsame",
+      1337,
+      {x|["1999-04-06T20:28:13.355Z","1999-02-28T10:38:46.860Z","1999-04-12T16:21:47.525Z"]|x}
+    );
+    ( "birthdate/yearsame",
+      7,
+      {x|["1999-01-29T14:57:59.105Z","1999-10-11T07:56:04.081Z","1999-06-09T16:53:57.850Z"]|x}
+    );
+    ( "birthdate/yeardefault",
+      42,
+      {x|["0041-08-06T10:03:26.304Z","0077-11-22T00:50:03.427Z","0064-02-11T17:11:55.380Z"]|x}
+    );
+    ( "birthdate/yeardefault",
+      1337,
+      {x|["0034-07-05T15:55:45.646Z","0028-01-01T00:01:11.827Z","0035-07-11T03:14:20.589Z"]|x}
+    );
+    ( "birthdate/yeardefault",
+      7,
+      {x|["0022-10-23T16:49:36.933Z","0067-02-18T08:55:03.809Z","0045-08-14T22:04:13.180Z"]|x}
+    );
+    ( "birthdate/yearerr",
+      42,
+      {x|[{"error":"Max year 1990 should be greater than or equal to min year 2000."},{"error":"Max year 1990 should be greater than or equal to min year 2000."},{"error":"Max year 1990 should be greater than or equal to min year 2000."}]|x}
+    );
+    ( "birthdate/yearerr",
+      1337,
+      {x|[{"error":"Max year 1990 should be greater than or equal to min year 2000."},{"error":"Max year 1990 should be greater than or equal to min year 2000."},{"error":"Max year 1990 should be greater than or equal to min year 2000."}]|x}
+    );
+    ( "birthdate/yearerr",
+      7,
+      {x|[{"error":"Max year 1990 should be greater than or equal to min year 2000."},{"error":"Max year 1990 should be greater than or equal to min year 2000."},{"error":"Max year 1990 should be greater than or equal to min year 2000."}]|x}
+    );
+    ( "birthdate/yearhuge",
+      42,
+      {x|[{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"}]|x}
+    );
+    ( "birthdate/yearhuge",
+      1337,
+      {x|[{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"}]|x}
+    );
+    ( "birthdate/yearhuge",
+      7,
+      {x|[{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"},{"error":"Invalid from date: NaN"}]|x}
+    );
+    ( "birthdate/errref",
+      42,
+      {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x}
+    );
+    ( "birthdate/errref",
+      1337,
+      {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x}
+    );
+    ( "birthdate/errref",
+      7,
+      {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x}
+    );
+    ("month", 42, {x|["January","September","May"]|x});
+    ("month", 1337, {x|["February","August","February"]|x});
+    ("month", 7, {x|["April","November","July"]|x});
+    ("month/abbr", 42, {x|["Jan","Sep","May"]|x});
+    ("month/abbr", 1337, {x|["Feb","Aug","Feb"]|x});
+    ("month/abbr", 7, {x|["Apr","Nov","Jul"]|x});
+    ("month/context", 42, {x|["January","September","May"]|x});
+    ("month/context", 1337, {x|["February","August","February"]|x});
+    ("month/context", 7, {x|["April","November","July"]|x});
+    ("month/abbrctx", 42, {x|["Jan","Sep","May"]|x});
+    ("month/abbrctx", 1337, {x|["Feb","Aug","Feb"]|x});
+    ("month/abbrctx", 7, {x|["Apr","Nov","Jul"]|x});
+    ("weekday", 42, {x|["Saturday","Wednesday","Tuesday"]|x});
+    ("weekday", 1337, {x|["Monday","Monday","Monday"]|x});
+    ("weekday", 7, {x|["Friday","Tuesday","Sunday"]|x});
+    ("weekday/abbr", 42, {x|["Sat","Wed","Tue"]|x});
+    ("weekday/abbr", 1337, {x|["Mon","Mon","Mon"]|x});
+    ("weekday/abbr", 7, {x|["Fri","Tue","Sun"]|x});
+    ("weekday/context", 42, {x|["Saturday","Wednesday","Tuesday"]|x});
+    ("weekday/context", 1337, {x|["Monday","Monday","Monday"]|x});
+    ("weekday/context", 7, {x|["Friday","Tuesday","Sunday"]|x});
+    ("weekday/abbrctx", 42, {x|["Sat","Wed","Tue"]|x});
+    ("weekday/abbrctx", 1337, {x|["Mon","Mon","Mon"]|x});
+    ("weekday/abbrctx", 7, {x|["Fri","Tue","Sun"]|x});
+    ( "timeZone",
+      42,
+      {x|["America/North_Dakota/Center","Pacific/Kosrae","Australia/Hobart"]|x}
+    );
+    ( "timeZone",
+      1337,
+      {x|["America/Guadeloupe","America/Argentina/San_Luis","America/Indiana/Indianapolis"]|x}
+    );
+    ( "timeZone",
+      7,
+      {x|["Africa/Libreville","Europe/Gibraltar","America/St_Thomas"]|x} );
+    ( "fake/month",
+      42,
+      {x|["January / Wed / Australia/Hobart","March / Mon / America/Argentina/San_Juan","April / Wed / Asia/Kuwait"]|x}
+    );
+    ( "fake/month",
+      1337,
+      {x|["February / Mon / America/Indiana/Indianapolis","July / Sat / Asia/Bahrain","February / Wed / Australia/Lindeman"]|x}
+    );
+    ( "fake/month",
+      7,
+      {x|["April / Tue / America/St_Thomas","May / Wed / Asia/Choibalsan","June / Fri / America/Guyana"]|x}
+    );
+    ( "fake/errref",
+      42,
+      {x|[{"error":"Invalid refDate date: foo"},{"error":"Invalid refDate date: foo"},{"error":"Invalid refDate date: foo"}]|x}
+    );
+    ( "fake/errref",
+      1337,
+      {x|[{"error":"Invalid refDate date: foo"},{"error":"Invalid refDate date: foo"},{"error":"Invalid refDate date: foo"}]|x}
+    );
+    ( "fake/errref",
+      7,
+      {x|[{"error":"Invalid refDate date: foo"},{"error":"Invalid refDate date: foo"},{"error":"Invalid refDate date: foo"}]|x}
+    );
+    ( "fake/errbetween",
+      42,
+      {x|[{"error":"Cannot read properties of undefined (reading 'toString')"},{"error":"Cannot read properties of undefined (reading 'toString')"},{"error":"Cannot read properties of undefined (reading 'toString')"}]|x}
+    );
+    ( "fake/errbetween",
+      1337,
+      {x|[{"error":"Cannot read properties of undefined (reading 'toString')"},{"error":"Cannot read properties of undefined (reading 'toString')"},{"error":"Cannot read properties of undefined (reading 'toString')"}]|x}
+    );
+    ( "fake/errbetween",
+      7,
+      {x|[{"error":"Cannot read properties of undefined (reading 'toString')"},{"error":"Cannot read properties of undefined (reading 'toString')"},{"error":"Cannot read properties of undefined (reading 'toString')"}]|x}
+    );
+  ]

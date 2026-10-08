@@ -5,7 +5,8 @@ open Fk_helpers
 
 let boolean f = Fk_datatype.boolean f
 
-let get_repetitions f (symbol : char option) (qmin : string option) (qmax : string option) =
+let get_repetitions f (symbol : char option) (qmin : string option)
+    (qmax : string option) =
   let doubling_limit () =
     let limit = ref 1 in
     while boolean f do
@@ -46,16 +47,25 @@ let replace_unquantified_tokens pattern ci f =
          Buffer.add_char b pattern.[!i]
        end
      end
-     else if c = '[' then (in_class := true; Buffer.add_char b c)
-     else if c = ']' then (in_class := false; Buffer.add_char b c)
+     else if c = '[' then (
+       in_class := true;
+       Buffer.add_char b c)
+     else if c = ']' then (
+       in_class := false;
+       Buffer.add_char b c)
      else
        let has_quantifier =
-         !i + 1 < len && match pattern.[!i + 1] with '?' | '*' | '+' | '{' -> true | _ -> false
+         !i + 1 < len
+         &&
+         match pattern.[!i + 1] with
+         | '?' | '*' | '+' | '{' -> true
+         | _ -> false
        in
        if (not !in_class) && (not has_quantifier) && c = '.' then
          Buffer.add_string b (Fk_string.alphanumeric f)
        else if (not !in_class) && (not has_quantifier) && ci && is_alpha c then
-         Buffer.add_string b (Fk_string.from_character_array [| lower c; upper c |] f)
+         Buffer.add_string b
+           (Fk_string.from_character_array [| lower c; upper c |] f)
        else Buffer.add_char b c);
     incr i
   done;
@@ -70,9 +80,11 @@ let match_quantifier s i =
       match read_digits s (i + 1) with
       | Some (a, j) when j < len && s.[j] = ',' -> (
           match read_digits s (j + 1) with
-          | Some (b, k) when k < len && s.[k] = '}' -> Some (k + 1, Some a, Some b, None)
+          | Some (b, k) when k < len && s.[k] = '}' ->
+              Some (k + 1, Some a, Some b, None)
           | _ -> None)
-      | Some (a, j) when j < len && s.[j] = '}' -> Some (j + 1, Some a, None, None)
+      | Some (a, j) when j < len && s.[j] = '}' ->
+          Some (j + 1, Some a, None, None)
       | _ -> None
     else None
   in
@@ -94,7 +106,8 @@ let negative_lookahead_ok s p =
     in
     go p
   in
-  not (closes_before ~close:']' ~open_:'[' || closes_before ~close:'}' ~open_:'{')
+  not
+    (closes_before ~close:']' ~open_:'[' || closes_before ~close:'}' ~open_:'{')
 
 (* /([.A-Za-z0-9])(?:\{(\d+)(?:,(\d+)|)\}|(\?|\*|\+))(?![^[]*]|[^{]*})/ *)
 let find_single_char s =
@@ -154,7 +167,8 @@ let find_range_alphanumeric s =
   in
   let rec at i =
     if i >= len then None
-    else if s.[i] = '[' then match try_at i with Some r -> Some r | None -> at (i + 1)
+    else if s.[i] = '[' then
+      match try_at i with Some r -> Some r | None -> at (i + 1)
     else at (i + 1)
   in
   at 0
@@ -167,8 +181,10 @@ let find_single_range s =
     if i >= len then None
     else
       let c = s.[i] in
-      if i + 2 < len && is_digit c && s.[i + 1] = '-' && is_digit s.[i + 2] then Some (String.sub s i 3)
-      else if i + 2 < len && is_word c && s.[i + 1] = '-' && is_word s.[i + 2] then Some (String.sub s i 3)
+      if i + 2 < len && is_digit c && s.[i + 1] = '-' && is_digit s.[i + 2] then
+        Some (String.sub s i 3)
+      else if i + 2 < len && is_word c && s.[i + 1] = '-' && is_word s.[i + 2]
+      then Some (String.sub s i 3)
       else if is_word c || special c then Some (String.make 1 c)
       else at (i + 1)
   in
@@ -180,8 +196,8 @@ let utf8_of_code cp =
   Buffer.contents b
 
 (** [from_reg_exp ?flags pattern]. When [flags] is given the pattern is treated
-    like a JavaScript [RegExp] source: leading [^] and trailing [$] are removed and
-    the [i] flag enables case-insensitive generation. *)
+    like a JavaScript [RegExp] source: leading [^] and trailing [$] are removed
+    and the [i] flag enables case-insensitive generation. *)
 let from_reg_exp ?flags pattern f =
   let ci, pattern =
     match flags with
@@ -208,7 +224,10 @@ let from_reg_exp ?flags pattern f =
           let reps = get_repetitions f sym qmin qmax in
           let replacement =
             if c = '.' then Fk_string.alphanumeric ~length:(`N reps) f
-            else if ci then Fk_string.from_character_array ~length:(`N reps) [| lower c; upper c |] f
+            else if ci then
+              Fk_string.from_character_array ~length:(`N reps)
+                [| lower c; upper c |]
+                f
             else Js.repeat (String.make 1 c) reps
           in
           pattern := splice !pattern i stop replacement;
@@ -228,10 +247,11 @@ let from_reg_exp ?flags pattern f =
             match find_single_range !ranges with
             | None -> ()
             | Some m ->
-                (if String.contains m '-' then begin
-                   if String.length m = 3 then begin
+                (if String.contains m '-' then
+                   begin if String.length m = 3 then begin
                      let min = Char.code m.[0] and max = Char.code m.[2] in
-                     if min > max then Core.error "Character range provided is out of order.";
+                     if min > max then
+                       Core.error "Character range provided is out of order.";
                      for i = min to max do
                        let ch = Char.chr i in
                        if ci && not (is_digit ch) then begin
@@ -241,8 +261,8 @@ let from_reg_exp ?flags pattern f =
                        else push i
                      done
                    end
-                   (* a lone '-' yields NaN bounds upstream and adds nothing *)
-                 end
+                     (* a lone '-' yields NaN bounds upstream and adds nothing *)
+                   end
                  else
                    let ch = m.[0] in
                    if ci && not (is_digit ch) then begin
@@ -250,7 +270,8 @@ let from_reg_exp ?flags pattern f =
                      push (Char.code (Char.lowercase_ascii ch))
                    end
                    else push (Char.code ch));
-                ranges := Js.substring !ranges (String.length m) (String.length !ranges);
+                ranges :=
+                  Js.substring !ranges (String.length m) (String.length !ranges);
                 ranges_loop ()
           in
           ranges_loop ();
@@ -260,20 +281,31 @@ let from_reg_exp ?flags pattern f =
             let toggle i =
               if List.mem i !codes then begin
                 (* remove first occurrence *)
-                let rec rm = function [] -> [] | x :: xs -> if x = i then xs else x :: rm xs in
+                let rec rm = function
+                  | [] -> []
+                  | x :: xs -> if x = i then xs else x :: rm xs
+                in
                 codes := rm !codes
               end
               else codes := !codes @ [ i ]
             in
-            for i = 48 to 57 do toggle i done;
-            for i = 65 to 90 do toggle i done;
-            for i = 97 to 122 do toggle i done
+            for i = 48 to 57 do
+              toggle i
+            done;
+            for i = 65 to 90 do
+              toggle i
+            done;
+            for i = 97 to 122 do
+              toggle i
+            done
           end;
           let arr = Array.of_list !codes in
           let generated =
             String.concat ""
               (Array.to_list
-                 (multiple ~count:(`N reps) (fun _ -> utf8_of_code (array_element arr f)) f))
+                 (multiple ~count:(`N reps)
+                    (fun _ -> utf8_of_code (array_element arr f))
+                    f))
           in
           pattern := splice !pattern i stop generated;
           range_loop ()

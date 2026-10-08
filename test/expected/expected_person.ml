@@ -2,125 +2,199 @@
 
 let locale = "en"
 
-let cases = [
-  ("firstName", 42, {x|["Nikita","Chase","Lilliana"]|x});
-  ("firstName", 1337, {x|["Elda","Katie","Nova"]|x});
-  ("firstName", 7, {x|["Janae","Kerry","Domenick"]|x});
-  ("firstName/female", 42, {x|["Valentina","Liliana","Camila"]|x});
-  ("firstName/female", 1337, {x|["Candace","Jennie","Katie"]|x});
-  ("firstName/female", 7, {x|["Oceane","Melinda","Kerry"]|x});
-  ("firstName/male", 42, {x|["Vernon","Kevin","Chase"]|x});
-  ("firstName/male", 1337, {x|["Chet","Hugo","Jeffry"]|x});
-  ("firstName/male", 7, {x|["Pete","Nathanial","Kerry"]|x});
-  ("firstName/generic", 42, {x|["Hollis","Telly","Nikita"]|x});
-  ("firstName/generic", 1337, {x|["Devan","Cali","Dorian"]|x});
-  ("firstName/generic", 7, {x|["Arlie","Pat","Jaylin"]|x});
-  ("lastName", 42, {x|["Reynolds-Miller","Beer","Quigley"]|x});
-  ("lastName", 1337, {x|["Gottlieb","Leannon","Reynolds-Buckridge"]|x});
-  ("lastName", 7, {x|["Kessler","Lind-Kuvalis","Kutch"]|x});
-  ("lastName/female", 42, {x|["Wiegand","Miller","Crist"]|x});
-  ("lastName/female", 1337, {x|["Cronin","Koelpin","Leannon"]|x});
-  ("lastName/female", 7, {x|["Satterfield","Reilly","Lind-Kuvalis"]|x});
-  ("lastName/male", 42, {x|["Wiegand","Miller","Crist"]|x});
-  ("lastName/male", 1337, {x|["Cronin","Koelpin","Leannon"]|x});
-  ("lastName/male", 7, {x|["Satterfield","Reilly","Lind-Kuvalis"]|x});
-  ("lastName/generic", 42, {x|["Wiegand","Miller","Crist"]|x});
-  ("lastName/generic", 1337, {x|["Cronin","Koelpin","Leannon"]|x});
-  ("lastName/generic", 7, {x|["Satterfield","Reilly","Lind-Kuvalis"]|x});
-  ("middleName", 42, {x|["Rebel","Cameron","Marlowe"]|x});
-  ("middleName", 1337, {x|["Dawn","Isla","Rebel"]|x});
-  ("middleName", 7, {x|["Gwen","London","Elijah"]|x});
-  ("middleName/female", 42, {x|["Venus","Kali","Brielle"]|x});
-  ("middleName/female", 1337, {x|["Brielle","Hippolyta","Isla"]|x});
-  ("middleName/female", 7, {x|["Michelle","Maddie","London"]|x});
-  ("middleName/male", 42, {x|["Warren","Levi","Cameron"]|x});
-  ("middleName/male", 1337, {x|["Cameron","Jakobe","Joseph"]|x});
-  ("middleName/male", 7, {x|["Ozzy","Nixon","London"]|x});
-  ("middleName/generic", 42, {x|["Jazz","Taylor","Rebel"]|x});
-  ("middleName/generic", 1337, {x|["Flynn","Dakota","Francis"]|x});
-  ("middleName/generic", 7, {x|["Avery","Riley","Jules"]|x});
-  ("prefix", 42, {x|["Dr.","Mr.","Miss"]|x});
-  ("prefix", 1337, {x|["Miss","Mrs.","Dr."]|x});
-  ("prefix", 7, {x|["Mrs.","Dr.","Mr."]|x});
-  ("prefix/female", 42, {x|["Ms.","Mrs.","Miss"]|x});
-  ("prefix/female", 1337, {x|["Miss","Mrs.","Mrs."]|x});
-  ("prefix/female", 7, {x|["Ms.","Ms.","Dr."]|x});
-  ("prefix/male", 42, {x|["Mr.","Dr.","Mr."]|x});
-  ("prefix/male", 1337, {x|["Mr.","Mr.","Mr."]|x});
-  ("prefix/male", 7, {x|["Mr.","Dr.","Mr."]|x});
-  ("prefix/generic", 42, {x|["Dr.","Dr.","Dr."]|x});
-  ("prefix/generic", 1337, {x|["Dr.","Dr.","Dr."]|x});
-  ("prefix/generic", 7, {x|["Dr.","Dr.","Dr."]|x});
-  ("fullName", 42, {x|["Nikita Crist","Lilliana Aufderhar PhD","Cecilia Leffler"]|x});
-  ("fullName", 1337, {x|["Elda Hammes","Nova Howe","Jayme Schimmel"]|x});
-  ("fullName", 7, {x|["Janae Wolff","Mr. Domenick Parisian","Susan Klein Jr."]|x});
-  ("fullName/female", 42, {x|["Valentina Miller","Amelia Mills","Violet Effertz"]|x});
-  ("fullName/female", 1337, {x|["Candace Koelpin","Doreen Reynolds-Buckridge","Mrs. Berta Kihn-Schamberger"]|x});
-  ("fullName/female", 7, {x|["Oceane Reilly IV","Angelina Kutch","Greta Green I"]|x});
-  ("fullName/male", 42, {x|["Vernon Miller","Arlo Mills","Werner Effertz"]|x});
-  ("fullName/male", 1337, {x|["Chet Koelpin","Dexter Reynolds-Buckridge","Mr. Bud Kihn-Schamberger"]|x});
-  ("fullName/male", 7, {x|["Pete Reilly IV","Axel Kutch","Garett Green I"]|x});
-  ("fullName/generic", 42, {x|["Hollis Reynolds-Miller","Cali Streich","Dr. Murl Wisozk"]|x});
-  ("fullName/generic", 1337, {x|["Devan Gottlieb","Francis Gibson DDS","Baby Murphy"]|x});
-  ("fullName/generic", 7, {x|["Arlie Kessler","Unique Kuvalis","Dr. Devyn Parisian"]|x});
-  ("fullName/first", 42, {x|["Joann Reynolds-Miller","Joann Streich","Mr. Joann Wisozk"]|x});
-  ("fullName/first", 1337, {x|["Joann Gottlieb","Joann Gibson DDS","Joann Murphy"]|x});
-  ("fullName/first", 7, {x|["Joann Kessler","Joann Kuvalis","Miss Joann Parisian"]|x});
-  ("fullName/last", 42, {x|["Nikita Doe","Ms. Amelia Doe","Rickie Doe"]|x});
-  ("fullName/last", 1337, {x|["Elda Doe","Doreen Doe DDS","Ludie Doe"]|x});
-  ("fullName/last", 7, {x|["Janae Doe","Jarret Doe","Miss Maria Doe"]|x});
-  ("fullName/both", 42, {x|["Jane Doe","Jane Doe DDS","Jane Doe"]|x});
-  ("fullName/both", 1337, {x|["Jane Doe","Jane Doe","Jane Doe"]|x});
-  ("fullName/both", 7, {x|["Jane Doe","Ms. Jane Doe","Jane Doe IV"]|x});
-  ("fullName/empty", 42, {x|["  DDS"," "," "]|x});
-  ("fullName/empty", 1337, {x|[" "," "," "]|x});
-  ("fullName/empty", 7, {x|["Ms.  "," "," "]|x});
-  ("fullName/dollar", 42, {x|["$& $1 $$ DDS","$& $1 $$","$& $1 $$"]|x});
-  ("fullName/dollar", 1337, {x|["$& $1 $$","$& $1 $$","$& $1 $$"]|x});
-  ("fullName/dollar", 7, {x|["Ms. $& $1 $$","$& $1 $$","$& $1 $$"]|x});
-  ("gender", 42, {x|["Gender nonconforming","Two-spirit person","Trans female"]|x});
-  ("gender", 1337, {x|["Demigender","Cisgender woman","FTM"]|x});
-  ("gender", 7, {x|["Cis male","Trans woman","Hermaphrodite"]|x});
-  ("sex", 42, {x|["female","male","male"]|x});
-  ("sex", 1337, {x|["female","female","female"]|x});
-  ("sex", 7, {x|["female","male","female"]|x});
-  ("sexType", 42, {x|["female","male","male"]|x});
-  ("sexType", 1337, {x|["female","female","female"]|x});
-  ("sexType", 7, {x|["female","male","female"]|x});
-  ("sexType/generic", 42, {x|["generic","male","male"]|x});
-  ("sexType/generic", 1337, {x|["female","female","female"]|x});
-  ("sexType/generic", 7, {x|["female","male","generic"]|x});
-  ("sexType/nogeneric", 42, {x|["female","male","male"]|x});
-  ("sexType/nogeneric", 1337, {x|["female","female","female"]|x});
-  ("sexType/nogeneric", 7, {x|["female","male","female"]|x});
-  ("bio", 42, {x|["traveler, philosopher, model","creator, author","procurement advocate, veteran"]|x});
-  ("bio", 1337, {x|["creator, engineer, friend","grad, educator, writer","governance junkie  🦾"]|x});
-  ("bio", 7, {x|["photographer","person, writer, inventor ⛄","geek, parent, public speaker"]|x});
-  ("suffix", 42, {x|["III","DVM","DDS"]|x});
-  ("suffix", 1337, {x|["I","Sr.","II"]|x});
-  ("suffix", 7, {x|["Jr.","DDS","III"]|x});
-  ("jobTitle", 42, {x|["National Usability Producer","Customer Marketing Liaison","Senior Accountability Orchestrator"]|x});
-  ("jobTitle", 1337, {x|["Future Marketing Engineer","District Paradigm Analyst","Future Metrics Producer"]|x});
-  ("jobTitle", 7, {x|["Senior Accounts Administrator","Legacy Metrics Designer","Central Brand Engineer"]|x});
-  ("jobDescriptor", 42, {x|["National","Chief","Legacy"]|x});
-  ("jobDescriptor", 1337, {x|["Future","Corporate","Future"]|x});
-  ("jobDescriptor", 7, {x|["Senior","Forward","District"]|x});
-  ("jobArea", 42, {x|["Identity","Usability","Mobility"]|x});
-  ("jobArea", 1337, {x|["Functionality","Marketing","Response"]|x});
-  ("jobArea", 7, {x|["Brand","Accounts","Division"]|x});
-  ("jobType", 42, {x|["Coordinator","Representative","Producer"]|x});
-  ("jobType", 1337, {x|["Engineer","Liaison","Engineer"]|x});
-  ("jobType", 7, {x|["Associate","Consultant","Administrator"]|x});
-  ("zodiacSign", 42, {x|["Gemini","Capricorn","Libra"]|x});
-  ("zodiacSign", 1337, {x|["Taurus","Pisces","Taurus"]|x});
-  ("zodiacSign", 7, {x|["Aquarius","Scorpio","Cancer"]|x});
-  ("fake/names", 42, {x|["Nikita|Camila|Beer|Scout|Mr.|Werner Effertz|X Gutmann","Lola|Ellie|Klocko|River|Mr.|Andrew D'Amore|Miss X Wintheiser","Bryce|Alexane|Gerlach|Ocean|Mr.|Conner Ryan-Weimann V|X Bogisich"]|x});
-  ("fake/names", 1337, {x|["Elda|Esperanza|Gibson|Zion|Mr.|Ludie Wyman|X Schimmel","Natalie|Elise|Kutch|Devine|Mr.|Rhoda Will|X Langosh","Carey|Glenda|Abernathy|Jamie|Mr.|Mr. Misael Wiza|X Zieme"]|x});
-  ("fake/names", 7, {x|["Janae|Wava|Kuvalis|August|Mr.|Penelope Bergstrom|X Effertz","Keyshawn|Dannie|Vandervort|Bowie|Mr.|Irwin Kulas|Miss X Hilll","Horacio|Magdalen|Koelpin|Reagan|Mr.|Noble Kautzer|X Johns"]|x});
-  ("fake/misc", 42, {x|["Two-spirit person|male|female|female|PhD|Customer Assurance Supervisor|Principal|Creative|Manager|Aries|Leffler|Karma|Mrs.","Trans woman|male|male|female|Sr.|Senior Usability Strategist|Forward|Paradigm|Executive|Libra|Kunze|Flynn|Mr.","Male to female transgender woman|male|male|male|V|Chief Security Officer|Lead|Tactics|Coordinator|Taurus|Goyette|Pax|Dr."]|x});
-  ("fake/misc", 1337, {x|["Cisgender woman|female|female|generic|DVM|Legacy Research Coordinator|Investor|Research|Strategist|Cancer|Hessel|Maybel|Ms.","Cisgender|female|male|male|DVM|Regional Optimization Analyst|Lead|Mobility|Strategist|Pisces|Pouros|Anika|Mr.","Intersex|male|male|generic|I|Lead Security Representative|Principal|Optimization|Director|Libra|Osinski|Sydney|Dr."]|x});
-  ("fake/misc", 7, {x|["Trans woman|male|male|generic|Jr.|Future Optimization Technician|Forward|Markets|Associate|Taurus|Klein|Levi|Mr.","Transmasculine|male|male|male|I|Central Identity Architect|National|Configuration|Consultant|Taurus|Kling|Erin|Mrs.","Cisgender|female|female|generic|III|Lead Security Developer|Global|Quality|Representative|Libra|Medhurst|Taylor|Mr."]|x});
-  ("fake/bio", 42, {x|["traveler, philosopher, model","creator, author","procurement advocate, veteran"]|x});
-  ("fake/bio", 1337, {x|["creator, engineer, friend","grad, educator, writer","governance junkie  🦾"]|x});
-  ("fake/bio", 7, {x|["photographer","person, writer, inventor ⛄","geek, parent, public speaker"]|x});
-]
+let cases =
+  [
+    ("firstName", 42, {x|["Nikita","Chase","Lilliana"]|x});
+    ("firstName", 1337, {x|["Elda","Katie","Nova"]|x});
+    ("firstName", 7, {x|["Janae","Kerry","Domenick"]|x});
+    ("firstName/female", 42, {x|["Valentina","Liliana","Camila"]|x});
+    ("firstName/female", 1337, {x|["Candace","Jennie","Katie"]|x});
+    ("firstName/female", 7, {x|["Oceane","Melinda","Kerry"]|x});
+    ("firstName/male", 42, {x|["Vernon","Kevin","Chase"]|x});
+    ("firstName/male", 1337, {x|["Chet","Hugo","Jeffry"]|x});
+    ("firstName/male", 7, {x|["Pete","Nathanial","Kerry"]|x});
+    ("firstName/generic", 42, {x|["Hollis","Telly","Nikita"]|x});
+    ("firstName/generic", 1337, {x|["Devan","Cali","Dorian"]|x});
+    ("firstName/generic", 7, {x|["Arlie","Pat","Jaylin"]|x});
+    ("lastName", 42, {x|["Reynolds-Miller","Beer","Quigley"]|x});
+    ("lastName", 1337, {x|["Gottlieb","Leannon","Reynolds-Buckridge"]|x});
+    ("lastName", 7, {x|["Kessler","Lind-Kuvalis","Kutch"]|x});
+    ("lastName/female", 42, {x|["Wiegand","Miller","Crist"]|x});
+    ("lastName/female", 1337, {x|["Cronin","Koelpin","Leannon"]|x});
+    ("lastName/female", 7, {x|["Satterfield","Reilly","Lind-Kuvalis"]|x});
+    ("lastName/male", 42, {x|["Wiegand","Miller","Crist"]|x});
+    ("lastName/male", 1337, {x|["Cronin","Koelpin","Leannon"]|x});
+    ("lastName/male", 7, {x|["Satterfield","Reilly","Lind-Kuvalis"]|x});
+    ("lastName/generic", 42, {x|["Wiegand","Miller","Crist"]|x});
+    ("lastName/generic", 1337, {x|["Cronin","Koelpin","Leannon"]|x});
+    ("lastName/generic", 7, {x|["Satterfield","Reilly","Lind-Kuvalis"]|x});
+    ("middleName", 42, {x|["Rebel","Cameron","Marlowe"]|x});
+    ("middleName", 1337, {x|["Dawn","Isla","Rebel"]|x});
+    ("middleName", 7, {x|["Gwen","London","Elijah"]|x});
+    ("middleName/female", 42, {x|["Venus","Kali","Brielle"]|x});
+    ("middleName/female", 1337, {x|["Brielle","Hippolyta","Isla"]|x});
+    ("middleName/female", 7, {x|["Michelle","Maddie","London"]|x});
+    ("middleName/male", 42, {x|["Warren","Levi","Cameron"]|x});
+    ("middleName/male", 1337, {x|["Cameron","Jakobe","Joseph"]|x});
+    ("middleName/male", 7, {x|["Ozzy","Nixon","London"]|x});
+    ("middleName/generic", 42, {x|["Jazz","Taylor","Rebel"]|x});
+    ("middleName/generic", 1337, {x|["Flynn","Dakota","Francis"]|x});
+    ("middleName/generic", 7, {x|["Avery","Riley","Jules"]|x});
+    ("prefix", 42, {x|["Dr.","Mr.","Miss"]|x});
+    ("prefix", 1337, {x|["Miss","Mrs.","Dr."]|x});
+    ("prefix", 7, {x|["Mrs.","Dr.","Mr."]|x});
+    ("prefix/female", 42, {x|["Ms.","Mrs.","Miss"]|x});
+    ("prefix/female", 1337, {x|["Miss","Mrs.","Mrs."]|x});
+    ("prefix/female", 7, {x|["Ms.","Ms.","Dr."]|x});
+    ("prefix/male", 42, {x|["Mr.","Dr.","Mr."]|x});
+    ("prefix/male", 1337, {x|["Mr.","Mr.","Mr."]|x});
+    ("prefix/male", 7, {x|["Mr.","Dr.","Mr."]|x});
+    ("prefix/generic", 42, {x|["Dr.","Dr.","Dr."]|x});
+    ("prefix/generic", 1337, {x|["Dr.","Dr.","Dr."]|x});
+    ("prefix/generic", 7, {x|["Dr.","Dr.","Dr."]|x});
+    ( "fullName",
+      42,
+      {x|["Nikita Crist","Lilliana Aufderhar PhD","Cecilia Leffler"]|x} );
+    ("fullName", 1337, {x|["Elda Hammes","Nova Howe","Jayme Schimmel"]|x});
+    ( "fullName",
+      7,
+      {x|["Janae Wolff","Mr. Domenick Parisian","Susan Klein Jr."]|x} );
+    ( "fullName/female",
+      42,
+      {x|["Valentina Miller","Amelia Mills","Violet Effertz"]|x} );
+    ( "fullName/female",
+      1337,
+      {x|["Candace Koelpin","Doreen Reynolds-Buckridge","Mrs. Berta Kihn-Schamberger"]|x}
+    );
+    ( "fullName/female",
+      7,
+      {x|["Oceane Reilly IV","Angelina Kutch","Greta Green I"]|x} );
+    ("fullName/male", 42, {x|["Vernon Miller","Arlo Mills","Werner Effertz"]|x});
+    ( "fullName/male",
+      1337,
+      {x|["Chet Koelpin","Dexter Reynolds-Buckridge","Mr. Bud Kihn-Schamberger"]|x}
+    );
+    ("fullName/male", 7, {x|["Pete Reilly IV","Axel Kutch","Garett Green I"]|x});
+    ( "fullName/generic",
+      42,
+      {x|["Hollis Reynolds-Miller","Cali Streich","Dr. Murl Wisozk"]|x} );
+    ( "fullName/generic",
+      1337,
+      {x|["Devan Gottlieb","Francis Gibson DDS","Baby Murphy"]|x} );
+    ( "fullName/generic",
+      7,
+      {x|["Arlie Kessler","Unique Kuvalis","Dr. Devyn Parisian"]|x} );
+    ( "fullName/first",
+      42,
+      {x|["Joann Reynolds-Miller","Joann Streich","Mr. Joann Wisozk"]|x} );
+    ( "fullName/first",
+      1337,
+      {x|["Joann Gottlieb","Joann Gibson DDS","Joann Murphy"]|x} );
+    ( "fullName/first",
+      7,
+      {x|["Joann Kessler","Joann Kuvalis","Miss Joann Parisian"]|x} );
+    ("fullName/last", 42, {x|["Nikita Doe","Ms. Amelia Doe","Rickie Doe"]|x});
+    ("fullName/last", 1337, {x|["Elda Doe","Doreen Doe DDS","Ludie Doe"]|x});
+    ("fullName/last", 7, {x|["Janae Doe","Jarret Doe","Miss Maria Doe"]|x});
+    ("fullName/both", 42, {x|["Jane Doe","Jane Doe DDS","Jane Doe"]|x});
+    ("fullName/both", 1337, {x|["Jane Doe","Jane Doe","Jane Doe"]|x});
+    ("fullName/both", 7, {x|["Jane Doe","Ms. Jane Doe","Jane Doe IV"]|x});
+    ("fullName/empty", 42, {x|["  DDS"," "," "]|x});
+    ("fullName/empty", 1337, {x|[" "," "," "]|x});
+    ("fullName/empty", 7, {x|["Ms.  "," "," "]|x});
+    ("fullName/dollar", 42, {x|["$& $1 $$ DDS","$& $1 $$","$& $1 $$"]|x});
+    ("fullName/dollar", 1337, {x|["$& $1 $$","$& $1 $$","$& $1 $$"]|x});
+    ("fullName/dollar", 7, {x|["Ms. $& $1 $$","$& $1 $$","$& $1 $$"]|x});
+    ( "gender",
+      42,
+      {x|["Gender nonconforming","Two-spirit person","Trans female"]|x} );
+    ("gender", 1337, {x|["Demigender","Cisgender woman","FTM"]|x});
+    ("gender", 7, {x|["Cis male","Trans woman","Hermaphrodite"]|x});
+    ("sex", 42, {x|["female","male","male"]|x});
+    ("sex", 1337, {x|["female","female","female"]|x});
+    ("sex", 7, {x|["female","male","female"]|x});
+    ("sexType", 42, {x|["female","male","male"]|x});
+    ("sexType", 1337, {x|["female","female","female"]|x});
+    ("sexType", 7, {x|["female","male","female"]|x});
+    ("sexType/generic", 42, {x|["generic","male","male"]|x});
+    ("sexType/generic", 1337, {x|["female","female","female"]|x});
+    ("sexType/generic", 7, {x|["female","male","generic"]|x});
+    ("sexType/nogeneric", 42, {x|["female","male","male"]|x});
+    ("sexType/nogeneric", 1337, {x|["female","female","female"]|x});
+    ("sexType/nogeneric", 7, {x|["female","male","female"]|x});
+    ( "bio",
+      42,
+      {x|["traveler, philosopher, model","creator, author","procurement advocate, veteran"]|x}
+    );
+    ( "bio",
+      1337,
+      {x|["creator, engineer, friend","grad, educator, writer","governance junkie  🦾"]|x}
+    );
+    ( "bio",
+      7,
+      {x|["photographer","person, writer, inventor ⛄","geek, parent, public speaker"]|x}
+    );
+    ("suffix", 42, {x|["III","DVM","DDS"]|x});
+    ("suffix", 1337, {x|["I","Sr.","II"]|x});
+    ("suffix", 7, {x|["Jr.","DDS","III"]|x});
+    ( "jobTitle",
+      42,
+      {x|["National Usability Producer","Customer Marketing Liaison","Senior Accountability Orchestrator"]|x}
+    );
+    ( "jobTitle",
+      1337,
+      {x|["Future Marketing Engineer","District Paradigm Analyst","Future Metrics Producer"]|x}
+    );
+    ( "jobTitle",
+      7,
+      {x|["Senior Accounts Administrator","Legacy Metrics Designer","Central Brand Engineer"]|x}
+    );
+    ("jobDescriptor", 42, {x|["National","Chief","Legacy"]|x});
+    ("jobDescriptor", 1337, {x|["Future","Corporate","Future"]|x});
+    ("jobDescriptor", 7, {x|["Senior","Forward","District"]|x});
+    ("jobArea", 42, {x|["Identity","Usability","Mobility"]|x});
+    ("jobArea", 1337, {x|["Functionality","Marketing","Response"]|x});
+    ("jobArea", 7, {x|["Brand","Accounts","Division"]|x});
+    ("jobType", 42, {x|["Coordinator","Representative","Producer"]|x});
+    ("jobType", 1337, {x|["Engineer","Liaison","Engineer"]|x});
+    ("jobType", 7, {x|["Associate","Consultant","Administrator"]|x});
+    ("zodiacSign", 42, {x|["Gemini","Capricorn","Libra"]|x});
+    ("zodiacSign", 1337, {x|["Taurus","Pisces","Taurus"]|x});
+    ("zodiacSign", 7, {x|["Aquarius","Scorpio","Cancer"]|x});
+    ( "fake/names",
+      42,
+      {x|["Nikita|Camila|Beer|Scout|Mr.|Werner Effertz|X Gutmann","Lola|Ellie|Klocko|River|Mr.|Andrew D'Amore|Miss X Wintheiser","Bryce|Alexane|Gerlach|Ocean|Mr.|Conner Ryan-Weimann V|X Bogisich"]|x}
+    );
+    ( "fake/names",
+      1337,
+      {x|["Elda|Esperanza|Gibson|Zion|Mr.|Ludie Wyman|X Schimmel","Natalie|Elise|Kutch|Devine|Mr.|Rhoda Will|X Langosh","Carey|Glenda|Abernathy|Jamie|Mr.|Mr. Misael Wiza|X Zieme"]|x}
+    );
+    ( "fake/names",
+      7,
+      {x|["Janae|Wava|Kuvalis|August|Mr.|Penelope Bergstrom|X Effertz","Keyshawn|Dannie|Vandervort|Bowie|Mr.|Irwin Kulas|Miss X Hilll","Horacio|Magdalen|Koelpin|Reagan|Mr.|Noble Kautzer|X Johns"]|x}
+    );
+    ( "fake/misc",
+      42,
+      {x|["Two-spirit person|male|female|female|PhD|Customer Assurance Supervisor|Principal|Creative|Manager|Aries|Leffler|Karma|Mrs.","Trans woman|male|male|female|Sr.|Senior Usability Strategist|Forward|Paradigm|Executive|Libra|Kunze|Flynn|Mr.","Male to female transgender woman|male|male|male|V|Chief Security Officer|Lead|Tactics|Coordinator|Taurus|Goyette|Pax|Dr."]|x}
+    );
+    ( "fake/misc",
+      1337,
+      {x|["Cisgender woman|female|female|generic|DVM|Legacy Research Coordinator|Investor|Research|Strategist|Cancer|Hessel|Maybel|Ms.","Cisgender|female|male|male|DVM|Regional Optimization Analyst|Lead|Mobility|Strategist|Pisces|Pouros|Anika|Mr.","Intersex|male|male|generic|I|Lead Security Representative|Principal|Optimization|Director|Libra|Osinski|Sydney|Dr."]|x}
+    );
+    ( "fake/misc",
+      7,
+      {x|["Trans woman|male|male|generic|Jr.|Future Optimization Technician|Forward|Markets|Associate|Taurus|Klein|Levi|Mr.","Transmasculine|male|male|male|I|Central Identity Architect|National|Configuration|Consultant|Taurus|Kling|Erin|Mrs.","Cisgender|female|female|generic|III|Lead Security Developer|Global|Quality|Representative|Libra|Medhurst|Taylor|Mr."]|x}
+    );
+    ( "fake/bio",
+      42,
+      {x|["traveler, philosopher, model","creator, author","procurement advocate, veteran"]|x}
+    );
+    ( "fake/bio",
+      1337,
+      {x|["creator, engineer, friend","grad, educator, writer","governance junkie  🦾"]|x}
+    );
+    ( "fake/bio",
+      7,
+      {x|["photographer","person, writer, inventor ⛄","geek, parent, public speaker"]|x}
+    );
+  ]

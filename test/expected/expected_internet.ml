@@ -2,518 +2,1526 @@
 
 let locale = "en"
 
-let cases = [
-  ("email", 42, {x|["Kevin60@hotmail.com","Daniel_Gutmann43@gmail.com","Georgianna_Dooley59@hotmail.com"]|x});
-  ("email", 1337, {x|["Jennie_Gibson73@gmail.com","Willy.Schimmel@hotmail.com","Marcella53@yahoo.com"]|x});
-  ("email", 7, {x|["Nathanial.Kuvalis@gmail.com","Arthur.Effertz93@yahoo.com","Jonas_Ledner@hotmail.com"]|x});
-  ("email/first", 42, {x|["Jane.Miller15@hotmail.com","Jane_Aufderhar83@yahoo.com","Jane.Leffler@gmail.com"]|x});
-  ("email/first", 1337, {x|["Jane.Koelpin51@gmail.com","Jane12@yahoo.com","Jane58@hotmail.com"]|x});
-  ("email/first", 7, {x|["Jane_Reilly@gmail.com","Jane_Parisian38@gmail.com","Jane_Klein@gmail.com"]|x});
-  ("email/last", 42, {x|["Kevin.Doe15@hotmail.com","Al_Doe83@yahoo.com","Kaylee.Doe@gmail.com"]|x});
-  ("email/last", 1337, {x|["Jennie.Doe51@gmail.com","Garth_Doe@yahoo.com","Ford.Doe@hotmail.com"]|x});
-  ("email/last", 7, {x|["Nathanial_Doe@gmail.com","Maria_Doe38@gmail.com","Horace_Doe@gmail.com"]|x});
-  ("email/provider", 42, {x|["Nikita.Crist@example.fakerjs.dev","Werner.Deckow@example.fakerjs.dev","Lola.Hilll78@example.fakerjs.dev"]|x});
-  ("email/provider", 1337, {x|["Elda97@example.fakerjs.dev","Ludie_Kihn-Schamberger@example.fakerjs.dev","Constantin.Kutch41@example.fakerjs.dev"]|x});
-  ("email/provider", 7, {x|["Janae.Lind-Kuvalis@example.fakerjs.dev","Garett45@example.fakerjs.dev","Valentina52@example.fakerjs.dev"]|x});
-  ("email/special", 42, {x|["Kevin60@hotmail.com","Cecilia*Kemmer61@yahoo.com","Jedediah6@hotmail.com"]|x});
-  ("email/special", 1337, {x|["Jennie?Gibson73@gmail.com","Quinten_Johns76@gmail.com","Chyna.Denesik@hotmail.com"]|x});
-  ("email/special", 7, {x|["Nathanial.Kuvalis@gmail.com","Susan60@hotmail.com","Myah.Doyle@yahoo.com"]|x});
-  ("email/special-names", 42, {x|["Jane_Doe@hotmail.com","Jane_Doe@gmail.com","Jane/Doe18@yahoo.com"]|x});
-  ("email/special-names", 1337, {x|["Jane/Doe27@gmail.com","Jane?Doe73@gmail.com","Jane_Doe@gmail.com"]|x});
-  ("email/special-names", 7, {x|["Jane_Doe@gmail.com","Jane.Doe26@hotmail.com","Jane-Doe@hotmail.com"]|x});
-  ("email/dots", 42, {x|["Jane._@hotmail.com","Jane@gmail.com","Jane._@hotmail.com"]|x});
-  ("email/dots", 1337, {x|["Jane.27@gmail.com","Jane._@gmail.com","Jane@yahoo.com"]|x});
-  ("email/dots", 7, {x|["Jane._@gmail.com","Jane._.50@yahoo.com","Jane@gmail.com"]|x});
-  ("email/emptylast", 42, {x|["Jane_@hotmail.com","Jane5@gmail.com","Jane2@hotmail.com"]|x});
-  ("email/emptylast", 1337, {x|["Jane@gmail.com","Jane26@gmail.com","Jane@yahoo.com"]|x});
-  ("email/emptylast", 7, {x|["Jane43@gmail.com","Jane_50@yahoo.com","Jane67@gmail.com"]|x});
-  ("exampleEmail", 42, {x|["Kevin60@example.net","Daniel_Gutmann43@example.com","Georgianna_Dooley59@example.net"]|x});
-  ("exampleEmail", 1337, {x|["Jennie_Gibson73@example.com","Willy.Schimmel@example.net","Marcella53@example.org"]|x});
-  ("exampleEmail", 7, {x|["Nathanial.Kuvalis@example.com","Arthur.Effertz93@example.org","Jonas_Ledner@example.net"]|x});
-  ("exampleEmail/names", 42, {x|["Jane_Doe@example.net","Jane.Doe@example.com","Jane_Doe@example.net"]|x});
-  ("exampleEmail/names", 1337, {x|["Jane.Doe27@example.com","Jane_Doe@example.com","Jane.Doe@example.org"]|x});
-  ("exampleEmail/names", 7, {x|["Jane_Doe@example.com","Jane_Doe50@example.org","Jane.Doe@example.com"]|x});
-  ("exampleEmail/special", 42, {x|["Kevin60@example.net","Cecilia*Kemmer61@example.org","Jedediah6@example.net"]|x});
-  ("exampleEmail/special", 1337, {x|["Jennie?Gibson73@example.com","Quinten_Johns76@example.com","Chyna.Denesik@example.net"]|x});
-  ("exampleEmail/special", 7, {x|["Nathanial.Kuvalis@example.com","Susan60@example.net","Myah.Doyle@example.org"]|x});
-  ("username", 42, {x|["Nikita.Crist","Werner.Deckow","Lola.Hilll78"]|x});
-  ("username", 1337, {x|["Elda97","Ludie_Kihn-Schamberger","Constantin.Kutch41"]|x});
-  ("username", 7, {x|["Janae.Lind-Kuvalis","Garett45","Valentina52"]|x});
-  ("username/first", 42, {x|["Jane.Reynolds-Miller15","Jane96","Jane.Deckow"]|x});
-  ("username/first", 1337, {x|["Jane.Gottlieb","Jane.Reynolds-Buckridge62","Jane_Schamberger"]|x});
-  ("username/first", 7, {x|["Jane_Kessler","Jane67","Jane_Green"]|x});
-  ("username/last", 42, {x|["Nikita_Doe15","Lilliana_Doe","Collin.Doe"]|x});
-  ("username/last", 1337, {x|["Elda.Doe","Nova.Doe","Jayme_Doe79"]|x});
-  ("username/last", 7, {x|["Janae_Doe","Domenick.Doe","Elise_Doe21"]|x});
-  ("username/emptylast", 42, {x|["Jane95","Jane_15","Jane."]|x});
-  ("username/emptylast", 1337, {x|["Jane.15","Jane.","Jane97"]|x});
-  ("username/emptylast", 7, {x|["Jane.","Jane_","Jane_7"]|x});
-  ("displayName", 42, {x|["Nikita.Crist","Werner.Deckow","Lola78"]|x});
-  ("displayName", 1337, {x|["Elda.Leannon97","Ludie_Kihn-Schamberger","Constantin41"]|x});
-  ("displayName", 7, {x|["Janae.Lind-Kuvalis","Garett.Vandervort45","Valentina.Vandervort52"]|x});
-  ("displayName/first", 42, {x|["Jane15","Jane.Quigley96","Jane.Deckow"]|x});
-  ("displayName/first", 1337, {x|["Jane.Gottlieb","Jane62","Jane_Schamberger"]|x});
-  ("displayName/first", 7, {x|["Jane_Kessler","Jane.Gleichner67","Jane_Green"]|x});
-  ("displayName/last", 42, {x|["Nikita15","Lilliana_Doe2","Collin.Doe"]|x});
-  ("displayName/last", 1337, {x|["Elda.Doe","Nova.Doe","Jayme_Doe"]|x});
-  ("displayName/last", 7, {x|["Janae_Doe","Domenick.Doe67","Elise_Doe"]|x});
-  ("protocol", 42, {x|["http","https","https"]|x});
-  ("protocol", 1337, {x|["http","http","http"]|x});
-  ("protocol", 7, {x|["http","https","http"]|x});
-  ("httpMethod", 42, {x|["POST","PATCH","DELETE"]|x});
-  ("httpMethod", 1337, {x|["POST","GET","POST"]|x});
-  ("httpMethod", 7, {x|["GET","DELETE","PUT"]|x});
-  ("httpStatusCode", 42, {x|[226,417,100]|x});
-  ("httpStatusCode", 1337, {x|[201,204,205]|x});
-  ("httpStatusCode", 7, {x|[103,306,505]|x});
-  ("httpStatusCode/success", 42, {x|[203,226,207]|x});
-  ("httpStatusCode/success", 1337, {x|[202,201,202]|x});
-  ("httpStatusCode/success", 7, {x|[200,207,204]|x});
-  ("httpStatusCode/errors", 42, {x|[431,506,404]|x});
-  ("httpStatusCode/errors", 1337, {x|[404,413,415]|x});
-  ("httpStatusCode/errors", 7, {x|[424,422,505]|x});
-  ("httpStatusCode/all", 42, {x|[226,506,100]|x});
-  ("httpStatusCode/all", 1337, {x|[201,204,205]|x});
-  ("httpStatusCode/all", 7, {x|[103,422,304]|x});
-  ("httpStatusCode/empty", 42, {x|[{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."}]|x});
-  ("httpStatusCode/empty", 1337, {x|[{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."}]|x});
-  ("httpStatusCode/empty", 7, {x|[{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."}]|x});
-  ("url", 42, {x|["https://weird-rawhide.name/","https://crushing-backburn.org/","https://scaly-agreement.org"]|x});
-  ("url", 1337, {x|["https://cumbersome-duster.info/","https://minty-diver.org/","https://clean-governance.name"]|x});
-  ("url", 7, {x|["https://sparkling-hundred.net/","https://narrow-knight.biz","https://marvelous-platter.net/"]|x});
-  ("url/slash", 42, {x|["https://hospitable-unit.net/","https://pastel-cleaner.biz/","https://baggy-substitution.name/"]|x});
-  ("url/slash", 1337, {x|["https://fatal-co-producer.com/","https://lawful-feather.name/","https://fat-wallaby.net/"]|x});
-  ("url/slash", 7, {x|["https://blushing-saw.info/","https://separate-warming.name/","https://mature-bell.com/"]|x});
-  ("url/noslash", 42, {x|["https://hospitable-unit.net","https://pastel-cleaner.biz","https://baggy-substitution.name"]|x});
-  ("url/noslash", 1337, {x|["https://fatal-co-producer.com","https://lawful-feather.name","https://fat-wallaby.net"]|x});
-  ("url/noslash", 7, {x|["https://blushing-saw.info","https://separate-warming.name","https://mature-bell.com"]|x});
-  ("url/http", 42, {x|["http://weird-rawhide.name/","http://crushing-backburn.org/","http://scaly-agreement.org"]|x});
-  ("url/http", 1337, {x|["http://cumbersome-duster.info/","http://minty-diver.org/","http://clean-governance.name"]|x});
-  ("url/http", 7, {x|["http://sparkling-hundred.net/","http://narrow-knight.biz","http://marvelous-platter.net/"]|x});
-  ("url/https", 42, {x|["https://hospitable-unit.net/","https://pastel-cleaner.biz/","https://baggy-substitution.name/"]|x});
-  ("url/https", 1337, {x|["https://fatal-co-producer.com/","https://lawful-feather.name/","https://fat-wallaby.net/"]|x});
-  ("url/https", 7, {x|["https://blushing-saw.info/","https://separate-warming.name/","https://mature-bell.com/"]|x});
-  ("domainName", 42, {x|["hospitable-unit.net","pastel-cleaner.biz","baggy-substitution.name"]|x});
-  ("domainName", 1337, {x|["fatal-co-producer.com","lawful-feather.name","fat-wallaby.net"]|x});
-  ("domainName", 7, {x|["blushing-saw.info","separate-warming.name","mature-bell.com"]|x});
-  ("domainSuffix", 42, {x|["info","org","net"]|x});
-  ("domainSuffix", 1337, {x|["com","biz","com"]|x});
-  ("domainSuffix", 7, {x|["biz","net","info"]|x});
-  ("domainWord", 42, {x|["hospitable-unit","shameful-negotiation","cuddly-clavicle"]|x});
-  ("domainWord", 1337, {x|["fatal-co-producer","flickering-in-joke","gloomy-legend"]|x});
-  ("domainWord", 7, {x|["blushing-saw","jittery-puritan","woeful-lyre"]|x});
-  ("ip", 42, {x|["243.98.3.69","d331:ddf0:fc44:46b9:6d36:8ab4:bd1d:31ef","62f9:2a0e:5e6b:c4fb:edde:1407:85c7:6b3b"]|x});
-  ("ip", 1337, {x|["40.159.131.70","117.149.202.161","132.181.100.82"]|x});
-  ("ip", 7, {x|["199.168.194.10","185.53.3.142","bb15:aeb8:16e4:9e0d:e5ce:2bae:a4a8:a8ca"]|x});
-  ("ipv4", 42, {x|["95.225.220.121","243.98.3.69","187.99.244.120"]|x});
-  ("ipv4", 1337, {x|["67.20.12.145","40.159.131.70","71.51.76.177"]|x});
-  ("ipv4", 7, {x|["19.136.240.167","199.168.194.10","112.59.150.95"]|x});
-  ("ipv4/any", 42, {x|["95.225.220.121","243.98.3.69","187.99.244.120"]|x});
-  ("ipv4/any", 1337, {x|["67.20.12.145","40.159.131.70","71.51.76.177"]|x});
-  ("ipv4/any", 7, {x|["19.136.240.167","199.168.194.10","112.59.150.95"]|x});
-  ("ipv4/loopback", 42, {x|["127.95.225.220","127.243.98.3","127.187.99.244"]|x});
-  ("ipv4/loopback", 1337, {x|["127.67.20.12","127.40.159.131","127.71.51.76"]|x});
-  ("ipv4/loopback", 7, {x|["127.19.136.240","127.199.168.194","127.112.59.150"]|x});
-  ("ipv4/private-a", 42, {x|["10.95.225.220","10.243.98.3","10.187.99.244"]|x});
-  ("ipv4/private-a", 1337, {x|["10.67.20.12","10.40.159.131","10.71.51.76"]|x});
-  ("ipv4/private-a", 7, {x|["10.19.136.240","10.199.168.194","10.112.59.150"]|x});
-  ("ipv4/private-b", 42, {x|["172.21.254.29","172.31.54.32","172.27.182.63"]|x});
-  ("ipv4/private-b", 1337, {x|["172.20.49.64","172.18.137.248","172.20.115.52"]|x});
-  ("ipv4/private-b", 7, {x|["172.17.56.143","172.28.122.140","172.23.3.185"]|x});
-  ("ipv4/private-c", 42, {x|["192.168.95.225","192.168.243.98","192.168.187.99"]|x});
-  ("ipv4/private-c", 1337, {x|["192.168.67.20","192.168.40.159","192.168.71.51"]|x});
-  ("ipv4/private-c", 7, {x|["192.168.19.136","192.168.199.168","192.168.112.59"]|x});
-  ("ipv4/test-net-1", 42, {x|["192.0.2.95","192.0.2.243","192.0.2.187"]|x});
-  ("ipv4/test-net-1", 1337, {x|["192.0.2.67","192.0.2.40","192.0.2.71"]|x});
-  ("ipv4/test-net-1", 7, {x|["192.0.2.19","192.0.2.199","192.0.2.112"]|x});
-  ("ipv4/test-net-2", 42, {x|["198.51.100.95","198.51.100.243","198.51.100.187"]|x});
-  ("ipv4/test-net-2", 1337, {x|["198.51.100.67","198.51.100.40","198.51.100.71"]|x});
-  ("ipv4/test-net-2", 7, {x|["198.51.100.19","198.51.100.199","198.51.100.112"]|x});
-  ("ipv4/test-net-3", 42, {x|["203.0.113.95","203.0.113.243","203.0.113.187"]|x});
-  ("ipv4/test-net-3", 1337, {x|["203.0.113.67","203.0.113.40","203.0.113.71"]|x});
-  ("ipv4/test-net-3", 7, {x|["203.0.113.19","203.0.113.199","203.0.113.112"]|x});
-  ("ipv4/link-local", 42, {x|["169.254.95.225","169.254.243.98","169.254.187.99"]|x});
-  ("ipv4/link-local", 1337, {x|["169.254.67.20","169.254.40.159","169.254.71.51"]|x});
-  ("ipv4/link-local", 7, {x|["169.254.19.136","169.254.199.168","169.254.112.59"]|x});
-  ("ipv4/multicast", 42, {x|["229.254.29.199","239.54.32.52","235.182.63.71"]|x});
-  ("ipv4/multicast", 1337, {x|["228.49.64.201","226.137.248.52","228.115.52.203"]|x});
-  ("ipv4/multicast", 7, {x|["225.56.143.10","236.122.140.32","231.3.185.101"]|x});
-  ("ipv4/cidr:192.168.1.0/24", 42, {x|["192.168.1.95","192.168.1.243","192.168.1.187"]|x});
-  ("ipv4/cidr:192.168.1.0/24", 1337, {x|["192.168.1.67","192.168.1.40","192.168.1.71"]|x});
-  ("ipv4/cidr:192.168.1.0/24", 7, {x|["192.168.1.19","192.168.1.199","192.168.1.112"]|x});
-  ("ipv4/cidr:10.0.0.1/32", 42, {x|["10.0.0.1","10.0.0.1","10.0.0.1"]|x});
-  ("ipv4/cidr:10.0.0.1/32", 1337, {x|["10.0.0.1","10.0.0.1","10.0.0.1"]|x});
-  ("ipv4/cidr:10.0.0.1/32", 7, {x|["10.0.0.1","10.0.0.1","10.0.0.1"]|x});
-  ("ipv4/cidr:010.0.0.1/32", 42, {x|["010.0.0.1","010.0.0.1","010.0.0.1"]|x});
-  ("ipv4/cidr:010.0.0.1/32", 1337, {x|["010.0.0.1","010.0.0.1","010.0.0.1"]|x});
-  ("ipv4/cidr:010.0.0.1/32", 7, {x|["010.0.0.1","010.0.0.1","010.0.0.1"]|x});
-  ("ipv4/cidr:0.0.0.0/0", 42, {x|["95.225.220.121","243.98.3.69","187.99.244.120"]|x});
-  ("ipv4/cidr:0.0.0.0/0", 1337, {x|["67.20.12.145","40.159.131.70","71.51.76.177"]|x});
-  ("ipv4/cidr:0.0.0.0/0", 7, {x|["19.136.240.167","199.168.194.10","112.59.150.95"]|x});
-  ("ipv4/cidr:255.255.255.255/31", 42, {x|["255.255.255.254","255.255.255.255","255.255.255.255"]|x});
-  ("ipv4/cidr:255.255.255.255/31", 1337, {x|["255.255.255.254","255.255.255.254","255.255.255.254"]|x});
-  ("ipv4/cidr:255.255.255.255/31", 7, {x|["255.255.255.254","255.255.255.255","255.255.255.254"]|x});
-  ("ipv4/cidr:255.255.255.255/1", 42, {x|["175.240.238.60","249.177.1.162","221.177.250.60"]|x});
-  ("ipv4/cidr:255.255.255.255/1", 1337, {x|["161.138.6.72","148.79.193.163","163.153.166.88"]|x});
-  ("ipv4/cidr:255.255.255.255/1", 7, {x|["137.196.120.83","227.212.97.5","184.29.203.47"]|x});
-  ("ipv4/cidr:128.0.0.0/1", 42, {x|["175.240.238.60","249.177.1.162","221.177.250.60"]|x});
-  ("ipv4/cidr:128.0.0.0/1", 1337, {x|["161.138.6.72","148.79.193.163","163.153.166.88"]|x});
-  ("ipv4/cidr:128.0.0.0/1", 7, {x|["137.196.120.83","227.212.97.5","184.29.203.47"]|x});
-  ("ipv4/cidr:172.31.255.7/30", 42, {x|["172.31.255.5","172.31.255.7","172.31.255.6"]|x});
-  ("ipv4/cidr:172.31.255.7/30", 1337, {x|["172.31.255.5","172.31.255.4","172.31.255.5"]|x});
-  ("ipv4/cidr:172.31.255.7/30", 7, {x|["172.31.255.4","172.31.255.7","172.31.255.5"]|x});
-  ("ipv4/cidr:1.2.3.4/9", 42, {x|["1.47.240.238","1.121.177.1","1.93.177.250"]|x});
-  ("ipv4/cidr:1.2.3.4/9", 1337, {x|["1.33.138.6","1.20.79.193","1.35.153.166"]|x});
-  ("ipv4/cidr:1.2.3.4/9", 7, {x|["1.9.196.120","1.99.212.97","1.56.29.203"]|x});
-  ("ipv4/cidr:abc", 42, {x|[{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:abc", 1337, {x|[{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:abc", 7, {x|[{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3.4/33", 42, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."}]|x});
-  ("ipv4/cidr:1.2.3.4/33", 1337, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."}]|x});
-  ("ipv4/cidr:1.2.3.4/33", 7, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."}]|x});
-  ("ipv4/cidr:1.2.3.4/99", 42, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."}]|x});
-  ("ipv4/cidr:1.2.3.4/99", 1337, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."}]|x});
-  ("ipv4/cidr:1.2.3.4/99", 7, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."}]|x});
-  ("ipv4/cidr:256.0.0.0/8", 42, {x|[{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."},{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."},{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."}]|x});
-  ("ipv4/cidr:256.0.0.0/8", 1337, {x|[{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."},{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."},{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."}]|x});
-  ("ipv4/cidr:256.0.0.0/8", 7, {x|[{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."},{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."},{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."}]|x});
-  ("ipv4/cidr:1.2.3/8", 42, {x|[{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3/8", 1337, {x|[{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3/8", 7, {x|[{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3.4", 42, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3.4", 1337, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3.4", 7, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3.4/", 42, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3.4/", 1337, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3.4/", 7, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3.4/123", 42, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3.4/123", 1337, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3.4/123", 7, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1234.0.0.0/8", 42, {x|[{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1234.0.0.0/8", 1337, {x|[{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1234.0.0.0/8", 7, {x|[{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr: 1.2.3.4/8", 42, {x|[{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr: 1.2.3.4/8", 1337, {x|[{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr: 1.2.3.4/8", 7, {x|[{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3.4/8 ", 42, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3.4/8 ", 1337, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/cidr:1.2.3.4/8 ", 7, {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."}]|x});
-  ("ipv4/both", 42, {x|["192.0.2.1","192.0.2.3","192.0.2.2"]|x});
-  ("ipv4/both", 1337, {x|["192.0.2.1","192.0.2.0","192.0.2.1"]|x});
-  ("ipv4/both", 7, {x|["192.0.2.0","192.0.2.3","192.0.2.1"]|x});
-  ("ipv6", 42, {x|["8ead:331d:df0f:c444:6b96:d368:ab4b:d1d3","1efb:62f9:2a0e:5e6b:c4fb:edde:1407:85c7","6b3b:1fa4:0bfa:a172:cd71:67ae:da2f:acaa"]|x});
-  ("ipv6", 1337, {x|["536a:7b5f:a28d:2f9b:b79c:a46e:a394:bc4f","9bb0:af32:8f08:1b7f:afcd:cf50:1efa:7f0a","e4ee:3e7f:5b3a:98ba:fb7e:fd9a:ddb5:eca5"]|x});
-  ("ipv6", 7, {x|["1b9f:fbb1:5aeb:816e:49e0:de5c:e2ba:ea4a","8a8c:a6c6:97e8:af9d:3a99:db90:2fbf:ff16","d5fe:cac2:6aaa:3776:399b:bbab:debe:0d6a"]|x});
-  ("port", 42, {x|[24546,62306,47972]|x});
-  ("port", 1337, {x|[17172,10400,18228]|x});
-  ("port", 7, {x|[5001,51112,28732]|x});
-  ("userAgent", 42, {x|["Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/118.0","Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_15_7) AppleWebKit/546.15.5 (KHTML, like Gecko) Chrome/121.6.14.0 Safari/603.83.21","Googlebot/2.1 (+http://www.google.com/bot.html)"]|x});
-  ("userAgent", 1337, {x|["Mozilla/5.0 (Linux; Android 6; SM-G998B) AppleWebKit/568.32 (KHTML, like Gecko) Chrome/94.2.20.15 Mobile Safari/544.38","Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/604.44 (KHTML, like Gecko) Chrome/115.7.7.8 Safari/576.76 Edg/114.2.14.10","Googlebot/2.1 (+http://www.google.com/bot.html)"]|x});
-  ("userAgent", 7, {x|["FakerBot/7.9.15","Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/541.26.49 (KHTML, like Gecko) Version/16_4 Mobile/15E148 Safari/562.6","Mozilla/5.0 (Linux; Android 13; SM-G998B) AppleWebKit/567.93 (KHTML, like Gecko) Chrome/56.6.19.4 Mobile Safari/574.90"]|x});
-  ("mac", 42, {x|["5f:b9:22:0d:9b:0f","d3:22:48:64:92:45","7c:38:90:92:1f:fc"]|x});
-  ("mac", 1337, {x|["42:47:58:4f:b1:6a","2f:7c:c5:69:c3:4a","72:63:8d:2f:68:80"]|x});
-  ("mac", 7, {x|["1c:7b:f8:81:47:ac","61:4e:37:e0:9f:38","e2:8c:a7:37:57:5d"]|x});
-  ("mac/dash", 42, {x|["5f-b9-22-0d-9b-0f","d3-22-48-64-92-45","7c-38-90-92-1f-fc"]|x});
-  ("mac/dash", 1337, {x|["42-47-58-4f-b1-6a","2f-7c-c5-69-c3-4a","72-63-8d-2f-68-80"]|x});
-  ("mac/dash", 7, {x|["1c-7b-f8-81-47-ac","61-4e-37-e0-9f-38","e2-8c-a7-37-57-5d"]|x});
-  ("mac/empty", 42, {x|["5fb9220d9b0f","d32248649245","7c3890921ffc"]|x});
-  ("mac/empty", 1337, {x|["4247584fb16a","2f7cc569c34a","72638d2f6880"]|x});
-  ("mac/empty", 7, {x|["1c7bf88147ac","614e37e09f38","e28ca737575d"]|x});
-  ("mac/invalid", 42, {x|["5f:b9:22:0d:9b:0f","d3:22:48:64:92:45","7c:38:90:92:1f:fc"]|x});
-  ("mac/invalid", 1337, {x|["42:47:58:4f:b1:6a","2f:7c:c5:69:c3:4a","72:63:8d:2f:68:80"]|x});
-  ("mac/invalid", 7, {x|["1c:7b:f8:81:47:ac","61:4e:37:e0:9f:38","e2:8c:a7:37:57:5d"]|x});
-  ("mac/obj", 42, {x|["5f-b9-22-0d-9b-0f","d3-22-48-64-92-45","7c-38-90-92-1f-fc"]|x});
-  ("mac/obj", 1337, {x|["42-47-58-4f-b1-6a","2f-7c-c5-69-c3-4a","72-63-8d-2f-68-80"]|x});
-  ("mac/obj", 7, {x|["1c-7b-f8-81-47-ac","61-4e-37-e0-9f-38","e2-8c-a7-37-57-5d"]|x});
-  ("mac/objdefault", 42, {x|["5f:b9:22:0d:9b:0f","d3:22:48:64:92:45","7c:38:90:92:1f:fc"]|x});
-  ("mac/objdefault", 1337, {x|["42:47:58:4f:b1:6a","2f:7c:c5:69:c3:4a","72:63:8d:2f:68:80"]|x});
-  ("mac/objdefault", 7, {x|["1c:7b:f8:81:47:ac","61:4e:37:e0:9f:38","e2:8c:a7:37:57:5d"]|x});
-  ("password", 42, {x|["DfYsZdp522RJCLk","3QYZ1mbJPw9_RT2","jzvYx3EoBTmj3nd"]|x});
-  ("password", 1337, {x|["90LR9fEKllCHXi2","P1H3Sp2IPQf0DbD","kBcOpZV9zOAei3w"]|x});
-  ("password", 7, {x|["kJeTPPamEw5KyZ6","UwRhM4ODNCpjWLB","_DLeHw2gIIRHdRc"]|x});
-  ("password/5", 42, {x|["DfYsZ","dp522","RJCLk"]|x});
-  ("password/5", 1337, {x|["90LR9","fEKll","CHXi2"]|x});
-  ("password/5", 7, {x|["kJeTP","PamEw","5KyZ6"]|x});
-  ("password/0", 42, {x|["","",""]|x});
-  ("password/0", 1337, {x|["","",""]|x});
-  ("password/0", 7, {x|["","",""]|x});
-  ("password/memorable", 42, {x|["debumivoriqutin","razofaqeyaxusab","vukubulozirequy"]|x});
-  ("password/memorable", 1337, {x|["lekipipopowolif","qafowejanajejul","wekapufujofekog"]|x});
-  ("password/memorable", 7, {x|["ketamewuwodehir","hayohumebiyohoz","wequmiyoyodeyiy"]|x});
-  ("password/memorable20", 42, {x|["debumivoriqutinazofa","qeyaxusabevukubulozi","requyudoceruduhomele"]|x});
-  ("password/memorable20", 1337, {x|["lekipipopowolifafowe","janajejulawekapufujo","fekogogegenoposobehi"]|x});
-  ("password/memorable20", 7, {x|["ketamewuwodehirayohu","mebiyohozequmiyoyode","yiyiyoxipuhuyafugize"]|x});
-  ("password/upper", 42, {x|["DYZRJCLQYZJPRTY","EBTCMVORIQGTIQH","ARCPZPOCSYQEAUS"]|x});
-  ("password/upper", 1337, {x|["LREKCHXPHSIPQDD","BOZVOARMKFOBHMS","VIFQGFBBONXAJAX"]|x});
-  ("password/upper", 7, {x|["JTPPEKZURMODNCW","LBDLHIIRHRYMLOA","HKRLNBIYHLTZWSJ"]|x});
-  ("password/digit", 42, {x|["52231923","38602668","77726197"]|x});
-  ("password/digit", 1337, {x|["90921320","93017779","72219403"]|x});
-  ("password/digit", 7, {x|["56427066","11300720","34728798"]|x});
-  ("password/symbols", 42, {x|["{//&\"}=<[.<%","'{|=*,$_>})%","?:;.(~!(,\\@'"]|x});
-  ("password/symbols", 1337, {x|[";?}+\\,~<`{\"","-!&}\")}\"``?",":],#[=$%*$,"]|x});
-  ("password/symbols", 7, {x|["(}':'<#{-`>;","_]!){&>|->.?","=$;._'!&-_-$"]|x});
-  ("password/prefix", 42, {x|["pre-DfYsZdp522R","pre-JCLk3QYZ1mb","pre-JPw9_RT2jzv"]|x});
-  ("password/prefix", 1337, {x|["pre-90LR9fEKllC","pre-HXi2P1H3Sp2","pre-IPQf0DbDkBc"]|x});
-  ("password/prefix", 7, {x|["pre-kJeTPPamEw5","pre-KyZ6UwRhM4O","pre-DNCpjWLB_DL"]|x});
-  ("password/longprefix", 42, {x|["abcdefghij","abcdefghij","abcdefghij"]|x});
-  ("password/longprefix", 1337, {x|["abcdefghij","abcdefghij","abcdefghij"]|x});
-  ("password/longprefix", 7, {x|["abcdefghij","abcdefghij","abcdefghij"]|x});
-  ("password/memorableprefix", 42, {x|["xyzebumivo","xyziqutina","xyzofaqeya"]|x});
-  ("password/memorableprefix", 1337, {x|["xyzekipipo","xyzowolifa","xyzowejana"]|x});
-  ("password/memorableprefix", 7, {x|["xyzetamewu","xyzodehira","xyzohumebi"]|x});
-  ("password/memorablevowel", 42, {x|["Badebumivo","Bariqutina","Bazofaqeya"]|x});
-  ("password/memorablevowel", 1337, {x|["Balekipipo","Bapowolifa","Bafowejana"]|x});
-  ("password/memorablevowel", 7, {x|["Baketamewu","Bawodehira","Bayohumebi"]|x});
-  ("password/memorablepattern", 42, {x|["debumivori","qutinazofa","qeyaxusabe"]|x});
-  ("password/memorablepattern", 1337, {x|["lekipipopo","wolifafowe","janajejula"]|x});
-  ("password/memorablepattern", 7, {x|["ketamewuwo","dehirayohu","mebiyohoze"]|x});
-  ("password/unicodeprefix", 42, {x|["é😀DfYsZdp","é😀522RJCL","é😀k3QYZ1m"]|x});
-  ("password/unicodeprefix", 1337, {x|["é😀90LR9fE","é😀KllCHXi","é😀2P1H3Sp"]|x});
-  ("password/unicodeprefix", 7, {x|["é😀kJeTPPa","é😀mEw5KyZ","é😀6UwRhM4"]|x});
-  ("emoji", 42, {x|["🦮","🔗","👃"]|x});
-  ("emoji", 1337, {x|["👩‍🎤","💆🏿","🐳"]|x});
-  ("emoji", 7, {x|["🤎","🥤","🇲🇨"]|x});
-  ("emoji/flag", 42, {x|["🇭🇰","🇽🇰","🇷🇴"]|x});
-  ("emoji/flag", 1337, {x|["🇪🇭","🇨🇬","🇪🇺"]|x});
-  ("emoji/flag", 7, {x|["🇧🇪","🇸🇰","🇯🇪"]|x});
-  ("emoji/foodnature", 42, {x|["🫐","🐽","🍑"]|x});
-  ("emoji/foodnature", 1337, {x|["🍑","🍸","🍿"]|x});
-  ("emoji/foodnature", 7, {x|["🥫","🥤","🐶"]|x});
-  ("emoji/empty", 42, {x|[{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."}]|x});
-  ("emoji/empty", 1337, {x|[{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."}]|x});
-  ("emoji/empty", 7, {x|[{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."}]|x});
-  ("jwtAlgorithm", 42, {x|["HS384","none","RS256"]|x});
-  ("jwtAlgorithm", 1337, {x|["HS256","ES512","HS256"]|x});
-  ("jwtAlgorithm", 7, {x|["ES256","RS384","HS512"]|x});
-  ("jwt", 42, {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE3MzU2MzU1NjAsImV4cCI6MTczNTY5ODgwNCwibmJmIjoxNzQxOTEyMTg4LCJpc3MiOiJTdHJlaWNoIC0gQXVmZGVyaGFyIiwic3ViIjoiZmQzMjI0ODYtNDkyNC00NTdjLTkzODktMDkyMWZmYzQxYTcxIiwiYXVkIjoiMGU0YTQ4ODItZmNmZS00OWUxLTgzMDUtNjRkNTQ4MmMxZmMzIiwianRpIjoiZGJiYzE1MWQtOTUxNC00NWJhLWFlNzEtYmM4Yzc4NjAxMGE1In0.UfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb","eyJhbGciOiJQUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDY3MjMsImV4cCI6MTczNTY2NTI2NSwibmJmIjoxNzA1MTk5ODI4LCJpc3MiOiJEYW5pZWwgTExDIiwic3ViIjoiNmUyNTFlZTQtYWQ4OC00MzFlLWFlYTUtNWJlZWNhMTJlOTAxIiwiYXVkIjoiMDI4YmEzYjMtNWJhZC00YTkxLWE1NDMtZjZlYWM4OTczYjQwIiwianRpIjoiMmZmZTUwZTYtZmZkNC00NmQ1LTkyOGUtYjkxOWYyOGViYmI1In0.OORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK07","eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDcxNzUsImV4cCI6MTczNTY4MTA4NywibmJmIjoxNzQ4NTM0NzA5LCJpc3MiOiJLb3pleSBHcm91cCIsInN1YiI6IjY2OWEwNWE4LWRhMjEtNGEwOS1hZjk2LWE3OGY2ZmUzMTEwMSIsImF1ZCI6IjE1ZDBkNDFiLWFlYmMtNDQyYy05Y2Y2LTVjNWVkNmNjMWU4ZCIsImp0aSI6ImU2MGUxNWZmLTlhNzQtNDVhYy1hY2MxLTcwODdlNTEyYzkxMSJ9.4OH55ZnmOWZKn5MyqU6u0t377EKAXnhRdX0Y2TwZ4yYwDHsCAT2hWTsChbslA4YZ"]|x});
-  ("jwt", 1337, {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MjU4MzksImV4cCI6MTczNTY0OTg3MCwibmJmIjoxNzMzMTIzNjM1LCJpc3MiOiJXb2xmIC0gSG93ZSIsInN1YiI6ImEyZjdjYzU2LTljMzQtNGE3Mi1hNjM4LWQyZjY4ODBiZjIyNSIsImF1ZCI6IjA1MGM1YjdmLWQ5OWYtNDQwMS05ZmY3LTViMGNhM2FlMmU1YiIsImp0aSI6IjgyNzc2YzdiLWM1ZWItNGU2Ny1hZWE4LTNmOGMzNjY4MmEwMyJ9.VCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cD","eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2Mjc5MDgsImV4cCI6MTczNTY1Nzc5OCwibmJmIjoxNzM1NjczMDE5LCJpc3MiOiJMeW5jaCBMTEMiLCJzdWIiOiIyYjY4OWRiYS0wMDhjLTRiMzQtYTM2YS00NGNkOGI2ZGQwYmIiLCJhdWQiOiJjZWEyYmZlZC0wMGJiLTRiMjEtYTJkNi0yYTAxMWI5OWRiMzEiLCJqdGkiOiI1NDhiZTc4Yy02YmYzLTQ5YjItOGRiYi1kYmJhYWRkM2EyZDAifQ.1Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBypP","eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2NTM0MjEsImV4cCI6MTczNTY3NDY1NiwibmJmIjoxNzExMzY5NjEzLCJpc3MiOiJKb2hucywgTHVldHRnZW4gYW5kIFJ1ZWNrZXIiLCJzdWIiOiIzZWEwOTY1My1iZjRhLTQ2NjEtYjRkMS01YjY0ZmU5ZmZlOGMiLCJhdWQiOiIyOTEzMjQ3NC04ZDMwLTRlNWQtYmVjMS02NGE5ZTZkYTU0YjkiLCJqdGkiOiIzM2JhZWU0OC02MTQxLTRmZWQtOGY5YS0zZTBhMGZlODk0MmQifQ.8lZtjfM9rR0KYeJNSHd5yyoxaaIZNaLiVto6v5G8tfZgA0BvtoTbHMJBHe5UxeQO"]|x});
-  ("jwt", 7, {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDk3OTMsImV4cCI6MTczNTY0NzY3MiwibmJmIjoxNzQ5NzgzOTk2LCJpc3MiOiJCaW5zLCBQYXJpc2lhbiBhbmQgQmVyZ3N0cm9tIiwic3ViIjoiNGUzN2UwOWYtMzhlMi00OGNhLTk3MzctNTc1ZGM1OTQ3NWE1IiwiYXVkIjoiYjZlMmI2NmEtODYwMS00YjhiLTlmYTAtNDkzZmZkN2QyNDdiIiwianRpIjoiMjU1NDI2N2MtYzg3Yy00ZWFjLWJmMGUtNDdjYjJhMTVkNjliIn0.L0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MTM2MjMsImV4cCI6MTczNTYxNjI1MywibmJmIjoxNzQ2NTczMzY5LCJpc3MiOiJEYXZpcyAtIEhhbHZvcnNvbiIsInN1YiI6ImIyMzU2M2VkLTE1MzctNDQ4ZS05NmE5LWMwYmY5NGFiYTJmZiIsImF1ZCI6IjkwZmRhYzM0LTM5MWUtNDc3MS1iYWRhLTNjMmQ5NDhhNGQ2ZSIsImp0aSI6IjFhNGM4N2UwLTg1MGMtNDhlOS05NWYxLTBiNTVlNWVhNTAzZiJ9.9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0Fa","eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE3MzU2MzI4MjQsImV4cCI6MTczNTY3NDgzNSwibmJmIjoxNzQ1NjE4Nzk3LCJpc3MiOiJWb2xrbWFuLCBHcmFoYW0gYW5kIExhbmd3b3J0aCIsInN1YiI6ImNiMWQzYzcyLWJjYmYtNDQzMi1iODY1LTc0MDc0N2UyYWE0NyIsImF1ZCI6IjViZDVmYThiLTZiNGUtNDgzNi05ZWM3LTU2ZjFlZDM1OWNmZiIsImp0aSI6IjM3OGExYWVlLWZlZjAtNGU0NS1iN2Y5LTU1ZWQyMzUzOTM5ZSJ9.6cpEnflcRHpHwwmuZMP7vm5o4eNGH4a166XTcfXzmsgAIvO7BZ9uDkXutT0R8nut"]|x});
-  ("jwt/ref", 42, {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE1Nzc3ODI3NjAsImV4cCI6MTU3Nzg0NjAwNCwibmJmIjoxNTg0MDU5Mzg4LCJpc3MiOiJTdHJlaWNoIC0gQXVmZGVyaGFyIiwic3ViIjoiZmQzMjI0ODYtNDkyNC00NTdjLTkzODktMDkyMWZmYzQxYTcxIiwiYXVkIjoiMGU0YTQ4ODItZmNmZS00OWUxLTgzMDUtNjRkNTQ4MmMxZmMzIiwianRpIjoiZGJiYzE1MWQtOTUxNC00NWJhLWFlNzEtYmM4Yzc4NjAxMGE1In0.UfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb","eyJhbGciOiJQUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc3NTM5MjMsImV4cCI6MTU3NzgxMjQ2NSwibmJmIjoxNTQ3MzQ3MDI4LCJpc3MiOiJEYW5pZWwgTExDIiwic3ViIjoiNmUyNTFlZTQtYWQ4OC00MzFlLWFlYTUtNWJlZWNhMTJlOTAxIiwiYXVkIjoiMDI4YmEzYjMtNWJhZC00YTkxLWE1NDMtZjZlYWM4OTczYjQwIiwianRpIjoiMmZmZTUwZTYtZmZkNC00NmQ1LTkyOGUtYjkxOWYyOGViYmI1In0.OORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK07","eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc3NTQzNzUsImV4cCI6MTU3NzgyODI4NywibmJmIjoxNTkwNjgxOTA5LCJpc3MiOiJLb3pleSBHcm91cCIsInN1YiI6IjY2OWEwNWE4LWRhMjEtNGEwOS1hZjk2LWE3OGY2ZmUzMTEwMSIsImF1ZCI6IjE1ZDBkNDFiLWFlYmMtNDQyYy05Y2Y2LTVjNWVkNmNjMWU4ZCIsImp0aSI6ImU2MGUxNWZmLTlhNzQtNDVhYy1hY2MxLTcwODdlNTEyYzkxMSJ9.4OH55ZnmOWZKn5MyqU6u0t377EKAXnhRdX0Y2TwZ4yYwDHsCAT2hWTsChbslA4YZ"]|x});
-  ("jwt/ref", 1337, {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc3NzMwMzksImV4cCI6MTU3Nzc5NzA3MCwibmJmIjoxNTc1MjcwODM1LCJpc3MiOiJXb2xmIC0gSG93ZSIsInN1YiI6ImEyZjdjYzU2LTljMzQtNGE3Mi1hNjM4LWQyZjY4ODBiZjIyNSIsImF1ZCI6IjA1MGM1YjdmLWQ5OWYtNDQwMS05ZmY3LTViMGNhM2FlMmU1YiIsImp0aSI6IjgyNzc2YzdiLWM1ZWItNGU2Ny1hZWE4LTNmOGMzNjY4MmEwMyJ9.VCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cD","eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc3NzUxMDgsImV4cCI6MTU3NzgwNDk5OCwibmJmIjoxNTc3ODIwMjE5LCJpc3MiOiJMeW5jaCBMTEMiLCJzdWIiOiIyYjY4OWRiYS0wMDhjLTRiMzQtYTM2YS00NGNkOGI2ZGQwYmIiLCJhdWQiOiJjZWEyYmZlZC0wMGJiLTRiMjEtYTJkNi0yYTAxMWI5OWRiMzEiLCJqdGkiOiI1NDhiZTc4Yy02YmYzLTQ5YjItOGRiYi1kYmJhYWRkM2EyZDAifQ.1Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBypP","eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc4MDA2MjEsImV4cCI6MTU3NzgyMTg1NiwibmJmIjoxNTUzNTE2ODEzLCJpc3MiOiJKb2hucywgTHVldHRnZW4gYW5kIFJ1ZWNrZXIiLCJzdWIiOiIzZWEwOTY1My1iZjRhLTQ2NjEtYjRkMS01YjY0ZmU5ZmZlOGMiLCJhdWQiOiIyOTEzMjQ3NC04ZDMwLTRlNWQtYmVjMS02NGE5ZTZkYTU0YjkiLCJqdGkiOiIzM2JhZWU0OC02MTQxLTRmZWQtOGY5YS0zZTBhMGZlODk0MmQifQ.8lZtjfM9rR0KYeJNSHd5yyoxaaIZNaLiVto6v5G8tfZgA0BvtoTbHMJBHe5UxeQO"]|x});
-  ("jwt/ref", 7, {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc3NTY5OTMsImV4cCI6MTU3Nzc5NDg3MiwibmJmIjoxNTkxOTMxMTk2LCJpc3MiOiJCaW5zLCBQYXJpc2lhbiBhbmQgQmVyZ3N0cm9tIiwic3ViIjoiNGUzN2UwOWYtMzhlMi00OGNhLTk3MzctNTc1ZGM1OTQ3NWE1IiwiYXVkIjoiYjZlMmI2NmEtODYwMS00YjhiLTlmYTAtNDkzZmZkN2QyNDdiIiwianRpIjoiMjU1NDI2N2MtYzg3Yy00ZWFjLWJmMGUtNDdjYjJhMTVkNjliIn0.L0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc3NjA4MjMsImV4cCI6MTU3Nzc2MzQ1MywibmJmIjoxNTg4NzIwNTY5LCJpc3MiOiJEYXZpcyAtIEhhbHZvcnNvbiIsInN1YiI6ImIyMzU2M2VkLTE1MzctNDQ4ZS05NmE5LWMwYmY5NGFiYTJmZiIsImF1ZCI6IjkwZmRhYzM0LTM5MWUtNDc3MS1iYWRhLTNjMmQ5NDhhNGQ2ZSIsImp0aSI6IjFhNGM4N2UwLTg1MGMtNDhlOS05NWYxLTBiNTVlNWVhNTAzZiJ9.9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0Fa","eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE1Nzc3ODAwMjQsImV4cCI6MTU3NzgyMjAzNSwibmJmIjoxNTg3NzY1OTk3LCJpc3MiOiJWb2xrbWFuLCBHcmFoYW0gYW5kIExhbmd3b3J0aCIsInN1YiI6ImNiMWQzYzcyLWJjYmYtNDQzMi1iODY1LTc0MDc0N2UyYWE0NyIsImF1ZCI6IjViZDVmYThiLTZiNGUtNDgzNi05ZWM3LTU2ZjFlZDM1OWNmZiIsImp0aSI6IjM3OGExYWVlLWZlZjAtNGU0NS1iN2Y5LTU1ZWQyMzUzOTM5ZSJ9.6cpEnflcRHpHwwmuZMP7vm5o4eNGH4a166XTcfXzmsgAIvO7BZ9uDkXutT0R8nut"]|x});
-  ("jwt/refnum", 42, {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE1OTk5NDU5NjAsImV4cCI6MTYwMDAwOTIwNSwibmJmIjoxNjA2MjIyNTg4LCJpc3MiOiJTdHJlaWNoIC0gQXVmZGVyaGFyIiwic3ViIjoiZmQzMjI0ODYtNDkyNC00NTdjLTkzODktMDkyMWZmYzQxYTcxIiwiYXVkIjoiMGU0YTQ4ODItZmNmZS00OWUxLTgzMDUtNjRkNTQ4MmMxZmMzIiwianRpIjoiZGJiYzE1MWQtOTUxNC00NWJhLWFlNzEtYmM4Yzc4NjAxMGE1In0.UfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb","eyJhbGciOiJQUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5MTcxMjMsImV4cCI6MTU5OTk3NTY2NSwibmJmIjoxNTY5NTEwMjI4LCJpc3MiOiJEYW5pZWwgTExDIiwic3ViIjoiNmUyNTFlZTQtYWQ4OC00MzFlLWFlYTUtNWJlZWNhMTJlOTAxIiwiYXVkIjoiMDI4YmEzYjMtNWJhZC00YTkxLWE1NDMtZjZlYWM4OTczYjQwIiwianRpIjoiMmZmZTUwZTYtZmZkNC00NmQ1LTkyOGUtYjkxOWYyOGViYmI1In0.OORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK07","eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5MTc1NzUsImV4cCI6MTU5OTk5MTQ4NywibmJmIjoxNjEyODQ1MTA5LCJpc3MiOiJLb3pleSBHcm91cCIsInN1YiI6IjY2OWEwNWE4LWRhMjEtNGEwOS1hZjk2LWE3OGY2ZmUzMTEwMSIsImF1ZCI6IjE1ZDBkNDFiLWFlYmMtNDQyYy05Y2Y2LTVjNWVkNmNjMWU4ZCIsImp0aSI6ImU2MGUxNWZmLTlhNzQtNDVhYy1hY2MxLTcwODdlNTEyYzkxMSJ9.4OH55ZnmOWZKn5MyqU6u0t377EKAXnhRdX0Y2TwZ4yYwDHsCAT2hWTsChbslA4YZ"]|x});
-  ("jwt/refnum", 1337, {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5MzYyMzksImV4cCI6MTU5OTk2MDI3MCwibmJmIjoxNTk3NDM0MDM1LCJpc3MiOiJXb2xmIC0gSG93ZSIsInN1YiI6ImEyZjdjYzU2LTljMzQtNGE3Mi1hNjM4LWQyZjY4ODBiZjIyNSIsImF1ZCI6IjA1MGM1YjdmLWQ5OWYtNDQwMS05ZmY3LTViMGNhM2FlMmU1YiIsImp0aSI6IjgyNzc2YzdiLWM1ZWItNGU2Ny1hZWE4LTNmOGMzNjY4MmEwMyJ9.VCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cD","eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5MzgzMDgsImV4cCI6MTU5OTk2ODE5OCwibmJmIjoxNTk5OTgzNDE5LCJpc3MiOiJMeW5jaCBMTEMiLCJzdWIiOiIyYjY4OWRiYS0wMDhjLTRiMzQtYTM2YS00NGNkOGI2ZGQwYmIiLCJhdWQiOiJjZWEyYmZlZC0wMGJiLTRiMjEtYTJkNi0yYTAxMWI5OWRiMzEiLCJqdGkiOiI1NDhiZTc4Yy02YmYzLTQ5YjItOGRiYi1kYmJhYWRkM2EyZDAifQ.1Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBypP","eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5NjM4MjIsImV4cCI6MTU5OTk4NTA1NiwibmJmIjoxNTc1NjgwMDEzLCJpc3MiOiJKb2hucywgTHVldHRnZW4gYW5kIFJ1ZWNrZXIiLCJzdWIiOiIzZWEwOTY1My1iZjRhLTQ2NjEtYjRkMS01YjY0ZmU5ZmZlOGMiLCJhdWQiOiIyOTEzMjQ3NC04ZDMwLTRlNWQtYmVjMS02NGE5ZTZkYTU0YjkiLCJqdGkiOiIzM2JhZWU0OC02MTQxLTRmZWQtOGY5YS0zZTBhMGZlODk0MmQifQ.8lZtjfM9rR0KYeJNSHd5yyoxaaIZNaLiVto6v5G8tfZgA0BvtoTbHMJBHe5UxeQO"]|x});
-  ("jwt/refnum", 7, {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5MjAxOTMsImV4cCI6MTU5OTk1ODA3MiwibmJmIjoxNjE0MDk0Mzk2LCJpc3MiOiJCaW5zLCBQYXJpc2lhbiBhbmQgQmVyZ3N0cm9tIiwic3ViIjoiNGUzN2UwOWYtMzhlMi00OGNhLTk3MzctNTc1ZGM1OTQ3NWE1IiwiYXVkIjoiYjZlMmI2NmEtODYwMS00YjhiLTlmYTAtNDkzZmZkN2QyNDdiIiwianRpIjoiMjU1NDI2N2MtYzg3Yy00ZWFjLWJmMGUtNDdjYjJhMTVkNjliIn0.L0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5MjQwMjMsImV4cCI6MTU5OTkyNjY1NCwibmJmIjoxNjEwODgzNzY5LCJpc3MiOiJEYXZpcyAtIEhhbHZvcnNvbiIsInN1YiI6ImIyMzU2M2VkLTE1MzctNDQ4ZS05NmE5LWMwYmY5NGFiYTJmZiIsImF1ZCI6IjkwZmRhYzM0LTM5MWUtNDc3MS1iYWRhLTNjMmQ5NDhhNGQ2ZSIsImp0aSI6IjFhNGM4N2UwLTg1MGMtNDhlOS05NWYxLTBiNTVlNWVhNTAzZiJ9.9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0Fa","eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE1OTk5NDMyMjQsImV4cCI6MTU5OTk4NTIzNSwibmJmIjoxNjA5OTI5MTk3LCJpc3MiOiJWb2xrbWFuLCBHcmFoYW0gYW5kIExhbmd3b3J0aCIsInN1YiI6ImNiMWQzYzcyLWJjYmYtNDQzMi1iODY1LTc0MDc0N2UyYWE0NyIsImF1ZCI6IjViZDVmYThiLTZiNGUtNDgzNi05ZWM3LTU2ZjFlZDM1OWNmZiIsImp0aSI6IjM3OGExYWVlLWZlZjAtNGU0NS1iN2Y5LTU1ZWQyMzUzOTM5ZSJ9.6cpEnflcRHpHwwmuZMP7vm5o4eNGH4a166XTcfXzmsgAIvO7BZ9uDkXutT0R8nut"]|x});
-  ("jwt/referr", 42, {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x});
-  ("jwt/referr", 1337, {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x});
-  ("jwt/referr", 7, {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x});
-  ("jwt/header", 42, {x|["eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2MzU1NjAsImV4cCI6MTczNTcxNzcwMiwibmJmIjoxNzUwMzIxOTIyLCJpc3MiOiJCZWVyIGFuZCBTb25zIiwic3ViIjoiOWIwZmQzMjItNDg2NC00OTI0LWE1N2MtMzg5MDkyMWZmYzQxIiwiYXVkIjoiNzE3MGU0YTQtODgyZi00Y2ZlLWI5ZTEtMzA1NjRkNTQ4MmMxIiwianRpIjoiYzMwZGJiYzEtNTFkOS00NTE0LTg1YmEtZTcxYmM4Yzc4NjAxIn0.DjvUfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5","eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2NzUzNjksImV4cCI6MTczNTcwMzA4NSwibmJmIjoxNzE1OTE3Njk1LCJpc3MiOiJBcm1zdHJvbmcgLSBPJ0Nvbm5lbGwiLCJzdWIiOiIyYjZlMjUxZS1lNGFkLTQ4ODMtODFlZS1hNTViZWVjYTEyZTkiLCJhdWQiOiIxYTAyOGJhMy1iMzViLTRhZGEtOTkxNS00M2Y2ZWFjODk3M2IiLCJqdGkiOiIwYTJmZmU1MC1lNmZmLTRkNDYtYWQ1Mi04ZWI5MTlmMjhlYmIifQ.miOORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK","eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2MDQ0NDQsImV4cCI6MTczNTYxNDQ3MywibmJmIjoxNzA3MDU1MDc5LCJpc3MiOiJLcmFqY2lrIC0gS296ZXkiLCJzdWIiOiIyNjY5YTA1YS04ZGEyLTQxYTAtODlmOS02YTc4ZjZmZTMxMTAiLCJhdWQiOiJhMTVkMGQ0MS1iYWViLTRjNDItYmNjZi02NWM1ZWQ2Y2MxZTgiLCJqdGkiOiI1ZTYwZTE1Zi1mOWE3LTQ0NWEtOGNjYy0xNzA4N2U1MTJjOTEifQ.H4OH55ZnmOWZKn5MyqU6u0t377EKAXnhRdX0Y2TwZ4yYwDHsCAT2hWTsChbslA4Y"]|x});
-  ("jwt/header", 1337, {x|["eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2MjU4MzksImV4cCI6MTczNTYzOTU1MCwibmJmIjoxNzIxNjk1NTk2LCJpc3MiOiJHaWJzb24gYW5kIFNvbnMiLCJzdWIiOiJiMTZhMmY3Yy1jNTY5LTRjMzQtOGE3Mi02MzhkMmY2ODgwYmYiLCJhdWQiOiIyNWIwNTBjNS1iN2ZkLTQ5OWYtYjQwMS1mZjc1YjBjYTNhZTIiLCJqdGkiOiI1YjQ4Mjc3Ni1jN2JjLTQ1ZWItYWU2Ny1lYTgzZjhjMzY2ODIifQ.1eJVCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh","eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2MDgyMzUsImV4cCI6MTczNTYyNTk1MywibmJmIjoxNzQ0NTIyMTQ1LCJpc3MiOiJLdXRjaCAtIEJhcnRvbGV0dGkiLCJzdWIiOiI4YTJiNjg5ZC1iYTAwLTQ4Y2ItYTM0My02YTQ0Y2Q4YjZkZDAiLCJhdWQiOiJiYmNlYTJiZi1lZDAwLTRiYmItODIxMi1kNjJhMDExYjk5ZGIiLCJqdGkiOiIxODU0OGJlNy04YzZiLTRmMzktYmIyZC1iYmRiYmFhZGQzYTIifQ.121Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBy","eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2Mzg5OTcsImV4cCI6MTczNTcxMTIxNywibmJmIjoxNzQwODE1NjY3LCJpc3MiOiJaYm9uY2FrLCBKb2hucyBhbmQgTHVldHRnZW4iLCJzdWIiOiI5OWMzZWEwOS02NTNiLTRmNGEtYjY2MS00ZDE1YjY0ZmU5ZmYiLCJhdWQiOiI4Y2MyOTEzMi00NzQ4LTRkMzAtOWU1ZC1lYzE2NGE5ZTZkYTUiLCJqdGkiOiJiOWYzM2JhZS1lNDg2LTQxNDEtOWZlZC1mOWEzZTBhMGZlODkifQ.9P88lZtjfM9rR0KYeJNSHd5yyoxaaIZNaLiVto6v5G8tfZgA0BvtoTbHMJBHe5Ux"]|x});
-  ("jwt/header", 7, {x|["eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2MDk3OTMsImV4cCI6MTczNTY3NzE3OCwibmJmIjoxNzMxODA0OTQ3LCJpc3MiOiJLdXZhbGlzLCBLdXRjaCBhbmQgSG9tZW5pY2siLCJzdWIiOiIxNGUzN2UwOS1mMzhlLTQyOGMtOWE3My03NTc1ZGM1OTQ3NWEiLCJhdWQiOiI3YjZlMmI2Ni1hODYwLTQxYjgtYWJmYS0wNDkzZmZkN2QyNDciLCJqdGkiOiI3MjU1NDI2Ny1jYzg3LTRjZWEtYWNmMC1lNDdjYjJhMTVkNjkifQ.OL0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1g","eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2MjcxNTEsImV4cCI6MTczNTYzNzU3NSwibmJmIjoxNzYxNTk0MTE5LCJpc3MiOiJIZXNzZWwgLSBMZWJzYWNrIiwic3ViIjoiODViMjM1NjMtZWQxNS00Mzc0LWI4ZTYtYTljMGJmOTRhYmEyIiwiYXVkIjoiZjY5MGZkYWMtMzQzOS00MWU3LTk3MWEtZGEzYzJkOTQ4YTRkIiwianRpIjoiZWQxYTRjODctZTA4NS00MGM4LThlOTUtZjEwYjU1ZTVlYTUwIn0.Yp9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0","eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2NjE0NDMsImV4cCI6MTczNTY3NTc2MSwibmJmIjoxNzI1Nzc5NDI3LCJpc3MiOiJSb2JlbCwgVm9sa21hbiBhbmQgR3JhaGFtIiwic3ViIjoiYjA4Y2IxZDMtYzcyYi00Y2JmLWE0MzItODY1NzQwNzQ3ZTJhIiwiYXVkIjoiNDdmNWJkNWYtYThiNi00YjRlLWI4MzYtZWM3NTZmMWVkMzU5IiwianRpIjoiZmY0Mzc4YTEtYWVlZi00ZWYwLThlNDUtN2Y5NTVlZDIzNTM5In0.zWQ6cpEnflcRHpHwwmuZMP7vm5o4eNGH4a166XTcfXzmsgAIvO7BZ9uDkXutT0R8"]|x});
-  ("jwt/payload", 42, {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.JB993RBH1YPdbbiwqiB8imsMcvA2Ba4WXOi6Gr7u2UgFjwxbYMWTBV5c2kogPmhx","eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.4ZLc0OHJL4m7RCk3jkJDTt7ILyLuwq161DjvUfpKe4h9VODSNbTxOTj6eqOR0vpd","eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.WkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb2AG1veEaGnW8l7VSfEOywe5TTDllJT"]|x});
-  ("jwt/payload", 1337, {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.hsjwgYJ7nC7YrMNmpALbhFubpcwPbXqvv0JZa7nG0m3MlHuYPBzZf05WYulI0LFb","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.aUkHgwbtroNuINlUITqsUDxeWyKeqov7G1eJVCpQZioHm1lu2UIL52g7eGtWAbbk","eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cDhrluEW2yD9JnvzQHD32wMHcgdpEghM"]|x});
-  ("jwt/payload", 7, {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.rIYxv4guGNn4hUdsV1BWeyU8wKFtcuntmPLjzhslEmsIpUbJqqDwp05HwHXG3jAe","eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.QtQ8jsJu8lkiaprMNwsMTFNW2ShtNI9E4mOqBJOL0qs3xBPW7eE8dzaMR2xNYhaS","eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.rIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh7U1F4mpbwxjJ9blncUP6merhvVn"]|x});
-  ("jwt/both", 42, {x|["e30.e30.WJB993RBH1YPdbbiwqiB8imsMcvA2Ba4WXOi6Gr7u2UgFjwxbYMWTBV5c2kogPmh","e30.e30.8N4ZLc0OHJL4m7RCk3jkJDTt7ILyLuwq161DjvUfpKe4h9VODSNbTxOTj6eqOR0v","e30.e30.d7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb2AG1veEaGnW8l7VSfEOywe5TTDl"]|x});
-  ("jwt/both", 1337, {x|["e30.e30.9hsjwgYJ7nC7YrMNmpALbhFubpcwPbXqvv0JZa7nG0m3MlHuYPBzZf05WYulI0LF","e30.e30.FUaUkHgwbtroNuINlUITqsUDxeWyKeqov7G1eJVCpQZioHm1lu2UIL52g7eGtWAb","e30.e30.kq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cDhrluEW2yD9JnvzQHD32wMHcgdpE"]|x});
-  ("jwt/both", 7, {x|["e30.e30.MrIYxv4guGNn4hUdsV1BWeyU8wKFtcuntmPLjzhslEmsIpUbJqqDwp05HwHXG3jA","e30.e30.XWQtQ8jsJu8lkiaprMNwsMTFNW2ShtNI9E4mOqBJOL0qs3xBPW7eE8dzaMR2xNYh","e30.e30.SUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh7U1F4mpbwxjJ9blncUP6merh"]|x});
-  ("fake/misc", 42, {x|["Kevin60@hotmail.com|Daniel_Gutmann43@example.com|Edison.Schaden|Carolina30|https|PUT|101|https://unused-disk.name/|general-legislature.name|com|willing-sandbar|dde1:4078:5c76:b3b1:fa40:bfaa:172c:d716|83.63.54.213|aeda:2fac:aab9:020e:6bd5:9a51:63eb:ddb4|58494|8c:e5:13:6d:d0:86|6AzRcC8PZPw7O7i|🧏🏿‍♀️|HS384","Billy59@hotmail.com|Lon_Howe@example.com|Ryley_Schumm52|Shanon_Heller89|https|DELETE|100|https://petty-ad.biz|radiant-accompanist.biz|name|rotten-pearl|182.81.96.160|60.188.91.47|7aec:ec28:55f8:ddbb:ca4f:60e3:eee8:0e9f|63151|d4:6d:52:8e:b9:19|RtgccCmmswQPlcl|⚠️|HS384","Immanuel3@gmail.com|Nicolette.Bogan@example.net|Wiley.Schinner43|Rickie.Dach|https|DELETE|226|https://nifty-numeric.info|experienced-fork.net|biz|clear-archaeology|218.255.118.255|180.34.235.229|a2aa:398d:d08d:bce3:1e0c:ec8e:ace8:fd41|6605|01:a1:5d:0d:41:ba|tfm1hmHDjAyrIhh|🦵|PS256"]|x});
-  ("fake/misc", 1337, {x|["Jennie_Gibson73@gmail.com|Willy.Schimmel@example.net|Easton.Daugherty|Vito.Langosh73|http|GET|206|https://hollow-backburn.net/|gullible-premium.info|org|tangible-numeracy|f501:efa7:f0ae:4ee3:e7f5:b3a9:8baf:b7ef|229.178.5.79|9add:b5ec:a598:b2f0:5aed:8cf6:8f70:7a1e|47551|c1:04:23:a7:e9:22|AJe_iAjX1qgVvUL|🤘|PS512","Devan.Goyette@hotmail.com|Kara_Bartoletti64@example.com|Jaylen_Prohaska5|Misael65|http|DELETE|506|https://irresponsible-slide.net|aggressive-reasoning.net|net|spiteful-tuber|4ffe:d10a:af32:3c83:d022:fdcc:a41b:65bf|232.61.53.52|9bb8:af4c:f2ba:acaa:eecc:4e3c:000e:b00a|49066|3c:dd:8b:cb:6a:bd|BR38ThKBxp3CX2k|🐘|PS512","Herminia_Vandervort45@hotmail.com|Loy_Smith74@example.com|Ali.Fisher|Darien_Bayer|http|DELETE|503|https://jealous-hovel.biz|failing-summary.biz|com|scratchy-glider|242.104.69.139|232.246.97.105|dffd:bbb3:d253:696c:d41d:7ceb:185e:ce8c|44706|54:b9:f3:3b:ae:e4|TFvpYa6xtPXoAN8|🏷️|HS512"]|x});
-  ("fake/misc", 7, {x|["Nathanial.Kuvalis@gmail.com|Arthur.Effertz93@example.org|Dannie75|Kaela76|https|POST|303|https://homely-in-joke.net|indelible-testing.com|net|insidious-hoof|b902:fbff:f16d:5fec:ac26:aaa3:7763:99bb|133.187.92.3|abde:be0d:6abf:3e17:b9da:ca09:a1bd:ce25|43198|23:92:cd:08:cf:42|tw3Jeq0mU0mCRcI|👋🏿|PS384","Adolf_Koch@yahoo.com|Elaine_Bartell@example.org|Katrine.Rippin|Tami45|https|PATCH|206|https://skeletal-bar.net|webbed-newsprint.com|net|scientific-peony|249.53.177.225|244.148.2.136|9d0f:cea4:65d2:da92:fbd5:b3cc:6bd5:c9dc|6511|a4:c8:7e:08:50:c8|uYAfDCtu8G0v0jS|🥰|HS384","Branson.Bechtelar94@yahoo.com|Neha_Abshire@example.net|Reese87|Julianne_Ferry37|http|PUT|100|https://giving-taro.name|appropriate-seafood.biz|net|actual-pinstripe|87.198.171.238|243.231.131.241|aea2:ce3c:6a0b:ba2c:5ba3:abff:553b:87a6|280|74:7e:2a:a4:7f:5b|pCPdIdyT7JvmOBD|🇧🇴|RS512"]|x});
-  ("fake/userAgent", 42, {x|["Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/118.0","Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_15_7) AppleWebKit/546.15.5 (KHTML, like Gecko) Chrome/121.6.14.0 Safari/603.83.21","Googlebot/2.1 (+http://www.google.com/bot.html)"]|x});
-  ("fake/userAgent", 1337, {x|["Mozilla/5.0 (Linux; Android 6; SM-G998B) AppleWebKit/568.32 (KHTML, like Gecko) Chrome/94.2.20.15 Mobile Safari/544.38","Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/604.44 (KHTML, like Gecko) Chrome/115.7.7.8 Safari/576.76 Edg/114.2.14.10","Googlebot/2.1 (+http://www.google.com/bot.html)"]|x});
-  ("fake/userAgent", 7, {x|["FakerBot/7.9.15","Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/541.26.49 (KHTML, like Gecko) Version/16_4 Mobile/15E148 Safari/562.6","Mozilla/5.0 (Linux; Android 13; SM-G998B) AppleWebKit/567.93 (KHTML, like Gecko) Chrome/56.6.19.4 Mobile Safari/574.90"]|x});
-  ("fake/jwt", 42, {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE3MzU2MzU1NjAsImV4cCI6MTczNTY5ODgwNCwibmJmIjoxNzQxOTEyMTg4LCJpc3MiOiJTdHJlaWNoIC0gQXVmZGVyaGFyIiwic3ViIjoiZmQzMjI0ODYtNDkyNC00NTdjLTkzODktMDkyMWZmYzQxYTcxIiwiYXVkIjoiMGU0YTQ4ODItZmNmZS00OWUxLTgzMDUtNjRkNTQ4MmMxZmMzIiwianRpIjoiZGJiYzE1MWQtOTUxNC00NWJhLWFlNzEtYmM4Yzc4NjAxMGE1In0.UfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb","eyJhbGciOiJQUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDY3MjMsImV4cCI6MTczNTY2NTI2NSwibmJmIjoxNzA1MTk5ODI4LCJpc3MiOiJEYW5pZWwgTExDIiwic3ViIjoiNmUyNTFlZTQtYWQ4OC00MzFlLWFlYTUtNWJlZWNhMTJlOTAxIiwiYXVkIjoiMDI4YmEzYjMtNWJhZC00YTkxLWE1NDMtZjZlYWM4OTczYjQwIiwianRpIjoiMmZmZTUwZTYtZmZkNC00NmQ1LTkyOGUtYjkxOWYyOGViYmI1In0.OORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK07","eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDcxNzUsImV4cCI6MTczNTY4MTA4NywibmJmIjoxNzQ4NTM0NzA5LCJpc3MiOiJLb3pleSBHcm91cCIsInN1YiI6IjY2OWEwNWE4LWRhMjEtNGEwOS1hZjk2LWE3OGY2ZmUzMTEwMSIsImF1ZCI6IjE1ZDBkNDFiLWFlYmMtNDQyYy05Y2Y2LTVjNWVkNmNjMWU4ZCIsImp0aSI6ImU2MGUxNWZmLTlhNzQtNDVhYy1hY2MxLTcwODdlNTEyYzkxMSJ9.4OH55ZnmOWZKn5MyqU6u0t377EKAXnhRdX0Y2TwZ4yYwDHsCAT2hWTsChbslA4YZ"]|x});
-  ("fake/jwt", 1337, {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MjU4MzksImV4cCI6MTczNTY0OTg3MCwibmJmIjoxNzMzMTIzNjM1LCJpc3MiOiJXb2xmIC0gSG93ZSIsInN1YiI6ImEyZjdjYzU2LTljMzQtNGE3Mi1hNjM4LWQyZjY4ODBiZjIyNSIsImF1ZCI6IjA1MGM1YjdmLWQ5OWYtNDQwMS05ZmY3LTViMGNhM2FlMmU1YiIsImp0aSI6IjgyNzc2YzdiLWM1ZWItNGU2Ny1hZWE4LTNmOGMzNjY4MmEwMyJ9.VCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cD","eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2Mjc5MDgsImV4cCI6MTczNTY1Nzc5OCwibmJmIjoxNzM1NjczMDE5LCJpc3MiOiJMeW5jaCBMTEMiLCJzdWIiOiIyYjY4OWRiYS0wMDhjLTRiMzQtYTM2YS00NGNkOGI2ZGQwYmIiLCJhdWQiOiJjZWEyYmZlZC0wMGJiLTRiMjEtYTJkNi0yYTAxMWI5OWRiMzEiLCJqdGkiOiI1NDhiZTc4Yy02YmYzLTQ5YjItOGRiYi1kYmJhYWRkM2EyZDAifQ.1Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBypP","eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2NTM0MjEsImV4cCI6MTczNTY3NDY1NiwibmJmIjoxNzExMzY5NjEzLCJpc3MiOiJKb2hucywgTHVldHRnZW4gYW5kIFJ1ZWNrZXIiLCJzdWIiOiIzZWEwOTY1My1iZjRhLTQ2NjEtYjRkMS01YjY0ZmU5ZmZlOGMiLCJhdWQiOiIyOTEzMjQ3NC04ZDMwLTRlNWQtYmVjMS02NGE5ZTZkYTU0YjkiLCJqdGkiOiIzM2JhZWU0OC02MTQxLTRmZWQtOGY5YS0zZTBhMGZlODk0MmQifQ.8lZtjfM9rR0KYeJNSHd5yyoxaaIZNaLiVto6v5G8tfZgA0BvtoTbHMJBHe5UxeQO"]|x});
-  ("fake/jwt", 7, {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDk3OTMsImV4cCI6MTczNTY0NzY3MiwibmJmIjoxNzQ5NzgzOTk2LCJpc3MiOiJCaW5zLCBQYXJpc2lhbiBhbmQgQmVyZ3N0cm9tIiwic3ViIjoiNGUzN2UwOWYtMzhlMi00OGNhLTk3MzctNTc1ZGM1OTQ3NWE1IiwiYXVkIjoiYjZlMmI2NmEtODYwMS00YjhiLTlmYTAtNDkzZmZkN2QyNDdiIiwianRpIjoiMjU1NDI2N2MtYzg3Yy00ZWFjLWJmMGUtNDdjYjJhMTVkNjliIn0.L0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MTM2MjMsImV4cCI6MTczNTYxNjI1MywibmJmIjoxNzQ2NTczMzY5LCJpc3MiOiJEYXZpcyAtIEhhbHZvcnNvbiIsInN1YiI6ImIyMzU2M2VkLTE1MzctNDQ4ZS05NmE5LWMwYmY5NGFiYTJmZiIsImF1ZCI6IjkwZmRhYzM0LTM5MWUtNDc3MS1iYWRhLTNjMmQ5NDhhNGQ2ZSIsImp0aSI6IjFhNGM4N2UwLTg1MGMtNDhlOS05NWYxLTBiNTVlNWVhNTAzZiJ9.9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0Fa","eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE3MzU2MzI4MjQsImV4cCI6MTczNTY3NDgzNSwibmJmIjoxNzQ1NjE4Nzk3LCJpc3MiOiJWb2xrbWFuLCBHcmFoYW0gYW5kIExhbmd3b3J0aCIsInN1YiI6ImNiMWQzYzcyLWJjYmYtNDQzMi1iODY1LTc0MDc0N2UyYWE0NyIsImF1ZCI6IjViZDVmYThiLTZiNGUtNDgzNi05ZWM3LTU2ZjFlZDM1OWNmZiIsImp0aSI6IjM3OGExYWVlLWZlZjAtNGU0NS1iN2Y5LTU1ZWQyMzUzOTM5ZSJ9.6cpEnflcRHpHwwmuZMP7vm5o4eNGH4a166XTcfXzmsgAIvO7BZ9uDkXutT0R8nut"]|x});
-  ("fake/args", 42, {x|["Jane.Reynolds?Miller15@x.dev|Werner_Doe21|Jo.Leffler|201|http://frail-fun.info/|192.168.201.1|10.1.51.29|89-09-21-ff-c4-1a|7170e4a4882f|jebumi|🇲🇰","Jane?Ledner2@x.dev|Stephany.Doe|Jo.Greenfelder92|206|http://trusting-settler.com/|192.168.228.126|10.1.138.18|ce-51-36-dd-08-63|15f58b5ff474|zofaqe|🇻🇺","Jane{Bruen87@x.dev|Delmer.Doe|Jo_Heller89|207|http://proper-blossom.biz/|192.168.230.7|10.1.155.62|01-a0-28-ba-3b-35|bada91543f6e|lozire|🇹🇰"]|x});
-  ("fake/args", 1337, {x|["Jane~Gottlieb@x.dev|Garth_Doe|Jo.Schimmel|207|http://deserted-electronics.net/|192.168.127.232|10.1.45.182|63-8d-2f-68-80-bf|225b050c5b7f|powoli|🇭🇺","Jane23@x.dev|Zella.Doe|Jo.Heller4|207|http://sophisticated-boyfriend.biz/|192.168.66.131|10.1.32.33|3a-7e-92-25-61-a0|ba0c5c592d4b|vulawe|🇰🇾","Jane-Doyle@x.dev|Ali_Doe64|Jo_Langosh84|206|http://average-arcade.name/|192.168.200.117|10.1.179.252|34-36-a4-4c-d8-b6|dd0bbbcea2bf|wogoge|🇷🇼"]|x});
-  ("fake/args", 7, {x|["Jane!Kessler@x.dev|Maria_Doe38|Jo93|206|http://weird-defendant.name/|192.168.232.188|10.1.34.23|8c-a7-37-57-5d-c5|9475a57b6e2b|rayohu|🇵🇪","Jane_Bauch@x.dev|Andreane.Doe81|Jo_Schuster|204|http://babyish-maintainer.name/|192.168.212.21|10.1.241.26|23-a2-39-2c-d0-8c|f42ee37bd2ac|miyoyo|🇧🇳","Jane50@x.dev|Arno_Doe|Jo_Rath14|226|http://insistent-muscat.biz/|192.168.253.23|10.1.209.153|ac-34-39-1e-77-1a|da3c2d948a4d|puhuya|🏳️‍🌈"]|x});
-  ("fake/jwtargs", 42, {x|["eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3ODI3NjAsImV4cCI6MTU3Nzg2NDkwMiwibmJmIjoxNTkyNDY5MTIyLCJpc3MiOiJCZWVyIGFuZCBTb25zIiwic3ViIjoiOWIwZmQzMjItNDg2NC00OTI0LWE1N2MtMzg5MDkyMWZmYzQxIiwiYXVkIjoiNzE3MGU0YTQtODgyZi00Y2ZlLWI5ZTEtMzA1NjRkNTQ4MmMxIiwianRpIjoiYzMwZGJiYzEtNTFkOS00NTE0LTg1YmEtZTcxYmM4Yzc4NjAxIn0.DjvUfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5","eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc4MjI1NjksImV4cCI6MTU3Nzg1MDI4NSwibmJmIjoxNTU4MDY0ODk1LCJpc3MiOiJBcm1zdHJvbmcgLSBPJ0Nvbm5lbGwiLCJzdWIiOiIyYjZlMjUxZS1lNGFkLTQ4ODMtODFlZS1hNTViZWVjYTEyZTkiLCJhdWQiOiIxYTAyOGJhMy1iMzViLTRhZGEtOTkxNS00M2Y2ZWFjODk3M2IiLCJqdGkiOiIwYTJmZmU1MC1lNmZmLTRkNDYtYWQ1Mi04ZWI5MTlmMjhlYmIifQ.miOORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK","eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3NTE2NDQsImV4cCI6MTU3Nzc2MTY3MywibmJmIjoxNTQ5MjAyMjc5LCJpc3MiOiJLcmFqY2lrIC0gS296ZXkiLCJzdWIiOiIyNjY5YTA1YS04ZGEyLTQxYTAtODlmOS02YTc4ZjZmZTMxMTAiLCJhdWQiOiJhMTVkMGQ0MS1iYWViLTRjNDItYmNjZi02NWM1ZWQ2Y2MxZTgiLCJqdGkiOiI1ZTYwZTE1Zi1mOWE3LTQ0NWEtOGNjYy0xNzA4N2U1MTJjOTEifQ.H4OH55ZnmOWZKn5MyqU6u0t377EKAXnhRdX0Y2TwZ4yYwDHsCAT2hWTsChbslA4Y"]|x});
-  ("fake/jwtargs", 1337, {x|["eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3NzMwMzksImV4cCI6MTU3Nzc4Njc1MCwibmJmIjoxNTYzODQyNzk2LCJpc3MiOiJHaWJzb24gYW5kIFNvbnMiLCJzdWIiOiJiMTZhMmY3Yy1jNTY5LTRjMzQtOGE3Mi02MzhkMmY2ODgwYmYiLCJhdWQiOiIyNWIwNTBjNS1iN2ZkLTQ5OWYtYjQwMS1mZjc1YjBjYTNhZTIiLCJqdGkiOiI1YjQ4Mjc3Ni1jN2JjLTQ1ZWItYWU2Ny1lYTgzZjhjMzY2ODIifQ.1eJVCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh","eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3NTU0MzUsImV4cCI6MTU3Nzc3MzE1MywibmJmIjoxNTg2NjY5MzQ1LCJpc3MiOiJLdXRjaCAtIEJhcnRvbGV0dGkiLCJzdWIiOiI4YTJiNjg5ZC1iYTAwLTQ4Y2ItYTM0My02YTQ0Y2Q4YjZkZDAiLCJhdWQiOiJiYmNlYTJiZi1lZDAwLTRiYmItODIxMi1kNjJhMDExYjk5ZGIiLCJqdGkiOiIxODU0OGJlNy04YzZiLTRmMzktYmIyZC1iYmRiYmFhZGQzYTIifQ.121Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBy","eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3ODYxOTcsImV4cCI6MTU3Nzg1ODQxNywibmJmIjoxNTgyOTYyODY3LCJpc3MiOiJaYm9uY2FrLCBKb2hucyBhbmQgTHVldHRnZW4iLCJzdWIiOiI5OWMzZWEwOS02NTNiLTRmNGEtYjY2MS00ZDE1YjY0ZmU5ZmYiLCJhdWQiOiI4Y2MyOTEzMi00NzQ4LTRkMzAtOWU1ZC1lYzE2NGE5ZTZkYTUiLCJqdGkiOiJiOWYzM2JhZS1lNDg2LTQxNDEtOWZlZC1mOWEzZTBhMGZlODkifQ.9P88lZtjfM9rR0KYeJNSHd5yyoxaaIZNaLiVto6v5G8tfZgA0BvtoTbHMJBHe5Ux"]|x});
-  ("fake/jwtargs", 7, {x|["eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3NTY5OTMsImV4cCI6MTU3NzgyNDM3OCwibmJmIjoxNTczOTUyMTQ3LCJpc3MiOiJLdXZhbGlzLCBLdXRjaCBhbmQgSG9tZW5pY2siLCJzdWIiOiIxNGUzN2UwOS1mMzhlLTQyOGMtOWE3My03NTc1ZGM1OTQ3NWEiLCJhdWQiOiI3YjZlMmI2Ni1hODYwLTQxYjgtYWJmYS0wNDkzZmZkN2QyNDciLCJqdGkiOiI3MjU1NDI2Ny1jYzg3LTRjZWEtYWNmMC1lNDdjYjJhMTVkNjkifQ.OL0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1g","eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3NzQzNTEsImV4cCI6MTU3Nzc4NDc3NSwibmJmIjoxNjAzNzQxMzE5LCJpc3MiOiJIZXNzZWwgLSBMZWJzYWNrIiwic3ViIjoiODViMjM1NjMtZWQxNS00Mzc0LWI4ZTYtYTljMGJmOTRhYmEyIiwiYXVkIjoiZjY5MGZkYWMtMzQzOS00MWU3LTk3MWEtZGEzYzJkOTQ4YTRkIiwianRpIjoiZWQxYTRjODctZTA4NS00MGM4LThlOTUtZjEwYjU1ZTVlYTUwIn0.Yp9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0","eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc4MDg2NDMsImV4cCI6MTU3NzgyMjk2MSwibmJmIjoxNTY3OTI2NjI3LCJpc3MiOiJSb2JlbCwgVm9sa21hbiBhbmQgR3JhaGFtIiwic3ViIjoiYjA4Y2IxZDMtYzcyYi00Y2JmLWE0MzItODY1NzQwNzQ3ZTJhIiwiYXVkIjoiNDdmNWJkNWYtYThiNi00YjRlLWI4MzYtZWM3NTZmMWVkMzU5IiwianRpIjoiZmY0Mzc4YTEtYWVlZi00ZWYwLThlNDUtN2Y5NTVlZDIzNTM5In0.zWQ6cpEnflcRHpHwwmuZMP7vm5o4eNGH4a166XTcfXzmsgAIvO7BZ9uDkXutT0R8"]|x});
-  ("fake/ipv4bad", 42, {x|[{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."}]|x});
-  ("fake/ipv4bad", 1337, {x|[{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."}]|x});
-  ("fake/ipv4bad", 7, {x|[{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."}]|x});
-  ("username/ascii", 42, {x|["Jane.Doe","Jane_Doe15","Jane.Doe"]|x});
-  ("username/ascii", 1337, {x|["Jane.Doe15","Jane.Doe","Jane.Doe"]|x});
-  ("username/ascii", 7, {x|["Jane.Doe77","Jane_Doe","Jane_Doe7"]|x});
-  ("username/ascii/first", 42, {x|["JaneDoe.Reynolds-Miller15","JaneDoe96","JaneDoe.Deckow"]|x});
-  ("username/ascii/first", 1337, {x|["JaneDoe.Gottlieb","JaneDoe.Reynolds-Buckridge62","JaneDoe_Schamberger"]|x});
-  ("username/ascii/first", 7, {x|["JaneDoe_Kessler","JaneDoe67","JaneDoe_Green"]|x});
-  ("email/ascii", 42, {x|["Jane_Doe@hotmail.com","Jane.Doe@gmail.com","Jane_Doe@hotmail.com"]|x});
-  ("email/ascii", 1337, {x|["Jane.Doe27@gmail.com","Jane_Doe@gmail.com","Jane.Doe@yahoo.com"]|x});
-  ("email/ascii", 7, {x|["Jane_Doe@gmail.com","Jane_Doe50@yahoo.com","Jane.Doe@gmail.com"]|x});
-  ("displayName/ascii", 42, {x|["Jane.Doe95","Jane15","Jane.Doe"]|x});
-  ("displayName/ascii", 1337, {x|["Jane15","Jane.Doe","Jane.Doe97"]|x});
-  ("displayName/ascii", 7, {x|["Jane.Doe","Jane_Doe","Jane7"]|x});
-  ("username/apos", 42, {x|["DAngelo.OBrien","DAngelo_OBrien15","DAngelo.OBrien"]|x});
-  ("username/apos", 1337, {x|["DAngelo.OBrien15","DAngelo.OBrien","DAngelo.OBrien"]|x});
-  ("username/apos", 7, {x|["DAngelo.OBrien77","DAngelo_OBrien","DAngelo_OBrien7"]|x});
-  ("username/apos/first", 42, {x|["DAngeloOBrien.Reynolds-Miller15","DAngeloOBrien96","DAngeloOBrien.Deckow"]|x});
-  ("username/apos/first", 1337, {x|["DAngeloOBrien.Gottlieb","DAngeloOBrien.Reynolds-Buckridge62","DAngeloOBrien_Schamberger"]|x});
-  ("username/apos/first", 7, {x|["DAngeloOBrien_Kessler","DAngeloOBrien67","DAngeloOBrien_Green"]|x});
-  ("email/apos", 42, {x|["DAngelo_OBrien@hotmail.com","DAngelo.OBrien@gmail.com","DAngelo_OBrien@hotmail.com"]|x});
-  ("email/apos", 1337, {x|["DAngelo.OBrien27@gmail.com","DAngelo_OBrien@gmail.com","DAngelo.OBrien@yahoo.com"]|x});
-  ("email/apos", 7, {x|["DAngelo_OBrien@gmail.com","DAngelo_OBrien50@yahoo.com","DAngelo.OBrien@gmail.com"]|x});
-  ("displayName/apos", 42, {x|["DAngelo.OBrien95","DAngelo15","DAngelo.OBrien"]|x});
-  ("displayName/apos", 1337, {x|["DAngelo15","DAngelo.OBrien","DAngelo.OBrien97"]|x});
-  ("displayName/apos", 7, {x|["DAngelo.OBrien","DAngelo_OBrien","DAngelo7"]|x});
-  ("username/space", 42, {x|["MaryAnn.VanderBerg","MaryAnn_VanderBerg15","MaryAnn.VanderBerg"]|x});
-  ("username/space", 1337, {x|["MaryAnn.VanderBerg15","MaryAnn.VanderBerg","MaryAnn.VanderBerg"]|x});
-  ("username/space", 7, {x|["MaryAnn.VanderBerg77","MaryAnn_VanderBerg","MaryAnn_VanderBerg7"]|x});
-  ("username/space/first", 42, {x|["MaryAnnVanderBerg.Reynolds-Miller15","MaryAnnVanderBerg96","MaryAnnVanderBerg.Deckow"]|x});
-  ("username/space/first", 1337, {x|["MaryAnnVanderBerg.Gottlieb","MaryAnnVanderBerg.Reynolds-Buckridge62","MaryAnnVanderBerg_Schamberger"]|x});
-  ("username/space/first", 7, {x|["MaryAnnVanderBerg_Kessler","MaryAnnVanderBerg67","MaryAnnVanderBerg_Green"]|x});
-  ("email/space", 42, {x|["MaryAnn_VanderBerg@hotmail.com","MaryAnn.VanderBerg@gmail.com","MaryAnn_VanderBerg@hotmail.com"]|x});
-  ("email/space", 1337, {x|["MaryAnn.VanderBerg27@gmail.com","MaryAnn_VanderBerg@gmail.com","MaryAnn.VanderBerg@yahoo.com"]|x});
-  ("email/space", 7, {x|["MaryAnn_VanderBerg@gmail.com","MaryAnn_VanderBerg50@yahoo.com","MaryAnn.VanderBerg@gmail.com"]|x});
-  ("displayName/space", 42, {x|["MaryAnn.VanderBerg95","MaryAnn15","MaryAnn.VanderBerg"]|x});
-  ("displayName/space", 1337, {x|["MaryAnn15","MaryAnn.VanderBerg","MaryAnn.VanderBerg97"]|x});
-  ("displayName/space", 7, {x|["MaryAnn.VanderBerg","MaryAnn_VanderBerg","MaryAnn7"]|x});
-  ("username/accent", 42, {x|["Jurgen.Muller-Ludenscheidt","Jurgen_Muller-Ludenscheidt15","Jurgen.Muller-Ludenscheidt"]|x});
-  ("username/accent", 1337, {x|["Jurgen.Muller-Ludenscheidt15","Jurgen.Muller-Ludenscheidt","Jurgen.Muller-Ludenscheidt"]|x});
-  ("username/accent", 7, {x|["Jurgen.Muller-Ludenscheidt77","Jurgen_Muller-Ludenscheidt","Jurgen_Muller-Ludenscheidt7"]|x});
-  ("username/accent/first", 42, {x|["JurgenMuller-Ludenscheidt.Reynolds-Miller15","JurgenMuller-Ludenscheidt96","JurgenMuller-Ludenscheidt.Deckow"]|x});
-  ("username/accent/first", 1337, {x|["JurgenMuller-Ludenscheidt.Gottlieb","JurgenMuller-Ludenscheidt.Reynolds-Buckridge62","JurgenMuller-Ludenscheidt_Schamberger"]|x});
-  ("username/accent/first", 7, {x|["JurgenMuller-Ludenscheidt_Kessler","JurgenMuller-Ludenscheidt67","JurgenMuller-Ludenscheidt_Green"]|x});
-  ("email/accent", 42, {x|["Jurgen_Muller-Ludenscheidt@hotmail.com","Jurgen.Muller-Ludenscheidt@gmail.com","Jurgen_Muller-Ludenscheidt@hotmail.com"]|x});
-  ("email/accent", 1337, {x|["Jurgen.Muller-Ludenscheidt27@gmail.com","Jurgen_Muller-Ludenscheidt@gmail.com","Jurgen.Muller-Ludenscheidt@yahoo.com"]|x});
-  ("email/accent", 7, {x|["Jurgen_Muller-Ludenscheidt@gmail.com","Jurgen_Muller-Ludenscheidt50@yahoo.com","Jurgen.Muller-Ludenscheidt@gmail.com"]|x});
-  ("displayName/accent", 42, {x|["Jürgen.Müller-Lüdenscheidt95","Jürgen15","Jürgen.Müller-Lüdenscheidt"]|x});
-  ("displayName/accent", 1337, {x|["Jürgen15","Jürgen.Müller-Lüdenscheidt","Jürgen.Müller-Lüdenscheidt97"]|x});
-  ("displayName/accent", 7, {x|["Jürgen.Müller-Lüdenscheidt","Jürgen_Müller-Lüdenscheidt","Jürgen7"]|x});
-  ("username/cyrillic", 42, {x|["Petr.Ivanov","Petr_Ivanov15","Petr.Ivanov"]|x});
-  ("username/cyrillic", 1337, {x|["Petr.Ivanov15","Petr.Ivanov","Petr.Ivanov"]|x});
-  ("username/cyrillic", 7, {x|["Petr.Ivanov77","Petr_Ivanov","Petr_Ivanov7"]|x});
-  ("username/cyrillic/first", 42, {x|["PetrIvanov.Reynolds-Miller15","PetrIvanov96","PetrIvanov.Deckow"]|x});
-  ("username/cyrillic/first", 1337, {x|["PetrIvanov.Gottlieb","PetrIvanov.Reynolds-Buckridge62","PetrIvanov_Schamberger"]|x});
-  ("username/cyrillic/first", 7, {x|["PetrIvanov_Kessler","PetrIvanov67","PetrIvanov_Green"]|x});
-  ("email/cyrillic", 42, {x|["Petr_Ivanov@hotmail.com","Petr.Ivanov@gmail.com","Petr_Ivanov@hotmail.com"]|x});
-  ("email/cyrillic", 1337, {x|["Petr.Ivanov27@gmail.com","Petr_Ivanov@gmail.com","Petr.Ivanov@yahoo.com"]|x});
-  ("email/cyrillic", 7, {x|["Petr_Ivanov@gmail.com","Petr_Ivanov50@yahoo.com","Petr.Ivanov@gmail.com"]|x});
-  ("displayName/cyrillic", 42, {x|["Пётр.Иванов95","Пётр15","Пётр.Иванов"]|x});
-  ("displayName/cyrillic", 1337, {x|["Пётр15","Пётр.Иванов","Пётр.Иванов97"]|x});
-  ("displayName/cyrillic", 7, {x|["Пётр.Иванов","Пётр_Иванов","Пётр7"]|x});
-  ("username/greek", 42, {x|["Alkistis.Papadopoyloy","Alkistis_Papadopoyloy15","Alkistis.Papadopoyloy"]|x});
-  ("username/greek", 1337, {x|["Alkistis.Papadopoyloy15","Alkistis.Papadopoyloy","Alkistis.Papadopoyloy"]|x});
-  ("username/greek", 7, {x|["Alkistis.Papadopoyloy77","Alkistis_Papadopoyloy","Alkistis_Papadopoyloy7"]|x});
-  ("username/greek/first", 42, {x|["AlkistisPapadopoyloy.Reynolds-Miller15","AlkistisPapadopoyloy96","AlkistisPapadopoyloy.Deckow"]|x});
-  ("username/greek/first", 1337, {x|["AlkistisPapadopoyloy.Gottlieb","AlkistisPapadopoyloy.Reynolds-Buckridge62","AlkistisPapadopoyloy_Schamberger"]|x});
-  ("username/greek/first", 7, {x|["AlkistisPapadopoyloy_Kessler","AlkistisPapadopoyloy67","AlkistisPapadopoyloy_Green"]|x});
-  ("email/greek", 42, {x|["Alkistis_Papadopoyloy@hotmail.com","Alkistis.Papadopoyloy@gmail.com","Alkistis_Papadopoyloy@hotmail.com"]|x});
-  ("email/greek", 1337, {x|["Alkistis.Papadopoyloy27@gmail.com","Alkistis_Papadopoyloy@gmail.com","Alkistis.Papadopoyloy@yahoo.com"]|x});
-  ("email/greek", 7, {x|["Alkistis_Papadopoyloy@gmail.com","Alkistis_Papadopoyloy50@yahoo.com","Alkistis.Papadopoyloy@gmail.com"]|x});
-  ("displayName/greek", 42, {x|["Άλκηστις.Παπαδοπούλου95","Άλκηστις15","Άλκηστις.Παπαδοπούλου"]|x});
-  ("displayName/greek", 1337, {x|["Άλκηστις15","Άλκηστις.Παπαδοπούλου","Άλκηστις.Παπαδοπούλου97"]|x});
-  ("displayName/greek", 7, {x|["Άλκηστις.Παπαδοπούλου","Άλκηστις_Παπαδοπούλου","Άλκηστις7"]|x});
-  ("username/cjk", 42, {x|["mtn.i6nk5q","mtn_i6nk5q15","mtn.i6nk5q"]|x});
-  ("username/cjk", 1337, {x|["mtn.i6nk5q15","mtn.i6nk5q","mtn.i6nk5q"]|x});
-  ("username/cjk", 7, {x|["mtn.i6nk5q77","mtn_i6nk5q","mtn_i6nk5q7"]|x});
-  ("username/cjk/first", 42, {x|["mtni6nk5q.Reynolds-Miller15","mtni6nk5q96","mtni6nk5q.Deckow"]|x});
-  ("username/cjk/first", 1337, {x|["mtni6nk5q.Gottlieb","mtni6nk5q.Reynolds-Buckridge62","mtni6nk5q_Schamberger"]|x});
-  ("username/cjk/first", 7, {x|["mtni6nk5q_Kessler","mtni6nk5q67","mtni6nk5q_Green"]|x});
-  ("email/cjk", 42, {x|["mtn_i6nk5q@hotmail.com","mtn.i6nk5q@gmail.com","mtn_i6nk5q@hotmail.com"]|x});
-  ("email/cjk", 1337, {x|["mtn.i6nk5q27@gmail.com","mtn_i6nk5q@gmail.com","mtn.i6nk5q@yahoo.com"]|x});
-  ("email/cjk", 7, {x|["mtn_i6nk5q@gmail.com","mtn_i6nk5q50@yahoo.com","mtn.i6nk5q@gmail.com"]|x});
-  ("displayName/cjk", 42, {x|["王.小明95","王15","王.小明"]|x});
-  ("displayName/cjk", 1337, {x|["王15","王.小明","王.小明97"]|x});
-  ("displayName/cjk", 7, {x|["王.小明","王_小明","王7"]|x});
-  ("username/kana", 42, {x|["9jp9jj9l5.9no9ni9mn9ll","9jp9jj9l5_9no9ni9mn9ll15","9jp9jj9l5.9no9ni9mn9ll"]|x});
-  ("username/kana", 1337, {x|["9jp9jj9l5.9no9ni9mn9ll15","9jp9jj9l5.9no9ni9mn9ll","9jp9jj9l5.9no9ni9mn9ll"]|x});
-  ("username/kana", 7, {x|["9jp9jj9l5.9no9ni9mn9ll77","9jp9jj9l5_9no9ni9mn9ll","9jp9jj9l5_9no9ni9mn9ll7"]|x});
-  ("username/kana/first", 42, {x|["9jp9jj9l59no9ni9mn9ll.Reynolds-Miller15","9jp9jj9l59no9ni9mn9ll96","9jp9jj9l59no9ni9mn9ll.Deckow"]|x});
-  ("username/kana/first", 1337, {x|["9jp9jj9l59no9ni9mn9ll.Gottlieb","9jp9jj9l59no9ni9mn9ll.Reynolds-Buckridge62","9jp9jj9l59no9ni9mn9ll_Schamberger"]|x});
-  ("username/kana/first", 7, {x|["9jp9jj9l59no9ni9mn9ll_Kessler","9jp9jj9l59no9ni9mn9ll67","9jp9jj9l59no9ni9mn9ll_Green"]|x});
-  ("email/kana", 42, {x|["9jp9jj9l5_9no9ni9mn9ll@hotmail.com","9jp9jj9l5.9no9ni9mn9ll@gmail.com","9jp9jj9l5_9no9ni9mn9ll@hotmail.com"]|x});
-  ("email/kana", 1337, {x|["9jp9jj9l5.9no9ni9mn9ll27@gmail.com","9jp9jj9l5_9no9ni9mn9ll@gmail.com","9jp9jj9l5.9no9ni9mn9ll@yahoo.com"]|x});
-  ("email/kana", 7, {x|["9jp9jj9l5_9no9ni9mn9ll@gmail.com","9jp9jj9l5_9no9ni9mn9ll50@yahoo.com","9jp9jj9l5.9no9ni9mn9ll@gmail.com"]|x});
-  ("displayName/kana", 42, {x|["さくら.ﾔﾏﾀﾞ95","さくら15","さくら.ﾔﾏﾀﾞ"]|x});
-  ("displayName/kana", 1337, {x|["さくら15","さくら.ﾔﾏﾀﾞ","さくら.ﾔﾏﾀﾞ97"]|x});
-  ("displayName/kana", 7, {x|["さくら.ﾔﾏﾀﾞ","さくら_ﾔﾏﾀﾞ","さくら7"]|x});
-  ("username/korean", 42, {x|["3cw3g53hz.3d23g53hn3d83fy3hn","3cw3g53hz_3d23g53hn3d83fy3hn15","3cw3g53hz.3d23g53hn3d83fy3hn"]|x});
-  ("username/korean", 1337, {x|["3cw3g53hz.3d23g53hn3d83fy3hn15","3cw3g53hz.3d23g53hn3d83fy3hn","3cw3g53hz.3d23g53hn3d83fy3hn"]|x});
-  ("username/korean", 7, {x|["3cw3g53hz.3d23g53hn3d83fy3hn77","3cw3g53hz_3d23g53hn3d83fy3hn","3cw3g53hz_3d23g53hn3d83fy3hn7"]|x});
-  ("username/korean/first", 42, {x|["3cw3g53hz3d23g53hn3d83fy3hn.Reynolds-Miller15","3cw3g53hz3d23g53hn3d83fy3hn96","3cw3g53hz3d23g53hn3d83fy3hn.Deckow"]|x});
-  ("username/korean/first", 1337, {x|["3cw3g53hz3d23g53hn3d83fy3hn.Gottlieb","3cw3g53hz3d23g53hn3d83fy3hn.Reynolds-Buckridge62","3cw3g53hz3d23g53hn3d83fy3hn_Schamberger"]|x});
-  ("username/korean/first", 7, {x|["3cw3g53hz3d23g53hn3d83fy3hn_Kessler","3cw3g53hz3d23g53hn3d83fy3hn67","3cw3g53hz3d23g53hn3d83fy3hn_Green"]|x});
-  ("email/korean", 42, {x|["3cw3g53hz_3d23g53hn3d83fy3hn@hotmail.com","3cw3g53hz.3d23g53hn3d83fy3hn@gmail.com","3cw3g53hz_3d23g53hn3d83fy3hn@hotmail.com"]|x});
-  ("email/korean", 1337, {x|["3cw3g53hz.3d23g53hn3d83fy3hn27@gmail.com","3cw3g53hz_3d23g53hn3d83fy3hn@gmail.com","3cw3g53hz.3d23g53hn3d83fy3hn@yahoo.com"]|x});
-  ("email/korean", 7, {x|["3cw3g53hz_3d23g53hn3d83fy3hn@gmail.com","3cw3g53hz_3d23g53hn3d83fy3hn50@yahoo.com","3cw3g53hz.3d23g53hn3d83fy3hn@gmail.com"]|x});
-  ("displayName/korean", 42, {x|["김.민준95","김15","김.민준"]|x});
-  ("displayName/korean", 1337, {x|["김15","김.민준","김.민준97"]|x});
-  ("displayName/korean", 7, {x|["김.민준","김_민준","김7"]|x});
-  ("username/arabic", 42, {x|["a18zdm.a191brahym","a18zdm_a191brahym15","a18zdm.a191brahym"]|x});
-  ("username/arabic", 1337, {x|["a18zdm.a191brahym15","a18zdm.a191brahym","a18zdm.a191brahym"]|x});
-  ("username/arabic", 7, {x|["a18zdm.a191brahym77","a18zdm_a191brahym","a18zdm_a191brahym7"]|x});
-  ("username/arabic/first", 42, {x|["a18zdma191brahym.Reynolds-Miller15","a18zdma191brahym96","a18zdma191brahym.Deckow"]|x});
-  ("username/arabic/first", 1337, {x|["a18zdma191brahym.Gottlieb","a18zdma191brahym.Reynolds-Buckridge62","a18zdma191brahym_Schamberger"]|x});
-  ("username/arabic/first", 7, {x|["a18zdma191brahym_Kessler","a18zdma191brahym67","a18zdma191brahym_Green"]|x});
-  ("email/arabic", 42, {x|["a18zdm_a191brahym@hotmail.com","a18zdm.a191brahym@gmail.com","a18zdm_a191brahym@hotmail.com"]|x});
-  ("email/arabic", 1337, {x|["a18zdm.a191brahym27@gmail.com","a18zdm_a191brahym@gmail.com","a18zdm.a191brahym@yahoo.com"]|x});
-  ("email/arabic", 7, {x|["a18zdm_a191brahym@gmail.com","a18zdm_a191brahym50@yahoo.com","a18zdm.a191brahym@gmail.com"]|x});
-  ("displayName/arabic", 42, {x|["آدم.إبراهيم95","آدم15","آدم.إبراهيم"]|x});
-  ("displayName/arabic", 1337, {x|["آدم15","آدم.إبراهيم","آدم.إبراهيم97"]|x});
-  ("displayName/arabic", 7, {x|["آدم.إبراهيم","آدم_إبراهيم","آدم7"]|x});
-  ("username/hebrew", 42, {x|["dvd.k14p14sh14ln","dvd_k14p14sh14ln15","dvd.k14p14sh14ln"]|x});
-  ("username/hebrew", 1337, {x|["dvd.k14p14sh14ln15","dvd.k14p14sh14ln","dvd.k14p14sh14ln"]|x});
-  ("username/hebrew", 7, {x|["dvd.k14p14sh14ln77","dvd_k14p14sh14ln","dvd_k14p14sh14ln7"]|x});
-  ("username/hebrew/first", 42, {x|["dvdk14p14sh14ln.Reynolds-Miller15","dvdk14p14sh14ln96","dvdk14p14sh14ln.Deckow"]|x});
-  ("username/hebrew/first", 1337, {x|["dvdk14p14sh14ln.Gottlieb","dvdk14p14sh14ln.Reynolds-Buckridge62","dvdk14p14sh14ln_Schamberger"]|x});
-  ("username/hebrew/first", 7, {x|["dvdk14p14sh14ln_Kessler","dvdk14p14sh14ln67","dvdk14p14sh14ln_Green"]|x});
-  ("email/hebrew", 42, {x|["dvd_k14p14sh14ln@hotmail.com","dvd.k14p14sh14ln@gmail.com","dvd_k14p14sh14ln@hotmail.com"]|x});
-  ("email/hebrew", 1337, {x|["dvd.k14p14sh14ln27@gmail.com","dvd_k14p14sh14ln@gmail.com","dvd.k14p14sh14ln@yahoo.com"]|x});
-  ("email/hebrew", 7, {x|["dvd_k14p14sh14ln@gmail.com","dvd_k14p14sh14ln50@yahoo.com","dvd.k14p14sh14ln@gmail.com"]|x});
-  ("displayName/hebrew", 42, {x|["דוד.כֹּהֵן95","דוד15","דוד.כֹּהֵן"]|x});
-  ("displayName/hebrew", 1337, {x|["דוד15","דוד.כֹּהֵן","דוד.כֹּהֵן97"]|x});
-  ("displayName/hebrew", 7, {x|["דוד.כֹּהֵן","דוד_כֹּהֵן","דוד7"]|x});
-  ("username/armenian", 42, {x|["Aram.Pyetrvosyan","Aram_Pyetrvosyan15","Aram.Pyetrvosyan"]|x});
-  ("username/armenian", 1337, {x|["Aram.Pyetrvosyan15","Aram.Pyetrvosyan","Aram.Pyetrvosyan"]|x});
-  ("username/armenian", 7, {x|["Aram.Pyetrvosyan77","Aram_Pyetrvosyan","Aram_Pyetrvosyan7"]|x});
-  ("username/armenian/first", 42, {x|["AramPyetrvosyan.Reynolds-Miller15","AramPyetrvosyan96","AramPyetrvosyan.Deckow"]|x});
-  ("username/armenian/first", 1337, {x|["AramPyetrvosyan.Gottlieb","AramPyetrvosyan.Reynolds-Buckridge62","AramPyetrvosyan_Schamberger"]|x});
-  ("username/armenian/first", 7, {x|["AramPyetrvosyan_Kessler","AramPyetrvosyan67","AramPyetrvosyan_Green"]|x});
-  ("email/armenian", 42, {x|["Aram_Pyetrvosyan@hotmail.com","Aram.Pyetrvosyan@gmail.com","Aram_Pyetrvosyan@hotmail.com"]|x});
-  ("email/armenian", 1337, {x|["Aram.Pyetrvosyan27@gmail.com","Aram_Pyetrvosyan@gmail.com","Aram.Pyetrvosyan@yahoo.com"]|x});
-  ("email/armenian", 7, {x|["Aram_Pyetrvosyan@gmail.com","Aram_Pyetrvosyan50@yahoo.com","Aram.Pyetrvosyan@gmail.com"]|x});
-  ("displayName/armenian", 42, {x|["Արամ.Պետրոսյան95","Արամ15","Արամ.Պետրոսյան"]|x});
-  ("displayName/armenian", 1337, {x|["Արամ15","Արամ.Պետրոսյան","Արամ.Պետրոսյան97"]|x});
-  ("displayName/armenian", 7, {x|["Արամ.Պետրոսյան","Արամ_Պետրոսյան","Արամ7"]|x});
-  ("username/emoji", 42, {x|["A2r5s.Bob","A2r5s_Bob15","A2r5s.Bob"]|x});
-  ("username/emoji", 1337, {x|["A2r5s.Bob15","A2r5s.Bob","A2r5s.Bob"]|x});
-  ("username/emoji", 7, {x|["A2r5s.Bob77","A2r5s_Bob","A2r5s_Bob7"]|x});
-  ("username/emoji/first", 42, {x|["A2r5sBob.Reynolds-Miller15","A2r5sBob96","A2r5sBob.Deckow"]|x});
-  ("username/emoji/first", 1337, {x|["A2r5sBob.Gottlieb","A2r5sBob.Reynolds-Buckridge62","A2r5sBob_Schamberger"]|x});
-  ("username/emoji/first", 7, {x|["A2r5sBob_Kessler","A2r5sBob67","A2r5sBob_Green"]|x});
-  ("email/emoji", 42, {x|["A2r5s_Bob@hotmail.com","A2r5s.Bob@gmail.com","A2r5s_Bob@hotmail.com"]|x});
-  ("email/emoji", 1337, {x|["A2r5s.Bob27@gmail.com","A2r5s_Bob@gmail.com","A2r5s.Bob@yahoo.com"]|x});
-  ("email/emoji", 7, {x|["A2r5s_Bob@gmail.com","A2r5s_Bob50@yahoo.com","A2r5s.Bob@gmail.com"]|x});
-  ("displayName/emoji", 42, {x|["A😀.𝐁𝐨𝐛95","A😀15","A😀.𝐁𝐨𝐛"]|x});
-  ("displayName/emoji", 1337, {x|["A😀15","A😀.𝐁𝐨𝐛","A😀.𝐁𝐨𝐛97"]|x});
-  ("displayName/emoji", 7, {x|["A😀.𝐁𝐨𝐛","A😀_𝐁𝐨𝐛","A😀7"]|x});
-  ("username/specialchars", 42, {x|["a!b#c$d...x..y..","a!b#c$d_..x..y..15","a!b#c$d...x..y.."]|x});
-  ("username/specialchars", 1337, {x|["a!b#c$d...x..y..15","a!b#c$d...x..y..","a!b#c$d...x..y.."]|x});
-  ("username/specialchars", 7, {x|["a!b#c$d...x..y..77","a!b#c$d_..x..y..","a!b#c$d_..x..y..7"]|x});
-  ("username/specialchars/first", 42, {x|["a!b#c$d..x..y...Reynolds-Miller15","a!b#c$d..x..y..96","a!b#c$d..x..y...Deckow"]|x});
-  ("username/specialchars/first", 1337, {x|["a!b#c$d..x..y...Gottlieb","a!b#c$d..x..y...Reynolds-Buckridge62","a!b#c$d..x..y.._Schamberger"]|x});
-  ("username/specialchars/first", 7, {x|["a!b#c$d..x..y.._Kessler","a!b#c$d..x..y..67","a!b#c$d..x..y.._Green"]|x});
-  ("email/specialchars", 42, {x|["abcd_.x.y@hotmail.com","abcd.x.y@gmail.com","abcd_.x.y@hotmail.com"]|x});
-  ("email/specialchars", 1337, {x|["abcd.x.y.27@gmail.com","abcd_.x.y@gmail.com","abcd.x.y@yahoo.com"]|x});
-  ("email/specialchars", 7, {x|["abcd_.x.y@gmail.com","abcd_.x.y.50@yahoo.com","abcd.x.y@gmail.com"]|x});
-  ("displayName/specialchars", 42, {x|["a!b#c$d...x..y..95","a!b#c$d15","a!b#c$d...x..y.."]|x});
-  ("displayName/specialchars", 1337, {x|["a!b#c$d15","a!b#c$d...x..y..","a!b#c$d...x..y..97"]|x});
-  ("displayName/specialchars", 7, {x|["a!b#c$d...x..y..","a!b#c$d_..x..y..","a!b#c$d7"]|x});
-  ("username/long", 42, {x|["Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff","Bartholomew-Maximilian-Alexander_Wolfeschlegelsteinhausenbergerdorff15","Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff"]|x});
-  ("username/long", 1337, {x|["Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff15","Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff","Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff"]|x});
-  ("username/long", 7, {x|["Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff77","Bartholomew-Maximilian-Alexander_Wolfeschlegelsteinhausenbergerdorff","Bartholomew-Maximilian-Alexander_Wolfeschlegelsteinhausenbergerdorff7"]|x});
-  ("username/long/first", 42, {x|["Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff.Reynolds-Miller15","Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff96","Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff.Deckow"]|x});
-  ("username/long/first", 1337, {x|["Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff.Gottlieb","Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff.Reynolds-Buckridge62","Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff_Schamberger"]|x});
-  ("username/long/first", 7, {x|["Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff_Kessler","Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff67","Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff_Green"]|x});
-  ("email/long", 42, {x|["Bartholomew-Maximilian-Alexander_Wolfeschlegelstei@hotmail.com","Bartholomew-Maximilian-Alexander.Wolfeschlegelstei@gmail.com","Bartholomew-Maximilian-Alexander_Wolfeschlegelstei@hotmail.com"]|x});
-  ("email/long", 1337, {x|["Bartholomew-Maximilian-Alexander.Wolfeschlegelstei@gmail.com","Bartholomew-Maximilian-Alexander_Wolfeschlegelstei@gmail.com","Bartholomew-Maximilian-Alexander.Wolfeschlegelstei@yahoo.com"]|x});
-  ("email/long", 7, {x|["Bartholomew-Maximilian-Alexander_Wolfeschlegelstei@gmail.com","Bartholomew-Maximilian-Alexander_Wolfeschlegelstei@yahoo.com","Bartholomew-Maximilian-Alexander.Wolfeschlegelstei@gmail.com"]|x});
-  ("displayName/long", 42, {x|["Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff95","Bartholomew-Maximilian-Alexander15","Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff"]|x});
-  ("displayName/long", 1337, {x|["Bartholomew-Maximilian-Alexander15","Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff","Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff97"]|x});
-  ("displayName/long", 7, {x|["Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff","Bartholomew-Maximilian-Alexander_Wolfeschlegelsteinhausenbergerdorff","Bartholomew-Maximilian-Alexander7"]|x});
-  ("username/ligature", 42, {x|["fiona.XII1","fiona_XII115","fiona.XII1"]|x});
-  ("username/ligature", 1337, {x|["fiona.XII115","fiona.XII1","fiona.XII1"]|x});
-  ("username/ligature", 7, {x|["fiona.XII177","fiona_XII1","fiona_XII17"]|x});
-  ("username/ligature/first", 42, {x|["fionaXII1.Reynolds-Miller15","fionaXII196","fionaXII1.Deckow"]|x});
-  ("username/ligature/first", 1337, {x|["fionaXII1.Gottlieb","fionaXII1.Reynolds-Buckridge62","fionaXII1_Schamberger"]|x});
-  ("username/ligature/first", 7, {x|["fionaXII1_Kessler","fionaXII167","fionaXII1_Green"]|x});
-  ("email/ligature", 42, {x|["fiona_XII1@hotmail.com","fiona.XII1@gmail.com","fiona_XII1@hotmail.com"]|x});
-  ("email/ligature", 1337, {x|["fiona.XII127@gmail.com","fiona_XII1@gmail.com","fiona.XII1@yahoo.com"]|x});
-  ("email/ligature", 7, {x|["fiona_XII1@gmail.com","fiona_XII150@yahoo.com","fiona.XII1@gmail.com"]|x});
-  ("displayName/ligature", 42, {x|["ﬁona.Ⅻ①95","ﬁona15","ﬁona.Ⅻ①"]|x});
-  ("displayName/ligature", 1337, {x|["ﬁona15","ﬁona.Ⅻ①","ﬁona.Ⅻ①97"]|x});
-  ("displayName/ligature", 7, {x|["ﬁona.Ⅻ①","ﬁona_Ⅻ①","ﬁona7"]|x});
-]
+let cases =
+  [
+    ( "email",
+      42,
+      {x|["Kevin60@hotmail.com","Daniel_Gutmann43@gmail.com","Georgianna_Dooley59@hotmail.com"]|x}
+    );
+    ( "email",
+      1337,
+      {x|["Jennie_Gibson73@gmail.com","Willy.Schimmel@hotmail.com","Marcella53@yahoo.com"]|x}
+    );
+    ( "email",
+      7,
+      {x|["Nathanial.Kuvalis@gmail.com","Arthur.Effertz93@yahoo.com","Jonas_Ledner@hotmail.com"]|x}
+    );
+    ( "email/first",
+      42,
+      {x|["Jane.Miller15@hotmail.com","Jane_Aufderhar83@yahoo.com","Jane.Leffler@gmail.com"]|x}
+    );
+    ( "email/first",
+      1337,
+      {x|["Jane.Koelpin51@gmail.com","Jane12@yahoo.com","Jane58@hotmail.com"]|x}
+    );
+    ( "email/first",
+      7,
+      {x|["Jane_Reilly@gmail.com","Jane_Parisian38@gmail.com","Jane_Klein@gmail.com"]|x}
+    );
+    ( "email/last",
+      42,
+      {x|["Kevin.Doe15@hotmail.com","Al_Doe83@yahoo.com","Kaylee.Doe@gmail.com"]|x}
+    );
+    ( "email/last",
+      1337,
+      {x|["Jennie.Doe51@gmail.com","Garth_Doe@yahoo.com","Ford.Doe@hotmail.com"]|x}
+    );
+    ( "email/last",
+      7,
+      {x|["Nathanial_Doe@gmail.com","Maria_Doe38@gmail.com","Horace_Doe@gmail.com"]|x}
+    );
+    ( "email/provider",
+      42,
+      {x|["Nikita.Crist@example.fakerjs.dev","Werner.Deckow@example.fakerjs.dev","Lola.Hilll78@example.fakerjs.dev"]|x}
+    );
+    ( "email/provider",
+      1337,
+      {x|["Elda97@example.fakerjs.dev","Ludie_Kihn-Schamberger@example.fakerjs.dev","Constantin.Kutch41@example.fakerjs.dev"]|x}
+    );
+    ( "email/provider",
+      7,
+      {x|["Janae.Lind-Kuvalis@example.fakerjs.dev","Garett45@example.fakerjs.dev","Valentina52@example.fakerjs.dev"]|x}
+    );
+    ( "email/special",
+      42,
+      {x|["Kevin60@hotmail.com","Cecilia*Kemmer61@yahoo.com","Jedediah6@hotmail.com"]|x}
+    );
+    ( "email/special",
+      1337,
+      {x|["Jennie?Gibson73@gmail.com","Quinten_Johns76@gmail.com","Chyna.Denesik@hotmail.com"]|x}
+    );
+    ( "email/special",
+      7,
+      {x|["Nathanial.Kuvalis@gmail.com","Susan60@hotmail.com","Myah.Doyle@yahoo.com"]|x}
+    );
+    ( "email/special-names",
+      42,
+      {x|["Jane_Doe@hotmail.com","Jane_Doe@gmail.com","Jane/Doe18@yahoo.com"]|x}
+    );
+    ( "email/special-names",
+      1337,
+      {x|["Jane/Doe27@gmail.com","Jane?Doe73@gmail.com","Jane_Doe@gmail.com"]|x}
+    );
+    ( "email/special-names",
+      7,
+      {x|["Jane_Doe@gmail.com","Jane.Doe26@hotmail.com","Jane-Doe@hotmail.com"]|x}
+    );
+    ( "email/dots",
+      42,
+      {x|["Jane._@hotmail.com","Jane@gmail.com","Jane._@hotmail.com"]|x} );
+    ( "email/dots",
+      1337,
+      {x|["Jane.27@gmail.com","Jane._@gmail.com","Jane@yahoo.com"]|x} );
+    ( "email/dots",
+      7,
+      {x|["Jane._@gmail.com","Jane._.50@yahoo.com","Jane@gmail.com"]|x} );
+    ( "email/emptylast",
+      42,
+      {x|["Jane_@hotmail.com","Jane5@gmail.com","Jane2@hotmail.com"]|x} );
+    ( "email/emptylast",
+      1337,
+      {x|["Jane@gmail.com","Jane26@gmail.com","Jane@yahoo.com"]|x} );
+    ( "email/emptylast",
+      7,
+      {x|["Jane43@gmail.com","Jane_50@yahoo.com","Jane67@gmail.com"]|x} );
+    ( "exampleEmail",
+      42,
+      {x|["Kevin60@example.net","Daniel_Gutmann43@example.com","Georgianna_Dooley59@example.net"]|x}
+    );
+    ( "exampleEmail",
+      1337,
+      {x|["Jennie_Gibson73@example.com","Willy.Schimmel@example.net","Marcella53@example.org"]|x}
+    );
+    ( "exampleEmail",
+      7,
+      {x|["Nathanial.Kuvalis@example.com","Arthur.Effertz93@example.org","Jonas_Ledner@example.net"]|x}
+    );
+    ( "exampleEmail/names",
+      42,
+      {x|["Jane_Doe@example.net","Jane.Doe@example.com","Jane_Doe@example.net"]|x}
+    );
+    ( "exampleEmail/names",
+      1337,
+      {x|["Jane.Doe27@example.com","Jane_Doe@example.com","Jane.Doe@example.org"]|x}
+    );
+    ( "exampleEmail/names",
+      7,
+      {x|["Jane_Doe@example.com","Jane_Doe50@example.org","Jane.Doe@example.com"]|x}
+    );
+    ( "exampleEmail/special",
+      42,
+      {x|["Kevin60@example.net","Cecilia*Kemmer61@example.org","Jedediah6@example.net"]|x}
+    );
+    ( "exampleEmail/special",
+      1337,
+      {x|["Jennie?Gibson73@example.com","Quinten_Johns76@example.com","Chyna.Denesik@example.net"]|x}
+    );
+    ( "exampleEmail/special",
+      7,
+      {x|["Nathanial.Kuvalis@example.com","Susan60@example.net","Myah.Doyle@example.org"]|x}
+    );
+    ("username", 42, {x|["Nikita.Crist","Werner.Deckow","Lola.Hilll78"]|x});
+    ( "username",
+      1337,
+      {x|["Elda97","Ludie_Kihn-Schamberger","Constantin.Kutch41"]|x} );
+    ("username", 7, {x|["Janae.Lind-Kuvalis","Garett45","Valentina52"]|x});
+    ( "username/first",
+      42,
+      {x|["Jane.Reynolds-Miller15","Jane96","Jane.Deckow"]|x} );
+    ( "username/first",
+      1337,
+      {x|["Jane.Gottlieb","Jane.Reynolds-Buckridge62","Jane_Schamberger"]|x} );
+    ("username/first", 7, {x|["Jane_Kessler","Jane67","Jane_Green"]|x});
+    ("username/last", 42, {x|["Nikita_Doe15","Lilliana_Doe","Collin.Doe"]|x});
+    ("username/last", 1337, {x|["Elda.Doe","Nova.Doe","Jayme_Doe79"]|x});
+    ("username/last", 7, {x|["Janae_Doe","Domenick.Doe","Elise_Doe21"]|x});
+    ("username/emptylast", 42, {x|["Jane95","Jane_15","Jane."]|x});
+    ("username/emptylast", 1337, {x|["Jane.15","Jane.","Jane97"]|x});
+    ("username/emptylast", 7, {x|["Jane.","Jane_","Jane_7"]|x});
+    ("displayName", 42, {x|["Nikita.Crist","Werner.Deckow","Lola78"]|x});
+    ( "displayName",
+      1337,
+      {x|["Elda.Leannon97","Ludie_Kihn-Schamberger","Constantin41"]|x} );
+    ( "displayName",
+      7,
+      {x|["Janae.Lind-Kuvalis","Garett.Vandervort45","Valentina.Vandervort52"]|x}
+    );
+    ("displayName/first", 42, {x|["Jane15","Jane.Quigley96","Jane.Deckow"]|x});
+    ( "displayName/first",
+      1337,
+      {x|["Jane.Gottlieb","Jane62","Jane_Schamberger"]|x} );
+    ( "displayName/first",
+      7,
+      {x|["Jane_Kessler","Jane.Gleichner67","Jane_Green"]|x} );
+    ("displayName/last", 42, {x|["Nikita15","Lilliana_Doe2","Collin.Doe"]|x});
+    ("displayName/last", 1337, {x|["Elda.Doe","Nova.Doe","Jayme_Doe"]|x});
+    ("displayName/last", 7, {x|["Janae_Doe","Domenick.Doe67","Elise_Doe"]|x});
+    ("protocol", 42, {x|["http","https","https"]|x});
+    ("protocol", 1337, {x|["http","http","http"]|x});
+    ("protocol", 7, {x|["http","https","http"]|x});
+    ("httpMethod", 42, {x|["POST","PATCH","DELETE"]|x});
+    ("httpMethod", 1337, {x|["POST","GET","POST"]|x});
+    ("httpMethod", 7, {x|["GET","DELETE","PUT"]|x});
+    ("httpStatusCode", 42, {x|[226,417,100]|x});
+    ("httpStatusCode", 1337, {x|[201,204,205]|x});
+    ("httpStatusCode", 7, {x|[103,306,505]|x});
+    ("httpStatusCode/success", 42, {x|[203,226,207]|x});
+    ("httpStatusCode/success", 1337, {x|[202,201,202]|x});
+    ("httpStatusCode/success", 7, {x|[200,207,204]|x});
+    ("httpStatusCode/errors", 42, {x|[431,506,404]|x});
+    ("httpStatusCode/errors", 1337, {x|[404,413,415]|x});
+    ("httpStatusCode/errors", 7, {x|[424,422,505]|x});
+    ("httpStatusCode/all", 42, {x|[226,506,100]|x});
+    ("httpStatusCode/all", 1337, {x|[201,204,205]|x});
+    ("httpStatusCode/all", 7, {x|[103,422,304]|x});
+    ( "httpStatusCode/empty",
+      42,
+      {x|[{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."}]|x}
+    );
+    ( "httpStatusCode/empty",
+      1337,
+      {x|[{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."}]|x}
+    );
+    ( "httpStatusCode/empty",
+      7,
+      {x|[{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."}]|x}
+    );
+    ( "url",
+      42,
+      {x|["https://weird-rawhide.name/","https://crushing-backburn.org/","https://scaly-agreement.org"]|x}
+    );
+    ( "url",
+      1337,
+      {x|["https://cumbersome-duster.info/","https://minty-diver.org/","https://clean-governance.name"]|x}
+    );
+    ( "url",
+      7,
+      {x|["https://sparkling-hundred.net/","https://narrow-knight.biz","https://marvelous-platter.net/"]|x}
+    );
+    ( "url/slash",
+      42,
+      {x|["https://hospitable-unit.net/","https://pastel-cleaner.biz/","https://baggy-substitution.name/"]|x}
+    );
+    ( "url/slash",
+      1337,
+      {x|["https://fatal-co-producer.com/","https://lawful-feather.name/","https://fat-wallaby.net/"]|x}
+    );
+    ( "url/slash",
+      7,
+      {x|["https://blushing-saw.info/","https://separate-warming.name/","https://mature-bell.com/"]|x}
+    );
+    ( "url/noslash",
+      42,
+      {x|["https://hospitable-unit.net","https://pastel-cleaner.biz","https://baggy-substitution.name"]|x}
+    );
+    ( "url/noslash",
+      1337,
+      {x|["https://fatal-co-producer.com","https://lawful-feather.name","https://fat-wallaby.net"]|x}
+    );
+    ( "url/noslash",
+      7,
+      {x|["https://blushing-saw.info","https://separate-warming.name","https://mature-bell.com"]|x}
+    );
+    ( "url/http",
+      42,
+      {x|["http://weird-rawhide.name/","http://crushing-backburn.org/","http://scaly-agreement.org"]|x}
+    );
+    ( "url/http",
+      1337,
+      {x|["http://cumbersome-duster.info/","http://minty-diver.org/","http://clean-governance.name"]|x}
+    );
+    ( "url/http",
+      7,
+      {x|["http://sparkling-hundred.net/","http://narrow-knight.biz","http://marvelous-platter.net/"]|x}
+    );
+    ( "url/https",
+      42,
+      {x|["https://hospitable-unit.net/","https://pastel-cleaner.biz/","https://baggy-substitution.name/"]|x}
+    );
+    ( "url/https",
+      1337,
+      {x|["https://fatal-co-producer.com/","https://lawful-feather.name/","https://fat-wallaby.net/"]|x}
+    );
+    ( "url/https",
+      7,
+      {x|["https://blushing-saw.info/","https://separate-warming.name/","https://mature-bell.com/"]|x}
+    );
+    ( "domainName",
+      42,
+      {x|["hospitable-unit.net","pastel-cleaner.biz","baggy-substitution.name"]|x}
+    );
+    ( "domainName",
+      1337,
+      {x|["fatal-co-producer.com","lawful-feather.name","fat-wallaby.net"]|x} );
+    ( "domainName",
+      7,
+      {x|["blushing-saw.info","separate-warming.name","mature-bell.com"]|x} );
+    ("domainSuffix", 42, {x|["info","org","net"]|x});
+    ("domainSuffix", 1337, {x|["com","biz","com"]|x});
+    ("domainSuffix", 7, {x|["biz","net","info"]|x});
+    ( "domainWord",
+      42,
+      {x|["hospitable-unit","shameful-negotiation","cuddly-clavicle"]|x} );
+    ( "domainWord",
+      1337,
+      {x|["fatal-co-producer","flickering-in-joke","gloomy-legend"]|x} );
+    ("domainWord", 7, {x|["blushing-saw","jittery-puritan","woeful-lyre"]|x});
+    ( "ip",
+      42,
+      {x|["243.98.3.69","d331:ddf0:fc44:46b9:6d36:8ab4:bd1d:31ef","62f9:2a0e:5e6b:c4fb:edde:1407:85c7:6b3b"]|x}
+    );
+    ("ip", 1337, {x|["40.159.131.70","117.149.202.161","132.181.100.82"]|x});
+    ( "ip",
+      7,
+      {x|["199.168.194.10","185.53.3.142","bb15:aeb8:16e4:9e0d:e5ce:2bae:a4a8:a8ca"]|x}
+    );
+    ("ipv4", 42, {x|["95.225.220.121","243.98.3.69","187.99.244.120"]|x});
+    ("ipv4", 1337, {x|["67.20.12.145","40.159.131.70","71.51.76.177"]|x});
+    ("ipv4", 7, {x|["19.136.240.167","199.168.194.10","112.59.150.95"]|x});
+    ("ipv4/any", 42, {x|["95.225.220.121","243.98.3.69","187.99.244.120"]|x});
+    ("ipv4/any", 1337, {x|["67.20.12.145","40.159.131.70","71.51.76.177"]|x});
+    ("ipv4/any", 7, {x|["19.136.240.167","199.168.194.10","112.59.150.95"]|x});
+    ( "ipv4/loopback",
+      42,
+      {x|["127.95.225.220","127.243.98.3","127.187.99.244"]|x} );
+    ( "ipv4/loopback",
+      1337,
+      {x|["127.67.20.12","127.40.159.131","127.71.51.76"]|x} );
+    ( "ipv4/loopback",
+      7,
+      {x|["127.19.136.240","127.199.168.194","127.112.59.150"]|x} );
+    ("ipv4/private-a", 42, {x|["10.95.225.220","10.243.98.3","10.187.99.244"]|x});
+    ("ipv4/private-a", 1337, {x|["10.67.20.12","10.40.159.131","10.71.51.76"]|x});
+    ( "ipv4/private-a",
+      7,
+      {x|["10.19.136.240","10.199.168.194","10.112.59.150"]|x} );
+    ( "ipv4/private-b",
+      42,
+      {x|["172.21.254.29","172.31.54.32","172.27.182.63"]|x} );
+    ( "ipv4/private-b",
+      1337,
+      {x|["172.20.49.64","172.18.137.248","172.20.115.52"]|x} );
+    ( "ipv4/private-b",
+      7,
+      {x|["172.17.56.143","172.28.122.140","172.23.3.185"]|x} );
+    ( "ipv4/private-c",
+      42,
+      {x|["192.168.95.225","192.168.243.98","192.168.187.99"]|x} );
+    ( "ipv4/private-c",
+      1337,
+      {x|["192.168.67.20","192.168.40.159","192.168.71.51"]|x} );
+    ( "ipv4/private-c",
+      7,
+      {x|["192.168.19.136","192.168.199.168","192.168.112.59"]|x} );
+    ("ipv4/test-net-1", 42, {x|["192.0.2.95","192.0.2.243","192.0.2.187"]|x});
+    ("ipv4/test-net-1", 1337, {x|["192.0.2.67","192.0.2.40","192.0.2.71"]|x});
+    ("ipv4/test-net-1", 7, {x|["192.0.2.19","192.0.2.199","192.0.2.112"]|x});
+    ( "ipv4/test-net-2",
+      42,
+      {x|["198.51.100.95","198.51.100.243","198.51.100.187"]|x} );
+    ( "ipv4/test-net-2",
+      1337,
+      {x|["198.51.100.67","198.51.100.40","198.51.100.71"]|x} );
+    ( "ipv4/test-net-2",
+      7,
+      {x|["198.51.100.19","198.51.100.199","198.51.100.112"]|x} );
+    ( "ipv4/test-net-3",
+      42,
+      {x|["203.0.113.95","203.0.113.243","203.0.113.187"]|x} );
+    ( "ipv4/test-net-3",
+      1337,
+      {x|["203.0.113.67","203.0.113.40","203.0.113.71"]|x} );
+    ( "ipv4/test-net-3",
+      7,
+      {x|["203.0.113.19","203.0.113.199","203.0.113.112"]|x} );
+    ( "ipv4/link-local",
+      42,
+      {x|["169.254.95.225","169.254.243.98","169.254.187.99"]|x} );
+    ( "ipv4/link-local",
+      1337,
+      {x|["169.254.67.20","169.254.40.159","169.254.71.51"]|x} );
+    ( "ipv4/link-local",
+      7,
+      {x|["169.254.19.136","169.254.199.168","169.254.112.59"]|x} );
+    ( "ipv4/multicast",
+      42,
+      {x|["229.254.29.199","239.54.32.52","235.182.63.71"]|x} );
+    ( "ipv4/multicast",
+      1337,
+      {x|["228.49.64.201","226.137.248.52","228.115.52.203"]|x} );
+    ( "ipv4/multicast",
+      7,
+      {x|["225.56.143.10","236.122.140.32","231.3.185.101"]|x} );
+    ( "ipv4/cidr:192.168.1.0/24",
+      42,
+      {x|["192.168.1.95","192.168.1.243","192.168.1.187"]|x} );
+    ( "ipv4/cidr:192.168.1.0/24",
+      1337,
+      {x|["192.168.1.67","192.168.1.40","192.168.1.71"]|x} );
+    ( "ipv4/cidr:192.168.1.0/24",
+      7,
+      {x|["192.168.1.19","192.168.1.199","192.168.1.112"]|x} );
+    ("ipv4/cidr:10.0.0.1/32", 42, {x|["10.0.0.1","10.0.0.1","10.0.0.1"]|x});
+    ("ipv4/cidr:10.0.0.1/32", 1337, {x|["10.0.0.1","10.0.0.1","10.0.0.1"]|x});
+    ("ipv4/cidr:10.0.0.1/32", 7, {x|["10.0.0.1","10.0.0.1","10.0.0.1"]|x});
+    ("ipv4/cidr:010.0.0.1/32", 42, {x|["010.0.0.1","010.0.0.1","010.0.0.1"]|x});
+    ("ipv4/cidr:010.0.0.1/32", 1337, {x|["010.0.0.1","010.0.0.1","010.0.0.1"]|x});
+    ("ipv4/cidr:010.0.0.1/32", 7, {x|["010.0.0.1","010.0.0.1","010.0.0.1"]|x});
+    ( "ipv4/cidr:0.0.0.0/0",
+      42,
+      {x|["95.225.220.121","243.98.3.69","187.99.244.120"]|x} );
+    ( "ipv4/cidr:0.0.0.0/0",
+      1337,
+      {x|["67.20.12.145","40.159.131.70","71.51.76.177"]|x} );
+    ( "ipv4/cidr:0.0.0.0/0",
+      7,
+      {x|["19.136.240.167","199.168.194.10","112.59.150.95"]|x} );
+    ( "ipv4/cidr:255.255.255.255/31",
+      42,
+      {x|["255.255.255.254","255.255.255.255","255.255.255.255"]|x} );
+    ( "ipv4/cidr:255.255.255.255/31",
+      1337,
+      {x|["255.255.255.254","255.255.255.254","255.255.255.254"]|x} );
+    ( "ipv4/cidr:255.255.255.255/31",
+      7,
+      {x|["255.255.255.254","255.255.255.255","255.255.255.254"]|x} );
+    ( "ipv4/cidr:255.255.255.255/1",
+      42,
+      {x|["175.240.238.60","249.177.1.162","221.177.250.60"]|x} );
+    ( "ipv4/cidr:255.255.255.255/1",
+      1337,
+      {x|["161.138.6.72","148.79.193.163","163.153.166.88"]|x} );
+    ( "ipv4/cidr:255.255.255.255/1",
+      7,
+      {x|["137.196.120.83","227.212.97.5","184.29.203.47"]|x} );
+    ( "ipv4/cidr:128.0.0.0/1",
+      42,
+      {x|["175.240.238.60","249.177.1.162","221.177.250.60"]|x} );
+    ( "ipv4/cidr:128.0.0.0/1",
+      1337,
+      {x|["161.138.6.72","148.79.193.163","163.153.166.88"]|x} );
+    ( "ipv4/cidr:128.0.0.0/1",
+      7,
+      {x|["137.196.120.83","227.212.97.5","184.29.203.47"]|x} );
+    ( "ipv4/cidr:172.31.255.7/30",
+      42,
+      {x|["172.31.255.5","172.31.255.7","172.31.255.6"]|x} );
+    ( "ipv4/cidr:172.31.255.7/30",
+      1337,
+      {x|["172.31.255.5","172.31.255.4","172.31.255.5"]|x} );
+    ( "ipv4/cidr:172.31.255.7/30",
+      7,
+      {x|["172.31.255.4","172.31.255.7","172.31.255.5"]|x} );
+    ( "ipv4/cidr:1.2.3.4/9",
+      42,
+      {x|["1.47.240.238","1.121.177.1","1.93.177.250"]|x} );
+    ( "ipv4/cidr:1.2.3.4/9",
+      1337,
+      {x|["1.33.138.6","1.20.79.193","1.35.153.166"]|x} );
+    ("ipv4/cidr:1.2.3.4/9", 7, {x|["1.9.196.120","1.99.212.97","1.56.29.203"]|x});
+    ( "ipv4/cidr:abc",
+      42,
+      {x|[{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:abc",
+      1337,
+      {x|[{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:abc",
+      7,
+      {x|[{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: abc. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/33",
+      42,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/33",
+      1337,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/33",
+      7,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/33. Prefix length must be between 0 and 32."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/99",
+      42,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/99",
+      1337,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/99",
+      7,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."},{"error":"Invalid CIDR block provided: 1.2.3.4/99. Prefix length must be between 0 and 32."}]|x}
+    );
+    ( "ipv4/cidr:256.0.0.0/8",
+      42,
+      {x|[{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."},{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."},{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."}]|x}
+    );
+    ( "ipv4/cidr:256.0.0.0/8",
+      1337,
+      {x|[{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."},{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."},{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."}]|x}
+    );
+    ( "ipv4/cidr:256.0.0.0/8",
+      7,
+      {x|[{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."},{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."},{"error":"Invalid CIDR block provided: 256.0.0.0/8. Each octet must be between 0 and 255."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3/8",
+      42,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3/8",
+      1337,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3/8",
+      7,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3/8. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4",
+      42,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4",
+      1337,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4",
+      7,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/",
+      42,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/",
+      1337,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/",
+      7,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/123",
+      42,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/123",
+      1337,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/123",
+      7,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/123. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1234.0.0.0/8",
+      42,
+      {x|[{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1234.0.0.0/8",
+      1337,
+      {x|[{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1234.0.0.0/8",
+      7,
+      {x|[{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1234.0.0.0/8. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr: 1.2.3.4/8",
+      42,
+      {x|[{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr: 1.2.3.4/8",
+      1337,
+      {x|[{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr: 1.2.3.4/8",
+      7,
+      {x|[{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided:  1.2.3.4/8. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/8 ",
+      42,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/8 ",
+      1337,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "ipv4/cidr:1.2.3.4/8 ",
+      7,
+      {x|[{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: 1.2.3.4/8 . Must be in the format x.x.x.x/y."}]|x}
+    );
+    ("ipv4/both", 42, {x|["192.0.2.1","192.0.2.3","192.0.2.2"]|x});
+    ("ipv4/both", 1337, {x|["192.0.2.1","192.0.2.0","192.0.2.1"]|x});
+    ("ipv4/both", 7, {x|["192.0.2.0","192.0.2.3","192.0.2.1"]|x});
+    ( "ipv6",
+      42,
+      {x|["8ead:331d:df0f:c444:6b96:d368:ab4b:d1d3","1efb:62f9:2a0e:5e6b:c4fb:edde:1407:85c7","6b3b:1fa4:0bfa:a172:cd71:67ae:da2f:acaa"]|x}
+    );
+    ( "ipv6",
+      1337,
+      {x|["536a:7b5f:a28d:2f9b:b79c:a46e:a394:bc4f","9bb0:af32:8f08:1b7f:afcd:cf50:1efa:7f0a","e4ee:3e7f:5b3a:98ba:fb7e:fd9a:ddb5:eca5"]|x}
+    );
+    ( "ipv6",
+      7,
+      {x|["1b9f:fbb1:5aeb:816e:49e0:de5c:e2ba:ea4a","8a8c:a6c6:97e8:af9d:3a99:db90:2fbf:ff16","d5fe:cac2:6aaa:3776:399b:bbab:debe:0d6a"]|x}
+    );
+    ("port", 42, {x|[24546,62306,47972]|x});
+    ("port", 1337, {x|[17172,10400,18228]|x});
+    ("port", 7, {x|[5001,51112,28732]|x});
+    ( "userAgent",
+      42,
+      {x|["Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/118.0","Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_15_7) AppleWebKit/546.15.5 (KHTML, like Gecko) Chrome/121.6.14.0 Safari/603.83.21","Googlebot/2.1 (+http://www.google.com/bot.html)"]|x}
+    );
+    ( "userAgent",
+      1337,
+      {x|["Mozilla/5.0 (Linux; Android 6; SM-G998B) AppleWebKit/568.32 (KHTML, like Gecko) Chrome/94.2.20.15 Mobile Safari/544.38","Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/604.44 (KHTML, like Gecko) Chrome/115.7.7.8 Safari/576.76 Edg/114.2.14.10","Googlebot/2.1 (+http://www.google.com/bot.html)"]|x}
+    );
+    ( "userAgent",
+      7,
+      {x|["FakerBot/7.9.15","Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/541.26.49 (KHTML, like Gecko) Version/16_4 Mobile/15E148 Safari/562.6","Mozilla/5.0 (Linux; Android 13; SM-G998B) AppleWebKit/567.93 (KHTML, like Gecko) Chrome/56.6.19.4 Mobile Safari/574.90"]|x}
+    );
+    ( "mac",
+      42,
+      {x|["5f:b9:22:0d:9b:0f","d3:22:48:64:92:45","7c:38:90:92:1f:fc"]|x} );
+    ( "mac",
+      1337,
+      {x|["42:47:58:4f:b1:6a","2f:7c:c5:69:c3:4a","72:63:8d:2f:68:80"]|x} );
+    ( "mac",
+      7,
+      {x|["1c:7b:f8:81:47:ac","61:4e:37:e0:9f:38","e2:8c:a7:37:57:5d"]|x} );
+    ( "mac/dash",
+      42,
+      {x|["5f-b9-22-0d-9b-0f","d3-22-48-64-92-45","7c-38-90-92-1f-fc"]|x} );
+    ( "mac/dash",
+      1337,
+      {x|["42-47-58-4f-b1-6a","2f-7c-c5-69-c3-4a","72-63-8d-2f-68-80"]|x} );
+    ( "mac/dash",
+      7,
+      {x|["1c-7b-f8-81-47-ac","61-4e-37-e0-9f-38","e2-8c-a7-37-57-5d"]|x} );
+    ("mac/empty", 42, {x|["5fb9220d9b0f","d32248649245","7c3890921ffc"]|x});
+    ("mac/empty", 1337, {x|["4247584fb16a","2f7cc569c34a","72638d2f6880"]|x});
+    ("mac/empty", 7, {x|["1c7bf88147ac","614e37e09f38","e28ca737575d"]|x});
+    ( "mac/invalid",
+      42,
+      {x|["5f:b9:22:0d:9b:0f","d3:22:48:64:92:45","7c:38:90:92:1f:fc"]|x} );
+    ( "mac/invalid",
+      1337,
+      {x|["42:47:58:4f:b1:6a","2f:7c:c5:69:c3:4a","72:63:8d:2f:68:80"]|x} );
+    ( "mac/invalid",
+      7,
+      {x|["1c:7b:f8:81:47:ac","61:4e:37:e0:9f:38","e2:8c:a7:37:57:5d"]|x} );
+    ( "mac/obj",
+      42,
+      {x|["5f-b9-22-0d-9b-0f","d3-22-48-64-92-45","7c-38-90-92-1f-fc"]|x} );
+    ( "mac/obj",
+      1337,
+      {x|["42-47-58-4f-b1-6a","2f-7c-c5-69-c3-4a","72-63-8d-2f-68-80"]|x} );
+    ( "mac/obj",
+      7,
+      {x|["1c-7b-f8-81-47-ac","61-4e-37-e0-9f-38","e2-8c-a7-37-57-5d"]|x} );
+    ( "mac/objdefault",
+      42,
+      {x|["5f:b9:22:0d:9b:0f","d3:22:48:64:92:45","7c:38:90:92:1f:fc"]|x} );
+    ( "mac/objdefault",
+      1337,
+      {x|["42:47:58:4f:b1:6a","2f:7c:c5:69:c3:4a","72:63:8d:2f:68:80"]|x} );
+    ( "mac/objdefault",
+      7,
+      {x|["1c:7b:f8:81:47:ac","61:4e:37:e0:9f:38","e2:8c:a7:37:57:5d"]|x} );
+    ( "password",
+      42,
+      {x|["DfYsZdp522RJCLk","3QYZ1mbJPw9_RT2","jzvYx3EoBTmj3nd"]|x} );
+    ( "password",
+      1337,
+      {x|["90LR9fEKllCHXi2","P1H3Sp2IPQf0DbD","kBcOpZV9zOAei3w"]|x} );
+    ( "password",
+      7,
+      {x|["kJeTPPamEw5KyZ6","UwRhM4ODNCpjWLB","_DLeHw2gIIRHdRc"]|x} );
+    ("password/5", 42, {x|["DfYsZ","dp522","RJCLk"]|x});
+    ("password/5", 1337, {x|["90LR9","fEKll","CHXi2"]|x});
+    ("password/5", 7, {x|["kJeTP","PamEw","5KyZ6"]|x});
+    ("password/0", 42, {x|["","",""]|x});
+    ("password/0", 1337, {x|["","",""]|x});
+    ("password/0", 7, {x|["","",""]|x});
+    ( "password/memorable",
+      42,
+      {x|["debumivoriqutin","razofaqeyaxusab","vukubulozirequy"]|x} );
+    ( "password/memorable",
+      1337,
+      {x|["lekipipopowolif","qafowejanajejul","wekapufujofekog"]|x} );
+    ( "password/memorable",
+      7,
+      {x|["ketamewuwodehir","hayohumebiyohoz","wequmiyoyodeyiy"]|x} );
+    ( "password/memorable20",
+      42,
+      {x|["debumivoriqutinazofa","qeyaxusabevukubulozi","requyudoceruduhomele"]|x}
+    );
+    ( "password/memorable20",
+      1337,
+      {x|["lekipipopowolifafowe","janajejulawekapufujo","fekogogegenoposobehi"]|x}
+    );
+    ( "password/memorable20",
+      7,
+      {x|["ketamewuwodehirayohu","mebiyohozequmiyoyode","yiyiyoxipuhuyafugize"]|x}
+    );
+    ( "password/upper",
+      42,
+      {x|["DYZRJCLQYZJPRTY","EBTCMVORIQGTIQH","ARCPZPOCSYQEAUS"]|x} );
+    ( "password/upper",
+      1337,
+      {x|["LREKCHXPHSIPQDD","BOZVOARMKFOBHMS","VIFQGFBBONXAJAX"]|x} );
+    ( "password/upper",
+      7,
+      {x|["JTPPEKZURMODNCW","LBDLHIIRHRYMLOA","HKRLNBIYHLTZWSJ"]|x} );
+    ("password/digit", 42, {x|["52231923","38602668","77726197"]|x});
+    ("password/digit", 1337, {x|["90921320","93017779","72219403"]|x});
+    ("password/digit", 7, {x|["56427066","11300720","34728798"]|x});
+    ( "password/symbols",
+      42,
+      {x|["{//&\"}=<[.<%","'{|=*,$_>})%","?:;.(~!(,\\@'"]|x} );
+    ( "password/symbols",
+      1337,
+      {x|[";?}+\\,~<`{\"","-!&}\")}\"``?",":],#[=$%*$,"]|x} );
+    ("password/symbols", 7, {x|["(}':'<#{-`>;","_]!){&>|->.?","=$;._'!&-_-$"]|x});
+    ( "password/prefix",
+      42,
+      {x|["pre-DfYsZdp522R","pre-JCLk3QYZ1mb","pre-JPw9_RT2jzv"]|x} );
+    ( "password/prefix",
+      1337,
+      {x|["pre-90LR9fEKllC","pre-HXi2P1H3Sp2","pre-IPQf0DbDkBc"]|x} );
+    ( "password/prefix",
+      7,
+      {x|["pre-kJeTPPamEw5","pre-KyZ6UwRhM4O","pre-DNCpjWLB_DL"]|x} );
+    ("password/longprefix", 42, {x|["abcdefghij","abcdefghij","abcdefghij"]|x});
+    ("password/longprefix", 1337, {x|["abcdefghij","abcdefghij","abcdefghij"]|x});
+    ("password/longprefix", 7, {x|["abcdefghij","abcdefghij","abcdefghij"]|x});
+    ( "password/memorableprefix",
+      42,
+      {x|["xyzebumivo","xyziqutina","xyzofaqeya"]|x} );
+    ( "password/memorableprefix",
+      1337,
+      {x|["xyzekipipo","xyzowolifa","xyzowejana"]|x} );
+    ( "password/memorableprefix",
+      7,
+      {x|["xyzetamewu","xyzodehira","xyzohumebi"]|x} );
+    ( "password/memorablevowel",
+      42,
+      {x|["Badebumivo","Bariqutina","Bazofaqeya"]|x} );
+    ( "password/memorablevowel",
+      1337,
+      {x|["Balekipipo","Bapowolifa","Bafowejana"]|x} );
+    ( "password/memorablevowel",
+      7,
+      {x|["Baketamewu","Bawodehira","Bayohumebi"]|x} );
+    ( "password/memorablepattern",
+      42,
+      {x|["debumivori","qutinazofa","qeyaxusabe"]|x} );
+    ( "password/memorablepattern",
+      1337,
+      {x|["lekipipopo","wolifafowe","janajejula"]|x} );
+    ( "password/memorablepattern",
+      7,
+      {x|["ketamewuwo","dehirayohu","mebiyohoze"]|x} );
+    ("password/unicodeprefix", 42, {x|["é😀DfYsZdp","é😀522RJCL","é😀k3QYZ1m"]|x});
+    ("password/unicodeprefix", 1337, {x|["é😀90LR9fE","é😀KllCHXi","é😀2P1H3Sp"]|x});
+    ("password/unicodeprefix", 7, {x|["é😀kJeTPPa","é😀mEw5KyZ","é😀6UwRhM4"]|x});
+    ("emoji", 42, {x|["🦮","🔗","👃"]|x});
+    ("emoji", 1337, {x|["👩‍🎤","💆🏿","🐳"]|x});
+    ("emoji", 7, {x|["🤎","🥤","🇲🇨"]|x});
+    ("emoji/flag", 42, {x|["🇭🇰","🇽🇰","🇷🇴"]|x});
+    ("emoji/flag", 1337, {x|["🇪🇭","🇨🇬","🇪🇺"]|x});
+    ("emoji/flag", 7, {x|["🇧🇪","🇸🇰","🇯🇪"]|x});
+    ("emoji/foodnature", 42, {x|["🫐","🐽","🍑"]|x});
+    ("emoji/foodnature", 1337, {x|["🍑","🍸","🍿"]|x});
+    ("emoji/foodnature", 7, {x|["🥫","🥤","🐶"]|x});
+    ( "emoji/empty",
+      42,
+      {x|[{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."}]|x}
+    );
+    ( "emoji/empty",
+      1337,
+      {x|[{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."}]|x}
+    );
+    ( "emoji/empty",
+      7,
+      {x|[{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."},{"error":"Cannot get value from empty dataset."}]|x}
+    );
+    ("jwtAlgorithm", 42, {x|["HS384","none","RS256"]|x});
+    ("jwtAlgorithm", 1337, {x|["HS256","ES512","HS256"]|x});
+    ("jwtAlgorithm", 7, {x|["ES256","RS384","HS512"]|x});
+    ( "jwt",
+      42,
+      {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE3MzU2MzU1NjAsImV4cCI6MTczNTY5ODgwNCwibmJmIjoxNzQxOTEyMTg4LCJpc3MiOiJTdHJlaWNoIC0gQXVmZGVyaGFyIiwic3ViIjoiZmQzMjI0ODYtNDkyNC00NTdjLTkzODktMDkyMWZmYzQxYTcxIiwiYXVkIjoiMGU0YTQ4ODItZmNmZS00OWUxLTgzMDUtNjRkNTQ4MmMxZmMzIiwianRpIjoiZGJiYzE1MWQtOTUxNC00NWJhLWFlNzEtYmM4Yzc4NjAxMGE1In0.UfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb","eyJhbGciOiJQUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDY3MjMsImV4cCI6MTczNTY2NTI2NSwibmJmIjoxNzA1MTk5ODI4LCJpc3MiOiJEYW5pZWwgTExDIiwic3ViIjoiNmUyNTFlZTQtYWQ4OC00MzFlLWFlYTUtNWJlZWNhMTJlOTAxIiwiYXVkIjoiMDI4YmEzYjMtNWJhZC00YTkxLWE1NDMtZjZlYWM4OTczYjQwIiwianRpIjoiMmZmZTUwZTYtZmZkNC00NmQ1LTkyOGUtYjkxOWYyOGViYmI1In0.OORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK07","eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDcxNzUsImV4cCI6MTczNTY4MTA4NywibmJmIjoxNzQ4NTM0NzA5LCJpc3MiOiJLb3pleSBHcm91cCIsInN1YiI6IjY2OWEwNWE4LWRhMjEtNGEwOS1hZjk2LWE3OGY2ZmUzMTEwMSIsImF1ZCI6IjE1ZDBkNDFiLWFlYmMtNDQyYy05Y2Y2LTVjNWVkNmNjMWU4ZCIsImp0aSI6ImU2MGUxNWZmLTlhNzQtNDVhYy1hY2MxLTcwODdlNTEyYzkxMSJ9.4OH55ZnmOWZKn5MyqU6u0t377EKAXnhRdX0Y2TwZ4yYwDHsCAT2hWTsChbslA4YZ"]|x}
+    );
+    ( "jwt",
+      1337,
+      {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MjU4MzksImV4cCI6MTczNTY0OTg3MCwibmJmIjoxNzMzMTIzNjM1LCJpc3MiOiJXb2xmIC0gSG93ZSIsInN1YiI6ImEyZjdjYzU2LTljMzQtNGE3Mi1hNjM4LWQyZjY4ODBiZjIyNSIsImF1ZCI6IjA1MGM1YjdmLWQ5OWYtNDQwMS05ZmY3LTViMGNhM2FlMmU1YiIsImp0aSI6IjgyNzc2YzdiLWM1ZWItNGU2Ny1hZWE4LTNmOGMzNjY4MmEwMyJ9.VCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cD","eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2Mjc5MDgsImV4cCI6MTczNTY1Nzc5OCwibmJmIjoxNzM1NjczMDE5LCJpc3MiOiJMeW5jaCBMTEMiLCJzdWIiOiIyYjY4OWRiYS0wMDhjLTRiMzQtYTM2YS00NGNkOGI2ZGQwYmIiLCJhdWQiOiJjZWEyYmZlZC0wMGJiLTRiMjEtYTJkNi0yYTAxMWI5OWRiMzEiLCJqdGkiOiI1NDhiZTc4Yy02YmYzLTQ5YjItOGRiYi1kYmJhYWRkM2EyZDAifQ.1Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBypP","eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2NTM0MjEsImV4cCI6MTczNTY3NDY1NiwibmJmIjoxNzExMzY5NjEzLCJpc3MiOiJKb2hucywgTHVldHRnZW4gYW5kIFJ1ZWNrZXIiLCJzdWIiOiIzZWEwOTY1My1iZjRhLTQ2NjEtYjRkMS01YjY0ZmU5ZmZlOGMiLCJhdWQiOiIyOTEzMjQ3NC04ZDMwLTRlNWQtYmVjMS02NGE5ZTZkYTU0YjkiLCJqdGkiOiIzM2JhZWU0OC02MTQxLTRmZWQtOGY5YS0zZTBhMGZlODk0MmQifQ.8lZtjfM9rR0KYeJNSHd5yyoxaaIZNaLiVto6v5G8tfZgA0BvtoTbHMJBHe5UxeQO"]|x}
+    );
+    ( "jwt",
+      7,
+      {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDk3OTMsImV4cCI6MTczNTY0NzY3MiwibmJmIjoxNzQ5NzgzOTk2LCJpc3MiOiJCaW5zLCBQYXJpc2lhbiBhbmQgQmVyZ3N0cm9tIiwic3ViIjoiNGUzN2UwOWYtMzhlMi00OGNhLTk3MzctNTc1ZGM1OTQ3NWE1IiwiYXVkIjoiYjZlMmI2NmEtODYwMS00YjhiLTlmYTAtNDkzZmZkN2QyNDdiIiwianRpIjoiMjU1NDI2N2MtYzg3Yy00ZWFjLWJmMGUtNDdjYjJhMTVkNjliIn0.L0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MTM2MjMsImV4cCI6MTczNTYxNjI1MywibmJmIjoxNzQ2NTczMzY5LCJpc3MiOiJEYXZpcyAtIEhhbHZvcnNvbiIsInN1YiI6ImIyMzU2M2VkLTE1MzctNDQ4ZS05NmE5LWMwYmY5NGFiYTJmZiIsImF1ZCI6IjkwZmRhYzM0LTM5MWUtNDc3MS1iYWRhLTNjMmQ5NDhhNGQ2ZSIsImp0aSI6IjFhNGM4N2UwLTg1MGMtNDhlOS05NWYxLTBiNTVlNWVhNTAzZiJ9.9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0Fa","eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE3MzU2MzI4MjQsImV4cCI6MTczNTY3NDgzNSwibmJmIjoxNzQ1NjE4Nzk3LCJpc3MiOiJWb2xrbWFuLCBHcmFoYW0gYW5kIExhbmd3b3J0aCIsInN1YiI6ImNiMWQzYzcyLWJjYmYtNDQzMi1iODY1LTc0MDc0N2UyYWE0NyIsImF1ZCI6IjViZDVmYThiLTZiNGUtNDgzNi05ZWM3LTU2ZjFlZDM1OWNmZiIsImp0aSI6IjM3OGExYWVlLWZlZjAtNGU0NS1iN2Y5LTU1ZWQyMzUzOTM5ZSJ9.6cpEnflcRHpHwwmuZMP7vm5o4eNGH4a166XTcfXzmsgAIvO7BZ9uDkXutT0R8nut"]|x}
+    );
+    ( "jwt/ref",
+      42,
+      {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE1Nzc3ODI3NjAsImV4cCI6MTU3Nzg0NjAwNCwibmJmIjoxNTg0MDU5Mzg4LCJpc3MiOiJTdHJlaWNoIC0gQXVmZGVyaGFyIiwic3ViIjoiZmQzMjI0ODYtNDkyNC00NTdjLTkzODktMDkyMWZmYzQxYTcxIiwiYXVkIjoiMGU0YTQ4ODItZmNmZS00OWUxLTgzMDUtNjRkNTQ4MmMxZmMzIiwianRpIjoiZGJiYzE1MWQtOTUxNC00NWJhLWFlNzEtYmM4Yzc4NjAxMGE1In0.UfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb","eyJhbGciOiJQUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc3NTM5MjMsImV4cCI6MTU3NzgxMjQ2NSwibmJmIjoxNTQ3MzQ3MDI4LCJpc3MiOiJEYW5pZWwgTExDIiwic3ViIjoiNmUyNTFlZTQtYWQ4OC00MzFlLWFlYTUtNWJlZWNhMTJlOTAxIiwiYXVkIjoiMDI4YmEzYjMtNWJhZC00YTkxLWE1NDMtZjZlYWM4OTczYjQwIiwianRpIjoiMmZmZTUwZTYtZmZkNC00NmQ1LTkyOGUtYjkxOWYyOGViYmI1In0.OORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK07","eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc3NTQzNzUsImV4cCI6MTU3NzgyODI4NywibmJmIjoxNTkwNjgxOTA5LCJpc3MiOiJLb3pleSBHcm91cCIsInN1YiI6IjY2OWEwNWE4LWRhMjEtNGEwOS1hZjk2LWE3OGY2ZmUzMTEwMSIsImF1ZCI6IjE1ZDBkNDFiLWFlYmMtNDQyYy05Y2Y2LTVjNWVkNmNjMWU4ZCIsImp0aSI6ImU2MGUxNWZmLTlhNzQtNDVhYy1hY2MxLTcwODdlNTEyYzkxMSJ9.4OH55ZnmOWZKn5MyqU6u0t377EKAXnhRdX0Y2TwZ4yYwDHsCAT2hWTsChbslA4YZ"]|x}
+    );
+    ( "jwt/ref",
+      1337,
+      {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc3NzMwMzksImV4cCI6MTU3Nzc5NzA3MCwibmJmIjoxNTc1MjcwODM1LCJpc3MiOiJXb2xmIC0gSG93ZSIsInN1YiI6ImEyZjdjYzU2LTljMzQtNGE3Mi1hNjM4LWQyZjY4ODBiZjIyNSIsImF1ZCI6IjA1MGM1YjdmLWQ5OWYtNDQwMS05ZmY3LTViMGNhM2FlMmU1YiIsImp0aSI6IjgyNzc2YzdiLWM1ZWItNGU2Ny1hZWE4LTNmOGMzNjY4MmEwMyJ9.VCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cD","eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc3NzUxMDgsImV4cCI6MTU3NzgwNDk5OCwibmJmIjoxNTc3ODIwMjE5LCJpc3MiOiJMeW5jaCBMTEMiLCJzdWIiOiIyYjY4OWRiYS0wMDhjLTRiMzQtYTM2YS00NGNkOGI2ZGQwYmIiLCJhdWQiOiJjZWEyYmZlZC0wMGJiLTRiMjEtYTJkNi0yYTAxMWI5OWRiMzEiLCJqdGkiOiI1NDhiZTc4Yy02YmYzLTQ5YjItOGRiYi1kYmJhYWRkM2EyZDAifQ.1Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBypP","eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc4MDA2MjEsImV4cCI6MTU3NzgyMTg1NiwibmJmIjoxNTUzNTE2ODEzLCJpc3MiOiJKb2hucywgTHVldHRnZW4gYW5kIFJ1ZWNrZXIiLCJzdWIiOiIzZWEwOTY1My1iZjRhLTQ2NjEtYjRkMS01YjY0ZmU5ZmZlOGMiLCJhdWQiOiIyOTEzMjQ3NC04ZDMwLTRlNWQtYmVjMS02NGE5ZTZkYTU0YjkiLCJqdGkiOiIzM2JhZWU0OC02MTQxLTRmZWQtOGY5YS0zZTBhMGZlODk0MmQifQ.8lZtjfM9rR0KYeJNSHd5yyoxaaIZNaLiVto6v5G8tfZgA0BvtoTbHMJBHe5UxeQO"]|x}
+    );
+    ( "jwt/ref",
+      7,
+      {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc3NTY5OTMsImV4cCI6MTU3Nzc5NDg3MiwibmJmIjoxNTkxOTMxMTk2LCJpc3MiOiJCaW5zLCBQYXJpc2lhbiBhbmQgQmVyZ3N0cm9tIiwic3ViIjoiNGUzN2UwOWYtMzhlMi00OGNhLTk3MzctNTc1ZGM1OTQ3NWE1IiwiYXVkIjoiYjZlMmI2NmEtODYwMS00YjhiLTlmYTAtNDkzZmZkN2QyNDdiIiwianRpIjoiMjU1NDI2N2MtYzg3Yy00ZWFjLWJmMGUtNDdjYjJhMTVkNjliIn0.L0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Nzc3NjA4MjMsImV4cCI6MTU3Nzc2MzQ1MywibmJmIjoxNTg4NzIwNTY5LCJpc3MiOiJEYXZpcyAtIEhhbHZvcnNvbiIsInN1YiI6ImIyMzU2M2VkLTE1MzctNDQ4ZS05NmE5LWMwYmY5NGFiYTJmZiIsImF1ZCI6IjkwZmRhYzM0LTM5MWUtNDc3MS1iYWRhLTNjMmQ5NDhhNGQ2ZSIsImp0aSI6IjFhNGM4N2UwLTg1MGMtNDhlOS05NWYxLTBiNTVlNWVhNTAzZiJ9.9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0Fa","eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE1Nzc3ODAwMjQsImV4cCI6MTU3NzgyMjAzNSwibmJmIjoxNTg3NzY1OTk3LCJpc3MiOiJWb2xrbWFuLCBHcmFoYW0gYW5kIExhbmd3b3J0aCIsInN1YiI6ImNiMWQzYzcyLWJjYmYtNDQzMi1iODY1LTc0MDc0N2UyYWE0NyIsImF1ZCI6IjViZDVmYThiLTZiNGUtNDgzNi05ZWM3LTU2ZjFlZDM1OWNmZiIsImp0aSI6IjM3OGExYWVlLWZlZjAtNGU0NS1iN2Y5LTU1ZWQyMzUzOTM5ZSJ9.6cpEnflcRHpHwwmuZMP7vm5o4eNGH4a166XTcfXzmsgAIvO7BZ9uDkXutT0R8nut"]|x}
+    );
+    ( "jwt/refnum",
+      42,
+      {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE1OTk5NDU5NjAsImV4cCI6MTYwMDAwOTIwNSwibmJmIjoxNjA2MjIyNTg4LCJpc3MiOiJTdHJlaWNoIC0gQXVmZGVyaGFyIiwic3ViIjoiZmQzMjI0ODYtNDkyNC00NTdjLTkzODktMDkyMWZmYzQxYTcxIiwiYXVkIjoiMGU0YTQ4ODItZmNmZS00OWUxLTgzMDUtNjRkNTQ4MmMxZmMzIiwianRpIjoiZGJiYzE1MWQtOTUxNC00NWJhLWFlNzEtYmM4Yzc4NjAxMGE1In0.UfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb","eyJhbGciOiJQUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5MTcxMjMsImV4cCI6MTU5OTk3NTY2NSwibmJmIjoxNTY5NTEwMjI4LCJpc3MiOiJEYW5pZWwgTExDIiwic3ViIjoiNmUyNTFlZTQtYWQ4OC00MzFlLWFlYTUtNWJlZWNhMTJlOTAxIiwiYXVkIjoiMDI4YmEzYjMtNWJhZC00YTkxLWE1NDMtZjZlYWM4OTczYjQwIiwianRpIjoiMmZmZTUwZTYtZmZkNC00NmQ1LTkyOGUtYjkxOWYyOGViYmI1In0.OORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK07","eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5MTc1NzUsImV4cCI6MTU5OTk5MTQ4NywibmJmIjoxNjEyODQ1MTA5LCJpc3MiOiJLb3pleSBHcm91cCIsInN1YiI6IjY2OWEwNWE4LWRhMjEtNGEwOS1hZjk2LWE3OGY2ZmUzMTEwMSIsImF1ZCI6IjE1ZDBkNDFiLWFlYmMtNDQyYy05Y2Y2LTVjNWVkNmNjMWU4ZCIsImp0aSI6ImU2MGUxNWZmLTlhNzQtNDVhYy1hY2MxLTcwODdlNTEyYzkxMSJ9.4OH55ZnmOWZKn5MyqU6u0t377EKAXnhRdX0Y2TwZ4yYwDHsCAT2hWTsChbslA4YZ"]|x}
+    );
+    ( "jwt/refnum",
+      1337,
+      {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5MzYyMzksImV4cCI6MTU5OTk2MDI3MCwibmJmIjoxNTk3NDM0MDM1LCJpc3MiOiJXb2xmIC0gSG93ZSIsInN1YiI6ImEyZjdjYzU2LTljMzQtNGE3Mi1hNjM4LWQyZjY4ODBiZjIyNSIsImF1ZCI6IjA1MGM1YjdmLWQ5OWYtNDQwMS05ZmY3LTViMGNhM2FlMmU1YiIsImp0aSI6IjgyNzc2YzdiLWM1ZWItNGU2Ny1hZWE4LTNmOGMzNjY4MmEwMyJ9.VCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cD","eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5MzgzMDgsImV4cCI6MTU5OTk2ODE5OCwibmJmIjoxNTk5OTgzNDE5LCJpc3MiOiJMeW5jaCBMTEMiLCJzdWIiOiIyYjY4OWRiYS0wMDhjLTRiMzQtYTM2YS00NGNkOGI2ZGQwYmIiLCJhdWQiOiJjZWEyYmZlZC0wMGJiLTRiMjEtYTJkNi0yYTAxMWI5OWRiMzEiLCJqdGkiOiI1NDhiZTc4Yy02YmYzLTQ5YjItOGRiYi1kYmJhYWRkM2EyZDAifQ.1Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBypP","eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5NjM4MjIsImV4cCI6MTU5OTk4NTA1NiwibmJmIjoxNTc1NjgwMDEzLCJpc3MiOiJKb2hucywgTHVldHRnZW4gYW5kIFJ1ZWNrZXIiLCJzdWIiOiIzZWEwOTY1My1iZjRhLTQ2NjEtYjRkMS01YjY0ZmU5ZmZlOGMiLCJhdWQiOiIyOTEzMjQ3NC04ZDMwLTRlNWQtYmVjMS02NGE5ZTZkYTU0YjkiLCJqdGkiOiIzM2JhZWU0OC02MTQxLTRmZWQtOGY5YS0zZTBhMGZlODk0MmQifQ.8lZtjfM9rR0KYeJNSHd5yyoxaaIZNaLiVto6v5G8tfZgA0BvtoTbHMJBHe5UxeQO"]|x}
+    );
+    ( "jwt/refnum",
+      7,
+      {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5MjAxOTMsImV4cCI6MTU5OTk1ODA3MiwibmJmIjoxNjE0MDk0Mzk2LCJpc3MiOiJCaW5zLCBQYXJpc2lhbiBhbmQgQmVyZ3N0cm9tIiwic3ViIjoiNGUzN2UwOWYtMzhlMi00OGNhLTk3MzctNTc1ZGM1OTQ3NWE1IiwiYXVkIjoiYjZlMmI2NmEtODYwMS00YjhiLTlmYTAtNDkzZmZkN2QyNDdiIiwianRpIjoiMjU1NDI2N2MtYzg3Yy00ZWFjLWJmMGUtNDdjYjJhMTVkNjliIn0.L0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTk5MjQwMjMsImV4cCI6MTU5OTkyNjY1NCwibmJmIjoxNjEwODgzNzY5LCJpc3MiOiJEYXZpcyAtIEhhbHZvcnNvbiIsInN1YiI6ImIyMzU2M2VkLTE1MzctNDQ4ZS05NmE5LWMwYmY5NGFiYTJmZiIsImF1ZCI6IjkwZmRhYzM0LTM5MWUtNDc3MS1iYWRhLTNjMmQ5NDhhNGQ2ZSIsImp0aSI6IjFhNGM4N2UwLTg1MGMtNDhlOS05NWYxLTBiNTVlNWVhNTAzZiJ9.9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0Fa","eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE1OTk5NDMyMjQsImV4cCI6MTU5OTk4NTIzNSwibmJmIjoxNjA5OTI5MTk3LCJpc3MiOiJWb2xrbWFuLCBHcmFoYW0gYW5kIExhbmd3b3J0aCIsInN1YiI6ImNiMWQzYzcyLWJjYmYtNDQzMi1iODY1LTc0MDc0N2UyYWE0NyIsImF1ZCI6IjViZDVmYThiLTZiNGUtNDgzNi05ZWM3LTU2ZjFlZDM1OWNmZiIsImp0aSI6IjM3OGExYWVlLWZlZjAtNGU0NS1iN2Y5LTU1ZWQyMzUzOTM5ZSJ9.6cpEnflcRHpHwwmuZMP7vm5o4eNGH4a166XTcfXzmsgAIvO7BZ9uDkXutT0R8nut"]|x}
+    );
+    ( "jwt/referr",
+      42,
+      {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x}
+    );
+    ( "jwt/referr",
+      1337,
+      {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x}
+    );
+    ( "jwt/referr",
+      7,
+      {x|[{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"},{"error":"Invalid refDate date: NaN"}]|x}
+    );
+    ( "jwt/header",
+      42,
+      {x|["eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2MzU1NjAsImV4cCI6MTczNTcxNzcwMiwibmJmIjoxNzUwMzIxOTIyLCJpc3MiOiJCZWVyIGFuZCBTb25zIiwic3ViIjoiOWIwZmQzMjItNDg2NC00OTI0LWE1N2MtMzg5MDkyMWZmYzQxIiwiYXVkIjoiNzE3MGU0YTQtODgyZi00Y2ZlLWI5ZTEtMzA1NjRkNTQ4MmMxIiwianRpIjoiYzMwZGJiYzEtNTFkOS00NTE0LTg1YmEtZTcxYmM4Yzc4NjAxIn0.DjvUfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5","eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2NzUzNjksImV4cCI6MTczNTcwMzA4NSwibmJmIjoxNzE1OTE3Njk1LCJpc3MiOiJBcm1zdHJvbmcgLSBPJ0Nvbm5lbGwiLCJzdWIiOiIyYjZlMjUxZS1lNGFkLTQ4ODMtODFlZS1hNTViZWVjYTEyZTkiLCJhdWQiOiIxYTAyOGJhMy1iMzViLTRhZGEtOTkxNS00M2Y2ZWFjODk3M2IiLCJqdGkiOiIwYTJmZmU1MC1lNmZmLTRkNDYtYWQ1Mi04ZWI5MTlmMjhlYmIifQ.miOORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK","eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2MDQ0NDQsImV4cCI6MTczNTYxNDQ3MywibmJmIjoxNzA3MDU1MDc5LCJpc3MiOiJLcmFqY2lrIC0gS296ZXkiLCJzdWIiOiIyNjY5YTA1YS04ZGEyLTQxYTAtODlmOS02YTc4ZjZmZTMxMTAiLCJhdWQiOiJhMTVkMGQ0MS1iYWViLTRjNDItYmNjZi02NWM1ZWQ2Y2MxZTgiLCJqdGkiOiI1ZTYwZTE1Zi1mOWE3LTQ0NWEtOGNjYy0xNzA4N2U1MTJjOTEifQ.H4OH55ZnmOWZKn5MyqU6u0t377EKAXnhRdX0Y2TwZ4yYwDHsCAT2hWTsChbslA4Y"]|x}
+    );
+    ( "jwt/header",
+      1337,
+      {x|["eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2MjU4MzksImV4cCI6MTczNTYzOTU1MCwibmJmIjoxNzIxNjk1NTk2LCJpc3MiOiJHaWJzb24gYW5kIFNvbnMiLCJzdWIiOiJiMTZhMmY3Yy1jNTY5LTRjMzQtOGE3Mi02MzhkMmY2ODgwYmYiLCJhdWQiOiIyNWIwNTBjNS1iN2ZkLTQ5OWYtYjQwMS1mZjc1YjBjYTNhZTIiLCJqdGkiOiI1YjQ4Mjc3Ni1jN2JjLTQ1ZWItYWU2Ny1lYTgzZjhjMzY2ODIifQ.1eJVCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh","eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2MDgyMzUsImV4cCI6MTczNTYyNTk1MywibmJmIjoxNzQ0NTIyMTQ1LCJpc3MiOiJLdXRjaCAtIEJhcnRvbGV0dGkiLCJzdWIiOiI4YTJiNjg5ZC1iYTAwLTQ4Y2ItYTM0My02YTQ0Y2Q4YjZkZDAiLCJhdWQiOiJiYmNlYTJiZi1lZDAwLTRiYmItODIxMi1kNjJhMDExYjk5ZGIiLCJqdGkiOiIxODU0OGJlNy04YzZiLTRmMzktYmIyZC1iYmRiYmFhZGQzYTIifQ.121Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBy","eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2Mzg5OTcsImV4cCI6MTczNTcxMTIxNywibmJmIjoxNzQwODE1NjY3LCJpc3MiOiJaYm9uY2FrLCBKb2hucyBhbmQgTHVldHRnZW4iLCJzdWIiOiI5OWMzZWEwOS02NTNiLTRmNGEtYjY2MS00ZDE1YjY0ZmU5ZmYiLCJhdWQiOiI4Y2MyOTEzMi00NzQ4LTRkMzAtOWU1ZC1lYzE2NGE5ZTZkYTUiLCJqdGkiOiJiOWYzM2JhZS1lNDg2LTQxNDEtOWZlZC1mOWEzZTBhMGZlODkifQ.9P88lZtjfM9rR0KYeJNSHd5yyoxaaIZNaLiVto6v5G8tfZgA0BvtoTbHMJBHe5Ux"]|x}
+    );
+    ( "jwt/header",
+      7,
+      {x|["eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2MDk3OTMsImV4cCI6MTczNTY3NzE3OCwibmJmIjoxNzMxODA0OTQ3LCJpc3MiOiJLdXZhbGlzLCBLdXRjaCBhbmQgSG9tZW5pY2siLCJzdWIiOiIxNGUzN2UwOS1mMzhlLTQyOGMtOWE3My03NTc1ZGM1OTQ3NWEiLCJhdWQiOiI3YjZlMmI2Ni1hODYwLTQxYjgtYWJmYS0wNDkzZmZkN2QyNDciLCJqdGkiOiI3MjU1NDI2Ny1jYzg3LTRjZWEtYWNmMC1lNDdjYjJhMTVkNjkifQ.OL0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1g","eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2MjcxNTEsImV4cCI6MTczNTYzNzU3NSwibmJmIjoxNzYxNTk0MTE5LCJpc3MiOiJIZXNzZWwgLSBMZWJzYWNrIiwic3ViIjoiODViMjM1NjMtZWQxNS00Mzc0LWI4ZTYtYTljMGJmOTRhYmEyIiwiYXVkIjoiZjY5MGZkYWMtMzQzOS00MWU3LTk3MWEtZGEzYzJkOTQ4YTRkIiwianRpIjoiZWQxYTRjODctZTA4NS00MGM4LThlOTUtZjEwYjU1ZTVlYTUwIn0.Yp9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0","eyJhbGciOiJub25lIiwia2lkIjoi0LrQu9GO0YciLCJuIjoxLjUsImIiOnRydWUsInoiOm51bGwsImEiOlsxLCJ4Il19.eyJpYXQiOjE3MzU2NjE0NDMsImV4cCI6MTczNTY3NTc2MSwibmJmIjoxNzI1Nzc5NDI3LCJpc3MiOiJSb2JlbCwgVm9sa21hbiBhbmQgR3JhaGFtIiwic3ViIjoiYjA4Y2IxZDMtYzcyYi00Y2JmLWE0MzItODY1NzQwNzQ3ZTJhIiwiYXVkIjoiNDdmNWJkNWYtYThiNi00YjRlLWI4MzYtZWM3NTZmMWVkMzU5IiwianRpIjoiZmY0Mzc4YTEtYWVlZi00ZWYwLThlNDUtN2Y5NTVlZDIzNTM5In0.zWQ6cpEnflcRHpHwwmuZMP7vm5o4eNGH4a166XTcfXzmsgAIvO7BZ9uDkXutT0R8"]|x}
+    );
+    ( "jwt/payload",
+      42,
+      {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.JB993RBH1YPdbbiwqiB8imsMcvA2Ba4WXOi6Gr7u2UgFjwxbYMWTBV5c2kogPmhx","eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.4ZLc0OHJL4m7RCk3jkJDTt7ILyLuwq161DjvUfpKe4h9VODSNbTxOTj6eqOR0vpd","eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.WkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb2AG1veEaGnW8l7VSfEOywe5TTDllJT"]|x}
+    );
+    ( "jwt/payload",
+      1337,
+      {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.hsjwgYJ7nC7YrMNmpALbhFubpcwPbXqvv0JZa7nG0m3MlHuYPBzZf05WYulI0LFb","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.aUkHgwbtroNuINlUITqsUDxeWyKeqov7G1eJVCpQZioHm1lu2UIL52g7eGtWAbbk","eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cDhrluEW2yD9JnvzQHD32wMHcgdpEghM"]|x}
+    );
+    ( "jwt/payload",
+      7,
+      {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.rIYxv4guGNn4hUdsV1BWeyU8wKFtcuntmPLjzhslEmsIpUbJqqDwp05HwHXG3jAe","eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.QtQ8jsJu8lkiaprMNwsMTFNW2ShtNI9E4mOqBJOL0qs3xBPW7eE8dzaMR2xNYhaS","eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJhZG1pbiI6dHJ1ZSwibmVzdGVkIjp7IngiOiLDqVxuXCIifX0.rIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh7U1F4mpbwxjJ9blncUP6merhvVn"]|x}
+    );
+    ( "jwt/both",
+      42,
+      {x|["e30.e30.WJB993RBH1YPdbbiwqiB8imsMcvA2Ba4WXOi6Gr7u2UgFjwxbYMWTBV5c2kogPmh","e30.e30.8N4ZLc0OHJL4m7RCk3jkJDTt7ILyLuwq161DjvUfpKe4h9VODSNbTxOTj6eqOR0v","e30.e30.d7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb2AG1veEaGnW8l7VSfEOywe5TTDl"]|x}
+    );
+    ( "jwt/both",
+      1337,
+      {x|["e30.e30.9hsjwgYJ7nC7YrMNmpALbhFubpcwPbXqvv0JZa7nG0m3MlHuYPBzZf05WYulI0LF","e30.e30.FUaUkHgwbtroNuINlUITqsUDxeWyKeqov7G1eJVCpQZioHm1lu2UIL52g7eGtWAb","e30.e30.kq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cDhrluEW2yD9JnvzQHD32wMHcgdpE"]|x}
+    );
+    ( "jwt/both",
+      7,
+      {x|["e30.e30.MrIYxv4guGNn4hUdsV1BWeyU8wKFtcuntmPLjzhslEmsIpUbJqqDwp05HwHXG3jA","e30.e30.XWQtQ8jsJu8lkiaprMNwsMTFNW2ShtNI9E4mOqBJOL0qs3xBPW7eE8dzaMR2xNYh","e30.e30.SUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh7U1F4mpbwxjJ9blncUP6merh"]|x}
+    );
+    ( "fake/misc",
+      42,
+      {x|["Kevin60@hotmail.com|Daniel_Gutmann43@example.com|Edison.Schaden|Carolina30|https|PUT|101|https://unused-disk.name/|general-legislature.name|com|willing-sandbar|dde1:4078:5c76:b3b1:fa40:bfaa:172c:d716|83.63.54.213|aeda:2fac:aab9:020e:6bd5:9a51:63eb:ddb4|58494|8c:e5:13:6d:d0:86|6AzRcC8PZPw7O7i|🧏🏿‍♀️|HS384","Billy59@hotmail.com|Lon_Howe@example.com|Ryley_Schumm52|Shanon_Heller89|https|DELETE|100|https://petty-ad.biz|radiant-accompanist.biz|name|rotten-pearl|182.81.96.160|60.188.91.47|7aec:ec28:55f8:ddbb:ca4f:60e3:eee8:0e9f|63151|d4:6d:52:8e:b9:19|RtgccCmmswQPlcl|⚠️|HS384","Immanuel3@gmail.com|Nicolette.Bogan@example.net|Wiley.Schinner43|Rickie.Dach|https|DELETE|226|https://nifty-numeric.info|experienced-fork.net|biz|clear-archaeology|218.255.118.255|180.34.235.229|a2aa:398d:d08d:bce3:1e0c:ec8e:ace8:fd41|6605|01:a1:5d:0d:41:ba|tfm1hmHDjAyrIhh|🦵|PS256"]|x}
+    );
+    ( "fake/misc",
+      1337,
+      {x|["Jennie_Gibson73@gmail.com|Willy.Schimmel@example.net|Easton.Daugherty|Vito.Langosh73|http|GET|206|https://hollow-backburn.net/|gullible-premium.info|org|tangible-numeracy|f501:efa7:f0ae:4ee3:e7f5:b3a9:8baf:b7ef|229.178.5.79|9add:b5ec:a598:b2f0:5aed:8cf6:8f70:7a1e|47551|c1:04:23:a7:e9:22|AJe_iAjX1qgVvUL|🤘|PS512","Devan.Goyette@hotmail.com|Kara_Bartoletti64@example.com|Jaylen_Prohaska5|Misael65|http|DELETE|506|https://irresponsible-slide.net|aggressive-reasoning.net|net|spiteful-tuber|4ffe:d10a:af32:3c83:d022:fdcc:a41b:65bf|232.61.53.52|9bb8:af4c:f2ba:acaa:eecc:4e3c:000e:b00a|49066|3c:dd:8b:cb:6a:bd|BR38ThKBxp3CX2k|🐘|PS512","Herminia_Vandervort45@hotmail.com|Loy_Smith74@example.com|Ali.Fisher|Darien_Bayer|http|DELETE|503|https://jealous-hovel.biz|failing-summary.biz|com|scratchy-glider|242.104.69.139|232.246.97.105|dffd:bbb3:d253:696c:d41d:7ceb:185e:ce8c|44706|54:b9:f3:3b:ae:e4|TFvpYa6xtPXoAN8|🏷️|HS512"]|x}
+    );
+    ( "fake/misc",
+      7,
+      {x|["Nathanial.Kuvalis@gmail.com|Arthur.Effertz93@example.org|Dannie75|Kaela76|https|POST|303|https://homely-in-joke.net|indelible-testing.com|net|insidious-hoof|b902:fbff:f16d:5fec:ac26:aaa3:7763:99bb|133.187.92.3|abde:be0d:6abf:3e17:b9da:ca09:a1bd:ce25|43198|23:92:cd:08:cf:42|tw3Jeq0mU0mCRcI|👋🏿|PS384","Adolf_Koch@yahoo.com|Elaine_Bartell@example.org|Katrine.Rippin|Tami45|https|PATCH|206|https://skeletal-bar.net|webbed-newsprint.com|net|scientific-peony|249.53.177.225|244.148.2.136|9d0f:cea4:65d2:da92:fbd5:b3cc:6bd5:c9dc|6511|a4:c8:7e:08:50:c8|uYAfDCtu8G0v0jS|🥰|HS384","Branson.Bechtelar94@yahoo.com|Neha_Abshire@example.net|Reese87|Julianne_Ferry37|http|PUT|100|https://giving-taro.name|appropriate-seafood.biz|net|actual-pinstripe|87.198.171.238|243.231.131.241|aea2:ce3c:6a0b:ba2c:5ba3:abff:553b:87a6|280|74:7e:2a:a4:7f:5b|pCPdIdyT7JvmOBD|🇧🇴|RS512"]|x}
+    );
+    ( "fake/userAgent",
+      42,
+      {x|["Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/118.0","Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_15_7) AppleWebKit/546.15.5 (KHTML, like Gecko) Chrome/121.6.14.0 Safari/603.83.21","Googlebot/2.1 (+http://www.google.com/bot.html)"]|x}
+    );
+    ( "fake/userAgent",
+      1337,
+      {x|["Mozilla/5.0 (Linux; Android 6; SM-G998B) AppleWebKit/568.32 (KHTML, like Gecko) Chrome/94.2.20.15 Mobile Safari/544.38","Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/604.44 (KHTML, like Gecko) Chrome/115.7.7.8 Safari/576.76 Edg/114.2.14.10","Googlebot/2.1 (+http://www.google.com/bot.html)"]|x}
+    );
+    ( "fake/userAgent",
+      7,
+      {x|["FakerBot/7.9.15","Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/541.26.49 (KHTML, like Gecko) Version/16_4 Mobile/15E148 Safari/562.6","Mozilla/5.0 (Linux; Android 13; SM-G998B) AppleWebKit/567.93 (KHTML, like Gecko) Chrome/56.6.19.4 Mobile Safari/574.90"]|x}
+    );
+    ( "fake/jwt",
+      42,
+      {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE3MzU2MzU1NjAsImV4cCI6MTczNTY5ODgwNCwibmJmIjoxNzQxOTEyMTg4LCJpc3MiOiJTdHJlaWNoIC0gQXVmZGVyaGFyIiwic3ViIjoiZmQzMjI0ODYtNDkyNC00NTdjLTkzODktMDkyMWZmYzQxYTcxIiwiYXVkIjoiMGU0YTQ4ODItZmNmZS00OWUxLTgzMDUtNjRkNTQ4MmMxZmMzIiwianRpIjoiZGJiYzE1MWQtOTUxNC00NWJhLWFlNzEtYmM4Yzc4NjAxMGE1In0.UfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb","eyJhbGciOiJQUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDY3MjMsImV4cCI6MTczNTY2NTI2NSwibmJmIjoxNzA1MTk5ODI4LCJpc3MiOiJEYW5pZWwgTExDIiwic3ViIjoiNmUyNTFlZTQtYWQ4OC00MzFlLWFlYTUtNWJlZWNhMTJlOTAxIiwiYXVkIjoiMDI4YmEzYjMtNWJhZC00YTkxLWE1NDMtZjZlYWM4OTczYjQwIiwianRpIjoiMmZmZTUwZTYtZmZkNC00NmQ1LTkyOGUtYjkxOWYyOGViYmI1In0.OORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK07","eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDcxNzUsImV4cCI6MTczNTY4MTA4NywibmJmIjoxNzQ4NTM0NzA5LCJpc3MiOiJLb3pleSBHcm91cCIsInN1YiI6IjY2OWEwNWE4LWRhMjEtNGEwOS1hZjk2LWE3OGY2ZmUzMTEwMSIsImF1ZCI6IjE1ZDBkNDFiLWFlYmMtNDQyYy05Y2Y2LTVjNWVkNmNjMWU4ZCIsImp0aSI6ImU2MGUxNWZmLTlhNzQtNDVhYy1hY2MxLTcwODdlNTEyYzkxMSJ9.4OH55ZnmOWZKn5MyqU6u0t377EKAXnhRdX0Y2TwZ4yYwDHsCAT2hWTsChbslA4YZ"]|x}
+    );
+    ( "fake/jwt",
+      1337,
+      {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MjU4MzksImV4cCI6MTczNTY0OTg3MCwibmJmIjoxNzMzMTIzNjM1LCJpc3MiOiJXb2xmIC0gSG93ZSIsInN1YiI6ImEyZjdjYzU2LTljMzQtNGE3Mi1hNjM4LWQyZjY4ODBiZjIyNSIsImF1ZCI6IjA1MGM1YjdmLWQ5OWYtNDQwMS05ZmY3LTViMGNhM2FlMmU1YiIsImp0aSI6IjgyNzc2YzdiLWM1ZWItNGU2Ny1hZWE4LTNmOGMzNjY4MmEwMyJ9.VCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cD","eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2Mjc5MDgsImV4cCI6MTczNTY1Nzc5OCwibmJmIjoxNzM1NjczMDE5LCJpc3MiOiJMeW5jaCBMTEMiLCJzdWIiOiIyYjY4OWRiYS0wMDhjLTRiMzQtYTM2YS00NGNkOGI2ZGQwYmIiLCJhdWQiOiJjZWEyYmZlZC0wMGJiLTRiMjEtYTJkNi0yYTAxMWI5OWRiMzEiLCJqdGkiOiI1NDhiZTc4Yy02YmYzLTQ5YjItOGRiYi1kYmJhYWRkM2EyZDAifQ.1Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBypP","eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2NTM0MjEsImV4cCI6MTczNTY3NDY1NiwibmJmIjoxNzExMzY5NjEzLCJpc3MiOiJKb2hucywgTHVldHRnZW4gYW5kIFJ1ZWNrZXIiLCJzdWIiOiIzZWEwOTY1My1iZjRhLTQ2NjEtYjRkMS01YjY0ZmU5ZmZlOGMiLCJhdWQiOiIyOTEzMjQ3NC04ZDMwLTRlNWQtYmVjMS02NGE5ZTZkYTU0YjkiLCJqdGkiOiIzM2JhZWU0OC02MTQxLTRmZWQtOGY5YS0zZTBhMGZlODk0MmQifQ.8lZtjfM9rR0KYeJNSHd5yyoxaaIZNaLiVto6v5G8tfZgA0BvtoTbHMJBHe5UxeQO"]|x}
+    );
+    ( "fake/jwt",
+      7,
+      {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDk3OTMsImV4cCI6MTczNTY0NzY3MiwibmJmIjoxNzQ5NzgzOTk2LCJpc3MiOiJCaW5zLCBQYXJpc2lhbiBhbmQgQmVyZ3N0cm9tIiwic3ViIjoiNGUzN2UwOWYtMzhlMi00OGNhLTk3MzctNTc1ZGM1OTQ3NWE1IiwiYXVkIjoiYjZlMmI2NmEtODYwMS00YjhiLTlmYTAtNDkzZmZkN2QyNDdiIiwianRpIjoiMjU1NDI2N2MtYzg3Yy00ZWFjLWJmMGUtNDdjYjJhMTVkNjliIn0.L0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MTM2MjMsImV4cCI6MTczNTYxNjI1MywibmJmIjoxNzQ2NTczMzY5LCJpc3MiOiJEYXZpcyAtIEhhbHZvcnNvbiIsInN1YiI6ImIyMzU2M2VkLTE1MzctNDQ4ZS05NmE5LWMwYmY5NGFiYTJmZiIsImF1ZCI6IjkwZmRhYzM0LTM5MWUtNDc3MS1iYWRhLTNjMmQ5NDhhNGQ2ZSIsImp0aSI6IjFhNGM4N2UwLTg1MGMtNDhlOS05NWYxLTBiNTVlNWVhNTAzZiJ9.9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0Fa","eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE3MzU2MzI4MjQsImV4cCI6MTczNTY3NDgzNSwibmJmIjoxNzQ1NjE4Nzk3LCJpc3MiOiJWb2xrbWFuLCBHcmFoYW0gYW5kIExhbmd3b3J0aCIsInN1YiI6ImNiMWQzYzcyLWJjYmYtNDQzMi1iODY1LTc0MDc0N2UyYWE0NyIsImF1ZCI6IjViZDVmYThiLTZiNGUtNDgzNi05ZWM3LTU2ZjFlZDM1OWNmZiIsImp0aSI6IjM3OGExYWVlLWZlZjAtNGU0NS1iN2Y5LTU1ZWQyMzUzOTM5ZSJ9.6cpEnflcRHpHwwmuZMP7vm5o4eNGH4a166XTcfXzmsgAIvO7BZ9uDkXutT0R8nut"]|x}
+    );
+    ( "fake/args",
+      42,
+      {x|["Jane.Reynolds?Miller15@x.dev|Werner_Doe21|Jo.Leffler|201|http://frail-fun.info/|192.168.201.1|10.1.51.29|89-09-21-ff-c4-1a|7170e4a4882f|jebumi|🇲🇰","Jane?Ledner2@x.dev|Stephany.Doe|Jo.Greenfelder92|206|http://trusting-settler.com/|192.168.228.126|10.1.138.18|ce-51-36-dd-08-63|15f58b5ff474|zofaqe|🇻🇺","Jane{Bruen87@x.dev|Delmer.Doe|Jo_Heller89|207|http://proper-blossom.biz/|192.168.230.7|10.1.155.62|01-a0-28-ba-3b-35|bada91543f6e|lozire|🇹🇰"]|x}
+    );
+    ( "fake/args",
+      1337,
+      {x|["Jane~Gottlieb@x.dev|Garth_Doe|Jo.Schimmel|207|http://deserted-electronics.net/|192.168.127.232|10.1.45.182|63-8d-2f-68-80-bf|225b050c5b7f|powoli|🇭🇺","Jane23@x.dev|Zella.Doe|Jo.Heller4|207|http://sophisticated-boyfriend.biz/|192.168.66.131|10.1.32.33|3a-7e-92-25-61-a0|ba0c5c592d4b|vulawe|🇰🇾","Jane-Doyle@x.dev|Ali_Doe64|Jo_Langosh84|206|http://average-arcade.name/|192.168.200.117|10.1.179.252|34-36-a4-4c-d8-b6|dd0bbbcea2bf|wogoge|🇷🇼"]|x}
+    );
+    ( "fake/args",
+      7,
+      {x|["Jane!Kessler@x.dev|Maria_Doe38|Jo93|206|http://weird-defendant.name/|192.168.232.188|10.1.34.23|8c-a7-37-57-5d-c5|9475a57b6e2b|rayohu|🇵🇪","Jane_Bauch@x.dev|Andreane.Doe81|Jo_Schuster|204|http://babyish-maintainer.name/|192.168.212.21|10.1.241.26|23-a2-39-2c-d0-8c|f42ee37bd2ac|miyoyo|🇧🇳","Jane50@x.dev|Arno_Doe|Jo_Rath14|226|http://insistent-muscat.biz/|192.168.253.23|10.1.209.153|ac-34-39-1e-77-1a|da3c2d948a4d|puhuya|🏳️‍🌈"]|x}
+    );
+    ( "fake/jwtargs",
+      42,
+      {x|["eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3ODI3NjAsImV4cCI6MTU3Nzg2NDkwMiwibmJmIjoxNTkyNDY5MTIyLCJpc3MiOiJCZWVyIGFuZCBTb25zIiwic3ViIjoiOWIwZmQzMjItNDg2NC00OTI0LWE1N2MtMzg5MDkyMWZmYzQxIiwiYXVkIjoiNzE3MGU0YTQtODgyZi00Y2ZlLWI5ZTEtMzA1NjRkNTQ4MmMxIiwianRpIjoiYzMwZGJiYzEtNTFkOS00NTE0LTg1YmEtZTcxYmM4Yzc4NjAxIn0.DjvUfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5","eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc4MjI1NjksImV4cCI6MTU3Nzg1MDI4NSwibmJmIjoxNTU4MDY0ODk1LCJpc3MiOiJBcm1zdHJvbmcgLSBPJ0Nvbm5lbGwiLCJzdWIiOiIyYjZlMjUxZS1lNGFkLTQ4ODMtODFlZS1hNTViZWVjYTEyZTkiLCJhdWQiOiIxYTAyOGJhMy1iMzViLTRhZGEtOTkxNS00M2Y2ZWFjODk3M2IiLCJqdGkiOiIwYTJmZmU1MC1lNmZmLTRkNDYtYWQ1Mi04ZWI5MTlmMjhlYmIifQ.miOORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK","eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3NTE2NDQsImV4cCI6MTU3Nzc2MTY3MywibmJmIjoxNTQ5MjAyMjc5LCJpc3MiOiJLcmFqY2lrIC0gS296ZXkiLCJzdWIiOiIyNjY5YTA1YS04ZGEyLTQxYTAtODlmOS02YTc4ZjZmZTMxMTAiLCJhdWQiOiJhMTVkMGQ0MS1iYWViLTRjNDItYmNjZi02NWM1ZWQ2Y2MxZTgiLCJqdGkiOiI1ZTYwZTE1Zi1mOWE3LTQ0NWEtOGNjYy0xNzA4N2U1MTJjOTEifQ.H4OH55ZnmOWZKn5MyqU6u0t377EKAXnhRdX0Y2TwZ4yYwDHsCAT2hWTsChbslA4Y"]|x}
+    );
+    ( "fake/jwtargs",
+      1337,
+      {x|["eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3NzMwMzksImV4cCI6MTU3Nzc4Njc1MCwibmJmIjoxNTYzODQyNzk2LCJpc3MiOiJHaWJzb24gYW5kIFNvbnMiLCJzdWIiOiJiMTZhMmY3Yy1jNTY5LTRjMzQtOGE3Mi02MzhkMmY2ODgwYmYiLCJhdWQiOiIyNWIwNTBjNS1iN2ZkLTQ5OWYtYjQwMS1mZjc1YjBjYTNhZTIiLCJqdGkiOiI1YjQ4Mjc3Ni1jN2JjLTQ1ZWItYWU2Ny1lYTgzZjhjMzY2ODIifQ.1eJVCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh","eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3NTU0MzUsImV4cCI6MTU3Nzc3MzE1MywibmJmIjoxNTg2NjY5MzQ1LCJpc3MiOiJLdXRjaCAtIEJhcnRvbGV0dGkiLCJzdWIiOiI4YTJiNjg5ZC1iYTAwLTQ4Y2ItYTM0My02YTQ0Y2Q4YjZkZDAiLCJhdWQiOiJiYmNlYTJiZi1lZDAwLTRiYmItODIxMi1kNjJhMDExYjk5ZGIiLCJqdGkiOiIxODU0OGJlNy04YzZiLTRmMzktYmIyZC1iYmRiYmFhZGQzYTIifQ.121Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBy","eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3ODYxOTcsImV4cCI6MTU3Nzg1ODQxNywibmJmIjoxNTgyOTYyODY3LCJpc3MiOiJaYm9uY2FrLCBKb2hucyBhbmQgTHVldHRnZW4iLCJzdWIiOiI5OWMzZWEwOS02NTNiLTRmNGEtYjY2MS00ZDE1YjY0ZmU5ZmYiLCJhdWQiOiI4Y2MyOTEzMi00NzQ4LTRkMzAtOWU1ZC1lYzE2NGE5ZTZkYTUiLCJqdGkiOiJiOWYzM2JhZS1lNDg2LTQxNDEtOWZlZC1mOWEzZTBhMGZlODkifQ.9P88lZtjfM9rR0KYeJNSHd5yyoxaaIZNaLiVto6v5G8tfZgA0BvtoTbHMJBHe5Ux"]|x}
+    );
+    ( "fake/jwtargs",
+      7,
+      {x|["eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3NTY5OTMsImV4cCI6MTU3NzgyNDM3OCwibmJmIjoxNTczOTUyMTQ3LCJpc3MiOiJLdXZhbGlzLCBLdXRjaCBhbmQgSG9tZW5pY2siLCJzdWIiOiIxNGUzN2UwOS1mMzhlLTQyOGMtOWE3My03NTc1ZGM1OTQ3NWEiLCJhdWQiOiI3YjZlMmI2Ni1hODYwLTQxYjgtYWJmYS0wNDkzZmZkN2QyNDciLCJqdGkiOiI3MjU1NDI2Ny1jYzg3LTRjZWEtYWNmMC1lNDdjYjJhMTVkNjkifQ.OL0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1g","eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc3NzQzNTEsImV4cCI6MTU3Nzc4NDc3NSwibmJmIjoxNjAzNzQxMzE5LCJpc3MiOiJIZXNzZWwgLSBMZWJzYWNrIiwic3ViIjoiODViMjM1NjMtZWQxNS00Mzc0LWI4ZTYtYTljMGJmOTRhYmEyIiwiYXVkIjoiZjY5MGZkYWMtMzQzOS00MWU3LTk3MWEtZGEzYzJkOTQ4YTRkIiwianRpIjoiZWQxYTRjODctZTA4NS00MGM4LThlOTUtZjEwYjU1ZTVlYTUwIn0.Yp9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0","eyJhbGciOiJ4In0.eyJpYXQiOjE1Nzc4MDg2NDMsImV4cCI6MTU3NzgyMjk2MSwibmJmIjoxNTY3OTI2NjI3LCJpc3MiOiJSb2JlbCwgVm9sa21hbiBhbmQgR3JhaGFtIiwic3ViIjoiYjA4Y2IxZDMtYzcyYi00Y2JmLWE0MzItODY1NzQwNzQ3ZTJhIiwiYXVkIjoiNDdmNWJkNWYtYThiNi00YjRlLWI4MzYtZWM3NTZmMWVkMzU5IiwianRpIjoiZmY0Mzc4YTEtYWVlZi00ZWYwLThlNDUtN2Y5NTVlZDIzNTM5In0.zWQ6cpEnflcRHpHwwmuZMP7vm5o4eNGH4a166XTcfXzmsgAIvO7BZ9uDkXutT0R8"]|x}
+    );
+    ( "fake/ipv4bad",
+      42,
+      {x|[{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "fake/ipv4bad",
+      1337,
+      {x|[{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ( "fake/ipv4bad",
+      7,
+      {x|[{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."},{"error":"Invalid CIDR block provided: undefined. Must be in the format x.x.x.x/y."}]|x}
+    );
+    ("username/ascii", 42, {x|["Jane.Doe","Jane_Doe15","Jane.Doe"]|x});
+    ("username/ascii", 1337, {x|["Jane.Doe15","Jane.Doe","Jane.Doe"]|x});
+    ("username/ascii", 7, {x|["Jane.Doe77","Jane_Doe","Jane_Doe7"]|x});
+    ( "username/ascii/first",
+      42,
+      {x|["JaneDoe.Reynolds-Miller15","JaneDoe96","JaneDoe.Deckow"]|x} );
+    ( "username/ascii/first",
+      1337,
+      {x|["JaneDoe.Gottlieb","JaneDoe.Reynolds-Buckridge62","JaneDoe_Schamberger"]|x}
+    );
+    ( "username/ascii/first",
+      7,
+      {x|["JaneDoe_Kessler","JaneDoe67","JaneDoe_Green"]|x} );
+    ( "email/ascii",
+      42,
+      {x|["Jane_Doe@hotmail.com","Jane.Doe@gmail.com","Jane_Doe@hotmail.com"]|x}
+    );
+    ( "email/ascii",
+      1337,
+      {x|["Jane.Doe27@gmail.com","Jane_Doe@gmail.com","Jane.Doe@yahoo.com"]|x}
+    );
+    ( "email/ascii",
+      7,
+      {x|["Jane_Doe@gmail.com","Jane_Doe50@yahoo.com","Jane.Doe@gmail.com"]|x}
+    );
+    ("displayName/ascii", 42, {x|["Jane.Doe95","Jane15","Jane.Doe"]|x});
+    ("displayName/ascii", 1337, {x|["Jane15","Jane.Doe","Jane.Doe97"]|x});
+    ("displayName/ascii", 7, {x|["Jane.Doe","Jane_Doe","Jane7"]|x});
+    ( "username/apos",
+      42,
+      {x|["DAngelo.OBrien","DAngelo_OBrien15","DAngelo.OBrien"]|x} );
+    ( "username/apos",
+      1337,
+      {x|["DAngelo.OBrien15","DAngelo.OBrien","DAngelo.OBrien"]|x} );
+    ( "username/apos",
+      7,
+      {x|["DAngelo.OBrien77","DAngelo_OBrien","DAngelo_OBrien7"]|x} );
+    ( "username/apos/first",
+      42,
+      {x|["DAngeloOBrien.Reynolds-Miller15","DAngeloOBrien96","DAngeloOBrien.Deckow"]|x}
+    );
+    ( "username/apos/first",
+      1337,
+      {x|["DAngeloOBrien.Gottlieb","DAngeloOBrien.Reynolds-Buckridge62","DAngeloOBrien_Schamberger"]|x}
+    );
+    ( "username/apos/first",
+      7,
+      {x|["DAngeloOBrien_Kessler","DAngeloOBrien67","DAngeloOBrien_Green"]|x} );
+    ( "email/apos",
+      42,
+      {x|["DAngelo_OBrien@hotmail.com","DAngelo.OBrien@gmail.com","DAngelo_OBrien@hotmail.com"]|x}
+    );
+    ( "email/apos",
+      1337,
+      {x|["DAngelo.OBrien27@gmail.com","DAngelo_OBrien@gmail.com","DAngelo.OBrien@yahoo.com"]|x}
+    );
+    ( "email/apos",
+      7,
+      {x|["DAngelo_OBrien@gmail.com","DAngelo_OBrien50@yahoo.com","DAngelo.OBrien@gmail.com"]|x}
+    );
+    ( "displayName/apos",
+      42,
+      {x|["DAngelo.OBrien95","DAngelo15","DAngelo.OBrien"]|x} );
+    ( "displayName/apos",
+      1337,
+      {x|["DAngelo15","DAngelo.OBrien","DAngelo.OBrien97"]|x} );
+    ("displayName/apos", 7, {x|["DAngelo.OBrien","DAngelo_OBrien","DAngelo7"]|x});
+    ( "username/space",
+      42,
+      {x|["MaryAnn.VanderBerg","MaryAnn_VanderBerg15","MaryAnn.VanderBerg"]|x}
+    );
+    ( "username/space",
+      1337,
+      {x|["MaryAnn.VanderBerg15","MaryAnn.VanderBerg","MaryAnn.VanderBerg"]|x}
+    );
+    ( "username/space",
+      7,
+      {x|["MaryAnn.VanderBerg77","MaryAnn_VanderBerg","MaryAnn_VanderBerg7"]|x}
+    );
+    ( "username/space/first",
+      42,
+      {x|["MaryAnnVanderBerg.Reynolds-Miller15","MaryAnnVanderBerg96","MaryAnnVanderBerg.Deckow"]|x}
+    );
+    ( "username/space/first",
+      1337,
+      {x|["MaryAnnVanderBerg.Gottlieb","MaryAnnVanderBerg.Reynolds-Buckridge62","MaryAnnVanderBerg_Schamberger"]|x}
+    );
+    ( "username/space/first",
+      7,
+      {x|["MaryAnnVanderBerg_Kessler","MaryAnnVanderBerg67","MaryAnnVanderBerg_Green"]|x}
+    );
+    ( "email/space",
+      42,
+      {x|["MaryAnn_VanderBerg@hotmail.com","MaryAnn.VanderBerg@gmail.com","MaryAnn_VanderBerg@hotmail.com"]|x}
+    );
+    ( "email/space",
+      1337,
+      {x|["MaryAnn.VanderBerg27@gmail.com","MaryAnn_VanderBerg@gmail.com","MaryAnn.VanderBerg@yahoo.com"]|x}
+    );
+    ( "email/space",
+      7,
+      {x|["MaryAnn_VanderBerg@gmail.com","MaryAnn_VanderBerg50@yahoo.com","MaryAnn.VanderBerg@gmail.com"]|x}
+    );
+    ( "displayName/space",
+      42,
+      {x|["MaryAnn.VanderBerg95","MaryAnn15","MaryAnn.VanderBerg"]|x} );
+    ( "displayName/space",
+      1337,
+      {x|["MaryAnn15","MaryAnn.VanderBerg","MaryAnn.VanderBerg97"]|x} );
+    ( "displayName/space",
+      7,
+      {x|["MaryAnn.VanderBerg","MaryAnn_VanderBerg","MaryAnn7"]|x} );
+    ( "username/accent",
+      42,
+      {x|["Jurgen.Muller-Ludenscheidt","Jurgen_Muller-Ludenscheidt15","Jurgen.Muller-Ludenscheidt"]|x}
+    );
+    ( "username/accent",
+      1337,
+      {x|["Jurgen.Muller-Ludenscheidt15","Jurgen.Muller-Ludenscheidt","Jurgen.Muller-Ludenscheidt"]|x}
+    );
+    ( "username/accent",
+      7,
+      {x|["Jurgen.Muller-Ludenscheidt77","Jurgen_Muller-Ludenscheidt","Jurgen_Muller-Ludenscheidt7"]|x}
+    );
+    ( "username/accent/first",
+      42,
+      {x|["JurgenMuller-Ludenscheidt.Reynolds-Miller15","JurgenMuller-Ludenscheidt96","JurgenMuller-Ludenscheidt.Deckow"]|x}
+    );
+    ( "username/accent/first",
+      1337,
+      {x|["JurgenMuller-Ludenscheidt.Gottlieb","JurgenMuller-Ludenscheidt.Reynolds-Buckridge62","JurgenMuller-Ludenscheidt_Schamberger"]|x}
+    );
+    ( "username/accent/first",
+      7,
+      {x|["JurgenMuller-Ludenscheidt_Kessler","JurgenMuller-Ludenscheidt67","JurgenMuller-Ludenscheidt_Green"]|x}
+    );
+    ( "email/accent",
+      42,
+      {x|["Jurgen_Muller-Ludenscheidt@hotmail.com","Jurgen.Muller-Ludenscheidt@gmail.com","Jurgen_Muller-Ludenscheidt@hotmail.com"]|x}
+    );
+    ( "email/accent",
+      1337,
+      {x|["Jurgen.Muller-Ludenscheidt27@gmail.com","Jurgen_Muller-Ludenscheidt@gmail.com","Jurgen.Muller-Ludenscheidt@yahoo.com"]|x}
+    );
+    ( "email/accent",
+      7,
+      {x|["Jurgen_Muller-Ludenscheidt@gmail.com","Jurgen_Muller-Ludenscheidt50@yahoo.com","Jurgen.Muller-Ludenscheidt@gmail.com"]|x}
+    );
+    ( "displayName/accent",
+      42,
+      {x|["Jürgen.Müller-Lüdenscheidt95","Jürgen15","Jürgen.Müller-Lüdenscheidt"]|x}
+    );
+    ( "displayName/accent",
+      1337,
+      {x|["Jürgen15","Jürgen.Müller-Lüdenscheidt","Jürgen.Müller-Lüdenscheidt97"]|x}
+    );
+    ( "displayName/accent",
+      7,
+      {x|["Jürgen.Müller-Lüdenscheidt","Jürgen_Müller-Lüdenscheidt","Jürgen7"]|x}
+    );
+    ( "username/cyrillic",
+      42,
+      {x|["Petr.Ivanov","Petr_Ivanov15","Petr.Ivanov"]|x} );
+    ( "username/cyrillic",
+      1337,
+      {x|["Petr.Ivanov15","Petr.Ivanov","Petr.Ivanov"]|x} );
+    ( "username/cyrillic",
+      7,
+      {x|["Petr.Ivanov77","Petr_Ivanov","Petr_Ivanov7"]|x} );
+    ( "username/cyrillic/first",
+      42,
+      {x|["PetrIvanov.Reynolds-Miller15","PetrIvanov96","PetrIvanov.Deckow"]|x}
+    );
+    ( "username/cyrillic/first",
+      1337,
+      {x|["PetrIvanov.Gottlieb","PetrIvanov.Reynolds-Buckridge62","PetrIvanov_Schamberger"]|x}
+    );
+    ( "username/cyrillic/first",
+      7,
+      {x|["PetrIvanov_Kessler","PetrIvanov67","PetrIvanov_Green"]|x} );
+    ( "email/cyrillic",
+      42,
+      {x|["Petr_Ivanov@hotmail.com","Petr.Ivanov@gmail.com","Petr_Ivanov@hotmail.com"]|x}
+    );
+    ( "email/cyrillic",
+      1337,
+      {x|["Petr.Ivanov27@gmail.com","Petr_Ivanov@gmail.com","Petr.Ivanov@yahoo.com"]|x}
+    );
+    ( "email/cyrillic",
+      7,
+      {x|["Petr_Ivanov@gmail.com","Petr_Ivanov50@yahoo.com","Petr.Ivanov@gmail.com"]|x}
+    );
+    ("displayName/cyrillic", 42, {x|["Пётр.Иванов95","Пётр15","Пётр.Иванов"]|x});
+    ( "displayName/cyrillic",
+      1337,
+      {x|["Пётр15","Пётр.Иванов","Пётр.Иванов97"]|x} );
+    ("displayName/cyrillic", 7, {x|["Пётр.Иванов","Пётр_Иванов","Пётр7"]|x});
+    ( "username/greek",
+      42,
+      {x|["Alkistis.Papadopoyloy","Alkistis_Papadopoyloy15","Alkistis.Papadopoyloy"]|x}
+    );
+    ( "username/greek",
+      1337,
+      {x|["Alkistis.Papadopoyloy15","Alkistis.Papadopoyloy","Alkistis.Papadopoyloy"]|x}
+    );
+    ( "username/greek",
+      7,
+      {x|["Alkistis.Papadopoyloy77","Alkistis_Papadopoyloy","Alkistis_Papadopoyloy7"]|x}
+    );
+    ( "username/greek/first",
+      42,
+      {x|["AlkistisPapadopoyloy.Reynolds-Miller15","AlkistisPapadopoyloy96","AlkistisPapadopoyloy.Deckow"]|x}
+    );
+    ( "username/greek/first",
+      1337,
+      {x|["AlkistisPapadopoyloy.Gottlieb","AlkistisPapadopoyloy.Reynolds-Buckridge62","AlkistisPapadopoyloy_Schamberger"]|x}
+    );
+    ( "username/greek/first",
+      7,
+      {x|["AlkistisPapadopoyloy_Kessler","AlkistisPapadopoyloy67","AlkistisPapadopoyloy_Green"]|x}
+    );
+    ( "email/greek",
+      42,
+      {x|["Alkistis_Papadopoyloy@hotmail.com","Alkistis.Papadopoyloy@gmail.com","Alkistis_Papadopoyloy@hotmail.com"]|x}
+    );
+    ( "email/greek",
+      1337,
+      {x|["Alkistis.Papadopoyloy27@gmail.com","Alkistis_Papadopoyloy@gmail.com","Alkistis.Papadopoyloy@yahoo.com"]|x}
+    );
+    ( "email/greek",
+      7,
+      {x|["Alkistis_Papadopoyloy@gmail.com","Alkistis_Papadopoyloy50@yahoo.com","Alkistis.Papadopoyloy@gmail.com"]|x}
+    );
+    ( "displayName/greek",
+      42,
+      {x|["Άλκηστις.Παπαδοπούλου95","Άλκηστις15","Άλκηστις.Παπαδοπούλου"]|x} );
+    ( "displayName/greek",
+      1337,
+      {x|["Άλκηστις15","Άλκηστις.Παπαδοπούλου","Άλκηστις.Παπαδοπούλου97"]|x} );
+    ( "displayName/greek",
+      7,
+      {x|["Άλκηστις.Παπαδοπούλου","Άλκηστις_Παπαδοπούλου","Άλκηστις7"]|x} );
+    ("username/cjk", 42, {x|["mtn.i6nk5q","mtn_i6nk5q15","mtn.i6nk5q"]|x});
+    ("username/cjk", 1337, {x|["mtn.i6nk5q15","mtn.i6nk5q","mtn.i6nk5q"]|x});
+    ("username/cjk", 7, {x|["mtn.i6nk5q77","mtn_i6nk5q","mtn_i6nk5q7"]|x});
+    ( "username/cjk/first",
+      42,
+      {x|["mtni6nk5q.Reynolds-Miller15","mtni6nk5q96","mtni6nk5q.Deckow"]|x} );
+    ( "username/cjk/first",
+      1337,
+      {x|["mtni6nk5q.Gottlieb","mtni6nk5q.Reynolds-Buckridge62","mtni6nk5q_Schamberger"]|x}
+    );
+    ( "username/cjk/first",
+      7,
+      {x|["mtni6nk5q_Kessler","mtni6nk5q67","mtni6nk5q_Green"]|x} );
+    ( "email/cjk",
+      42,
+      {x|["mtn_i6nk5q@hotmail.com","mtn.i6nk5q@gmail.com","mtn_i6nk5q@hotmail.com"]|x}
+    );
+    ( "email/cjk",
+      1337,
+      {x|["mtn.i6nk5q27@gmail.com","mtn_i6nk5q@gmail.com","mtn.i6nk5q@yahoo.com"]|x}
+    );
+    ( "email/cjk",
+      7,
+      {x|["mtn_i6nk5q@gmail.com","mtn_i6nk5q50@yahoo.com","mtn.i6nk5q@gmail.com"]|x}
+    );
+    ("displayName/cjk", 42, {x|["王.小明95","王15","王.小明"]|x});
+    ("displayName/cjk", 1337, {x|["王15","王.小明","王.小明97"]|x});
+    ("displayName/cjk", 7, {x|["王.小明","王_小明","王7"]|x});
+    ( "username/kana",
+      42,
+      {x|["9jp9jj9l5.9no9ni9mn9ll","9jp9jj9l5_9no9ni9mn9ll15","9jp9jj9l5.9no9ni9mn9ll"]|x}
+    );
+    ( "username/kana",
+      1337,
+      {x|["9jp9jj9l5.9no9ni9mn9ll15","9jp9jj9l5.9no9ni9mn9ll","9jp9jj9l5.9no9ni9mn9ll"]|x}
+    );
+    ( "username/kana",
+      7,
+      {x|["9jp9jj9l5.9no9ni9mn9ll77","9jp9jj9l5_9no9ni9mn9ll","9jp9jj9l5_9no9ni9mn9ll7"]|x}
+    );
+    ( "username/kana/first",
+      42,
+      {x|["9jp9jj9l59no9ni9mn9ll.Reynolds-Miller15","9jp9jj9l59no9ni9mn9ll96","9jp9jj9l59no9ni9mn9ll.Deckow"]|x}
+    );
+    ( "username/kana/first",
+      1337,
+      {x|["9jp9jj9l59no9ni9mn9ll.Gottlieb","9jp9jj9l59no9ni9mn9ll.Reynolds-Buckridge62","9jp9jj9l59no9ni9mn9ll_Schamberger"]|x}
+    );
+    ( "username/kana/first",
+      7,
+      {x|["9jp9jj9l59no9ni9mn9ll_Kessler","9jp9jj9l59no9ni9mn9ll67","9jp9jj9l59no9ni9mn9ll_Green"]|x}
+    );
+    ( "email/kana",
+      42,
+      {x|["9jp9jj9l5_9no9ni9mn9ll@hotmail.com","9jp9jj9l5.9no9ni9mn9ll@gmail.com","9jp9jj9l5_9no9ni9mn9ll@hotmail.com"]|x}
+    );
+    ( "email/kana",
+      1337,
+      {x|["9jp9jj9l5.9no9ni9mn9ll27@gmail.com","9jp9jj9l5_9no9ni9mn9ll@gmail.com","9jp9jj9l5.9no9ni9mn9ll@yahoo.com"]|x}
+    );
+    ( "email/kana",
+      7,
+      {x|["9jp9jj9l5_9no9ni9mn9ll@gmail.com","9jp9jj9l5_9no9ni9mn9ll50@yahoo.com","9jp9jj9l5.9no9ni9mn9ll@gmail.com"]|x}
+    );
+    ("displayName/kana", 42, {x|["さくら.ﾔﾏﾀﾞ95","さくら15","さくら.ﾔﾏﾀﾞ"]|x});
+    ("displayName/kana", 1337, {x|["さくら15","さくら.ﾔﾏﾀﾞ","さくら.ﾔﾏﾀﾞ97"]|x});
+    ("displayName/kana", 7, {x|["さくら.ﾔﾏﾀﾞ","さくら_ﾔﾏﾀﾞ","さくら7"]|x});
+    ( "username/korean",
+      42,
+      {x|["3cw3g53hz.3d23g53hn3d83fy3hn","3cw3g53hz_3d23g53hn3d83fy3hn15","3cw3g53hz.3d23g53hn3d83fy3hn"]|x}
+    );
+    ( "username/korean",
+      1337,
+      {x|["3cw3g53hz.3d23g53hn3d83fy3hn15","3cw3g53hz.3d23g53hn3d83fy3hn","3cw3g53hz.3d23g53hn3d83fy3hn"]|x}
+    );
+    ( "username/korean",
+      7,
+      {x|["3cw3g53hz.3d23g53hn3d83fy3hn77","3cw3g53hz_3d23g53hn3d83fy3hn","3cw3g53hz_3d23g53hn3d83fy3hn7"]|x}
+    );
+    ( "username/korean/first",
+      42,
+      {x|["3cw3g53hz3d23g53hn3d83fy3hn.Reynolds-Miller15","3cw3g53hz3d23g53hn3d83fy3hn96","3cw3g53hz3d23g53hn3d83fy3hn.Deckow"]|x}
+    );
+    ( "username/korean/first",
+      1337,
+      {x|["3cw3g53hz3d23g53hn3d83fy3hn.Gottlieb","3cw3g53hz3d23g53hn3d83fy3hn.Reynolds-Buckridge62","3cw3g53hz3d23g53hn3d83fy3hn_Schamberger"]|x}
+    );
+    ( "username/korean/first",
+      7,
+      {x|["3cw3g53hz3d23g53hn3d83fy3hn_Kessler","3cw3g53hz3d23g53hn3d83fy3hn67","3cw3g53hz3d23g53hn3d83fy3hn_Green"]|x}
+    );
+    ( "email/korean",
+      42,
+      {x|["3cw3g53hz_3d23g53hn3d83fy3hn@hotmail.com","3cw3g53hz.3d23g53hn3d83fy3hn@gmail.com","3cw3g53hz_3d23g53hn3d83fy3hn@hotmail.com"]|x}
+    );
+    ( "email/korean",
+      1337,
+      {x|["3cw3g53hz.3d23g53hn3d83fy3hn27@gmail.com","3cw3g53hz_3d23g53hn3d83fy3hn@gmail.com","3cw3g53hz.3d23g53hn3d83fy3hn@yahoo.com"]|x}
+    );
+    ( "email/korean",
+      7,
+      {x|["3cw3g53hz_3d23g53hn3d83fy3hn@gmail.com","3cw3g53hz_3d23g53hn3d83fy3hn50@yahoo.com","3cw3g53hz.3d23g53hn3d83fy3hn@gmail.com"]|x}
+    );
+    ("displayName/korean", 42, {x|["김.민준95","김15","김.민준"]|x});
+    ("displayName/korean", 1337, {x|["김15","김.민준","김.민준97"]|x});
+    ("displayName/korean", 7, {x|["김.민준","김_민준","김7"]|x});
+    ( "username/arabic",
+      42,
+      {x|["a18zdm.a191brahym","a18zdm_a191brahym15","a18zdm.a191brahym"]|x} );
+    ( "username/arabic",
+      1337,
+      {x|["a18zdm.a191brahym15","a18zdm.a191brahym","a18zdm.a191brahym"]|x} );
+    ( "username/arabic",
+      7,
+      {x|["a18zdm.a191brahym77","a18zdm_a191brahym","a18zdm_a191brahym7"]|x} );
+    ( "username/arabic/first",
+      42,
+      {x|["a18zdma191brahym.Reynolds-Miller15","a18zdma191brahym96","a18zdma191brahym.Deckow"]|x}
+    );
+    ( "username/arabic/first",
+      1337,
+      {x|["a18zdma191brahym.Gottlieb","a18zdma191brahym.Reynolds-Buckridge62","a18zdma191brahym_Schamberger"]|x}
+    );
+    ( "username/arabic/first",
+      7,
+      {x|["a18zdma191brahym_Kessler","a18zdma191brahym67","a18zdma191brahym_Green"]|x}
+    );
+    ( "email/arabic",
+      42,
+      {x|["a18zdm_a191brahym@hotmail.com","a18zdm.a191brahym@gmail.com","a18zdm_a191brahym@hotmail.com"]|x}
+    );
+    ( "email/arabic",
+      1337,
+      {x|["a18zdm.a191brahym27@gmail.com","a18zdm_a191brahym@gmail.com","a18zdm.a191brahym@yahoo.com"]|x}
+    );
+    ( "email/arabic",
+      7,
+      {x|["a18zdm_a191brahym@gmail.com","a18zdm_a191brahym50@yahoo.com","a18zdm.a191brahym@gmail.com"]|x}
+    );
+    ("displayName/arabic", 42, {x|["آدم.إبراهيم95","آدم15","آدم.إبراهيم"]|x});
+    ("displayName/arabic", 1337, {x|["آدم15","آدم.إبراهيم","آدم.إبراهيم97"]|x});
+    ("displayName/arabic", 7, {x|["آدم.إبراهيم","آدم_إبراهيم","آدم7"]|x});
+    ( "username/hebrew",
+      42,
+      {x|["dvd.k14p14sh14ln","dvd_k14p14sh14ln15","dvd.k14p14sh14ln"]|x} );
+    ( "username/hebrew",
+      1337,
+      {x|["dvd.k14p14sh14ln15","dvd.k14p14sh14ln","dvd.k14p14sh14ln"]|x} );
+    ( "username/hebrew",
+      7,
+      {x|["dvd.k14p14sh14ln77","dvd_k14p14sh14ln","dvd_k14p14sh14ln7"]|x} );
+    ( "username/hebrew/first",
+      42,
+      {x|["dvdk14p14sh14ln.Reynolds-Miller15","dvdk14p14sh14ln96","dvdk14p14sh14ln.Deckow"]|x}
+    );
+    ( "username/hebrew/first",
+      1337,
+      {x|["dvdk14p14sh14ln.Gottlieb","dvdk14p14sh14ln.Reynolds-Buckridge62","dvdk14p14sh14ln_Schamberger"]|x}
+    );
+    ( "username/hebrew/first",
+      7,
+      {x|["dvdk14p14sh14ln_Kessler","dvdk14p14sh14ln67","dvdk14p14sh14ln_Green"]|x}
+    );
+    ( "email/hebrew",
+      42,
+      {x|["dvd_k14p14sh14ln@hotmail.com","dvd.k14p14sh14ln@gmail.com","dvd_k14p14sh14ln@hotmail.com"]|x}
+    );
+    ( "email/hebrew",
+      1337,
+      {x|["dvd.k14p14sh14ln27@gmail.com","dvd_k14p14sh14ln@gmail.com","dvd.k14p14sh14ln@yahoo.com"]|x}
+    );
+    ( "email/hebrew",
+      7,
+      {x|["dvd_k14p14sh14ln@gmail.com","dvd_k14p14sh14ln50@yahoo.com","dvd.k14p14sh14ln@gmail.com"]|x}
+    );
+    ("displayName/hebrew", 42, {x|["דוד.כֹּהֵן95","דוד15","דוד.כֹּהֵן"]|x});
+    ("displayName/hebrew", 1337, {x|["דוד15","דוד.כֹּהֵן","דוד.כֹּהֵן97"]|x});
+    ("displayName/hebrew", 7, {x|["דוד.כֹּהֵן","דוד_כֹּהֵן","דוד7"]|x});
+    ( "username/armenian",
+      42,
+      {x|["Aram.Pyetrvosyan","Aram_Pyetrvosyan15","Aram.Pyetrvosyan"]|x} );
+    ( "username/armenian",
+      1337,
+      {x|["Aram.Pyetrvosyan15","Aram.Pyetrvosyan","Aram.Pyetrvosyan"]|x} );
+    ( "username/armenian",
+      7,
+      {x|["Aram.Pyetrvosyan77","Aram_Pyetrvosyan","Aram_Pyetrvosyan7"]|x} );
+    ( "username/armenian/first",
+      42,
+      {x|["AramPyetrvosyan.Reynolds-Miller15","AramPyetrvosyan96","AramPyetrvosyan.Deckow"]|x}
+    );
+    ( "username/armenian/first",
+      1337,
+      {x|["AramPyetrvosyan.Gottlieb","AramPyetrvosyan.Reynolds-Buckridge62","AramPyetrvosyan_Schamberger"]|x}
+    );
+    ( "username/armenian/first",
+      7,
+      {x|["AramPyetrvosyan_Kessler","AramPyetrvosyan67","AramPyetrvosyan_Green"]|x}
+    );
+    ( "email/armenian",
+      42,
+      {x|["Aram_Pyetrvosyan@hotmail.com","Aram.Pyetrvosyan@gmail.com","Aram_Pyetrvosyan@hotmail.com"]|x}
+    );
+    ( "email/armenian",
+      1337,
+      {x|["Aram.Pyetrvosyan27@gmail.com","Aram_Pyetrvosyan@gmail.com","Aram.Pyetrvosyan@yahoo.com"]|x}
+    );
+    ( "email/armenian",
+      7,
+      {x|["Aram_Pyetrvosyan@gmail.com","Aram_Pyetrvosyan50@yahoo.com","Aram.Pyetrvosyan@gmail.com"]|x}
+    );
+    ( "displayName/armenian",
+      42,
+      {x|["Արամ.Պետրոսյան95","Արամ15","Արամ.Պետրոսյան"]|x} );
+    ( "displayName/armenian",
+      1337,
+      {x|["Արամ15","Արամ.Պետրոսյան","Արամ.Պետրոսյան97"]|x} );
+    ( "displayName/armenian",
+      7,
+      {x|["Արամ.Պետրոսյան","Արամ_Պետրոսյան","Արամ7"]|x} );
+    ("username/emoji", 42, {x|["A2r5s.Bob","A2r5s_Bob15","A2r5s.Bob"]|x});
+    ("username/emoji", 1337, {x|["A2r5s.Bob15","A2r5s.Bob","A2r5s.Bob"]|x});
+    ("username/emoji", 7, {x|["A2r5s.Bob77","A2r5s_Bob","A2r5s_Bob7"]|x});
+    ( "username/emoji/first",
+      42,
+      {x|["A2r5sBob.Reynolds-Miller15","A2r5sBob96","A2r5sBob.Deckow"]|x} );
+    ( "username/emoji/first",
+      1337,
+      {x|["A2r5sBob.Gottlieb","A2r5sBob.Reynolds-Buckridge62","A2r5sBob_Schamberger"]|x}
+    );
+    ( "username/emoji/first",
+      7,
+      {x|["A2r5sBob_Kessler","A2r5sBob67","A2r5sBob_Green"]|x} );
+    ( "email/emoji",
+      42,
+      {x|["A2r5s_Bob@hotmail.com","A2r5s.Bob@gmail.com","A2r5s_Bob@hotmail.com"]|x}
+    );
+    ( "email/emoji",
+      1337,
+      {x|["A2r5s.Bob27@gmail.com","A2r5s_Bob@gmail.com","A2r5s.Bob@yahoo.com"]|x}
+    );
+    ( "email/emoji",
+      7,
+      {x|["A2r5s_Bob@gmail.com","A2r5s_Bob50@yahoo.com","A2r5s.Bob@gmail.com"]|x}
+    );
+    ("displayName/emoji", 42, {x|["A😀.𝐁𝐨𝐛95","A😀15","A😀.𝐁𝐨𝐛"]|x});
+    ("displayName/emoji", 1337, {x|["A😀15","A😀.𝐁𝐨𝐛","A😀.𝐁𝐨𝐛97"]|x});
+    ("displayName/emoji", 7, {x|["A😀.𝐁𝐨𝐛","A😀_𝐁𝐨𝐛","A😀7"]|x});
+    ( "username/specialchars",
+      42,
+      {x|["a!b#c$d...x..y..","a!b#c$d_..x..y..15","a!b#c$d...x..y.."]|x} );
+    ( "username/specialchars",
+      1337,
+      {x|["a!b#c$d...x..y..15","a!b#c$d...x..y..","a!b#c$d...x..y.."]|x} );
+    ( "username/specialchars",
+      7,
+      {x|["a!b#c$d...x..y..77","a!b#c$d_..x..y..","a!b#c$d_..x..y..7"]|x} );
+    ( "username/specialchars/first",
+      42,
+      {x|["a!b#c$d..x..y...Reynolds-Miller15","a!b#c$d..x..y..96","a!b#c$d..x..y...Deckow"]|x}
+    );
+    ( "username/specialchars/first",
+      1337,
+      {x|["a!b#c$d..x..y...Gottlieb","a!b#c$d..x..y...Reynolds-Buckridge62","a!b#c$d..x..y.._Schamberger"]|x}
+    );
+    ( "username/specialchars/first",
+      7,
+      {x|["a!b#c$d..x..y.._Kessler","a!b#c$d..x..y..67","a!b#c$d..x..y.._Green"]|x}
+    );
+    ( "email/specialchars",
+      42,
+      {x|["abcd_.x.y@hotmail.com","abcd.x.y@gmail.com","abcd_.x.y@hotmail.com"]|x}
+    );
+    ( "email/specialchars",
+      1337,
+      {x|["abcd.x.y.27@gmail.com","abcd_.x.y@gmail.com","abcd.x.y@yahoo.com"]|x}
+    );
+    ( "email/specialchars",
+      7,
+      {x|["abcd_.x.y@gmail.com","abcd_.x.y.50@yahoo.com","abcd.x.y@gmail.com"]|x}
+    );
+    ( "displayName/specialchars",
+      42,
+      {x|["a!b#c$d...x..y..95","a!b#c$d15","a!b#c$d...x..y.."]|x} );
+    ( "displayName/specialchars",
+      1337,
+      {x|["a!b#c$d15","a!b#c$d...x..y..","a!b#c$d...x..y..97"]|x} );
+    ( "displayName/specialchars",
+      7,
+      {x|["a!b#c$d...x..y..","a!b#c$d_..x..y..","a!b#c$d7"]|x} );
+    ( "username/long",
+      42,
+      {x|["Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff","Bartholomew-Maximilian-Alexander_Wolfeschlegelsteinhausenbergerdorff15","Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff"]|x}
+    );
+    ( "username/long",
+      1337,
+      {x|["Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff15","Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff","Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff"]|x}
+    );
+    ( "username/long",
+      7,
+      {x|["Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff77","Bartholomew-Maximilian-Alexander_Wolfeschlegelsteinhausenbergerdorff","Bartholomew-Maximilian-Alexander_Wolfeschlegelsteinhausenbergerdorff7"]|x}
+    );
+    ( "username/long/first",
+      42,
+      {x|["Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff.Reynolds-Miller15","Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff96","Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff.Deckow"]|x}
+    );
+    ( "username/long/first",
+      1337,
+      {x|["Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff.Gottlieb","Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff.Reynolds-Buckridge62","Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff_Schamberger"]|x}
+    );
+    ( "username/long/first",
+      7,
+      {x|["Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff_Kessler","Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff67","Bartholomew-Maximilian-AlexanderWolfeschlegelsteinhausenbergerdorff_Green"]|x}
+    );
+    ( "email/long",
+      42,
+      {x|["Bartholomew-Maximilian-Alexander_Wolfeschlegelstei@hotmail.com","Bartholomew-Maximilian-Alexander.Wolfeschlegelstei@gmail.com","Bartholomew-Maximilian-Alexander_Wolfeschlegelstei@hotmail.com"]|x}
+    );
+    ( "email/long",
+      1337,
+      {x|["Bartholomew-Maximilian-Alexander.Wolfeschlegelstei@gmail.com","Bartholomew-Maximilian-Alexander_Wolfeschlegelstei@gmail.com","Bartholomew-Maximilian-Alexander.Wolfeschlegelstei@yahoo.com"]|x}
+    );
+    ( "email/long",
+      7,
+      {x|["Bartholomew-Maximilian-Alexander_Wolfeschlegelstei@gmail.com","Bartholomew-Maximilian-Alexander_Wolfeschlegelstei@yahoo.com","Bartholomew-Maximilian-Alexander.Wolfeschlegelstei@gmail.com"]|x}
+    );
+    ( "displayName/long",
+      42,
+      {x|["Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff95","Bartholomew-Maximilian-Alexander15","Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff"]|x}
+    );
+    ( "displayName/long",
+      1337,
+      {x|["Bartholomew-Maximilian-Alexander15","Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff","Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff97"]|x}
+    );
+    ( "displayName/long",
+      7,
+      {x|["Bartholomew-Maximilian-Alexander.Wolfeschlegelsteinhausenbergerdorff","Bartholomew-Maximilian-Alexander_Wolfeschlegelsteinhausenbergerdorff","Bartholomew-Maximilian-Alexander7"]|x}
+    );
+    ("username/ligature", 42, {x|["fiona.XII1","fiona_XII115","fiona.XII1"]|x});
+    ("username/ligature", 1337, {x|["fiona.XII115","fiona.XII1","fiona.XII1"]|x});
+    ("username/ligature", 7, {x|["fiona.XII177","fiona_XII1","fiona_XII17"]|x});
+    ( "username/ligature/first",
+      42,
+      {x|["fionaXII1.Reynolds-Miller15","fionaXII196","fionaXII1.Deckow"]|x} );
+    ( "username/ligature/first",
+      1337,
+      {x|["fionaXII1.Gottlieb","fionaXII1.Reynolds-Buckridge62","fionaXII1_Schamberger"]|x}
+    );
+    ( "username/ligature/first",
+      7,
+      {x|["fionaXII1_Kessler","fionaXII167","fionaXII1_Green"]|x} );
+    ( "email/ligature",
+      42,
+      {x|["fiona_XII1@hotmail.com","fiona.XII1@gmail.com","fiona_XII1@hotmail.com"]|x}
+    );
+    ( "email/ligature",
+      1337,
+      {x|["fiona.XII127@gmail.com","fiona_XII1@gmail.com","fiona.XII1@yahoo.com"]|x}
+    );
+    ( "email/ligature",
+      7,
+      {x|["fiona_XII1@gmail.com","fiona_XII150@yahoo.com","fiona.XII1@gmail.com"]|x}
+    );
+    ("displayName/ligature", 42, {x|["ﬁona.Ⅻ①95","ﬁona15","ﬁona.Ⅻ①"]|x});
+    ("displayName/ligature", 1337, {x|["ﬁona15","ﬁona.Ⅻ①","ﬁona.Ⅻ①97"]|x});
+    ("displayName/ligature", 7, {x|["ﬁona.Ⅻ①","ﬁona_Ⅻ①","ﬁona7"]|x});
+  ]

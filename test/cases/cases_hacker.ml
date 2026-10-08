@@ -9,5 +9,6 @@ let cases : case list =
     ("verb", fun f -> s (H.verb f));
     ("ingverb", fun f -> s (H.ingverb f));
     ("phrase", fun f -> s (H.phrase f));
-    ("fake", fun f -> s (Faker.Helpers.fake "{{hacker.noun}} {{hacker.phrase}}" f));
+    ( "fake",
+      fun f -> s (Faker.Helpers.fake "{{hacker.noun}} {{hacker.phrase}}" f) );
   ]

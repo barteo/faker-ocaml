@@ -9,5 +9,10 @@ let cases : case list =
     ("publisher", fun f -> s (M.publisher f));
     ("series", fun f -> s (M.series f));
     ("title", fun f -> s (M.title f));
-    ("fake", fun f -> s (Faker.Helpers.fake "{{book.author}}|{{book.format}}|{{book.genre}}|{{book.publisher}}|{{book.series}}|{{book.title}}|" f));
+    ( "fake",
+      fun f ->
+        s
+          (Faker.Helpers.fake
+             "{{book.author}}|{{book.format}}|{{book.genre}}|{{book.publisher}}|{{book.series}}|{{book.title}}|"
+             f) );
   ]

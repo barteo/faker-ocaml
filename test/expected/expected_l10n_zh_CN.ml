@@ -2,167 +2,336 @@
 
 let locale = "zh_CN"
 
-let cases = [
-  ("person.firstName(\"female\")", 42, {x|["静","烨华"]|x});
-  ("person.firstName(\"female\")", 1337, {x|["国兰","梓晨"]|x});
-  ("person.firstName(\"female\")", 7, {x|["英","艳"]|x});
-  ("person.firstName(\"male\")", 42, {x|["辉","烨华"]|x});
-  ("person.firstName(\"male\")", 1337, {x|["哲新","振东"]|x});
-  ("person.firstName(\"male\")", 7, {x|["浩然","波"]|x});
-  ("person.lastName(\"female\")", 42, {x|["魏","祝"]|x});
-  ("person.lastName(\"female\")", 1337, {x|["向","殷"]|x});
-  ("person.lastName(\"female\")", 7, {x|["贾","蔡"]|x});
-  ("person.lastName(\"male\")", 42, {x|["魏","祝"]|x});
-  ("person.lastName(\"male\")", 1337, {x|["向","殷"]|x});
-  ("person.lastName(\"male\")", 7, {x|["贾","蔡"]|x});
-  ("person.middleName(\"female\")", 42, {x|["Venus","Kali"]|x});
-  ("person.middleName(\"female\")", 1337, {x|["Brielle","Hippolyta"]|x});
-  ("person.middleName(\"female\")", 7, {x|["Michelle","Maddie"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 42, {x|["祝静","秦丽芬"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 1337, {x|["殷国兰","薛天娇"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 7, {x|["蔡英","岳梓萱"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 42, {x|["祝辉","秦伟"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 1337, {x|["殷哲新","薛子豪"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 7, {x|["蔡浩然","岳文昊"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 42, {x|["薛Anna","伍Anna"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 1337, {x|["常Anna","尹Anna"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 7, {x|["欧阳Anna","洪Anna"]|x});
-  ("person.prefix(\"female\")", 42, {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.prefix(\"female\")", 1337, {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.prefix(\"female\")", 7, {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.prefix(\"male\")", 42, {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.prefix(\"male\")", 1337, {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.prefix(\"male\")", 7, {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x});
-  ("person.suffix()", 42, {x|["III","DVM"]|x});
-  ("person.suffix()", 1337, {x|["I","Sr."]|x});
-  ("person.suffix()", 7, {x|["Jr.","DDS"]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 42, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 1337, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 7, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 42, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 1337, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 7, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode(\"###\")", 42, {x|["397","511"]|x});
-  ("location.zipCode(\"###\")", 1337, {x|["212","435"]|x});
-  ("location.zipCode(\"###\")", 7, {x|["074","795"]|x});
-  ("location.state({\"abbreviated\":true})", 42, {x|["青海","福建"]|x});
-  ("location.state({\"abbreviated\":true})", 1337, {x|["河北","黑龙江"]|x});
-  ("location.state({\"abbreviated\":true})", 7, {x|["天津","广西"]|x});
-  ("location.streetAddress(true)", 42, {x|["薛侬20867号 公寓 982","廖侬361号 公寓 447"]|x});
-  ("location.streetAddress(true)", 1337, {x|["常桥5297号 公寓 461","赖中心4571号 公寓 741"]|x});
-  ("location.streetAddress(true)", 7, {x|["欧阳旁5号 套房 124","曾巷9249号 公寓 692"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 42, {x|["薛侬20867号 公寓 982","廖侬361号 公寓 447"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 1337, {x|["常桥5297号 公寓 461","赖中心4571号 公寓 741"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 7, {x|["欧阳旁5号 套房 124","曾巷9249号 公寓 692"]|x});
-  ("location.countryCode(\"alpha-3\")", 42, {x|["GUY","VCT"]|x});
-  ("location.countryCode(\"alpha-3\")", 1337, {x|["ESH","COD"]|x});
-  ("location.countryCode(\"alpha-3\")", 7, {x|["BEL","SYC"]|x});
-  ("location.countryCode(\"numeric\")", 42, {x|["328","670"]|x});
-  ("location.countryCode(\"numeric\")", 1337, {x|["732","180"]|x});
-  ("location.countryCode(\"numeric\")", 7, {x|["056","690"]|x});
-  ("location.timeZone()", 42, {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x});
-  ("location.timeZone()", 1337, {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x});
-  ("location.timeZone()", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
-  ("date.month({\"abbreviated\":true})", 42, {x|["2月","9月"]|x});
-  ("date.month({\"abbreviated\":true})", 1337, {x|["1月","11月"]|x});
-  ("date.month({\"abbreviated\":true})", 7, {x|["10月","7月"]|x});
-  ("date.month({\"context\":true})", 42, {x|["二月","四月"]|x});
-  ("date.month({\"context\":true})", 1337, {x|["九月","七月"]|x});
-  ("date.month({\"context\":true})", 7, {x|["一月","十二月"]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 42, {x|["2月","9月"]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 1337, {x|["1月","11月"]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 7, {x|["10月","7月"]|x});
-  ("date.weekday({\"abbreviated\":true})", 42, {x|["周二","周日"]|x});
-  ("date.weekday({\"abbreviated\":true})", 1337, {x|["周三","周三"]|x});
-  ("date.weekday({\"abbreviated\":true})", 7, {x|["周一","周四"]|x});
-  ("date.weekday({\"context\":true})", 42, {x|["星期二","星期天"]|x});
-  ("date.weekday({\"context\":true})", 1337, {x|["星期三","星期三"]|x});
-  ("date.weekday({\"context\":true})", 7, {x|["星期一","星期四"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 42, {x|["周二","周日"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 1337, {x|["周三","周三"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 7, {x|["周一","周四"]|x});
-  ("phone.number({\"style\":\"human\"})", 42, {x|["097-51108670","18211354261"]|x});
-  ("phone.number({\"style\":\"human\"})", 1337, {x|["0124-35297136","0947-73457126"]|x});
-  ("phone.number({\"style\":\"human\"})", 7, {x|["0747-95502468","002-92490692"]|x});
-  ("phone.number({\"style\":\"national\"})", 42, {x|["097 5110 8670","18211354261"]|x});
-  ("phone.number({\"style\":\"national\"})", 1337, {x|["12435297136","94773457126"]|x});
-  ("phone.number({\"style\":\"national\"})", 7, {x|["74795502468","002 9249 0692"]|x});
-  ("phone.number({\"style\":\"international\"})", 42, {x|["+8697511086709","+8612113542612"]|x});
-  ("phone.number({\"style\":\"international\"})", 1337, {x|["+861243529713","+8619477345712"]|x});
-  ("phone.number({\"style\":\"international\"})", 7, {x|["+867479550246","+8613029249069"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 42, {x|["血淋淋","黑不溜秋"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 1337, {x|["血淋淋","绿油油"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 7, {x|["绿油油","黑不溜秋"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 42, {x|["洗衣机","洗衣机"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 1337, {x|["洗衣机","洗衣机"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 7, {x|["洗衣机","洗衣机"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 42, {x|["拣","拧"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 1337, {x|["抱","咬"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 7, {x|["走","画"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 42, {x|["光","眼镜"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 1337, {x|["如果","甚至"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 7, {x|["捣","到"]|x});
-  ("word.words(5)", 42, {x|["光 眼镜 哟 嘘 乃至","咦 呜 全 以免 通过"]|x});
-  ("word.words(5)", 1337, {x|["如果 甚至 熟练 椅子 对于","逐渐 火车 全 吃 十分"]|x});
-  ("word.words(5)", 7, {x|["捣 到 哟 冰箱 朝","拣 平坦 啊 跑 老实"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 42, {x|["crux","vito"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 1337, {x|["ceno","arma"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 7, {x|["alii","tibi"]|x});
-  ("lorem.sentences(3)", 42, {x|["Virga synagoga patruus armarium armarium. Usitas paulatim suggero. Volubilis tristis benevolentia.","Auctus cognomen esse custodia. Perspiciatis apud claro copiose defleo. Aveho doloribus omnis adipiscor pectus assumenda advoco vinum vociferor."]|x});
-  ("lorem.sentences(3)", 1337, {x|["Articulus chirographum degenero commemoro eaque. Voluptatibus tabella ancilla creptio quisquam. Vorago decipio testimonium thalassinus.","Cupressus nulla temporibus audeo civis. Desidero atrox cupiditate avarus exercitationem tristis audax vita. Desparatus dolore accendo suus vulgo ascisco."]|x});
-  ("lorem.sentences(3)", 7, {x|["Termes debitis supra. Fugiat desino aequitas censura desidero spoliatio thymbra creator aedificium civis. Benigne defero vicinus acidus pauci virga callide infit verbera appello.","Tandem sortitus delibero bardus deprecator corroboro demoror. Tum tenuis combibo nam cetera. Conservo solum corpus degenero super cupiditate."]|x});
-  ("lorem.paragraphs(2)", 42, {x|["Virga synagoga patruus armarium armarium. Usitas paulatim suggero. Volubilis tristis benevolentia.\nAuctus cognomen esse custodia. Perspiciatis apud claro copiose defleo. Aveho doloribus omnis adipiscor pectus assumenda advoco vinum vociferor.","Cogo alter stella decerno animus deputo adeo verbera caute. Color eius incidunt audacia volubilis terga vigor varius. Verus alienus autus adipisci comparo creta cernuus.\nConsuasor cicuta illo aqua thorax aestas vos ter avarus. Tot suffragium suspendo. Aer contego ancilla urbanus qui comptus adversus colo communis."]|x});
-  ("lorem.paragraphs(2)", 1337, {x|["Articulus chirographum degenero commemoro eaque. Voluptatibus tabella ancilla creptio quisquam. Vorago decipio testimonium thalassinus.\nCupressus nulla temporibus audeo civis. Desidero atrox cupiditate avarus exercitationem tristis audax vita. Desparatus dolore accendo suus vulgo ascisco.","Corrupti suadeo abbas corporis. Testimonium consectetur subvenio. Voluptas tubineus pel magni vulpes caterva.\nAlienus vigor voluptate. Confugo supra abstergo temporibus speciosus aufero. Vere arx verbum communis subseco cena earum atrocitas."]|x});
-  ("lorem.paragraphs(2)", 7, {x|["Termes debitis supra. Fugiat desino aequitas censura desidero spoliatio thymbra creator aedificium civis. Benigne defero vicinus acidus pauci virga callide infit verbera appello.\nTandem sortitus delibero bardus deprecator corroboro demoror. Tum tenuis combibo nam cetera. Conservo solum corpus degenero super cupiditate.","Attollo talio curis curso reiciendis eos cuppedia ab aliquam sui. Subito vis statua adnuo colligo optio canonicus. Vinculum ubi demens turba aperte colligo delectatio talis depereo approbo.\nCommunis coerceo asperiores cuppedia dedico. Theca enim degusto tergo valens spero thesaurus vigor adhaero. Charisma demonstro theca sunt arceo soluta aegrus consuasor torqueo cursus."]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 42, {x|["Jurgen_60degard@gmail.com","Jurgen.60degard@163.com"]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 1337, {x|["Jurgen.60degard27@foxmail.com","Jurgen_60degard@gmail.com"]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 7, {x|["Jurgen_60degard@139.com","Jurgen_60degard50@yeah.net"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 42, {x|["Anna.8xukasz","Anna_8xukasz15"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 1337, {x|["Anna.8xukasz15","Anna.8xukasz"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 7, {x|["Anna.8xukasz77","Anna_8xukasz"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 42, {x|["Zoë15","Zoë_秦2"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 1337, {x|["Zoë.常","Zoë.薛"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 7, {x|["Zoë_欧阳","Zoë.岳67"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 42, {x|["mawgge60@gmail.com","h6lmvh*kn561@yahoo.cn"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 1337, {x|["knnk88?i7t73@foxmail.com","lm1sbt_kj776@163.com"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 7, {x|["lia.lka@139.com","tt660@hotmail.com"]|x});
-  ("internet.domainWord()", 42, {x|["virga-patruus","armarium-usitas"]|x});
-  ("internet.domainWord()", 1337, {x|["articulus-degenero","eaque-voluptatibus"]|x});
-  ("internet.domainWord()", 7, {x|["termes-supra","fugiat-aequitas"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 42, {x|["€375.15","€599.09"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 1337, {x|["€262.79","€459.85"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 7, {x|["€77.29","€723.75"]|x});
-  ("commerce.productName()", 42, {x|["棉花贼好用的金枪鱼","花岗岩优雅的手套"]|x});
-  ("commerce.productName()", 1337, {x|["木制优雅的椅子","橡胶好吃肥皂"]|x});
-  ("commerce.productName()", 7, {x|["冷冻精彩绝伦的球","软通用的肥皂"]|x});
-  ("company.name()", 42, {x|["长海市哲新传媒（集团）有限公司","北京市子默印刷无限责任公司"]|x});
-  ("company.name()", 1337, {x|["南头市榕融建设（集团）有限公司","青海省阳水产集团有限公司"]|x});
-  ("company.name()", 7, {x|["衡安市楷瑞燃气无限公司","成沙市俊凯旅游发展（集团）有限公司"]|x});
-  ("finance.currencyName()", 42, {x|["不丹努扎姆","东加勒比元"]|x});
-  ("finance.currencyName()", 1337, {x|["埃塞俄比亚比尔","加拿大元"]|x});
-  ("finance.currencyName()", 7, {x|["巴巴多斯元","索马里先令"]|x});
-  ("finance.creditCardNumber(\"visa\")", 42, {x|["4975110867099","4211-3542-6123-4718"]|x});
-  ("finance.creditCardNumber(\"visa\")", 1337, {x|["4124352971364","4947734571266"]|x});
-  ("finance.creditCardNumber(\"visa\")", 7, {x|["4747955024684","4029249069258"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 42, {x|["2696-7511-0867-0988","2311-1354-2612-3471"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 1337, {x|["2300-2435-2971-3611","5377-3457-1264-1417"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 7, {x|["2610-4795-5024-6833","2365-9249-0692-5918"]|x});
-  ("animal.type()", 42, {x|["狗","鸟"]|x});
-  ("animal.type()", 1337, {x|["熊","熊"]|x});
-  ("animal.type()", 7, {x|["昆虫","鱼"]|x});
-  ("system.fileName({\"extensionCount\":2})", 42, {x|["____.mar.xlw","____.dot.m1v"]|x});
-  ("system.fileName({\"extensionCount\":2})", 1337, {x|["__.jpg.distz","___.lrf.vsw"]|x});
-  ("system.fileName({\"extensionCount\":2})", 7, {x|["_.xla.xhtml","________.xlsx.sh"]|x});
-  ("food.dish()", 42, {x|["芹菜炒猪肉","葱花香料包裹的鹌鹑肉"]|x});
-  ("food.dish()", 1337, {x|["川菜油菜炒羊肉","蚝油生菜"]|x});
-  ("food.dish()", 7, {x|["葱花腌制鸡肉","凉皮"]|x});
-  ("music.songName()", 42, {x|["小城夏天","青花瓷"]|x});
-  ("music.songName()", 1337, {x|["在你身边","半岛铁盒"]|x});
-  ("music.songName()", 7, {x|["东风破","红颜如霜"]|x});
-  ("book.title()", 42, {x|["封神演义","长恨歌"]|x});
-  ("book.title()", 1337, {x|["大学","儒林外史"]|x});
-  ("book.title()", 7, {x|["中国大历史","老残游记"]|x});
-  ("vehicle.vehicle()", 42, {x|["捷豹 Wrangler","蔚来 Impala"]|x});
-  ("vehicle.vehicle()", 1337, {x|["奔驰smart Aventador","奔驰smart Explorer"]|x});
-  ("vehicle.vehicle()", 7, {x|["克莱斯勒 Mustang","日产 Model X"]|x});
-]
+let cases =
+  [
+    ("person.firstName(\"female\")", 42, {x|["静","烨华"]|x});
+    ("person.firstName(\"female\")", 1337, {x|["国兰","梓晨"]|x});
+    ("person.firstName(\"female\")", 7, {x|["英","艳"]|x});
+    ("person.firstName(\"male\")", 42, {x|["辉","烨华"]|x});
+    ("person.firstName(\"male\")", 1337, {x|["哲新","振东"]|x});
+    ("person.firstName(\"male\")", 7, {x|["浩然","波"]|x});
+    ("person.lastName(\"female\")", 42, {x|["魏","祝"]|x});
+    ("person.lastName(\"female\")", 1337, {x|["向","殷"]|x});
+    ("person.lastName(\"female\")", 7, {x|["贾","蔡"]|x});
+    ("person.lastName(\"male\")", 42, {x|["魏","祝"]|x});
+    ("person.lastName(\"male\")", 1337, {x|["向","殷"]|x});
+    ("person.lastName(\"male\")", 7, {x|["贾","蔡"]|x});
+    ("person.middleName(\"female\")", 42, {x|["Venus","Kali"]|x});
+    ("person.middleName(\"female\")", 1337, {x|["Brielle","Hippolyta"]|x});
+    ("person.middleName(\"female\")", 7, {x|["Michelle","Maddie"]|x});
+    ("person.fullName({\"sex\":\"female\"})", 42, {x|["祝静","秦丽芬"]|x});
+    ("person.fullName({\"sex\":\"female\"})", 1337, {x|["殷国兰","薛天娇"]|x});
+    ("person.fullName({\"sex\":\"female\"})", 7, {x|["蔡英","岳梓萱"]|x});
+    ("person.fullName({\"sex\":\"male\"})", 42, {x|["祝辉","秦伟"]|x});
+    ("person.fullName({\"sex\":\"male\"})", 1337, {x|["殷哲新","薛子豪"]|x});
+    ("person.fullName({\"sex\":\"male\"})", 7, {x|["蔡浩然","岳文昊"]|x});
+    ("person.fullName({\"firstName\":\"Anna\"})", 42, {x|["薛Anna","伍Anna"]|x});
+    ("person.fullName({\"firstName\":\"Anna\"})", 1337, {x|["常Anna","尹Anna"]|x});
+    ("person.fullName({\"firstName\":\"Anna\"})", 7, {x|["欧阳Anna","洪Anna"]|x});
+    ( "person.prefix(\"female\")",
+      42,
+      {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "person.prefix(\"female\")",
+      1337,
+      {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "person.prefix(\"female\")",
+      7,
+      {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "person.prefix(\"male\")",
+      42,
+      {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "person.prefix(\"male\")",
+      1337,
+      {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ( "person.prefix(\"male\")",
+      7,
+      {x|[{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"},{"error":"The locale data for 'person.prefix' aren't applicable to this locale.\n  If you think this is a bug, please report it at: https://github.com/faker-js/faker"}]|x}
+    );
+    ("person.suffix()", 42, {x|["III","DVM"]|x});
+    ("person.suffix()", 1337, {x|["I","Sr."]|x});
+    ("person.suffix()", 7, {x|["Jr.","DDS"]|x});
+    ( "location.zipCode({\"state\":\"CA\"})",
+      42,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"CA\"})",
+      1337,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"CA\"})",
+      7,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      42,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      1337,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      7,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ("location.zipCode(\"###\")", 42, {x|["397","511"]|x});
+    ("location.zipCode(\"###\")", 1337, {x|["212","435"]|x});
+    ("location.zipCode(\"###\")", 7, {x|["074","795"]|x});
+    ("location.state({\"abbreviated\":true})", 42, {x|["青海","福建"]|x});
+    ("location.state({\"abbreviated\":true})", 1337, {x|["河北","黑龙江"]|x});
+    ("location.state({\"abbreviated\":true})", 7, {x|["天津","广西"]|x});
+    ( "location.streetAddress(true)",
+      42,
+      {x|["薛侬20867号 公寓 982","廖侬361号 公寓 447"]|x} );
+    ( "location.streetAddress(true)",
+      1337,
+      {x|["常桥5297号 公寓 461","赖中心4571号 公寓 741"]|x} );
+    ("location.streetAddress(true)", 7, {x|["欧阳旁5号 套房 124","曾巷9249号 公寓 692"]|x});
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      42,
+      {x|["薛侬20867号 公寓 982","廖侬361号 公寓 447"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      1337,
+      {x|["常桥5297号 公寓 461","赖中心4571号 公寓 741"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      7,
+      {x|["欧阳旁5号 套房 124","曾巷9249号 公寓 692"]|x} );
+    ("location.countryCode(\"alpha-3\")", 42, {x|["GUY","VCT"]|x});
+    ("location.countryCode(\"alpha-3\")", 1337, {x|["ESH","COD"]|x});
+    ("location.countryCode(\"alpha-3\")", 7, {x|["BEL","SYC"]|x});
+    ("location.countryCode(\"numeric\")", 42, {x|["328","670"]|x});
+    ("location.countryCode(\"numeric\")", 1337, {x|["732","180"]|x});
+    ("location.countryCode(\"numeric\")", 7, {x|["056","690"]|x});
+    ( "location.timeZone()",
+      42,
+      {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x} );
+    ( "location.timeZone()",
+      1337,
+      {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x} );
+    ("location.timeZone()", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
+    ("date.month({\"abbreviated\":true})", 42, {x|["2月","9月"]|x});
+    ("date.month({\"abbreviated\":true})", 1337, {x|["1月","11月"]|x});
+    ("date.month({\"abbreviated\":true})", 7, {x|["10月","7月"]|x});
+    ("date.month({\"context\":true})", 42, {x|["二月","四月"]|x});
+    ("date.month({\"context\":true})", 1337, {x|["九月","七月"]|x});
+    ("date.month({\"context\":true})", 7, {x|["一月","十二月"]|x});
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      42,
+      {x|["2月","9月"]|x} );
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      1337,
+      {x|["1月","11月"]|x} );
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      7,
+      {x|["10月","7月"]|x} );
+    ("date.weekday({\"abbreviated\":true})", 42, {x|["周二","周日"]|x});
+    ("date.weekday({\"abbreviated\":true})", 1337, {x|["周三","周三"]|x});
+    ("date.weekday({\"abbreviated\":true})", 7, {x|["周一","周四"]|x});
+    ("date.weekday({\"context\":true})", 42, {x|["星期二","星期天"]|x});
+    ("date.weekday({\"context\":true})", 1337, {x|["星期三","星期三"]|x});
+    ("date.weekday({\"context\":true})", 7, {x|["星期一","星期四"]|x});
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      42,
+      {x|["周二","周日"]|x} );
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      1337,
+      {x|["周三","周三"]|x} );
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      7,
+      {x|["周一","周四"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      42,
+      {x|["097-51108670","18211354261"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      1337,
+      {x|["0124-35297136","0947-73457126"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      7,
+      {x|["0747-95502468","002-92490692"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      42,
+      {x|["097 5110 8670","18211354261"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      1337,
+      {x|["12435297136","94773457126"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      7,
+      {x|["74795502468","002 9249 0692"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      42,
+      {x|["+8697511086709","+8612113542612"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      1337,
+      {x|["+861243529713","+8619477345712"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      7,
+      {x|["+867479550246","+8613029249069"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      42,
+      {x|["血淋淋","黑不溜秋"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      1337,
+      {x|["血淋淋","绿油油"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      7,
+      {x|["绿油油","黑不溜秋"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      42,
+      {x|["洗衣机","洗衣机"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      1337,
+      {x|["洗衣机","洗衣机"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      7,
+      {x|["洗衣机","洗衣机"]|x} );
+    ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 42, {x|["拣","拧"]|x});
+    ( "word.verb({\"length\":20,\"strategy\":\"shortest\"})",
+      1337,
+      {x|["抱","咬"]|x} );
+    ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 7, {x|["走","画"]|x});
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      42,
+      {x|["光","眼镜"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      1337,
+      {x|["如果","甚至"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      7,
+      {x|["捣","到"]|x} );
+    ("word.words(5)", 42, {x|["光 眼镜 哟 嘘 乃至","咦 呜 全 以免 通过"]|x});
+    ("word.words(5)", 1337, {x|["如果 甚至 熟练 椅子 对于","逐渐 火车 全 吃 十分"]|x});
+    ("word.words(5)", 7, {x|["捣 到 哟 冰箱 朝","拣 平坦 啊 跑 老实"]|x});
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      42,
+      {x|["crux","vito"]|x} );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      1337,
+      {x|["ceno","arma"]|x} );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      7,
+      {x|["alii","tibi"]|x} );
+    ( "lorem.sentences(3)",
+      42,
+      {x|["Virga synagoga patruus armarium armarium. Usitas paulatim suggero. Volubilis tristis benevolentia.","Auctus cognomen esse custodia. Perspiciatis apud claro copiose defleo. Aveho doloribus omnis adipiscor pectus assumenda advoco vinum vociferor."]|x}
+    );
+    ( "lorem.sentences(3)",
+      1337,
+      {x|["Articulus chirographum degenero commemoro eaque. Voluptatibus tabella ancilla creptio quisquam. Vorago decipio testimonium thalassinus.","Cupressus nulla temporibus audeo civis. Desidero atrox cupiditate avarus exercitationem tristis audax vita. Desparatus dolore accendo suus vulgo ascisco."]|x}
+    );
+    ( "lorem.sentences(3)",
+      7,
+      {x|["Termes debitis supra. Fugiat desino aequitas censura desidero spoliatio thymbra creator aedificium civis. Benigne defero vicinus acidus pauci virga callide infit verbera appello.","Tandem sortitus delibero bardus deprecator corroboro demoror. Tum tenuis combibo nam cetera. Conservo solum corpus degenero super cupiditate."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      42,
+      {x|["Virga synagoga patruus armarium armarium. Usitas paulatim suggero. Volubilis tristis benevolentia.\nAuctus cognomen esse custodia. Perspiciatis apud claro copiose defleo. Aveho doloribus omnis adipiscor pectus assumenda advoco vinum vociferor.","Cogo alter stella decerno animus deputo adeo verbera caute. Color eius incidunt audacia volubilis terga vigor varius. Verus alienus autus adipisci comparo creta cernuus.\nConsuasor cicuta illo aqua thorax aestas vos ter avarus. Tot suffragium suspendo. Aer contego ancilla urbanus qui comptus adversus colo communis."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      1337,
+      {x|["Articulus chirographum degenero commemoro eaque. Voluptatibus tabella ancilla creptio quisquam. Vorago decipio testimonium thalassinus.\nCupressus nulla temporibus audeo civis. Desidero atrox cupiditate avarus exercitationem tristis audax vita. Desparatus dolore accendo suus vulgo ascisco.","Corrupti suadeo abbas corporis. Testimonium consectetur subvenio. Voluptas tubineus pel magni vulpes caterva.\nAlienus vigor voluptate. Confugo supra abstergo temporibus speciosus aufero. Vere arx verbum communis subseco cena earum atrocitas."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      7,
+      {x|["Termes debitis supra. Fugiat desino aequitas censura desidero spoliatio thymbra creator aedificium civis. Benigne defero vicinus acidus pauci virga callide infit verbera appello.\nTandem sortitus delibero bardus deprecator corroboro demoror. Tum tenuis combibo nam cetera. Conservo solum corpus degenero super cupiditate.","Attollo talio curis curso reiciendis eos cuppedia ab aliquam sui. Subito vis statua adnuo colligo optio canonicus. Vinculum ubi demens turba aperte colligo delectatio talis depereo approbo.\nCommunis coerceo asperiores cuppedia dedico. Theca enim degusto tergo valens spero thesaurus vigor adhaero. Charisma demonstro theca sunt arceo soluta aegrus consuasor torqueo cursus."]|x}
+    );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      42,
+      {x|["Jurgen_60degard@gmail.com","Jurgen.60degard@163.com"]|x} );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      1337,
+      {x|["Jurgen.60degard27@foxmail.com","Jurgen_60degard@gmail.com"]|x} );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      7,
+      {x|["Jurgen_60degard@139.com","Jurgen_60degard50@yeah.net"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      42,
+      {x|["Anna.8xukasz","Anna_8xukasz15"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      1337,
+      {x|["Anna.8xukasz15","Anna.8xukasz"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      7,
+      {x|["Anna.8xukasz77","Anna_8xukasz"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      42,
+      {x|["Zoë15","Zoë_秦2"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      1337,
+      {x|["Zoë.常","Zoë.薛"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      7,
+      {x|["Zoë_欧阳","Zoë.岳67"]|x} );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      42,
+      {x|["mawgge60@gmail.com","h6lmvh*kn561@yahoo.cn"]|x} );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      1337,
+      {x|["knnk88?i7t73@foxmail.com","lm1sbt_kj776@163.com"]|x} );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      7,
+      {x|["lia.lka@139.com","tt660@hotmail.com"]|x} );
+    ("internet.domainWord()", 42, {x|["virga-patruus","armarium-usitas"]|x});
+    ( "internet.domainWord()",
+      1337,
+      {x|["articulus-degenero","eaque-voluptatibus"]|x} );
+    ("internet.domainWord()", 7, {x|["termes-supra","fugiat-aequitas"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 42, {x|["€375.15","€599.09"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 1337, {x|["€262.79","€459.85"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 7, {x|["€77.29","€723.75"]|x});
+    ("commerce.productName()", 42, {x|["棉花贼好用的金枪鱼","花岗岩优雅的手套"]|x});
+    ("commerce.productName()", 1337, {x|["木制优雅的椅子","橡胶好吃肥皂"]|x});
+    ("commerce.productName()", 7, {x|["冷冻精彩绝伦的球","软通用的肥皂"]|x});
+    ("company.name()", 42, {x|["长海市哲新传媒（集团）有限公司","北京市子默印刷无限责任公司"]|x});
+    ("company.name()", 1337, {x|["南头市榕融建设（集团）有限公司","青海省阳水产集团有限公司"]|x});
+    ("company.name()", 7, {x|["衡安市楷瑞燃气无限公司","成沙市俊凯旅游发展（集团）有限公司"]|x});
+    ("finance.currencyName()", 42, {x|["不丹努扎姆","东加勒比元"]|x});
+    ("finance.currencyName()", 1337, {x|["埃塞俄比亚比尔","加拿大元"]|x});
+    ("finance.currencyName()", 7, {x|["巴巴多斯元","索马里先令"]|x});
+    ( "finance.creditCardNumber(\"visa\")",
+      42,
+      {x|["4975110867099","4211-3542-6123-4718"]|x} );
+    ( "finance.creditCardNumber(\"visa\")",
+      1337,
+      {x|["4124352971364","4947734571266"]|x} );
+    ( "finance.creditCardNumber(\"visa\")",
+      7,
+      {x|["4747955024684","4029249069258"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      42,
+      {x|["2696-7511-0867-0988","2311-1354-2612-3471"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      1337,
+      {x|["2300-2435-2971-3611","5377-3457-1264-1417"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      7,
+      {x|["2610-4795-5024-6833","2365-9249-0692-5918"]|x} );
+    ("animal.type()", 42, {x|["狗","鸟"]|x});
+    ("animal.type()", 1337, {x|["熊","熊"]|x});
+    ("animal.type()", 7, {x|["昆虫","鱼"]|x});
+    ( "system.fileName({\"extensionCount\":2})",
+      42,
+      {x|["____.mar.xlw","____.dot.m1v"]|x} );
+    ( "system.fileName({\"extensionCount\":2})",
+      1337,
+      {x|["__.jpg.distz","___.lrf.vsw"]|x} );
+    ( "system.fileName({\"extensionCount\":2})",
+      7,
+      {x|["_.xla.xhtml","________.xlsx.sh"]|x} );
+    ("food.dish()", 42, {x|["芹菜炒猪肉","葱花香料包裹的鹌鹑肉"]|x});
+    ("food.dish()", 1337, {x|["川菜油菜炒羊肉","蚝油生菜"]|x});
+    ("food.dish()", 7, {x|["葱花腌制鸡肉","凉皮"]|x});
+    ("music.songName()", 42, {x|["小城夏天","青花瓷"]|x});
+    ("music.songName()", 1337, {x|["在你身边","半岛铁盒"]|x});
+    ("music.songName()", 7, {x|["东风破","红颜如霜"]|x});
+    ("book.title()", 42, {x|["封神演义","长恨歌"]|x});
+    ("book.title()", 1337, {x|["大学","儒林外史"]|x});
+    ("book.title()", 7, {x|["中国大历史","老残游记"]|x});
+    ("vehicle.vehicle()", 42, {x|["捷豹 Wrangler","蔚来 Impala"]|x});
+    ("vehicle.vehicle()", 1337, {x|["奔驰smart Aventador","奔驰smart Explorer"]|x});
+    ("vehicle.vehicle()", 7, {x|["克莱斯勒 Mustang","日产 Model X"]|x});
+  ]

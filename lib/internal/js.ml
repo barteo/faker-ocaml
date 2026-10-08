@@ -14,7 +14,8 @@ let shortest_digits x =
   let mantissa, exp =
     match String.index_opt s 'e' with
     | Some i ->
-        (String.sub s 0 i, int_of_string (String.sub s (i + 1) (String.length s - i - 1)))
+        ( String.sub s 0 i,
+          int_of_string (String.sub s (i + 1) (String.length s - i - 1)) )
     | None -> (s, 0)
   in
   let digits = String.concat "" (String.split_on_char '.' mantissa) in
@@ -74,7 +75,8 @@ let to_fixed (x : float) (digits : int) =
     let s = Printf.sprintf "%.*f" (digits + 25) ax in
     let ip, fp =
       match String.index_opt s '.' with
-      | Some i -> (String.sub s 0 i, String.sub s (i + 1) (String.length s - i - 1))
+      | Some i ->
+          (String.sub s 0 i, String.sub s (i + 1) (String.length s - i - 1))
       | None -> (s, "")
     in
     let kept = String.sub fp 0 digits in
@@ -82,7 +84,8 @@ let to_fixed (x : float) (digits : int) =
     let all = if fp.[digits] >= '5' then increment_digits all else all in
     let il = String.length all - digits in
     let res =
-      if digits = 0 then all else String.sub all 0 il ^ "." ^ String.sub all il digits
+      if digits = 0 then all
+      else String.sub all 0 il ^ "." ^ String.sub all il digits
     in
     if neg then "-" ^ res else res
 
@@ -93,8 +96,15 @@ let int_to_radix (n : int) (radix : int) =
   else
     let digits = "0123456789abcdefghijklmnopqrstuvwxyz" in
     let buf = Buffer.create 16 in
-    let rec go n = if n > 0 then (go (n / radix); Buffer.add_char buf digits.[n mod radix]) in
-    if n < 0 then (Buffer.add_char buf '-'; go (-n)) else go n;
+    let rec go n =
+      if n > 0 then (
+        go (n / radix);
+        Buffer.add_char buf digits.[n mod radix])
+    in
+    if n < 0 then (
+      Buffer.add_char buf '-';
+      go (-n))
+    else go n;
     Buffer.contents buf
 
 (* ---------- Number.parseInt(s) (radix 10) ---------- *)
@@ -102,7 +112,9 @@ let int_to_radix (n : int) (radix : int) =
 let parse_int (s : string) : int option =
   let len = String.length s in
   let i = ref 0 in
-  while !i < len && (s.[!i] = ' ' || s.[!i] = '\t' || s.[!i] = '\n' || s.[!i] = '\r') do
+  while
+    !i < len && (s.[!i] = ' ' || s.[!i] = '\t' || s.[!i] = '\n' || s.[!i] = '\r')
+  do
     incr i
   done;
   let neg = !i < len && s.[!i] = '-' in
@@ -135,11 +147,18 @@ let to_number (s : string) : float =
     let i = ref (if n > 0 && (s.[0] = '+' || s.[0] = '-') then 1 else 0) in
     let count () =
       let start = !i in
-      while !i < n && is_dec s.[!i] do incr i done;
+      while !i < n && is_dec s.[!i] do
+        incr i
+      done;
       !i - start
     in
     let int_digits = count () in
-    let frac_digits = if !i < n && s.[!i] = '.' then (incr i; count ()) else 0 in
+    let frac_digits =
+      if !i < n && s.[!i] = '.' then (
+        incr i;
+        count ())
+      else 0
+    in
     let mantissa = int_digits + frac_digits > 0 in
     let exponent_ok =
       if !i < n && (s.[!i] = 'e' || s.[!i] = 'E') then begin
@@ -157,7 +176,11 @@ let to_number (s : string) : float =
     String.iteri
       (fun i c ->
         if i >= 2 then
-          let d = match c with '0' .. '9' -> Char.code c - 48 | c -> Char.code (Char.lowercase_ascii c) - 87 in
+          let d =
+            match c with
+            | '0' .. '9' -> Char.code c - 48
+            | c -> Char.code (Char.lowercase_ascii c) - 87
+          in
           v := (!v *. float_of_int base) +. float_of_int d)
       s;
     !v
@@ -165,7 +188,11 @@ let to_number (s : string) : float =
   if s = "" then 0.0
   else if s = "Infinity" || s = "+Infinity" then Float.infinity
   else if s = "-Infinity" then Float.neg_infinity
-  else if radix "0x" (function '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' -> true | _ -> false) then digits 16
+  else if
+    radix "0x" (function
+      | '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' -> true
+      | _ -> false)
+  then digits 16
   else if radix "0o" (function '0' .. '7' -> true | _ -> false) then digits 8
   else if radix "0b" (function '0' | '1' -> true | _ -> false) then digits 2
   else if decimal s then float_of_string s
@@ -209,9 +236,14 @@ let replace_all ~sub ~by s =
     let b = Buffer.create (String.length s) in
     let sl = String.length sub in
     let rec go i =
-      if i > String.length s - sl then Buffer.add_string b (String.sub s i (String.length s - i))
-      else if String.sub s i sl = sub then (Buffer.add_string b by; go (i + sl))
-      else (Buffer.add_char b s.[i]; go (i + 1))
+      if i > String.length s - sl then
+        Buffer.add_string b (String.sub s i (String.length s - i))
+      else if String.sub s i sl = sub then (
+        Buffer.add_string b by;
+        go (i + sl))
+      else (
+        Buffer.add_char b s.[i];
+        go (i + 1))
     in
     go 0;
     Buffer.contents b
@@ -226,7 +258,8 @@ let replace_first ~sub ~by s =
   in
   match find 0 with
   | None -> s
-  | Some i -> String.sub s 0 i ^ by ^ String.sub s (i + sl) (String.length s - i - sl)
+  | Some i ->
+      String.sub s 0 i ^ by ^ String.sub s (i + sl) (String.length s - i - sl)
 
 let index_of ?(from = 0) ~sub s =
   let sl = String.length sub in
@@ -267,7 +300,7 @@ let capitalize s = String.capitalize_ascii s
 
 (* ---------- floating point ---------- *)
 
-(** Float multiplication that is never fused with a following addition.
-    The arm64 backend turns [a *. b +. c] into a fused multiply-add, which
-    rounds differently from JavaScript; always write [Js.mul a b +. c]. *)
+(** Float multiplication that is never fused with a following addition. The
+    arm64 backend turns [a *. b +. c] into a fused multiply-add, which rounds
+    differently from JavaScript; always write [Js.mul a b +. c]. *)
 let mul (a : float) (b : float) : float = Sys.opaque_identity (a *. b)

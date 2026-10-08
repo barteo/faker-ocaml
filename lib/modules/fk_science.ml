@@ -4,16 +4,22 @@ type chemical_element = { symbol : string; name : string; atomic_number : int }
 type unit_ = { name : string; symbol : string }
 
 let pick_obj entry f =
-  match Locale.get f "science" entry with Json.Arr a -> Fk_helpers.array_element a f | v -> v
+  match Locale.get f "science" entry with
+  | Json.Arr a -> Fk_helpers.array_element a f
+  | v -> v
 
-let field o k = match Json.member k o with Some v -> Locale.to_string v | None -> ""
+let field o k =
+  match Json.member k o with Some v -> Locale.to_string v | None -> ""
 
 let chemical_element f : chemical_element =
   let o = pick_obj "chemical_element" f in
   {
     symbol = field o "symbol";
     name = field o "name";
-    atomic_number = (match Json.member "atomicNumber" o with Some (Json.Num n) -> int_of_float n | _ -> 0);
+    atomic_number =
+      (match Json.member "atomicNumber" o with
+      | Some (Json.Num n) -> int_of_float n
+      | _ -> 0);
   }
 
 let unit f : unit_ =
@@ -23,9 +29,14 @@ let unit f : unit_ =
 (* JSON views (JS key order). *)
 let chemical_element_to_json (e : chemical_element) =
   Json.Obj
-    [ ("symbol", Json.Str e.symbol); ("name", Json.Str e.name); ("atomicNumber", Json.int e.atomic_number) ]
+    [
+      ("symbol", Json.Str e.symbol);
+      ("name", Json.Str e.name);
+      ("atomicNumber", Json.int e.atomic_number);
+    ]
 
-let unit_to_json (u : unit_) = Json.Obj [ ("name", Json.Str u.name); ("symbol", Json.Str u.symbol) ]
+let unit_to_json (u : unit_) =
+  Json.Obj [ ("name", Json.Str u.name); ("symbol", Json.Str u.symbol) ]
 
 let registry : (string * Registry.fn) list =
   [

@@ -2,20 +2,21 @@
 
 let locale = "en"
 
-let cases = [
-  ("boolean", 42, {x|[true,false,false]|x});
-  ("boolean", 1337, {x|[true,true,true]|x});
-  ("boolean", 7, {x|[true,false,true]|x});
-  ("boolean/0.9", 42, {x|[true,false,true]|x});
-  ("boolean/0.9", 1337, {x|[true,true,true]|x});
-  ("boolean/0.9", 7, {x|[true,true,true]|x});
-  ("boolean/0.1", 42, {x|[false,false,false]|x});
-  ("boolean/0.1", 1337, {x|[false,false,false]|x});
-  ("boolean/0.1", 7, {x|[true,false,false]|x});
-  ("boolean/1", 42, {x|[true,true,true]|x});
-  ("boolean/1", 1337, {x|[true,true,true]|x});
-  ("boolean/1", 7, {x|[true,true,true]|x});
-  ("boolean/0", 42, {x|[false,false,false]|x});
-  ("boolean/0", 1337, {x|[false,false,false]|x});
-  ("boolean/0", 7, {x|[false,false,false]|x});
-]
+let cases =
+  [
+    ("boolean", 42, {x|[true,false,false]|x});
+    ("boolean", 1337, {x|[true,true,true]|x});
+    ("boolean", 7, {x|[true,false,true]|x});
+    ("boolean/0.9", 42, {x|[true,false,true]|x});
+    ("boolean/0.9", 1337, {x|[true,true,true]|x});
+    ("boolean/0.9", 7, {x|[true,true,true]|x});
+    ("boolean/0.1", 42, {x|[false,false,false]|x});
+    ("boolean/0.1", 1337, {x|[false,false,false]|x});
+    ("boolean/0.1", 7, {x|[true,false,false]|x});
+    ("boolean/1", 42, {x|[true,true,true]|x});
+    ("boolean/1", 1337, {x|[true,true,true]|x});
+    ("boolean/1", 7, {x|[true,true,true]|x});
+    ("boolean/0", 42, {x|[false,false,false]|x});
+    ("boolean/0", 1337, {x|[false,false,false]|x});
+    ("boolean/0", 7, {x|[false,false,false]|x});
+  ]

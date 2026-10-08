@@ -2,464 +2,855 @@
 
 let locale = "en"
 
-let cases = [
-  ("adjective", 42, {x|["hospitable","weird","shameful"]|x});
-  ("adjective", 1337, {x|["fatal","cumbersome","flickering"]|x});
-  ("adjective", 7, {x|["blushing","sparkling","jittery"]|x});
-  ("adjective/5", 42, {x|["lanky","windy","slimy"]|x});
-  ("adjective/5", 1337, {x|["fuzzy","crazy","great"]|x});
-  ("adjective/5", 7, {x|["blond","steel","merry"]|x});
-  ("adjective/range", 42, {x|["joyful","whole","smooth"]|x});
-  ("adjective/range", 1337, {x|["frilly","dark","fuzzy"]|x});
-  ("adjective/range", 7, {x|["both","steep","lone"]|x});
-  ("adjective/len3", 42, {x|["hot","wee","our"]|x});
-  ("adjective/len3", 1337, {x|["far","bad","far"]|x});
-  ("adjective/len3", 7, {x|["any","raw","ill"]|x});
-  ("adjective/fail", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("adjective/fail", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("adjective/fail", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("adjective/fail-range", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("adjective/fail-range", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("adjective/fail-range", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("adjective/closest", 42, {x|["inconsequential","well-documented","well-documented"]|x});
-  ("adjective/closest", 1337, {x|["black-and-white","black-and-white","black-and-white"]|x});
-  ("adjective/closest", 7, {x|["black-and-white","well-documented","inconsequential"]|x});
-  ("adjective/closest-low", 42, {x|["hot","wee","our"]|x});
-  ("adjective/closest-low", 1337, {x|["far","bad","far"]|x});
-  ("adjective/closest-low", 7, {x|["any","raw","ill"]|x});
-  ("adjective/closest-range", 42, {x|["inconsequential","well-documented","well-documented"]|x});
-  ("adjective/closest-range", 1337, {x|["black-and-white","black-and-white","black-and-white"]|x});
-  ("adjective/closest-range", 7, {x|["black-and-white","well-documented","inconsequential"]|x});
-  ("adjective/shortest", 42, {x|["hot","wee","our"]|x});
-  ("adjective/shortest", 1337, {x|["far","bad","far"]|x});
-  ("adjective/shortest", 7, {x|["any","raw","ill"]|x});
-  ("adjective/longest", 42, {x|["inconsequential","well-documented","well-documented"]|x});
-  ("adjective/longest", 1337, {x|["black-and-white","black-and-white","black-and-white"]|x});
-  ("adjective/longest", 7, {x|["black-and-white","well-documented","inconsequential"]|x});
-  ("adjective/shortest-len", 42, {x|["hot","wee","our"]|x});
-  ("adjective/shortest-len", 1337, {x|["far","bad","far"]|x});
-  ("adjective/shortest-len", 7, {x|["any","raw","ill"]|x});
-  ("adjective/longest-len", 42, {x|["inconsequential","well-documented","well-documented"]|x});
-  ("adjective/longest-len", 1337, {x|["black-and-white","black-and-white","black-and-white"]|x});
-  ("adjective/longest-len", 7, {x|["black-and-white","well-documented","inconsequential"]|x});
-  ("adjective/any-length", 42, {x|["hospitable","weird","shameful"]|x});
-  ("adjective/any-length", 1337, {x|["fatal","cumbersome","flickering"]|x});
-  ("adjective/any-length", 7, {x|["blushing","sparkling","jittery"]|x});
-  ("adjective/any-length-nolen", 42, {x|["hospitable","weird","shameful"]|x});
-  ("adjective/any-length-nolen", 1337, {x|["fatal","cumbersome","flickering"]|x});
-  ("adjective/any-length-nolen", 7, {x|["blushing","sparkling","jittery"]|x});
-  ("adjective/fail-nolen", 42, {x|["hospitable","weird","shameful"]|x});
-  ("adjective/fail-nolen", 1337, {x|["fatal","cumbersome","flickering"]|x});
-  ("adjective/fail-nolen", 7, {x|["blushing","sparkling","jittery"]|x});
-  ("adjective/closest-nolen", 42, {x|["hospitable","weird","shameful"]|x});
-  ("adjective/closest-nolen", 1337, {x|["fatal","cumbersome","flickering"]|x});
-  ("adjective/closest-nolen", 7, {x|["blushing","sparkling","jittery"]|x});
-  ("adjective/match-closest", 42, {x|["impish","white","slushy"]|x});
-  ("adjective/match-closest", 1337, {x|["frail","damaged","funny"]|x});
-  ("adjective/match-closest", 7, {x|["boiling","steel","little"]|x});
-  ("adverb", 42, {x|["jaggedly","wearily","sheepishly"]|x});
-  ("adverb", 1337, {x|["frankly","deceivingly","fully"]|x});
-  ("adverb", 7, {x|["briefly","successfully","lightly"]|x});
-  ("adverb/5", 42, {x|["madly","wetly","sadly"]|x});
-  ("adverb/5", 1337, {x|["fully","daily","fully"]|x});
-  ("adverb/5", 7, {x|["badly","shyly","never"]|x});
-  ("adverb/range", 42, {x|["keenly","wholly","seldom"]|x});
-  ("adverb/range", 1337, {x|["freely","deeply","fully"]|x});
-  ("adverb/range", 7, {x|["busily","softly","limply"]|x});
-  ("adverb/len3", 42, {x|["not","too","too"]|x});
-  ("adverb/len3", 1337, {x|["far","far","far"]|x});
-  ("adverb/len3", 7, {x|["far","too","not"]|x});
-  ("adverb/fail", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("adverb/fail", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("adverb/fail", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("adverb/fail-range", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("adverb/fail-range", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("adverb/fail-range", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("adverb/closest", 42, {x|["enthusiastically","enthusiastically","enthusiastically"]|x});
-  ("adverb/closest", 1337, {x|["enthusiastically","enthusiastically","enthusiastically"]|x});
-  ("adverb/closest", 7, {x|["enthusiastically","enthusiastically","enthusiastically"]|x});
-  ("adverb/closest-low", 42, {x|["not","too","too"]|x});
-  ("adverb/closest-low", 1337, {x|["far","far","far"]|x});
-  ("adverb/closest-low", 7, {x|["far","too","not"]|x});
-  ("adverb/closest-range", 42, {x|["enthusiastically","enthusiastically","enthusiastically"]|x});
-  ("adverb/closest-range", 1337, {x|["enthusiastically","enthusiastically","enthusiastically"]|x});
-  ("adverb/closest-range", 7, {x|["enthusiastically","enthusiastically","enthusiastically"]|x});
-  ("adverb/shortest", 42, {x|["not","too","too"]|x});
-  ("adverb/shortest", 1337, {x|["far","far","far"]|x});
-  ("adverb/shortest", 7, {x|["far","too","not"]|x});
-  ("adverb/longest", 42, {x|["enthusiastically","enthusiastically","enthusiastically"]|x});
-  ("adverb/longest", 1337, {x|["enthusiastically","enthusiastically","enthusiastically"]|x});
-  ("adverb/longest", 7, {x|["enthusiastically","enthusiastically","enthusiastically"]|x});
-  ("adverb/shortest-len", 42, {x|["not","too","too"]|x});
-  ("adverb/shortest-len", 1337, {x|["far","far","far"]|x});
-  ("adverb/shortest-len", 7, {x|["far","too","not"]|x});
-  ("adverb/longest-len", 42, {x|["enthusiastically","enthusiastically","enthusiastically"]|x});
-  ("adverb/longest-len", 1337, {x|["enthusiastically","enthusiastically","enthusiastically"]|x});
-  ("adverb/longest-len", 7, {x|["enthusiastically","enthusiastically","enthusiastically"]|x});
-  ("adverb/any-length", 42, {x|["jaggedly","wearily","sheepishly"]|x});
-  ("adverb/any-length", 1337, {x|["frankly","deceivingly","fully"]|x});
-  ("adverb/any-length", 7, {x|["briefly","successfully","lightly"]|x});
-  ("adverb/any-length-nolen", 42, {x|["jaggedly","wearily","sheepishly"]|x});
-  ("adverb/any-length-nolen", 1337, {x|["frankly","deceivingly","fully"]|x});
-  ("adverb/any-length-nolen", 7, {x|["briefly","successfully","lightly"]|x});
-  ("adverb/fail-nolen", 42, {x|["jaggedly","wearily","sheepishly"]|x});
-  ("adverb/fail-nolen", 1337, {x|["frankly","deceivingly","fully"]|x});
-  ("adverb/fail-nolen", 7, {x|["briefly","successfully","lightly"]|x});
-  ("adverb/closest-nolen", 42, {x|["jaggedly","wearily","sheepishly"]|x});
-  ("adverb/closest-nolen", 1337, {x|["frankly","deceivingly","fully"]|x});
-  ("adverb/closest-nolen", 7, {x|["briefly","successfully","lightly"]|x});
-  ("adverb/match-closest", 42, {x|["justly","wetly","seldom"]|x});
-  ("adverb/match-closest", 1337, {x|["fondly","crossly","freely"]|x});
-  ("adverb/match-closest", 7, {x|["bravely","softly","lively"]|x});
-  ("conjunction", 42, {x|["instead","whose","what"]|x});
-  ("conjunction", 1337, {x|["how","even","however"]|x});
-  ("conjunction", 7, {x|["as","whenever","meanwhile"]|x});
-  ("conjunction/5", 42, {x|["since","whose","which"]|x});
-  ("conjunction/5", 1337, {x|["since","hence","since"]|x});
-  ("conjunction/5", 7, {x|["after","while","until"]|x});
-  ("conjunction/range", 42, {x|["since","whose","what"]|x});
-  ("conjunction/range", 1337, {x|["lest","hence","lest"]|x});
-  ("conjunction/range", 7, {x|["before","when","than"]|x});
-  ("conjunction/len3", 42, {x|["how","yet","who"]|x});
-  ("conjunction/len3", 1337, {x|["for","but","for"]|x});
-  ("conjunction/len3", 7, {x|["and","why","how"]|x});
-  ("conjunction/fail", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("conjunction/fail", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("conjunction/fail", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("conjunction/fail-range", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("conjunction/fail-range", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("conjunction/fail-range", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("conjunction/closest", 42, {x|["consequently","incidentally","incidentally"]|x});
-  ("conjunction/closest", 1337, {x|["consequently","consequently","consequently"]|x});
-  ("conjunction/closest", 7, {x|["consequently","incidentally","consequently"]|x});
-  ("conjunction/closest-low", 42, {x|["if","so","or"]|x});
-  ("conjunction/closest-low", 1337, {x|["if","as","if"]|x});
-  ("conjunction/closest-low", 7, {x|["as","so","if"]|x});
-  ("conjunction/closest-range", 42, {x|["consequently","incidentally","incidentally"]|x});
-  ("conjunction/closest-range", 1337, {x|["consequently","consequently","consequently"]|x});
-  ("conjunction/closest-range", 7, {x|["consequently","incidentally","consequently"]|x});
-  ("conjunction/shortest", 42, {x|["if","so","or"]|x});
-  ("conjunction/shortest", 1337, {x|["if","as","if"]|x});
-  ("conjunction/shortest", 7, {x|["as","so","if"]|x});
-  ("conjunction/longest", 42, {x|["consequently","incidentally","incidentally"]|x});
-  ("conjunction/longest", 1337, {x|["consequently","consequently","consequently"]|x});
-  ("conjunction/longest", 7, {x|["consequently","incidentally","consequently"]|x});
-  ("conjunction/shortest-len", 42, {x|["if","so","or"]|x});
-  ("conjunction/shortest-len", 1337, {x|["if","as","if"]|x});
-  ("conjunction/shortest-len", 7, {x|["as","so","if"]|x});
-  ("conjunction/longest-len", 42, {x|["consequently","incidentally","incidentally"]|x});
-  ("conjunction/longest-len", 1337, {x|["consequently","consequently","consequently"]|x});
-  ("conjunction/longest-len", 7, {x|["consequently","incidentally","consequently"]|x});
-  ("conjunction/any-length", 42, {x|["instead","whose","what"]|x});
-  ("conjunction/any-length", 1337, {x|["how","even","however"]|x});
-  ("conjunction/any-length", 7, {x|["as","whenever","meanwhile"]|x});
-  ("conjunction/any-length-nolen", 42, {x|["instead","whose","what"]|x});
-  ("conjunction/any-length-nolen", 1337, {x|["how","even","however"]|x});
-  ("conjunction/any-length-nolen", 7, {x|["as","whenever","meanwhile"]|x});
-  ("conjunction/fail-nolen", 42, {x|["instead","whose","what"]|x});
-  ("conjunction/fail-nolen", 1337, {x|["how","even","however"]|x});
-  ("conjunction/fail-nolen", 7, {x|["as","whenever","meanwhile"]|x});
-  ("conjunction/closest-nolen", 42, {x|["instead","whose","what"]|x});
-  ("conjunction/closest-nolen", 1337, {x|["how","even","however"]|x});
-  ("conjunction/closest-nolen", 7, {x|["as","whenever","meanwhile"]|x});
-  ("conjunction/match-closest", 42, {x|["instead","whose","whereas"]|x});
-  ("conjunction/match-closest", 1337, {x|["hence","finally","however"]|x});
-  ("conjunction/match-closest", 7, {x|["because","whether","since"]|x});
-  ("interjection", 42, {x|["yahoo","ick","mmm"]|x});
-  ("interjection", 1337, {x|["ew","huzzah","ew"]|x});
-  ("interjection", 7, {x|["blah","phew","drat"]|x});
-  ("interjection/5", 42, {x|["fooey","zowie","yahoo"]|x});
-  ("interjection/5", 1337, {x|["fooey","yowza","fooey"]|x});
-  ("interjection/5", 7, {x|["yowza","zowie","fooey"]|x});
-  ("interjection/range", 42, {x|["geez","pish","phew"]|x});
-  ("interjection/range", 1337, {x|["huzzah","whoa","boohoo"]|x});
-  ("interjection/range", 7, {x|["phooey","uh-huh","pfft"]|x});
-  ("interjection/len3", 42, {x|["meh","oof","duh"]|x});
-  ("interjection/len3", 1337, {x|["aha","brr","gah"]|x});
-  ("interjection/len3", 7, {x|["yum","mmm","ugh"]|x});
-  ("interjection/fail", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("interjection/fail", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("interjection/fail", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("interjection/fail-range", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("interjection/fail-range", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("interjection/fail-range", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("interjection/closest", 42, {x|["gadzooks","gadzooks","gadzooks"]|x});
-  ("interjection/closest", 1337, {x|["gadzooks","gadzooks","gadzooks"]|x});
-  ("interjection/closest", 7, {x|["gadzooks","gadzooks","gadzooks"]|x});
-  ("interjection/closest-low", 42, {x|["ah","um","ha"]|x});
-  ("interjection/closest-low", 1337, {x|["ah","ew","ah"]|x});
-  ("interjection/closest-low", 7, {x|["oh","er","hm"]|x});
-  ("interjection/closest-range", 42, {x|["gadzooks","gadzooks","gadzooks"]|x});
-  ("interjection/closest-range", 1337, {x|["gadzooks","gadzooks","gadzooks"]|x});
-  ("interjection/closest-range", 7, {x|["gadzooks","gadzooks","gadzooks"]|x});
-  ("interjection/shortest", 42, {x|["ah","um","ha"]|x});
-  ("interjection/shortest", 1337, {x|["ah","ew","ah"]|x});
-  ("interjection/shortest", 7, {x|["oh","er","hm"]|x});
-  ("interjection/longest", 42, {x|["gadzooks","gadzooks","gadzooks"]|x});
-  ("interjection/longest", 1337, {x|["gadzooks","gadzooks","gadzooks"]|x});
-  ("interjection/longest", 7, {x|["gadzooks","gadzooks","gadzooks"]|x});
-  ("interjection/shortest-len", 42, {x|["ah","um","ha"]|x});
-  ("interjection/shortest-len", 1337, {x|["ah","ew","ah"]|x});
-  ("interjection/shortest-len", 7, {x|["oh","er","hm"]|x});
-  ("interjection/longest-len", 42, {x|["gadzooks","gadzooks","gadzooks"]|x});
-  ("interjection/longest-len", 1337, {x|["gadzooks","gadzooks","gadzooks"]|x});
-  ("interjection/longest-len", 7, {x|["gadzooks","gadzooks","gadzooks"]|x});
-  ("interjection/any-length", 42, {x|["yahoo","ick","mmm"]|x});
-  ("interjection/any-length", 1337, {x|["ew","huzzah","ew"]|x});
-  ("interjection/any-length", 7, {x|["blah","phew","drat"]|x});
-  ("interjection/any-length-nolen", 42, {x|["yahoo","ick","mmm"]|x});
-  ("interjection/any-length-nolen", 1337, {x|["ew","huzzah","ew"]|x});
-  ("interjection/any-length-nolen", 7, {x|["blah","phew","drat"]|x});
-  ("interjection/fail-nolen", 42, {x|["yahoo","ick","mmm"]|x});
-  ("interjection/fail-nolen", 1337, {x|["ew","huzzah","ew"]|x});
-  ("interjection/fail-nolen", 7, {x|["blah","phew","drat"]|x});
-  ("interjection/closest-nolen", 42, {x|["yahoo","ick","mmm"]|x});
-  ("interjection/closest-nolen", 1337, {x|["ew","huzzah","ew"]|x});
-  ("interjection/closest-nolen", 7, {x|["blah","phew","drat"]|x});
-  ("interjection/match-closest", 42, {x|["boohoo","zowie","yippee"]|x});
-  ("interjection/match-closest", 1337, {x|["huzzah","yowza","huzzah"]|x});
-  ("interjection/match-closest", 7, {x|["phooey","uh-huh","boohoo"]|x});
-  ("noun", 42, {x|["gerbil","unit","rawhide"]|x});
-  ("noun", 1337, {x|["diversity","co-producer","duster"]|x});
-  ("noun", 7, {x|["best-seller","saw","hundred"]|x});
-  ("noun/5", 42, {x|["guide","whack","smoke"]|x});
-  ("noun/5", 1337, {x|["equal","daddy","event"]|x});
-  ("noun/5", 7, {x|["brief","stall","igloo"]|x});
-  ("noun/range", 42, {x|["hawk","video","saloon"]|x});
-  ("noun/range", 1337, {x|["excess","custom","ferret"]|x});
-  ("noun/range", 7, {x|["bump","slide","jungle"]|x});
-  ("noun/len3", 42, {x|["fen","yin","mom"]|x});
-  ("noun/len3", 1337, {x|["cod","bob","cod"]|x});
-  ("noun/len3", 7, {x|["bar","oil","flu"]|x});
-  ("noun/fail", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("noun/fail", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("noun/fail", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("noun/fail-range", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("noun/fail-range", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("noun/fail-range", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("noun/closest", 42, {x|["cross-contamination","cross-contamination","cross-contamination"]|x});
-  ("noun/closest", 1337, {x|["cross-contamination","cross-contamination","cross-contamination"]|x});
-  ("noun/closest", 7, {x|["cross-contamination","cross-contamination","cross-contamination"]|x});
-  ("noun/closest-low", 42, {x|["CD","ad","ad"]|x});
-  ("noun/closest-low", 1337, {x|["CD","CD","CD"]|x});
-  ("noun/closest-low", 7, {x|["CD","ad","CD"]|x});
-  ("noun/closest-range", 42, {x|["cross-contamination","cross-contamination","cross-contamination"]|x});
-  ("noun/closest-range", 1337, {x|["cross-contamination","cross-contamination","cross-contamination"]|x});
-  ("noun/closest-range", 7, {x|["cross-contamination","cross-contamination","cross-contamination"]|x});
-  ("noun/shortest", 42, {x|["CD","ad","ad"]|x});
-  ("noun/shortest", 1337, {x|["CD","CD","CD"]|x});
-  ("noun/shortest", 7, {x|["CD","ad","CD"]|x});
-  ("noun/longest", 42, {x|["cross-contamination","cross-contamination","cross-contamination"]|x});
-  ("noun/longest", 1337, {x|["cross-contamination","cross-contamination","cross-contamination"]|x});
-  ("noun/longest", 7, {x|["cross-contamination","cross-contamination","cross-contamination"]|x});
-  ("noun/shortest-len", 42, {x|["CD","ad","ad"]|x});
-  ("noun/shortest-len", 1337, {x|["CD","CD","CD"]|x});
-  ("noun/shortest-len", 7, {x|["CD","ad","CD"]|x});
-  ("noun/longest-len", 42, {x|["cross-contamination","cross-contamination","cross-contamination"]|x});
-  ("noun/longest-len", 1337, {x|["cross-contamination","cross-contamination","cross-contamination"]|x});
-  ("noun/longest-len", 7, {x|["cross-contamination","cross-contamination","cross-contamination"]|x});
-  ("noun/any-length", 42, {x|["gerbil","unit","rawhide"]|x});
-  ("noun/any-length", 1337, {x|["diversity","co-producer","duster"]|x});
-  ("noun/any-length", 7, {x|["best-seller","saw","hundred"]|x});
-  ("noun/any-length-nolen", 42, {x|["gerbil","unit","rawhide"]|x});
-  ("noun/any-length-nolen", 1337, {x|["diversity","co-producer","duster"]|x});
-  ("noun/any-length-nolen", 7, {x|["best-seller","saw","hundred"]|x});
-  ("noun/fail-nolen", 42, {x|["gerbil","unit","rawhide"]|x});
-  ("noun/fail-nolen", 1337, {x|["diversity","co-producer","duster"]|x});
-  ("noun/fail-nolen", 7, {x|["best-seller","saw","hundred"]|x});
-  ("noun/closest-nolen", 42, {x|["gerbil","unit","rawhide"]|x});
-  ("noun/closest-nolen", 1337, {x|["diversity","co-producer","duster"]|x});
-  ("noun/closest-nolen", 7, {x|["best-seller","saw","hundred"]|x});
-  ("noun/match-closest", 42, {x|["horde","version","saloon"]|x});
-  ("noun/match-closest", 1337, {x|["feather","council","final"]|x});
-  ("noun/match-closest", 7, {x|["bonfire","siege","larva"]|x});
-  ("preposition", 42, {x|["concerning","via","pro"]|x});
-  ("preposition", 1337, {x|["barring","anenst","behind"]|x});
-  ("preposition", 7, {x|["after","since","excluding"]|x});
-  ("preposition/5", 42, {x|["aside","worth","round"]|x});
-  ("preposition/5", 1337, {x|["after","afore","along"]|x});
-  ("preposition/5", 7, {x|["about","since","below"]|x});
-  ("preposition/range", 42, {x|["beyond","vice","sans"]|x});
-  ("preposition/range", 1337, {x|["around","amid","aside"]|x});
-  ("preposition/range", 7, {x|["absent","than","except"]|x});
-  ("preposition/len3", 42, {x|["off","via","qua"]|x});
-  ("preposition/len3", 1337, {x|["mid","for","mid"]|x});
-  ("preposition/len3", 7, {x|["but","qua","out"]|x});
-  ("preposition/fail", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("preposition/fail", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("preposition/fail", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("preposition/fail-range", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("preposition/fail-range", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("preposition/fail-range", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("preposition/closest", 42, {x|["notwithstanding","notwithstanding","notwithstanding"]|x});
-  ("preposition/closest", 1337, {x|["notwithstanding","notwithstanding","notwithstanding"]|x});
-  ("preposition/closest", 7, {x|["notwithstanding","notwithstanding","notwithstanding"]|x});
-  ("preposition/closest-low", 42, {x|["a","a","a"]|x});
-  ("preposition/closest-low", 1337, {x|["a","a","a"]|x});
-  ("preposition/closest-low", 7, {x|["a","a","a"]|x});
-  ("preposition/closest-range", 42, {x|["notwithstanding","notwithstanding","notwithstanding"]|x});
-  ("preposition/closest-range", 1337, {x|["notwithstanding","notwithstanding","notwithstanding"]|x});
-  ("preposition/closest-range", 7, {x|["notwithstanding","notwithstanding","notwithstanding"]|x});
-  ("preposition/shortest", 42, {x|["a","a","a"]|x});
-  ("preposition/shortest", 1337, {x|["a","a","a"]|x});
-  ("preposition/shortest", 7, {x|["a","a","a"]|x});
-  ("preposition/longest", 42, {x|["notwithstanding","notwithstanding","notwithstanding"]|x});
-  ("preposition/longest", 1337, {x|["notwithstanding","notwithstanding","notwithstanding"]|x});
-  ("preposition/longest", 7, {x|["notwithstanding","notwithstanding","notwithstanding"]|x});
-  ("preposition/shortest-len", 42, {x|["a","a","a"]|x});
-  ("preposition/shortest-len", 1337, {x|["a","a","a"]|x});
-  ("preposition/shortest-len", 7, {x|["a","a","a"]|x});
-  ("preposition/longest-len", 42, {x|["notwithstanding","notwithstanding","notwithstanding"]|x});
-  ("preposition/longest-len", 1337, {x|["notwithstanding","notwithstanding","notwithstanding"]|x});
-  ("preposition/longest-len", 7, {x|["notwithstanding","notwithstanding","notwithstanding"]|x});
-  ("preposition/any-length", 42, {x|["concerning","via","pro"]|x});
-  ("preposition/any-length", 1337, {x|["barring","anenst","behind"]|x});
-  ("preposition/any-length", 7, {x|["after","since","excluding"]|x});
-  ("preposition/any-length-nolen", 42, {x|["concerning","via","pro"]|x});
-  ("preposition/any-length-nolen", 1337, {x|["barring","anenst","behind"]|x});
-  ("preposition/any-length-nolen", 7, {x|["after","since","excluding"]|x});
-  ("preposition/fail-nolen", 42, {x|["concerning","via","pro"]|x});
-  ("preposition/fail-nolen", 1337, {x|["barring","anenst","behind"]|x});
-  ("preposition/fail-nolen", 7, {x|["after","since","excluding"]|x});
-  ("preposition/closest-nolen", 42, {x|["concerning","via","pro"]|x});
-  ("preposition/closest-nolen", 1337, {x|["barring","anenst","behind"]|x});
-  ("preposition/closest-nolen", 7, {x|["after","since","excluding"]|x});
-  ("preposition/match-closest", 42, {x|["barring","within","outside"]|x});
-  ("preposition/match-closest", 1337, {x|["anenst","against","apropos"]|x});
-  ("preposition/match-closest", 7, {x|["above","since","below"]|x});
-  ("verb", 42, {x|["glow","unfurl","retract"]|x});
-  ("verb", 1337, {x|["downshift","condense","embed"]|x});
-  ("verb", 7, {x|["bludgeon","scuffle","insert"]|x});
-  ("verb/5", 42, {x|["libel","waltz","sniff"]|x});
-  ("verb/5", 1337, {x|["fluff","dally","gloat"]|x});
-  ("verb/5", 7, {x|["catch","stage","outdo"]|x});
-  ("verb/range", 42, {x|["hassle","verify","screw"]|x});
-  ("verb/range", 1337, {x|["enrage","cycle","etch"]|x});
-  ("verb/range", 7, {x|["braid","slake","jive"]|x});
-  ("verb/len3", 42, {x|["jot","veg","sew"]|x});
-  ("verb/len3", 1337, {x|["gad","cow","gum"]|x});
-  ("verb/len3", 7, {x|["bus","sit","low"]|x});
-  ("verb/fail", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("verb/fail", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("verb/fail", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("verb/fail-range", 42, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("verb/fail-range", 1337, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("verb/fail-range", 7, {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x});
-  ("verb/closest", 42, {x|["institutionalize","internationalize","internationalize"]|x});
-  ("verb/closest", 1337, {x|["institutionalize","institutionalize","institutionalize"]|x});
-  ("verb/closest", 7, {x|["institutionalize","internationalize","institutionalize"]|x});
-  ("verb/closest-low", 42, {x|["jot","veg","sew"]|x});
-  ("verb/closest-low", 1337, {x|["gad","cow","gum"]|x});
-  ("verb/closest-low", 7, {x|["bus","sit","low"]|x});
-  ("verb/closest-range", 42, {x|["institutionalize","internationalize","internationalize"]|x});
-  ("verb/closest-range", 1337, {x|["institutionalize","institutionalize","institutionalize"]|x});
-  ("verb/closest-range", 7, {x|["institutionalize","internationalize","institutionalize"]|x});
-  ("verb/shortest", 42, {x|["jot","veg","sew"]|x});
-  ("verb/shortest", 1337, {x|["gad","cow","gum"]|x});
-  ("verb/shortest", 7, {x|["bus","sit","low"]|x});
-  ("verb/longest", 42, {x|["institutionalize","internationalize","internationalize"]|x});
-  ("verb/longest", 1337, {x|["institutionalize","institutionalize","institutionalize"]|x});
-  ("verb/longest", 7, {x|["institutionalize","internationalize","institutionalize"]|x});
-  ("verb/shortest-len", 42, {x|["jot","veg","sew"]|x});
-  ("verb/shortest-len", 1337, {x|["gad","cow","gum"]|x});
-  ("verb/shortest-len", 7, {x|["bus","sit","low"]|x});
-  ("verb/longest-len", 42, {x|["institutionalize","internationalize","internationalize"]|x});
-  ("verb/longest-len", 1337, {x|["institutionalize","institutionalize","institutionalize"]|x});
-  ("verb/longest-len", 7, {x|["institutionalize","internationalize","institutionalize"]|x});
-  ("verb/any-length", 42, {x|["glow","unfurl","retract"]|x});
-  ("verb/any-length", 1337, {x|["downshift","condense","embed"]|x});
-  ("verb/any-length", 7, {x|["bludgeon","scuffle","insert"]|x});
-  ("verb/any-length-nolen", 42, {x|["glow","unfurl","retract"]|x});
-  ("verb/any-length-nolen", 1337, {x|["downshift","condense","embed"]|x});
-  ("verb/any-length-nolen", 7, {x|["bludgeon","scuffle","insert"]|x});
-  ("verb/fail-nolen", 42, {x|["glow","unfurl","retract"]|x});
-  ("verb/fail-nolen", 1337, {x|["downshift","condense","embed"]|x});
-  ("verb/fail-nolen", 7, {x|["bludgeon","scuffle","insert"]|x});
-  ("verb/closest-nolen", 42, {x|["glow","unfurl","retract"]|x});
-  ("verb/closest-nolen", 1337, {x|["downshift","condense","embed"]|x});
-  ("verb/closest-nolen", 7, {x|["bludgeon","scuffle","insert"]|x});
-  ("verb/match-closest", 42, {x|["gloss","unfurl","scotch"]|x});
-  ("verb/match-closest", 1337, {x|["display","coexist","drowse"]|x});
-  ("verb/match-closest", 7, {x|["blend","shrill","inure"]|x});
-  ("sample", 42, {x|["bleakly","custody","gee"]|x});
-  ("sample", 1337, {x|["how","yet","smooth"]|x});
-  ("sample", 7, {x|["masticate","afore","eek"]|x});
-  ("sample/5", 42, {x|["badly","dream","yahoo"]|x});
-  ("sample/5", 1337, {x|["since","whose","staid"]|x});
-  ("sample/5", 7, {x|["quiet","about","yahoo"]|x});
-  ("sample/range", 42, {x|["boldly","draft","psst"]|x});
-  ("sample/range", 1337, {x|["lest","whose","sparse"]|x});
-  ("sample/range", 7, {x|["mooch","absent","psst"]|x});
-  ("sample/len3", 42, {x|["far","bug","bah"]|x});
-  ("sample/len3", 1337, {x|["for","yet","raw"]|x});
-  ("sample/len3", 7, {x|["own","but","bah"]|x});
-  ("sample/fail", 42, {x|[{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"}]|x});
-  ("sample/fail", 1337, {x|[{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"}]|x});
-  ("sample/fail", 7, {x|[{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"}]|x});
-  ("sample/fail-range", 42, {x|[{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"}]|x});
-  ("sample/fail-range", 1337, {x|[{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"}]|x});
-  ("sample/fail-range", 7, {x|[{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"}]|x});
-  ("sample/closest", 42, {x|["enthusiastically","cross-contamination","consequently"]|x});
-  ("sample/closest", 1337, {x|["consequently","incidentally","well-documented"]|x});
-  ("sample/closest", 7, {x|["internationalize","notwithstanding","gadzooks"]|x});
-  ("sample/closest-low", 42, {x|["far","CD","aw"]|x});
-  ("sample/closest-low", 1337, {x|["if","so","raw"]|x});
-  ("sample/closest-low", 7, {x|["own","a","oh"]|x});
-  ("sample/closest-range", 42, {x|["enthusiastically","cross-contamination","consequently"]|x});
-  ("sample/closest-range", 1337, {x|["consequently","incidentally","well-documented"]|x});
-  ("sample/closest-range", 7, {x|["internationalize","notwithstanding","gadzooks"]|x});
-  ("sample/shortest", 42, {x|["far","CD","aw"]|x});
-  ("sample/shortest", 1337, {x|["if","so","raw"]|x});
-  ("sample/shortest", 7, {x|["own","a","oh"]|x});
-  ("sample/longest", 42, {x|["enthusiastically","cross-contamination","consequently"]|x});
-  ("sample/longest", 1337, {x|["consequently","incidentally","well-documented"]|x});
-  ("sample/longest", 7, {x|["internationalize","notwithstanding","gadzooks"]|x});
-  ("sample/shortest-len", 42, {x|["far","CD","aw"]|x});
-  ("sample/shortest-len", 1337, {x|["if","so","raw"]|x});
-  ("sample/shortest-len", 7, {x|["own","a","oh"]|x});
-  ("sample/longest-len", 42, {x|["enthusiastically","cross-contamination","consequently"]|x});
-  ("sample/longest-len", 1337, {x|["consequently","incidentally","well-documented"]|x});
-  ("sample/longest-len", 7, {x|["internationalize","notwithstanding","gadzooks"]|x});
-  ("sample/any-length", 42, {x|["bleakly","custody","gee"]|x});
-  ("sample/any-length", 1337, {x|["how","yet","smooth"]|x});
-  ("sample/any-length", 7, {x|["masticate","afore","eek"]|x});
-  ("sample/any-length-nolen", 42, {x|["bleakly","custody","gee"]|x});
-  ("sample/any-length-nolen", 1337, {x|["how","yet","smooth"]|x});
-  ("sample/any-length-nolen", 7, {x|["masticate","afore","eek"]|x});
-  ("sample/fail-nolen", 42, {x|["bleakly","custody","gee"]|x});
-  ("sample/fail-nolen", 1337, {x|["how","yet","smooth"]|x});
-  ("sample/fail-nolen", 7, {x|["masticate","afore","eek"]|x});
-  ("sample/closest-nolen", 42, {x|["bleakly","custody","gee"]|x});
-  ("sample/closest-nolen", 1337, {x|["how","yet","smooth"]|x});
-  ("sample/closest-nolen", 7, {x|["masticate","afore","eek"]|x});
-  ("sample/match-closest", 42, {x|["blindly","draft","yahoo"]|x});
-  ("sample/match-closest", 1337, {x|["hence","whose","speedy"]|x});
-  ("sample/match-closest", 7, {x|["mount","above","yahoo"]|x});
-  ("words", 42, {x|["unnaturally dreamily","embarrassment","perspire bus"]|x});
-  ("words", 1337, {x|["wallaby","suspiciously generously till","um"]|x});
-  ("words", 7, {x|["bleak","task","often"]|x});
-  ("words/5", 42, {x|["bleakly custody gee psst why","meh ugh utilized wherever without","safe across amidst intent zowie"]|x});
-  ("words/5", 1337, {x|["how yet smooth councilman including","safely junior actually accredit vaguely","failing vaguely mundane hassle whoever"]|x});
-  ("words/5", 7, {x|["masticate afore eek requirement circa","forswear delicious yuck bank linear","yowza scramble sticky plus next"]|x});
-  ("words/count", 42, {x|["bleakly custody gee psst","why meh ugh utilized","wherever without safe across"]|x});
-  ("words/count", 1337, {x|["how yet smooth councilman","including safely junior actually","accredit vaguely failing vaguely"]|x});
-  ("words/count", 7, {x|["masticate afore eek requirement","circa forswear delicious yuck","bank linear yowza scramble"]|x});
-  ("words/range", 42, {x|["unnaturally dreamily chapel mozzarella","evince unto","phew badly like"]|x});
-  ("words/range", 1337, {x|["wallaby drat deserted","till mmm hm","pitiful why"]|x});
-  ("words/range", 7, {x|["bleak below","geez inspection soft homely excepting per positively","yum beneath lazy"]|x});
-  ("words/0", 42, {x|["","",""]|x});
-  ("words/0", 1337, {x|["","",""]|x});
-  ("words/0", 7, {x|["","",""]|x});
-  ("fake/noun", 42, {x|[{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"},{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"},{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"}]|x});
-  ("fake/noun", 1337, {x|[{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"},{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"},{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"}]|x});
-  ("fake/noun", 7, {x|[{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"},{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"},{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"}]|x});
-  ("fake/sample", 42, {x|["bleakly cross-contamination","however notwithstanding","baseboard consequently"]|x});
-  ("fake/sample", 1337, {x|["how incidentally","smooth cross-contamination","maul enthusiastically"]|x});
-  ("fake/sample", 7, {x|["masticate notwithstanding","oh internationalize","libel institutionalize"]|x});
-  ("fake/misc", 42, {x|[{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"},{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"},{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"}]|x});
-  ("fake/misc", 1337, {x|[{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"},{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"},{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"}]|x});
-  ("fake/misc", 7, {x|[{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"},{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"},{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"}]|x});
-  ("fake/strategy", 42, {x|["cross-contamination|sew|cuddly","cross-contamination|tag|scaly","cross-contamination|sun|delirious"]|x});
-  ("fake/strategy", 1337, {x|["cross-contamination|gum|gloomy","cross-contamination|vet|clean","cross-contamination|cop|juicy"]|x});
-  ("fake/strategy", 7, {x|["cross-contamination|low|woeful","cross-contamination|bus|marvelous","cross-contamination|jot|formal"]|x});
-]
+let cases =
+  [
+    ("adjective", 42, {x|["hospitable","weird","shameful"]|x});
+    ("adjective", 1337, {x|["fatal","cumbersome","flickering"]|x});
+    ("adjective", 7, {x|["blushing","sparkling","jittery"]|x});
+    ("adjective/5", 42, {x|["lanky","windy","slimy"]|x});
+    ("adjective/5", 1337, {x|["fuzzy","crazy","great"]|x});
+    ("adjective/5", 7, {x|["blond","steel","merry"]|x});
+    ("adjective/range", 42, {x|["joyful","whole","smooth"]|x});
+    ("adjective/range", 1337, {x|["frilly","dark","fuzzy"]|x});
+    ("adjective/range", 7, {x|["both","steep","lone"]|x});
+    ("adjective/len3", 42, {x|["hot","wee","our"]|x});
+    ("adjective/len3", 1337, {x|["far","bad","far"]|x});
+    ("adjective/len3", 7, {x|["any","raw","ill"]|x});
+    ( "adjective/fail",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "adjective/fail",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "adjective/fail",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "adjective/fail-range",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "adjective/fail-range",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "adjective/fail-range",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "adjective/closest",
+      42,
+      {x|["inconsequential","well-documented","well-documented"]|x} );
+    ( "adjective/closest",
+      1337,
+      {x|["black-and-white","black-and-white","black-and-white"]|x} );
+    ( "adjective/closest",
+      7,
+      {x|["black-and-white","well-documented","inconsequential"]|x} );
+    ("adjective/closest-low", 42, {x|["hot","wee","our"]|x});
+    ("adjective/closest-low", 1337, {x|["far","bad","far"]|x});
+    ("adjective/closest-low", 7, {x|["any","raw","ill"]|x});
+    ( "adjective/closest-range",
+      42,
+      {x|["inconsequential","well-documented","well-documented"]|x} );
+    ( "adjective/closest-range",
+      1337,
+      {x|["black-and-white","black-and-white","black-and-white"]|x} );
+    ( "adjective/closest-range",
+      7,
+      {x|["black-and-white","well-documented","inconsequential"]|x} );
+    ("adjective/shortest", 42, {x|["hot","wee","our"]|x});
+    ("adjective/shortest", 1337, {x|["far","bad","far"]|x});
+    ("adjective/shortest", 7, {x|["any","raw","ill"]|x});
+    ( "adjective/longest",
+      42,
+      {x|["inconsequential","well-documented","well-documented"]|x} );
+    ( "adjective/longest",
+      1337,
+      {x|["black-and-white","black-and-white","black-and-white"]|x} );
+    ( "adjective/longest",
+      7,
+      {x|["black-and-white","well-documented","inconsequential"]|x} );
+    ("adjective/shortest-len", 42, {x|["hot","wee","our"]|x});
+    ("adjective/shortest-len", 1337, {x|["far","bad","far"]|x});
+    ("adjective/shortest-len", 7, {x|["any","raw","ill"]|x});
+    ( "adjective/longest-len",
+      42,
+      {x|["inconsequential","well-documented","well-documented"]|x} );
+    ( "adjective/longest-len",
+      1337,
+      {x|["black-and-white","black-and-white","black-and-white"]|x} );
+    ( "adjective/longest-len",
+      7,
+      {x|["black-and-white","well-documented","inconsequential"]|x} );
+    ("adjective/any-length", 42, {x|["hospitable","weird","shameful"]|x});
+    ("adjective/any-length", 1337, {x|["fatal","cumbersome","flickering"]|x});
+    ("adjective/any-length", 7, {x|["blushing","sparkling","jittery"]|x});
+    ("adjective/any-length-nolen", 42, {x|["hospitable","weird","shameful"]|x});
+    ( "adjective/any-length-nolen",
+      1337,
+      {x|["fatal","cumbersome","flickering"]|x} );
+    ("adjective/any-length-nolen", 7, {x|["blushing","sparkling","jittery"]|x});
+    ("adjective/fail-nolen", 42, {x|["hospitable","weird","shameful"]|x});
+    ("adjective/fail-nolen", 1337, {x|["fatal","cumbersome","flickering"]|x});
+    ("adjective/fail-nolen", 7, {x|["blushing","sparkling","jittery"]|x});
+    ("adjective/closest-nolen", 42, {x|["hospitable","weird","shameful"]|x});
+    ("adjective/closest-nolen", 1337, {x|["fatal","cumbersome","flickering"]|x});
+    ("adjective/closest-nolen", 7, {x|["blushing","sparkling","jittery"]|x});
+    ("adjective/match-closest", 42, {x|["impish","white","slushy"]|x});
+    ("adjective/match-closest", 1337, {x|["frail","damaged","funny"]|x});
+    ("adjective/match-closest", 7, {x|["boiling","steel","little"]|x});
+    ("adverb", 42, {x|["jaggedly","wearily","sheepishly"]|x});
+    ("adverb", 1337, {x|["frankly","deceivingly","fully"]|x});
+    ("adverb", 7, {x|["briefly","successfully","lightly"]|x});
+    ("adverb/5", 42, {x|["madly","wetly","sadly"]|x});
+    ("adverb/5", 1337, {x|["fully","daily","fully"]|x});
+    ("adverb/5", 7, {x|["badly","shyly","never"]|x});
+    ("adverb/range", 42, {x|["keenly","wholly","seldom"]|x});
+    ("adverb/range", 1337, {x|["freely","deeply","fully"]|x});
+    ("adverb/range", 7, {x|["busily","softly","limply"]|x});
+    ("adverb/len3", 42, {x|["not","too","too"]|x});
+    ("adverb/len3", 1337, {x|["far","far","far"]|x});
+    ("adverb/len3", 7, {x|["far","too","not"]|x});
+    ( "adverb/fail",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "adverb/fail",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "adverb/fail",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "adverb/fail-range",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "adverb/fail-range",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "adverb/fail-range",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "adverb/closest",
+      42,
+      {x|["enthusiastically","enthusiastically","enthusiastically"]|x} );
+    ( "adverb/closest",
+      1337,
+      {x|["enthusiastically","enthusiastically","enthusiastically"]|x} );
+    ( "adverb/closest",
+      7,
+      {x|["enthusiastically","enthusiastically","enthusiastically"]|x} );
+    ("adverb/closest-low", 42, {x|["not","too","too"]|x});
+    ("adverb/closest-low", 1337, {x|["far","far","far"]|x});
+    ("adverb/closest-low", 7, {x|["far","too","not"]|x});
+    ( "adverb/closest-range",
+      42,
+      {x|["enthusiastically","enthusiastically","enthusiastically"]|x} );
+    ( "adverb/closest-range",
+      1337,
+      {x|["enthusiastically","enthusiastically","enthusiastically"]|x} );
+    ( "adverb/closest-range",
+      7,
+      {x|["enthusiastically","enthusiastically","enthusiastically"]|x} );
+    ("adverb/shortest", 42, {x|["not","too","too"]|x});
+    ("adverb/shortest", 1337, {x|["far","far","far"]|x});
+    ("adverb/shortest", 7, {x|["far","too","not"]|x});
+    ( "adverb/longest",
+      42,
+      {x|["enthusiastically","enthusiastically","enthusiastically"]|x} );
+    ( "adverb/longest",
+      1337,
+      {x|["enthusiastically","enthusiastically","enthusiastically"]|x} );
+    ( "adverb/longest",
+      7,
+      {x|["enthusiastically","enthusiastically","enthusiastically"]|x} );
+    ("adverb/shortest-len", 42, {x|["not","too","too"]|x});
+    ("adverb/shortest-len", 1337, {x|["far","far","far"]|x});
+    ("adverb/shortest-len", 7, {x|["far","too","not"]|x});
+    ( "adverb/longest-len",
+      42,
+      {x|["enthusiastically","enthusiastically","enthusiastically"]|x} );
+    ( "adverb/longest-len",
+      1337,
+      {x|["enthusiastically","enthusiastically","enthusiastically"]|x} );
+    ( "adverb/longest-len",
+      7,
+      {x|["enthusiastically","enthusiastically","enthusiastically"]|x} );
+    ("adverb/any-length", 42, {x|["jaggedly","wearily","sheepishly"]|x});
+    ("adverb/any-length", 1337, {x|["frankly","deceivingly","fully"]|x});
+    ("adverb/any-length", 7, {x|["briefly","successfully","lightly"]|x});
+    ("adverb/any-length-nolen", 42, {x|["jaggedly","wearily","sheepishly"]|x});
+    ("adverb/any-length-nolen", 1337, {x|["frankly","deceivingly","fully"]|x});
+    ("adverb/any-length-nolen", 7, {x|["briefly","successfully","lightly"]|x});
+    ("adverb/fail-nolen", 42, {x|["jaggedly","wearily","sheepishly"]|x});
+    ("adverb/fail-nolen", 1337, {x|["frankly","deceivingly","fully"]|x});
+    ("adverb/fail-nolen", 7, {x|["briefly","successfully","lightly"]|x});
+    ("adverb/closest-nolen", 42, {x|["jaggedly","wearily","sheepishly"]|x});
+    ("adverb/closest-nolen", 1337, {x|["frankly","deceivingly","fully"]|x});
+    ("adverb/closest-nolen", 7, {x|["briefly","successfully","lightly"]|x});
+    ("adverb/match-closest", 42, {x|["justly","wetly","seldom"]|x});
+    ("adverb/match-closest", 1337, {x|["fondly","crossly","freely"]|x});
+    ("adverb/match-closest", 7, {x|["bravely","softly","lively"]|x});
+    ("conjunction", 42, {x|["instead","whose","what"]|x});
+    ("conjunction", 1337, {x|["how","even","however"]|x});
+    ("conjunction", 7, {x|["as","whenever","meanwhile"]|x});
+    ("conjunction/5", 42, {x|["since","whose","which"]|x});
+    ("conjunction/5", 1337, {x|["since","hence","since"]|x});
+    ("conjunction/5", 7, {x|["after","while","until"]|x});
+    ("conjunction/range", 42, {x|["since","whose","what"]|x});
+    ("conjunction/range", 1337, {x|["lest","hence","lest"]|x});
+    ("conjunction/range", 7, {x|["before","when","than"]|x});
+    ("conjunction/len3", 42, {x|["how","yet","who"]|x});
+    ("conjunction/len3", 1337, {x|["for","but","for"]|x});
+    ("conjunction/len3", 7, {x|["and","why","how"]|x});
+    ( "conjunction/fail",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "conjunction/fail",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "conjunction/fail",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "conjunction/fail-range",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "conjunction/fail-range",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "conjunction/fail-range",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "conjunction/closest",
+      42,
+      {x|["consequently","incidentally","incidentally"]|x} );
+    ( "conjunction/closest",
+      1337,
+      {x|["consequently","consequently","consequently"]|x} );
+    ( "conjunction/closest",
+      7,
+      {x|["consequently","incidentally","consequently"]|x} );
+    ("conjunction/closest-low", 42, {x|["if","so","or"]|x});
+    ("conjunction/closest-low", 1337, {x|["if","as","if"]|x});
+    ("conjunction/closest-low", 7, {x|["as","so","if"]|x});
+    ( "conjunction/closest-range",
+      42,
+      {x|["consequently","incidentally","incidentally"]|x} );
+    ( "conjunction/closest-range",
+      1337,
+      {x|["consequently","consequently","consequently"]|x} );
+    ( "conjunction/closest-range",
+      7,
+      {x|["consequently","incidentally","consequently"]|x} );
+    ("conjunction/shortest", 42, {x|["if","so","or"]|x});
+    ("conjunction/shortest", 1337, {x|["if","as","if"]|x});
+    ("conjunction/shortest", 7, {x|["as","so","if"]|x});
+    ( "conjunction/longest",
+      42,
+      {x|["consequently","incidentally","incidentally"]|x} );
+    ( "conjunction/longest",
+      1337,
+      {x|["consequently","consequently","consequently"]|x} );
+    ( "conjunction/longest",
+      7,
+      {x|["consequently","incidentally","consequently"]|x} );
+    ("conjunction/shortest-len", 42, {x|["if","so","or"]|x});
+    ("conjunction/shortest-len", 1337, {x|["if","as","if"]|x});
+    ("conjunction/shortest-len", 7, {x|["as","so","if"]|x});
+    ( "conjunction/longest-len",
+      42,
+      {x|["consequently","incidentally","incidentally"]|x} );
+    ( "conjunction/longest-len",
+      1337,
+      {x|["consequently","consequently","consequently"]|x} );
+    ( "conjunction/longest-len",
+      7,
+      {x|["consequently","incidentally","consequently"]|x} );
+    ("conjunction/any-length", 42, {x|["instead","whose","what"]|x});
+    ("conjunction/any-length", 1337, {x|["how","even","however"]|x});
+    ("conjunction/any-length", 7, {x|["as","whenever","meanwhile"]|x});
+    ("conjunction/any-length-nolen", 42, {x|["instead","whose","what"]|x});
+    ("conjunction/any-length-nolen", 1337, {x|["how","even","however"]|x});
+    ("conjunction/any-length-nolen", 7, {x|["as","whenever","meanwhile"]|x});
+    ("conjunction/fail-nolen", 42, {x|["instead","whose","what"]|x});
+    ("conjunction/fail-nolen", 1337, {x|["how","even","however"]|x});
+    ("conjunction/fail-nolen", 7, {x|["as","whenever","meanwhile"]|x});
+    ("conjunction/closest-nolen", 42, {x|["instead","whose","what"]|x});
+    ("conjunction/closest-nolen", 1337, {x|["how","even","however"]|x});
+    ("conjunction/closest-nolen", 7, {x|["as","whenever","meanwhile"]|x});
+    ("conjunction/match-closest", 42, {x|["instead","whose","whereas"]|x});
+    ("conjunction/match-closest", 1337, {x|["hence","finally","however"]|x});
+    ("conjunction/match-closest", 7, {x|["because","whether","since"]|x});
+    ("interjection", 42, {x|["yahoo","ick","mmm"]|x});
+    ("interjection", 1337, {x|["ew","huzzah","ew"]|x});
+    ("interjection", 7, {x|["blah","phew","drat"]|x});
+    ("interjection/5", 42, {x|["fooey","zowie","yahoo"]|x});
+    ("interjection/5", 1337, {x|["fooey","yowza","fooey"]|x});
+    ("interjection/5", 7, {x|["yowza","zowie","fooey"]|x});
+    ("interjection/range", 42, {x|["geez","pish","phew"]|x});
+    ("interjection/range", 1337, {x|["huzzah","whoa","boohoo"]|x});
+    ("interjection/range", 7, {x|["phooey","uh-huh","pfft"]|x});
+    ("interjection/len3", 42, {x|["meh","oof","duh"]|x});
+    ("interjection/len3", 1337, {x|["aha","brr","gah"]|x});
+    ("interjection/len3", 7, {x|["yum","mmm","ugh"]|x});
+    ( "interjection/fail",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "interjection/fail",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "interjection/fail",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "interjection/fail-range",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "interjection/fail-range",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "interjection/fail-range",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ("interjection/closest", 42, {x|["gadzooks","gadzooks","gadzooks"]|x});
+    ("interjection/closest", 1337, {x|["gadzooks","gadzooks","gadzooks"]|x});
+    ("interjection/closest", 7, {x|["gadzooks","gadzooks","gadzooks"]|x});
+    ("interjection/closest-low", 42, {x|["ah","um","ha"]|x});
+    ("interjection/closest-low", 1337, {x|["ah","ew","ah"]|x});
+    ("interjection/closest-low", 7, {x|["oh","er","hm"]|x});
+    ("interjection/closest-range", 42, {x|["gadzooks","gadzooks","gadzooks"]|x});
+    ( "interjection/closest-range",
+      1337,
+      {x|["gadzooks","gadzooks","gadzooks"]|x} );
+    ("interjection/closest-range", 7, {x|["gadzooks","gadzooks","gadzooks"]|x});
+    ("interjection/shortest", 42, {x|["ah","um","ha"]|x});
+    ("interjection/shortest", 1337, {x|["ah","ew","ah"]|x});
+    ("interjection/shortest", 7, {x|["oh","er","hm"]|x});
+    ("interjection/longest", 42, {x|["gadzooks","gadzooks","gadzooks"]|x});
+    ("interjection/longest", 1337, {x|["gadzooks","gadzooks","gadzooks"]|x});
+    ("interjection/longest", 7, {x|["gadzooks","gadzooks","gadzooks"]|x});
+    ("interjection/shortest-len", 42, {x|["ah","um","ha"]|x});
+    ("interjection/shortest-len", 1337, {x|["ah","ew","ah"]|x});
+    ("interjection/shortest-len", 7, {x|["oh","er","hm"]|x});
+    ("interjection/longest-len", 42, {x|["gadzooks","gadzooks","gadzooks"]|x});
+    ("interjection/longest-len", 1337, {x|["gadzooks","gadzooks","gadzooks"]|x});
+    ("interjection/longest-len", 7, {x|["gadzooks","gadzooks","gadzooks"]|x});
+    ("interjection/any-length", 42, {x|["yahoo","ick","mmm"]|x});
+    ("interjection/any-length", 1337, {x|["ew","huzzah","ew"]|x});
+    ("interjection/any-length", 7, {x|["blah","phew","drat"]|x});
+    ("interjection/any-length-nolen", 42, {x|["yahoo","ick","mmm"]|x});
+    ("interjection/any-length-nolen", 1337, {x|["ew","huzzah","ew"]|x});
+    ("interjection/any-length-nolen", 7, {x|["blah","phew","drat"]|x});
+    ("interjection/fail-nolen", 42, {x|["yahoo","ick","mmm"]|x});
+    ("interjection/fail-nolen", 1337, {x|["ew","huzzah","ew"]|x});
+    ("interjection/fail-nolen", 7, {x|["blah","phew","drat"]|x});
+    ("interjection/closest-nolen", 42, {x|["yahoo","ick","mmm"]|x});
+    ("interjection/closest-nolen", 1337, {x|["ew","huzzah","ew"]|x});
+    ("interjection/closest-nolen", 7, {x|["blah","phew","drat"]|x});
+    ("interjection/match-closest", 42, {x|["boohoo","zowie","yippee"]|x});
+    ("interjection/match-closest", 1337, {x|["huzzah","yowza","huzzah"]|x});
+    ("interjection/match-closest", 7, {x|["phooey","uh-huh","boohoo"]|x});
+    ("noun", 42, {x|["gerbil","unit","rawhide"]|x});
+    ("noun", 1337, {x|["diversity","co-producer","duster"]|x});
+    ("noun", 7, {x|["best-seller","saw","hundred"]|x});
+    ("noun/5", 42, {x|["guide","whack","smoke"]|x});
+    ("noun/5", 1337, {x|["equal","daddy","event"]|x});
+    ("noun/5", 7, {x|["brief","stall","igloo"]|x});
+    ("noun/range", 42, {x|["hawk","video","saloon"]|x});
+    ("noun/range", 1337, {x|["excess","custom","ferret"]|x});
+    ("noun/range", 7, {x|["bump","slide","jungle"]|x});
+    ("noun/len3", 42, {x|["fen","yin","mom"]|x});
+    ("noun/len3", 1337, {x|["cod","bob","cod"]|x});
+    ("noun/len3", 7, {x|["bar","oil","flu"]|x});
+    ( "noun/fail",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "noun/fail",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "noun/fail",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "noun/fail-range",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "noun/fail-range",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "noun/fail-range",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "noun/closest",
+      42,
+      {x|["cross-contamination","cross-contamination","cross-contamination"]|x}
+    );
+    ( "noun/closest",
+      1337,
+      {x|["cross-contamination","cross-contamination","cross-contamination"]|x}
+    );
+    ( "noun/closest",
+      7,
+      {x|["cross-contamination","cross-contamination","cross-contamination"]|x}
+    );
+    ("noun/closest-low", 42, {x|["CD","ad","ad"]|x});
+    ("noun/closest-low", 1337, {x|["CD","CD","CD"]|x});
+    ("noun/closest-low", 7, {x|["CD","ad","CD"]|x});
+    ( "noun/closest-range",
+      42,
+      {x|["cross-contamination","cross-contamination","cross-contamination"]|x}
+    );
+    ( "noun/closest-range",
+      1337,
+      {x|["cross-contamination","cross-contamination","cross-contamination"]|x}
+    );
+    ( "noun/closest-range",
+      7,
+      {x|["cross-contamination","cross-contamination","cross-contamination"]|x}
+    );
+    ("noun/shortest", 42, {x|["CD","ad","ad"]|x});
+    ("noun/shortest", 1337, {x|["CD","CD","CD"]|x});
+    ("noun/shortest", 7, {x|["CD","ad","CD"]|x});
+    ( "noun/longest",
+      42,
+      {x|["cross-contamination","cross-contamination","cross-contamination"]|x}
+    );
+    ( "noun/longest",
+      1337,
+      {x|["cross-contamination","cross-contamination","cross-contamination"]|x}
+    );
+    ( "noun/longest",
+      7,
+      {x|["cross-contamination","cross-contamination","cross-contamination"]|x}
+    );
+    ("noun/shortest-len", 42, {x|["CD","ad","ad"]|x});
+    ("noun/shortest-len", 1337, {x|["CD","CD","CD"]|x});
+    ("noun/shortest-len", 7, {x|["CD","ad","CD"]|x});
+    ( "noun/longest-len",
+      42,
+      {x|["cross-contamination","cross-contamination","cross-contamination"]|x}
+    );
+    ( "noun/longest-len",
+      1337,
+      {x|["cross-contamination","cross-contamination","cross-contamination"]|x}
+    );
+    ( "noun/longest-len",
+      7,
+      {x|["cross-contamination","cross-contamination","cross-contamination"]|x}
+    );
+    ("noun/any-length", 42, {x|["gerbil","unit","rawhide"]|x});
+    ("noun/any-length", 1337, {x|["diversity","co-producer","duster"]|x});
+    ("noun/any-length", 7, {x|["best-seller","saw","hundred"]|x});
+    ("noun/any-length-nolen", 42, {x|["gerbil","unit","rawhide"]|x});
+    ("noun/any-length-nolen", 1337, {x|["diversity","co-producer","duster"]|x});
+    ("noun/any-length-nolen", 7, {x|["best-seller","saw","hundred"]|x});
+    ("noun/fail-nolen", 42, {x|["gerbil","unit","rawhide"]|x});
+    ("noun/fail-nolen", 1337, {x|["diversity","co-producer","duster"]|x});
+    ("noun/fail-nolen", 7, {x|["best-seller","saw","hundred"]|x});
+    ("noun/closest-nolen", 42, {x|["gerbil","unit","rawhide"]|x});
+    ("noun/closest-nolen", 1337, {x|["diversity","co-producer","duster"]|x});
+    ("noun/closest-nolen", 7, {x|["best-seller","saw","hundred"]|x});
+    ("noun/match-closest", 42, {x|["horde","version","saloon"]|x});
+    ("noun/match-closest", 1337, {x|["feather","council","final"]|x});
+    ("noun/match-closest", 7, {x|["bonfire","siege","larva"]|x});
+    ("preposition", 42, {x|["concerning","via","pro"]|x});
+    ("preposition", 1337, {x|["barring","anenst","behind"]|x});
+    ("preposition", 7, {x|["after","since","excluding"]|x});
+    ("preposition/5", 42, {x|["aside","worth","round"]|x});
+    ("preposition/5", 1337, {x|["after","afore","along"]|x});
+    ("preposition/5", 7, {x|["about","since","below"]|x});
+    ("preposition/range", 42, {x|["beyond","vice","sans"]|x});
+    ("preposition/range", 1337, {x|["around","amid","aside"]|x});
+    ("preposition/range", 7, {x|["absent","than","except"]|x});
+    ("preposition/len3", 42, {x|["off","via","qua"]|x});
+    ("preposition/len3", 1337, {x|["mid","for","mid"]|x});
+    ("preposition/len3", 7, {x|["but","qua","out"]|x});
+    ( "preposition/fail",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "preposition/fail",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "preposition/fail",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "preposition/fail-range",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "preposition/fail-range",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "preposition/fail-range",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "preposition/closest",
+      42,
+      {x|["notwithstanding","notwithstanding","notwithstanding"]|x} );
+    ( "preposition/closest",
+      1337,
+      {x|["notwithstanding","notwithstanding","notwithstanding"]|x} );
+    ( "preposition/closest",
+      7,
+      {x|["notwithstanding","notwithstanding","notwithstanding"]|x} );
+    ("preposition/closest-low", 42, {x|["a","a","a"]|x});
+    ("preposition/closest-low", 1337, {x|["a","a","a"]|x});
+    ("preposition/closest-low", 7, {x|["a","a","a"]|x});
+    ( "preposition/closest-range",
+      42,
+      {x|["notwithstanding","notwithstanding","notwithstanding"]|x} );
+    ( "preposition/closest-range",
+      1337,
+      {x|["notwithstanding","notwithstanding","notwithstanding"]|x} );
+    ( "preposition/closest-range",
+      7,
+      {x|["notwithstanding","notwithstanding","notwithstanding"]|x} );
+    ("preposition/shortest", 42, {x|["a","a","a"]|x});
+    ("preposition/shortest", 1337, {x|["a","a","a"]|x});
+    ("preposition/shortest", 7, {x|["a","a","a"]|x});
+    ( "preposition/longest",
+      42,
+      {x|["notwithstanding","notwithstanding","notwithstanding"]|x} );
+    ( "preposition/longest",
+      1337,
+      {x|["notwithstanding","notwithstanding","notwithstanding"]|x} );
+    ( "preposition/longest",
+      7,
+      {x|["notwithstanding","notwithstanding","notwithstanding"]|x} );
+    ("preposition/shortest-len", 42, {x|["a","a","a"]|x});
+    ("preposition/shortest-len", 1337, {x|["a","a","a"]|x});
+    ("preposition/shortest-len", 7, {x|["a","a","a"]|x});
+    ( "preposition/longest-len",
+      42,
+      {x|["notwithstanding","notwithstanding","notwithstanding"]|x} );
+    ( "preposition/longest-len",
+      1337,
+      {x|["notwithstanding","notwithstanding","notwithstanding"]|x} );
+    ( "preposition/longest-len",
+      7,
+      {x|["notwithstanding","notwithstanding","notwithstanding"]|x} );
+    ("preposition/any-length", 42, {x|["concerning","via","pro"]|x});
+    ("preposition/any-length", 1337, {x|["barring","anenst","behind"]|x});
+    ("preposition/any-length", 7, {x|["after","since","excluding"]|x});
+    ("preposition/any-length-nolen", 42, {x|["concerning","via","pro"]|x});
+    ("preposition/any-length-nolen", 1337, {x|["barring","anenst","behind"]|x});
+    ("preposition/any-length-nolen", 7, {x|["after","since","excluding"]|x});
+    ("preposition/fail-nolen", 42, {x|["concerning","via","pro"]|x});
+    ("preposition/fail-nolen", 1337, {x|["barring","anenst","behind"]|x});
+    ("preposition/fail-nolen", 7, {x|["after","since","excluding"]|x});
+    ("preposition/closest-nolen", 42, {x|["concerning","via","pro"]|x});
+    ("preposition/closest-nolen", 1337, {x|["barring","anenst","behind"]|x});
+    ("preposition/closest-nolen", 7, {x|["after","since","excluding"]|x});
+    ("preposition/match-closest", 42, {x|["barring","within","outside"]|x});
+    ("preposition/match-closest", 1337, {x|["anenst","against","apropos"]|x});
+    ("preposition/match-closest", 7, {x|["above","since","below"]|x});
+    ("verb", 42, {x|["glow","unfurl","retract"]|x});
+    ("verb", 1337, {x|["downshift","condense","embed"]|x});
+    ("verb", 7, {x|["bludgeon","scuffle","insert"]|x});
+    ("verb/5", 42, {x|["libel","waltz","sniff"]|x});
+    ("verb/5", 1337, {x|["fluff","dally","gloat"]|x});
+    ("verb/5", 7, {x|["catch","stage","outdo"]|x});
+    ("verb/range", 42, {x|["hassle","verify","screw"]|x});
+    ("verb/range", 1337, {x|["enrage","cycle","etch"]|x});
+    ("verb/range", 7, {x|["braid","slake","jive"]|x});
+    ("verb/len3", 42, {x|["jot","veg","sew"]|x});
+    ("verb/len3", 1337, {x|["gad","cow","gum"]|x});
+    ("verb/len3", 7, {x|["bus","sit","low"]|x});
+    ( "verb/fail",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "verb/fail",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "verb/fail",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "verb/fail-range",
+      42,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "verb/fail-range",
+      1337,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "verb/fail-range",
+      7,
+      {x|[{"error":"No words found that match the given length."},{"error":"No words found that match the given length."},{"error":"No words found that match the given length."}]|x}
+    );
+    ( "verb/closest",
+      42,
+      {x|["institutionalize","internationalize","internationalize"]|x} );
+    ( "verb/closest",
+      1337,
+      {x|["institutionalize","institutionalize","institutionalize"]|x} );
+    ( "verb/closest",
+      7,
+      {x|["institutionalize","internationalize","institutionalize"]|x} );
+    ("verb/closest-low", 42, {x|["jot","veg","sew"]|x});
+    ("verb/closest-low", 1337, {x|["gad","cow","gum"]|x});
+    ("verb/closest-low", 7, {x|["bus","sit","low"]|x});
+    ( "verb/closest-range",
+      42,
+      {x|["institutionalize","internationalize","internationalize"]|x} );
+    ( "verb/closest-range",
+      1337,
+      {x|["institutionalize","institutionalize","institutionalize"]|x} );
+    ( "verb/closest-range",
+      7,
+      {x|["institutionalize","internationalize","institutionalize"]|x} );
+    ("verb/shortest", 42, {x|["jot","veg","sew"]|x});
+    ("verb/shortest", 1337, {x|["gad","cow","gum"]|x});
+    ("verb/shortest", 7, {x|["bus","sit","low"]|x});
+    ( "verb/longest",
+      42,
+      {x|["institutionalize","internationalize","internationalize"]|x} );
+    ( "verb/longest",
+      1337,
+      {x|["institutionalize","institutionalize","institutionalize"]|x} );
+    ( "verb/longest",
+      7,
+      {x|["institutionalize","internationalize","institutionalize"]|x} );
+    ("verb/shortest-len", 42, {x|["jot","veg","sew"]|x});
+    ("verb/shortest-len", 1337, {x|["gad","cow","gum"]|x});
+    ("verb/shortest-len", 7, {x|["bus","sit","low"]|x});
+    ( "verb/longest-len",
+      42,
+      {x|["institutionalize","internationalize","internationalize"]|x} );
+    ( "verb/longest-len",
+      1337,
+      {x|["institutionalize","institutionalize","institutionalize"]|x} );
+    ( "verb/longest-len",
+      7,
+      {x|["institutionalize","internationalize","institutionalize"]|x} );
+    ("verb/any-length", 42, {x|["glow","unfurl","retract"]|x});
+    ("verb/any-length", 1337, {x|["downshift","condense","embed"]|x});
+    ("verb/any-length", 7, {x|["bludgeon","scuffle","insert"]|x});
+    ("verb/any-length-nolen", 42, {x|["glow","unfurl","retract"]|x});
+    ("verb/any-length-nolen", 1337, {x|["downshift","condense","embed"]|x});
+    ("verb/any-length-nolen", 7, {x|["bludgeon","scuffle","insert"]|x});
+    ("verb/fail-nolen", 42, {x|["glow","unfurl","retract"]|x});
+    ("verb/fail-nolen", 1337, {x|["downshift","condense","embed"]|x});
+    ("verb/fail-nolen", 7, {x|["bludgeon","scuffle","insert"]|x});
+    ("verb/closest-nolen", 42, {x|["glow","unfurl","retract"]|x});
+    ("verb/closest-nolen", 1337, {x|["downshift","condense","embed"]|x});
+    ("verb/closest-nolen", 7, {x|["bludgeon","scuffle","insert"]|x});
+    ("verb/match-closest", 42, {x|["gloss","unfurl","scotch"]|x});
+    ("verb/match-closest", 1337, {x|["display","coexist","drowse"]|x});
+    ("verb/match-closest", 7, {x|["blend","shrill","inure"]|x});
+    ("sample", 42, {x|["bleakly","custody","gee"]|x});
+    ("sample", 1337, {x|["how","yet","smooth"]|x});
+    ("sample", 7, {x|["masticate","afore","eek"]|x});
+    ("sample/5", 42, {x|["badly","dream","yahoo"]|x});
+    ("sample/5", 1337, {x|["since","whose","staid"]|x});
+    ("sample/5", 7, {x|["quiet","about","yahoo"]|x});
+    ("sample/range", 42, {x|["boldly","draft","psst"]|x});
+    ("sample/range", 1337, {x|["lest","whose","sparse"]|x});
+    ("sample/range", 7, {x|["mooch","absent","psst"]|x});
+    ("sample/len3", 42, {x|["far","bug","bah"]|x});
+    ("sample/len3", 1337, {x|["for","yet","raw"]|x});
+    ("sample/len3", 7, {x|["own","but","bah"]|x});
+    ( "sample/fail",
+      42,
+      {x|[{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"}]|x}
+    );
+    ( "sample/fail",
+      1337,
+      {x|[{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"}]|x}
+    );
+    ( "sample/fail",
+      7,
+      {x|[{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"}]|x}
+    );
+    ( "sample/fail-range",
+      42,
+      {x|[{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"}]|x}
+    );
+    ( "sample/fail-range",
+      1337,
+      {x|[{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"}]|x}
+    );
+    ( "sample/fail-range",
+      7,
+      {x|[{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"},{"error":"No matching word data available for the current locale"}]|x}
+    );
+    ( "sample/closest",
+      42,
+      {x|["enthusiastically","cross-contamination","consequently"]|x} );
+    ( "sample/closest",
+      1337,
+      {x|["consequently","incidentally","well-documented"]|x} );
+    ( "sample/closest",
+      7,
+      {x|["internationalize","notwithstanding","gadzooks"]|x} );
+    ("sample/closest-low", 42, {x|["far","CD","aw"]|x});
+    ("sample/closest-low", 1337, {x|["if","so","raw"]|x});
+    ("sample/closest-low", 7, {x|["own","a","oh"]|x});
+    ( "sample/closest-range",
+      42,
+      {x|["enthusiastically","cross-contamination","consequently"]|x} );
+    ( "sample/closest-range",
+      1337,
+      {x|["consequently","incidentally","well-documented"]|x} );
+    ( "sample/closest-range",
+      7,
+      {x|["internationalize","notwithstanding","gadzooks"]|x} );
+    ("sample/shortest", 42, {x|["far","CD","aw"]|x});
+    ("sample/shortest", 1337, {x|["if","so","raw"]|x});
+    ("sample/shortest", 7, {x|["own","a","oh"]|x});
+    ( "sample/longest",
+      42,
+      {x|["enthusiastically","cross-contamination","consequently"]|x} );
+    ( "sample/longest",
+      1337,
+      {x|["consequently","incidentally","well-documented"]|x} );
+    ( "sample/longest",
+      7,
+      {x|["internationalize","notwithstanding","gadzooks"]|x} );
+    ("sample/shortest-len", 42, {x|["far","CD","aw"]|x});
+    ("sample/shortest-len", 1337, {x|["if","so","raw"]|x});
+    ("sample/shortest-len", 7, {x|["own","a","oh"]|x});
+    ( "sample/longest-len",
+      42,
+      {x|["enthusiastically","cross-contamination","consequently"]|x} );
+    ( "sample/longest-len",
+      1337,
+      {x|["consequently","incidentally","well-documented"]|x} );
+    ( "sample/longest-len",
+      7,
+      {x|["internationalize","notwithstanding","gadzooks"]|x} );
+    ("sample/any-length", 42, {x|["bleakly","custody","gee"]|x});
+    ("sample/any-length", 1337, {x|["how","yet","smooth"]|x});
+    ("sample/any-length", 7, {x|["masticate","afore","eek"]|x});
+    ("sample/any-length-nolen", 42, {x|["bleakly","custody","gee"]|x});
+    ("sample/any-length-nolen", 1337, {x|["how","yet","smooth"]|x});
+    ("sample/any-length-nolen", 7, {x|["masticate","afore","eek"]|x});
+    ("sample/fail-nolen", 42, {x|["bleakly","custody","gee"]|x});
+    ("sample/fail-nolen", 1337, {x|["how","yet","smooth"]|x});
+    ("sample/fail-nolen", 7, {x|["masticate","afore","eek"]|x});
+    ("sample/closest-nolen", 42, {x|["bleakly","custody","gee"]|x});
+    ("sample/closest-nolen", 1337, {x|["how","yet","smooth"]|x});
+    ("sample/closest-nolen", 7, {x|["masticate","afore","eek"]|x});
+    ("sample/match-closest", 42, {x|["blindly","draft","yahoo"]|x});
+    ("sample/match-closest", 1337, {x|["hence","whose","speedy"]|x});
+    ("sample/match-closest", 7, {x|["mount","above","yahoo"]|x});
+    ("words", 42, {x|["unnaturally dreamily","embarrassment","perspire bus"]|x});
+    ("words", 1337, {x|["wallaby","suspiciously generously till","um"]|x});
+    ("words", 7, {x|["bleak","task","often"]|x});
+    ( "words/5",
+      42,
+      {x|["bleakly custody gee psst why","meh ugh utilized wherever without","safe across amidst intent zowie"]|x}
+    );
+    ( "words/5",
+      1337,
+      {x|["how yet smooth councilman including","safely junior actually accredit vaguely","failing vaguely mundane hassle whoever"]|x}
+    );
+    ( "words/5",
+      7,
+      {x|["masticate afore eek requirement circa","forswear delicious yuck bank linear","yowza scramble sticky plus next"]|x}
+    );
+    ( "words/count",
+      42,
+      {x|["bleakly custody gee psst","why meh ugh utilized","wherever without safe across"]|x}
+    );
+    ( "words/count",
+      1337,
+      {x|["how yet smooth councilman","including safely junior actually","accredit vaguely failing vaguely"]|x}
+    );
+    ( "words/count",
+      7,
+      {x|["masticate afore eek requirement","circa forswear delicious yuck","bank linear yowza scramble"]|x}
+    );
+    ( "words/range",
+      42,
+      {x|["unnaturally dreamily chapel mozzarella","evince unto","phew badly like"]|x}
+    );
+    ( "words/range",
+      1337,
+      {x|["wallaby drat deserted","till mmm hm","pitiful why"]|x} );
+    ( "words/range",
+      7,
+      {x|["bleak below","geez inspection soft homely excepting per positively","yum beneath lazy"]|x}
+    );
+    ("words/0", 42, {x|["","",""]|x});
+    ("words/0", 1337, {x|["","",""]|x});
+    ("words/0", 7, {x|["","",""]|x});
+    ( "fake/noun",
+      42,
+      {x|[{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"},{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"},{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"}]|x}
+    );
+    ( "fake/noun",
+      1337,
+      {x|[{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"},{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"},{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"}]|x}
+    );
+    ( "fake/noun",
+      7,
+      {x|[{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"},{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"},{"error":"Missing closing parenthesis in '({\"length\":{\"min\":3,\"max\":4'"}]|x}
+    );
+    ( "fake/sample",
+      42,
+      {x|["bleakly cross-contamination","however notwithstanding","baseboard consequently"]|x}
+    );
+    ( "fake/sample",
+      1337,
+      {x|["how incidentally","smooth cross-contamination","maul enthusiastically"]|x}
+    );
+    ( "fake/sample",
+      7,
+      {x|["masticate notwithstanding","oh internationalize","libel institutionalize"]|x}
+    );
+    ( "fake/misc",
+      42,
+      {x|[{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"},{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"},{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"}]|x}
+    );
+    ( "fake/misc",
+      1337,
+      {x|[{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"},{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"},{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"}]|x}
+    );
+    ( "fake/misc",
+      7,
+      {x|[{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"},{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"},{"error":"Missing closing parenthesis in '({\"count\":{\"min\":1,\"max\":2'"}]|x}
+    );
+    ( "fake/strategy",
+      42,
+      {x|["cross-contamination|sew|cuddly","cross-contamination|tag|scaly","cross-contamination|sun|delirious"]|x}
+    );
+    ( "fake/strategy",
+      1337,
+      {x|["cross-contamination|gum|gloomy","cross-contamination|vet|clean","cross-contamination|cop|juicy"]|x}
+    );
+    ( "fake/strategy",
+      7,
+      {x|["cross-contamination|low|woeful","cross-contamination|bus|marvelous","cross-contamination|jot|formal"]|x}
+    );
+  ]

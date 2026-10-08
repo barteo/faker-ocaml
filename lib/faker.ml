@@ -3,8 +3,8 @@
 module Json = Json
 module Js = Js
 
-(** JS string semantics: [String.prototype.normalize('NFKD')], [toUpperCase], [toLowerCase] and
-    UTF-16 lengths on UTF-8 strings. *)
+(** JS string semantics: [String.prototype.normalize('NFKD')], [toUpperCase],
+    [toLowerCase] and UTF-16 lengths on UTF-8 strings. *)
 module Unicode = struct
   include Unicode
 
@@ -79,8 +79,9 @@ let () =
           let o = Args.opts ~shorthand:"max" a in
           Json.Str
             (string_of_int
-               (Fk_number_bigint.big_int ?min:(Args.int o "min") ?max:(Args.int o "max")
-                  ?multiple_of:(Args.int o "multipleOf") f)) );
+               (Fk_number_bigint.big_int ?min:(Args.int o "min")
+                  ?max:(Args.int o "max") ?multiple_of:(Args.int o "multipleOf")
+                  f)) );
     ];
   Registry.add "datatype" Fk_datatype.registry;
   Registry.add "string" Fk_string.registry;
@@ -111,12 +112,14 @@ let () =
 
 (* ---------- instances ---------- *)
 
-(** [create ?locale ?randomizer ?seed ?default_ref_date ()] creates a new faker instance.
-    [locale] defaults to [[en; base]]; an empty list raises like faker-js. [default_ref_date]
-    (epoch milliseconds) is faker-js [config.defaultRefDate]. *)
-let create ?(locale = [ Lazy.force Locale.en; Lazy.force Locale.base ]) ?randomizer ?seed
-    ?default_ref_date () =
-  if locale = [] then Core.error "The locale option must contain at least one locale definition.";
+(** [create ?locale ?randomizer ?seed ?default_ref_date ()] creates a new faker
+    instance. [locale] defaults to [[en; base]]; an empty list raises like
+    faker-js. [default_ref_date] (epoch milliseconds) is faker-js
+    [config.defaultRefDate]. *)
+let create ?(locale = [ Lazy.force Locale.en; Lazy.force Locale.base ])
+    ?randomizer ?seed ?default_ref_date () =
+  if locale = [] then
+    Core.error "The locale option must contain at least one locale definition.";
   let f = Core.create ~locale ?randomizer ?seed () in
   Option.iter (fun ms -> f.default_ref_date <- (fun () -> ms)) default_ref_date;
   f
@@ -124,17 +127,20 @@ let create ?(locale = [ Lazy.force Locale.en; Lazy.force Locale.base ]) ?randomi
 let seed (f : t) s = f.randomizer.seed (`Int s)
 let seed_array (f : t) a = f.randomizer.seed (`Array a)
 
-(** [seed_random f] reseeds [f] with a random seed and returns it, like faker-js [seed()]. *)
+(** [seed_random f] reseeds [f] with a random seed and returns it, like faker-js
+    [seed()]. *)
 let seed_random (f : t) =
   let s = Randomizer.random_seed () in
   seed f s;
   s
 
-(** Sets a fixed reference date (epoch milliseconds) used by date-relative methods. *)
+(** Sets a fixed reference date (epoch milliseconds) used by date-relative
+    methods. *)
 let set_default_ref_date (f : t) ms = f.default_ref_date <- (fun () -> ms)
 
-(** [set_default_ref_date_input f d] is faker-js [setDefaultRefDate(d)] for a date string or
-    number, which is converted ([new Date(d)]) each time it is read. *)
+(** [set_default_ref_date_input f d] is faker-js [setDefaultRefDate(d)] for a
+    date string or number, which is converted ([new Date(d)]) each time it is
+    read. *)
 let set_default_ref_date_input (f : t) (d : Fk_date.input) =
   f.default_ref_date <- (fun () -> Fk_date.new_date d)
 
@@ -145,19 +151,20 @@ let reset_default_ref_date (f : t) = f.default_ref_date <- Core.now
 let set_default_ref_date_source (f : t) src = f.default_ref_date <- src
 let default_ref_date (f : t) = f.default_ref_date ()
 
-(** Every faker-js locale: [Locales.De.faker ()] is faker-js [fakerDE], [Locales.De.definition ()]
-    is [de] and [Locales.De.chain ()] is its fallback chain ([de; en; base]). A program links only
-    the locales it references. *)
 module Locales = Faker_locales
+(** Every faker-js locale: [Locales.De.faker ()] is faker-js [fakerDE],
+    [Locales.De.definition ()] is [de] and [Locales.De.chain ()] is its fallback
+    chain ([de; en; base]). A program links only the locales it references. *)
 
-(** [allLocales] and [allFakers]. Referencing this module links every locale. *)
 module All_locales = Faker_all_locales
+(** [allLocales] and [allFakers]. Referencing this module links every locale. *)
 
 (** The raw merged locale definitions, like faker-js [rawDefinitions]. *)
 let definitions (f : t) = f.locale
 
-(** [definition f category entry] is faker-js [definitions.<category>.<entry>]. It raises the
-    upstream "missing" or "not applicable" error when the locale has no such data. *)
+(** [definition f category entry] is faker-js [definitions.<category>.<entry>].
+    It raises the upstream "missing" or "not applicable" error when the locale
+    has no such data. *)
 let definition (f : t) category entry = Locale.get f category entry
 
 type metadata = {
@@ -171,8 +178,8 @@ type metadata = {
   variant : string option;
 }
 
-(** The locale's metadata, like faker-js [getMetadata()]. Every field is absent for a locale
-    without metadata. *)
+(** The locale's metadata, like faker-js [getMetadata()]. Every field is absent
+    for a locale without metadata. *)
 let get_metadata (f : t) : metadata =
   let field k =
     match Option.bind (Json.member "metadata" f.locale) (Json.member k) with
@@ -185,27 +192,34 @@ let get_metadata (f : t) : metadata =
     country = field "country";
     language = field "language";
     endonym = field "endonym";
-    dir = (match field "dir" with Some "rtl" -> Some `Rtl | Some "ltr" -> Some `Ltr | _ -> None);
+    dir =
+      (match field "dir" with
+      | Some "rtl" -> Some `Rtl
+      | Some "ltr" -> Some `Ltr
+      | _ -> None);
     script = field "script";
     variant = field "variant";
   }
 
-(** [merge_locales locales] merges locale definitions, earlier ones taking precedence per entry,
-    like faker-js [mergeLocales]. *)
+(** [merge_locales locales] merges locale definitions, earlier ones taking
+    precedence per entry, like faker-js [mergeLocales]. *)
 let merge_locales = Core.merge_locales
 
-(** The [{{module.method}}] registry behind [Helpers.fake]: upstream (camelCase) method names
-    mapped to functions taking JSON arguments. *)
 module Registry = Registry
+(** The [{{module.method}}] registry behind [Helpers.fake]: upstream (camelCase)
+    method names mapped to functions taking JSON arguments. *)
 
 (** The shared default instance (random seed), like faker-js [faker]. *)
 let default = lazy (create ())
 
-(** [create_simple ?randomizer ?seed ?default_ref_date ()] is faker-js [new SimpleFaker()]: an
-    instance without locale data, for the locale-independent methods (Number, String, Datatype,
-    most of Date, Helpers). Methods that need locale data raise the upstream "missing" error. *)
+(** [create_simple ?randomizer ?seed ?default_ref_date ()] is faker-js
+    [new SimpleFaker()]: an instance without locale data, for the
+    locale-independent methods (Number, String, Datatype, most of Date,
+    Helpers). Methods that need locale data raise the upstream "missing" error.
+*)
 let create_simple ?randomizer ?seed ?default_ref_date () =
   create ~locale:[ Json.Obj [] ] ?randomizer ?seed ?default_ref_date ()
 
-(** The shared [SimpleFaker] instance (random seed), like faker-js [simpleFaker]. *)
+(** The shared [SimpleFaker] instance (random seed), like faker-js
+    [simpleFaker]. *)
 let simple_faker = lazy (create_simple ())

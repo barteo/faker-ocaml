@@ -1,7 +1,6 @@
 (* Port of src/modules/music/module.ts. *)
 
 let pick entry f = Fk_helpers.array_element (Locale.strings f "music" entry) f
-
 let album f = pick "album" f
 let artist f = pick "artist" f
 let genre f = pick "genre" f

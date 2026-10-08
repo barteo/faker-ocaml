@@ -18,17 +18,48 @@ let stacked =
   |]
 
 let numbers =
-  [| ""; " 12 "; "1e3"; "0x1F"; "0o17"; "0b101"; ".5"; "5."; "+1"; "-Infinity"; "NaN"; "1_000"; "0x"; "١"; "12px"; " \t\n" |]
+  [|
+    "";
+    " 12 ";
+    "1e3";
+    "0x1F";
+    "0o17";
+    "0b101";
+    ".5";
+    "5.";
+    "+1";
+    "-Infinity";
+    "NaN";
+    "1_000";
+    "0x";
+    "١";
+    "12px";
+    " \t\n";
+  |]
 
 let cases : case list =
   [
     ("toUpperCase", fun _ -> ss (Array.map U.js_upper samples));
     ("toLowerCase", fun _ -> ss (Array.map U.js_lower samples));
     ( "upperFirst",
-      fun _ -> ss (Array.map U.js_upper_first (Array.append samples [| "ǆa"; "ßa"; "𐐨x"; "ŉx" |])) );
+      fun _ ->
+        ss
+          (Array.map U.js_upper_first
+             (Array.append samples [| "ǆa"; "ßa"; "𐐨x"; "ŉx" |])) );
     ("nfkd", fun _ -> ss (Array.map U.nfkd (Array.append samples stacked)));
-    ("slugify", fun _ -> ss (Array.map Faker.Helpers.slugify (Array.append samples stacked)));
+    ( "slugify",
+      fun _ ->
+        ss (Array.map Faker.Helpers.slugify (Array.append samples stacked)) );
     ( "username",
-      fun f -> ss (Array.map (fun s -> Faker.Internet.username ~first_name:s ~last_name:"x" f) stacked) );
-    ("number", fun _ -> ss (Array.map (fun s -> Faker.Js.number_to_string (Faker.Js.to_number s)) numbers));
+      fun f ->
+        ss
+          (Array.map
+             (fun s -> Faker.Internet.username ~first_name:s ~last_name:"x" f)
+             stacked) );
+    ( "number",
+      fun _ ->
+        ss
+          (Array.map
+             (fun s -> Faker.Js.number_to_string (Faker.Js.to_number s))
+             numbers) );
   ]

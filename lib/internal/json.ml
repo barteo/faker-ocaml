@@ -28,10 +28,14 @@ let parse (s : string) : t =
           ws ()
       | _ -> ()
   in
-  let expect c = if peek () = c then incr pos else fail (Printf.sprintf "expected '%c'" c) in
+  let expect c =
+    if peek () = c then incr pos else fail (Printf.sprintf "expected '%c'" c)
+  in
   let literal word v =
     let l = String.length word in
-    if !pos + l <= len && String.sub s !pos l = word then (pos := !pos + l; v)
+    if !pos + l <= len && String.sub s !pos l = word then (
+      pos := !pos + l;
+      v)
     else fail "invalid literal"
   in
   let hex4 () =
@@ -63,8 +67,11 @@ let parse (s : string) : t =
           | 't' -> Buffer.add_char b '\t'
           | 'u' ->
               let cp = hex4 () in
-              if cp >= 0xD800 && cp <= 0xDBFF && !pos + 1 < len && s.[!pos] = '\\'
-                 && s.[!pos + 1] = 'u'
+              if
+                cp >= 0xD800 && cp <= 0xDBFF
+                && !pos + 1 < len
+                && s.[!pos] = '\\'
+                && s.[!pos + 1] = 'u'
               then begin
                 pos := !pos + 2;
                 let lo = hex4 () in
@@ -84,7 +91,9 @@ let parse (s : string) : t =
   let number () =
     let start = !pos in
     let is_num c =
-      match c with '0' .. '9' | '-' | '+' | '.' | 'e' | 'E' -> true | _ -> false
+      match c with
+      | '0' .. '9' | '-' | '+' | '.' | 'e' | 'E' -> true
+      | _ -> false
     in
     while !pos < len && is_num s.[!pos] do
       incr pos
@@ -99,7 +108,9 @@ let parse (s : string) : t =
     | '{' ->
         incr pos;
         ws ();
-        if peek () = '}' then (incr pos; Obj [])
+        if peek () = '}' then (
+          incr pos;
+          Obj [])
         else
           let rec members acc =
             ws ();
@@ -121,7 +132,9 @@ let parse (s : string) : t =
     | '[' ->
         incr pos;
         ws ();
-        if peek () = ']' then (incr pos; Arr [||])
+        if peek () = ']' then (
+          incr pos;
+          Arr [||])
         else
           let rec elems acc =
             let v = value () in
@@ -162,7 +175,8 @@ let escape_string_to b s =
       | '\n' -> Buffer.add_string b "\\n"
       | '\r' -> Buffer.add_string b "\\r"
       | '\t' -> Buffer.add_string b "\\t"
-      | c when Char.code c < 0x20 -> Buffer.add_string b (Printf.sprintf "\\u%04x" (Char.code c))
+      | c when Char.code c < 0x20 ->
+          Buffer.add_string b (Printf.sprintf "\\u%04x" (Char.code c))
       | c -> Buffer.add_char b c)
     s;
   Buffer.add_char b '"'
@@ -176,7 +190,8 @@ let rec to_buffer b = function
   | Null -> Buffer.add_string b "null"
   | Bool v -> Buffer.add_string b (if v then "true" else "false")
   | Num f ->
-      Buffer.add_string b (if Float.is_finite f then Js.number_to_string f else "null")
+      Buffer.add_string b
+        (if Float.is_finite f then Js.number_to_string f else "null")
   | Str s -> escape_string_to b s
   | Arr a ->
       Buffer.add_char b '[';
@@ -210,13 +225,13 @@ let rec to_js_string = function
   | Str s -> s
   | Arr a ->
       String.concat ","
-        (Array.to_list (Array.map (function Null -> "" | v -> to_js_string v) a))
+        (Array.to_list
+           (Array.map (function Null -> "" | v -> to_js_string v) a))
   | Obj _ -> "[object Object]"
 
 (* ---------- accessors ---------- *)
 
 let member k = function Obj kvs -> List.assoc_opt k kvs | _ -> None
-
 let int i = Num (float_of_int i)
 let str s = Str s
 let strs l = Arr (Array.of_list (List.map str l))

@@ -23,11 +23,14 @@ let fold_uchars s fn =
 let nfkd s =
   let t = Lazy.force table in
   fold_uchars s (fun b cp raw ->
-      match Hashtbl.find_opt t cp with Some d -> Buffer.add_string b d | None -> Buffer.add_string b raw)
+      match Hashtbl.find_opt t cp with
+      | Some d -> Buffer.add_string b d
+      | None -> Buffer.add_string b raw)
 
 (* Removes U+0300..U+036F. *)
 let strip_combining_marks s =
-  fold_uchars s (fun b cp raw -> if cp < 0x300 || cp > 0x36F then Buffer.add_string b raw)
+  fold_uchars s (fun b cp raw ->
+      if cp < 0x300 || cp > 0x36F then Buffer.add_string b raw)
 
 let ccc_table =
   lazy
@@ -35,8 +38,8 @@ let ccc_table =
      Array.iter (fun (cp, r) -> Hashtbl.replace h cp r) Unicode_ccc.rank;
      h)
 
-(** Canonical ordering (the last step of NFD/NFKD): each run of combining marks is stably sorted
-    by canonical combining class. *)
+(** Canonical ordering (the last step of NFD/NFKD): each run of combining marks
+    is stably sorted by canonical combining class. *)
 let canonical_order s =
   let t = Lazy.force ccc_table in
   let ccc cp = Option.value (Hashtbl.find_opt t cp) ~default:0 in
@@ -75,7 +78,9 @@ let in_ranges ranges cp =
     else
       let mid = (lo + hi) / 2 in
       let a, b = ranges.(mid) in
-      if cp < a then go lo (mid - 1) else if cp > b then go (mid + 1) hi else true
+      if cp < a then go lo (mid - 1)
+      else if cp > b then go (mid + 1) hi
+      else true
   in
   go 0 (Array.length ranges - 1)
 
@@ -101,10 +106,12 @@ let js_lower s =
   (* A cased letter before [i] (skipping case-ignorables), and none after it. *)
   let final_sigma i =
     let rec before j =
-      j >= 0 && (if is_case_ignorable cps.(j) then before (j - 1) else is_cased cps.(j))
+      j >= 0
+      && if is_case_ignorable cps.(j) then before (j - 1) else is_cased cps.(j)
     in
     let rec after j =
-      j < n && (if is_case_ignorable cps.(j) then after (j + 1) else is_cased cps.(j))
+      j < n
+      && if is_case_ignorable cps.(j) then after (j + 1) else is_cased cps.(j)
     in
     before (i - 1) && not (after (i + 1))
   in
@@ -119,18 +126,21 @@ let js_lower s =
     cps;
   Buffer.contents b
 
-(** [js_upper_first s] is [s.charAt(0).toUpperCase() + s.slice(1)]. [charAt(0)] of an astral
-    character is a lone surrogate, which [toUpperCase] leaves alone. *)
+(** [js_upper_first s] is [s.charAt(0).toUpperCase() + s.slice(1)]. [charAt(0)]
+    of an astral character is a lone surrogate, which [toUpperCase] leaves
+    alone. *)
 let js_upper_first s =
   if s = "" then s
   else
     let d = String.get_utf_8_uchar s 0 in
     let n = Uchar.utf_decode_length d in
     let cp = Uchar.to_int (Uchar.utf_decode_uchar d) in
-    if cp >= 0x10000 then s else js_upper (String.sub s 0 n) ^ String.sub s n (String.length s - n)
+    if cp >= 0x10000 then s
+    else js_upper (String.sub s 0 n) ^ String.sub s n (String.length s - n)
 
 (* Number of UTF-16 code units (JavaScript string length). *)
 let js_length s =
   let n = ref 0 in
-  ignore (fold_uchars s (fun _ cp _ -> n := !n + if cp >= 0x10000 then 2 else 1));
+  ignore
+    (fold_uchars s (fun _ cp _ -> n := !n + if cp >= 0x10000 then 2 else 1));
   !n

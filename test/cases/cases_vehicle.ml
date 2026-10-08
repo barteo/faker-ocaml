@@ -12,13 +12,16 @@ let cases : case list =
     ("color", fun f -> s (V.color f));
     ("vrm", fun f -> s (V.vrm f));
     ("bicycle", fun f -> s (V.bicycle f));
-    ("vin/many", fun f -> ss (Faker.Helpers.multiple ~count:(`N 30) (fun _ -> V.vin f) f));
+    ( "vin/many",
+      fun f -> ss (Faker.Helpers.multiple ~count:(`N 30) (fun _ -> V.vin f) f)
+    );
     ( "fake",
       fun f ->
         s
           (Faker.Helpers.fake
-             "{{vehicle.vehicle}} | {{vehicle.manufacturer}} | {{vehicle.model}} | \
-              {{vehicle.type}} | {{vehicle.fuel}} | {{vehicle.vin}} | {{vehicle.color}} | \
-              {{vehicle.vrm}} | {{vehicle.bicycle}}"
+             "{{vehicle.vehicle}} | {{vehicle.manufacturer}} | \
+              {{vehicle.model}} | {{vehicle.type}} | {{vehicle.fuel}} | \
+              {{vehicle.vin}} | {{vehicle.color}} | {{vehicle.vrm}} | \
+              {{vehicle.bicycle}}"
              f) );
   ]

@@ -2,26 +2,90 @@
 
 let locale = "en"
 
-let cases = [
-  ("toUpperCase", 42, {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"]]|x});
-  ("toUpperCase", 1337, {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"]]|x});
-  ("toUpperCase", 7, {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"]]|x});
-  ("toLowerCase", 42, {x|[["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"],["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"],["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"]]|x});
-  ("toLowerCase", 1337, {x|[["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"],["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"],["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"]]|x});
-  ("toLowerCase", 7, {x|[["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"],["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"],["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"]]|x});
-  ("upperFirst", 42, {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"]]|x});
-  ("upperFirst", 1337, {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"]]|x});
-  ("upperFirst", 7, {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"]]|x});
-  ("nfkd", 42, {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"]]|x});
-  ("nfkd", 1337, {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"]]|x});
-  ("nfkd", 7, {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"]]|x});
-  ("slugify", 42, {x|[["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"],["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"],["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"]]|x});
-  ("slugify", 1337, {x|[["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"],["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"],["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"]]|x});
-  ("slugify", 7, {x|[["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"],["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"],["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"]]|x});
-  ("username", 42, {x|[["sh14o14xlv14pm.x","b18u18xb18u18x_x15","ab.x","Aaua3cw3fl3cw3fl3hkkgHello1_x"],["sh14o14xlv14pm_x21","b18u18xb18u18x.x","ab.x","Aaua3cw3fl3cw3fl3hkkgHello1.x29"],["sh14o14xlv14pm.x78","b18u18xb18u18x_x59","ab_x17","Aaua3cw3fl3cw3fl3hkkgHello1_x"]]|x});
-  ("username", 1337, {x|[["sh14o14xlv14pm.x15","b18u18xb18u18x.x","ab.x","Aaua3cw3fl3cw3fl3hkkgHello1.x"],["sh14o14xlv14pm.x98","b18u18xb18u18x_x79","ab.x","Aaua3cw3fl3cw3fl3hkkgHello1.x"],["sh14o14xlv14pm.x17","b18u18xb18u18x.x","ab.x95","Aaua3cw3fl3cw3fl3hkkgHello1_x51"]]|x});
-  ("username", 7, {x|[["sh14o14xlv14pm.x77","b18u18xb18u18x_x","ab_x7","Aaua3cw3fl3cw3fl3hkkgHello1.x"],["sh14o14xlv14pm.x6","b18u18xb18u18x_x21","ab_x","Aaua3cw3fl3cw3fl3hkkgHello1_x"],["sh14o14xlv14pm_x","b18u18xb18u18x_x66","ab.x49","Aaua3cw3fl3cw3fl3hkkgHello1.x"]]|x});
-  ("number", 42, {x|[["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"],["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"],["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"]]|x});
-  ("number", 1337, {x|[["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"],["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"],["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"]]|x});
-  ("number", 7, {x|[["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"],["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"],["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"]]|x});
-]
+let cases =
+  [
+    ( "toUpperCase",
+      42,
+      {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"]]|x}
+    );
+    ( "toUpperCase",
+      1337,
+      {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"]]|x}
+    );
+    ( "toUpperCase",
+      7,
+      {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İSTANBUL KELVINK STRASSE ǄEMAL FINALE ʼN","ǇǊǱ Ϊ́ ΑΙ FFI 𐐀𐑐 𞤀 Ⓐ Ⅻ","ՀԱՅԵՐԷՆ ԵՒ ԵՒ Ⴀ Ა Ꙁ"]]|x}
+    );
+    ( "toLowerCase",
+      42,
+      {x|[["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"],["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"],["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"]]|x}
+    );
+    ( "toLowerCase",
+      1337,
+      {x|[["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"],["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"],["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"]]|x}
+    );
+    ( "toLowerCase",
+      7,
+      {x|[["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"],["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"],["ας σα όσος. σ ας́ ασ'α","i̇stanbul kelvink straße ǆemal ﬁnale ŉ","ǉǌǳ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ ⅻ","հայերէն եւ և ⴀ ა ꙁ"]]|x}
+    );
+    ( "upperFirst",
+      42,
+      {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"]]|x}
+    );
+    ( "upperFirst",
+      1337,
+      {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"]]|x}
+    );
+    ( "upperFirst",
+      7,
+      {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße ǅemal ﬁnale ŉ","Ǉǋǲ ΐ ᾳ ﬃ 𐐨𐑐 𞤢 ⓐ Ⅻ","Հայերէն եւ և Ⴀ ა ꙁ","Ǆa","SSa","𐐨x","ʼNx"]]|x}
+    );
+    ( "nfkd",
+      42,
+      {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"]]|x}
+    );
+    ( "nfkd",
+      1337,
+      {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"]]|x}
+    );
+    ( "nfkd",
+      7,
+      {x|[["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"],["ΑΣ ΣΑ ΌΣΟΣ. Σ ΑΣ́ ΑΣ'Α","İstanbul KELVINK straße Džemal finale ʼn","LjNjDz ΐ ᾳ ffi 𐐨𐑐 𞤢 a XII","հայերէն եւ եւ Ⴀ ა ꙁ","שָׁלוֹם","بَّبَّ","á̴̖b̧́","Ạ̊ ẫ ǖ ᾷ 가각 kg Hello 1"]]|x}
+    );
+    ( "slugify",
+      42,
+      {x|[["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"],["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"],["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"]]|x}
+    );
+    ( "slugify",
+      1337,
+      {x|[["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"],["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"],["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"]]|x}
+    );
+    ( "slugify",
+      7,
+      {x|[["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"],["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"],["--.---","Istanbul-KELVINK-strae-Dzemal-finale-n","LjNjDz---ffi---a-XII","-----","","","ab","A-a-u---kg-Hello-1"]]|x}
+    );
+    ( "username",
+      42,
+      {x|[["sh14o14xlv14pm.x","b18u18xb18u18x_x15","ab.x","Aaua3cw3fl3cw3fl3hkkgHello1_x"],["sh14o14xlv14pm_x21","b18u18xb18u18x.x","ab.x","Aaua3cw3fl3cw3fl3hkkgHello1.x29"],["sh14o14xlv14pm.x78","b18u18xb18u18x_x59","ab_x17","Aaua3cw3fl3cw3fl3hkkgHello1_x"]]|x}
+    );
+    ( "username",
+      1337,
+      {x|[["sh14o14xlv14pm.x15","b18u18xb18u18x.x","ab.x","Aaua3cw3fl3cw3fl3hkkgHello1.x"],["sh14o14xlv14pm.x98","b18u18xb18u18x_x79","ab.x","Aaua3cw3fl3cw3fl3hkkgHello1.x"],["sh14o14xlv14pm.x17","b18u18xb18u18x.x","ab.x95","Aaua3cw3fl3cw3fl3hkkgHello1_x51"]]|x}
+    );
+    ( "username",
+      7,
+      {x|[["sh14o14xlv14pm.x77","b18u18xb18u18x_x","ab_x7","Aaua3cw3fl3cw3fl3hkkgHello1.x"],["sh14o14xlv14pm.x6","b18u18xb18u18x_x21","ab_x","Aaua3cw3fl3cw3fl3hkkgHello1_x"],["sh14o14xlv14pm_x","b18u18xb18u18x_x66","ab.x49","Aaua3cw3fl3cw3fl3hkkgHello1.x"]]|x}
+    );
+    ( "number",
+      42,
+      {x|[["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"],["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"],["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"]]|x}
+    );
+    ( "number",
+      1337,
+      {x|[["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"],["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"],["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"]]|x}
+    );
+    ( "number",
+      7,
+      {x|[["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"],["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"],["0","12","1000","31","15","5","0.5","5","1","-Infinity","NaN","NaN","NaN","NaN","NaN","0"]]|x}
+    );
+  ]

@@ -45,7 +45,8 @@ let array_seeded (seed : int array) =
     let prev = out.(!idx_out - 1) in
     let xored = prev lxor (prev lsr 30) in
     out.(!idx_out) <-
-      u32 ((out.(!idx_out) lxor imul xored 1664525) + seed.(!idx_seed) + !idx_seed);
+      u32
+        ((out.(!idx_out) lxor imul xored 1664525) + seed.(!idx_seed) + !idx_seed);
     incr idx_out;
     incr idx_seed;
     if !idx_out >= n then begin
@@ -57,7 +58,9 @@ let array_seeded (seed : int array) =
   for _ = n - 1 downto 1 do
     let prev = out.(!idx_out - 1) in
     out.(!idx_out) <-
-      u32 ((out.(!idx_out) lxor imul (prev lxor (prev lsr 30)) 1566083941) - !idx_out);
+      u32
+        ((out.(!idx_out) lxor imul (prev lxor (prev lsr 30)) 1566083941)
+        - !idx_out);
     incr idx_out;
     if !idx_out >= n then begin
       out.(0) <- out.(n - 1);
@@ -70,7 +73,7 @@ let array_seeded (seed : int array) =
 let twist states =
   let mix i j k =
     let y = (states.(i) land mask_upper) + (states.(j) land mask_lower) in
-    states.(i) <- states.(k) lxor (y lsr 1) lxor (if y land 1 = 1 then a else 0)
+    states.(i) <- (states.(k) lxor (y lsr 1) lxor if y land 1 = 1 then a else 0)
   in
   for idx = 0 to n - m - 1 do
     mix idx (idx + 1) (idx + m)

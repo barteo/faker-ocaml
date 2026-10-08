@@ -8,7 +8,8 @@ let def = lazy (Json.parse Ru_data.json)
 let definition () = Lazy.force def
 
 (** The locale chain the prebuilt instance uses: ru, en, base. *)
-let chain () = [ definition (); Locale_en.definition (); Locale_base.definition () ]
+let chain () =
+  [ definition (); Locale_en.definition (); Locale_base.definition () ]
 
 let instance = lazy (Core.create ~locale:(chain ()) ())
 

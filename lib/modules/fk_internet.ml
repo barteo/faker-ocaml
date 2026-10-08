@@ -11,7 +11,16 @@
    - Dates are float epoch milliseconds. *)
 
 type emoji_type =
-  [ `Smiley | `Body | `Person | `Nature | `Food | `Travel | `Activity | `Object | `Symbol | `Flag ]
+  [ `Smiley
+  | `Body
+  | `Person
+  | `Nature
+  | `Food
+  | `Travel
+  | `Activity
+  | `Object
+  | `Symbol
+  | `Flag ]
 
 let emoji_type_to_string : emoji_type -> string = function
   | `Smiley -> "smiley"
@@ -50,7 +59,6 @@ let http_method_to_string : http_method -> string = function
   | `DELETE -> "DELETE"
   | `PATCH -> "PATCH"
 
-(** [IPv4Network] presets. *)
 type ipv4_network =
   [ `Any
   | `Loopback
@@ -62,6 +70,7 @@ type ipv4_network =
   | `Test_net_3
   | `Link_local
   | `Multicast ]
+(** [IPv4Network] presets. *)
 
 let ipv4_networks : (string * (ipv4_network * string)) list =
   [
@@ -80,14 +89,18 @@ let ipv4_networks : (string * (ipv4_network * string)) list =
 let ipv4_network_cidr (n : ipv4_network) =
   snd (snd (List.find (fun (_, (m, _)) -> m = n) ipv4_networks))
 
-let ipv4_network_to_string (n : ipv4_network) = fst (List.find (fun (_, (m, _)) -> m = n) ipv4_networks)
+let ipv4_network_to_string (n : ipv4_network) =
+  fst (List.find (fun (_, (m, _)) -> m = n) ipv4_networks)
 
 let ipv4_network_of_string s = Option.map fst (List.assoc_opt s ipv4_networks)
 
 (* ---------- helpers ---------- *)
 
 let el entry f = Fk_helpers.array_element (Locale.strings f "internet" entry) f
-let obj_keys = function Json.Obj kvs -> Array.of_list (List.map fst kvs) | _ -> [||]
+
+let obj_keys = function
+  | Json.Obj kvs -> Array.of_list (List.map fst kvs)
+  | _ -> [||]
 
 (* Bytes-level filter, valid on UTF-8 when [keep] only accepts ASCII bytes. *)
 let filter_bytes keep s =
@@ -96,14 +109,15 @@ let filter_bytes keep s =
   Buffer.contents b
 
 let remove_quotes_and_spaces s = filter_bytes (fun c -> c <> '\'' && c <> ' ') s
-
 let is_alpha c = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
 let is_digit c = c >= '0' && c <= '9'
 
 (* ---------- base64url (src/internal/base64.ts) ---------- *)
 
 let to_base64_url (input : string) =
-  let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_" in
+  let alphabet =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
+  in
   let len = String.length input in
   let b = Buffer.create ((len + 2) / 3 * 4) in
   let byte i = Char.code input.[i] in
@@ -137,9 +151,15 @@ let to_base64_url (input : string) =
     non-ASCII characters are transliterated (NFKD, char mappings, else the
     base-36 code point). *)
 let username ?first_name ?last_name f =
-  let has_last_name = match last_name with Some s -> s <> "" | None -> false in
-  let first_name = match first_name with Some v -> v | None -> Fk_person.first_name f in
-  let last_name = match last_name with Some v -> v | None -> Fk_person.last_name f in
+  let has_last_name =
+    match last_name with Some s -> s <> "" | None -> false
+  in
+  let first_name =
+    match first_name with Some v -> v | None -> Fk_person.first_name f
+  in
+  let last_name =
+    match last_name with Some v -> v | None -> Fk_person.last_name f
+  in
   let separator = Fk_helpers.array_element [| "."; "_" |] f in
   let disambiguator = string_of_int (Fk_number.int ~max:99 f) in
   let strategies =
@@ -147,7 +167,8 @@ let username ?first_name ?last_name f =
       (fun () -> first_name ^ separator ^ last_name ^ disambiguator);
       (fun () -> first_name ^ separator ^ last_name);
     ]
-    @ if not has_last_name then [ (fun () -> first_name ^ disambiguator) ] else []
+    @
+    if not has_last_name then [ (fun () -> first_name ^ disambiguator) ] else []
   in
   let result = (Fk_helpers.array_element (Array.of_list strategies) f) () in
   let result = Unicode.strip_combining_marks (Fk_internet_nfkd.nfkd result) in
@@ -155,23 +176,33 @@ let username ?first_name ?last_name f =
     Unicode.fold_uchars result (fun b cp raw ->
         match Fk_internet_char_mappings.lookup cp with
         | Some m -> Buffer.add_string b m
-        | None -> if cp < 0x80 then Buffer.add_string b raw else Buffer.add_string b (Js.int_to_radix cp 36))
+        | None ->
+            if cp < 0x80 then Buffer.add_string b raw
+            else Buffer.add_string b (Js.int_to_radix cp 36))
   in
   remove_quotes_and_spaces result
 
 (** [email ?first_name ?last_name ?provider ?allow_special_characters f]. *)
-let email ?first_name ?last_name ?provider ?(allow_special_characters = false) f =
-  let provider = match provider with Some p -> p | None -> el "free_email" f in
+let email ?first_name ?last_name ?provider ?(allow_special_characters = false) f
+    =
+  let provider =
+    match provider with Some p -> p | None -> el "free_email" f
+  in
   let local_part = username ?first_name ?last_name f in
   (* /[^A-Za-z0-9._+-]+/g *)
   let local_part =
-    filter_bytes (fun c -> is_alpha c || is_digit c || c = '.' || c = '_' || c = '+' || c = '-') local_part
+    filter_bytes
+      (fun c ->
+        is_alpha c || is_digit c || c = '.' || c = '_' || c = '+' || c = '-')
+      local_part
   in
   let local_part = Js.substring local_part 0 50 in
   let local_part =
     if allow_special_characters then
       let username_chars = [| "."; "_"; "-" |] in
-      let special_chars = Array.of_list (Js.code_points ".!#$%&'*+-/=?^_`{|}~") in
+      let special_chars =
+        Array.of_list (Js.code_points ".!#$%&'*+-/=?^_`{|}~")
+      in
       let sub = Fk_helpers.array_element username_chars f in
       let by = Fk_helpers.array_element special_chars f in
       Js.replace_first ~sub ~by local_part
@@ -180,25 +211,35 @@ let email ?first_name ?last_name ?provider ?(allow_special_characters = false) f
   (* /\.{2,}/g -> '.' *)
   let b = Buffer.create (String.length local_part) in
   String.iteri
-    (fun i c -> if not (c = '.' && i > 0 && local_part.[i - 1] = '.') then Buffer.add_char b c)
+    (fun i c ->
+      if not (c = '.' && i > 0 && local_part.[i - 1] = '.') then
+        Buffer.add_char b c)
     local_part;
   let local_part = Buffer.contents b in
-  let local_part = if Js.starts_with ~prefix:"." local_part then Js.slice local_part 1 else local_part in
   let local_part =
-    if Js.ends_with ~suffix:"." local_part then Js.slice ~end_:(-1) local_part 0 else local_part
+    if Js.starts_with ~prefix:"." local_part then Js.slice local_part 1
+    else local_part
+  in
+  let local_part =
+    if Js.ends_with ~suffix:"." local_part then Js.slice ~end_:(-1) local_part 0
+    else local_part
   in
   local_part ^ "@" ^ provider
 
-(** [example_email ?first_name ?last_name ?allow_special_characters f]: an
-    email at a reserved example domain. *)
+(** [example_email ?first_name ?last_name ?allow_special_characters f]: an email
+    at a reserved example domain. *)
 let example_email ?first_name ?last_name ?allow_special_characters f =
   let provider = el "example_email" f in
   email ?first_name ?last_name ~provider ?allow_special_characters f
 
 (** [display_name ?first_name ?last_name f]. *)
 let display_name ?first_name ?last_name f =
-  let first_name = match first_name with Some v -> v | None -> Fk_person.first_name f in
-  let last_name = match last_name with Some v -> v | None -> Fk_person.last_name f in
+  let first_name =
+    match first_name with Some v -> v | None -> Fk_person.first_name f
+  in
+  let last_name =
+    match last_name with Some v -> v | None -> Fk_person.last_name f
+  in
   let separator = Fk_helpers.array_element [| "."; "_" |] f in
   let disambiguator = string_of_int (Fk_number.int ~max:99 f) in
   let strategies =
@@ -214,20 +255,24 @@ let display_name ?first_name ?last_name f =
 
 let protocol f : http_protocol = Fk_helpers.array_element [| `Http; `Https |] f
 
-let http_method f : http_method = Fk_helpers.array_element [| `GET; `POST; `PUT; `DELETE; `PATCH |] f
+let http_method f : http_method =
+  Fk_helpers.array_element [| `GET; `POST; `PUT; `DELETE; `PATCH |] f
 
 let http_status_code_of_strings types f =
   let data = Locale.get f "internet" "http_status_code" in
   let types = match types with Some t -> t | None -> obj_keys data in
   let typ = Fk_helpers.array_element types f in
   match Json.member typ data with
-  | Some (Json.Arr codes) -> int_of_float (Locale.num (Fk_helpers.array_element codes f))
+  | Some (Json.Arr codes) ->
+      int_of_float (Locale.num (Fk_helpers.array_element codes f))
   | _ -> Core.error "Cannot read properties of undefined (reading 'length')"
 
 (** [http_status_code ?types f]: [types] defaults to all categories. *)
 let http_status_code ?(types : http_status_code_type list option) f =
   http_status_code_of_strings
-    (Option.map (fun l -> Array.of_list (List.map http_status_code_type_to_string l)) types)
+    (Option.map
+       (fun l -> Array.of_list (List.map http_status_code_type_to_string l))
+       types)
     f
 
 let domain_suffix f = el "domain_suffix" f
@@ -262,15 +307,22 @@ let domain_name f =
 (** [url ?append_slash ?protocol f]: [append_slash] defaults to random,
     [protocol] to [`Https]. *)
 let url ?append_slash ?(protocol : http_protocol = `Https) f =
-  let append_slash = match append_slash with Some b -> b | None -> Fk_datatype.boolean f in
-  http_protocol_to_string protocol ^ "://" ^ domain_name f ^ if append_slash then "/" else ""
+  let append_slash =
+    match append_slash with Some b -> b | None -> Fk_datatype.boolean f
+  in
+  http_protocol_to_string protocol
+  ^ "://" ^ domain_name f
+  ^ if append_slash then "/" else ""
 
 (* ---------- ip ---------- *)
 
 (* /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\/\d{1,2}$/ *)
 let valid_cidr s =
   let n = String.length s in
-  let rec digits i k max = if k < max && i < n && is_digit s.[i] then digits (i + 1) (k + 1) max else (i, k) in
+  let rec digits i k max =
+    if k < max && i < n && is_digit s.[i] then digits (i + 1) (k + 1) max
+    else (i, k)
+  in
   let rec octets i count =
     let j, k = digits i 0 3 in
     if k = 0 then false
@@ -286,45 +338,67 @@ let valid_cidr s =
 
 let ipv4_of_cidr cidr_block f =
   if not (valid_cidr cidr_block) then
-    Core.error "Invalid CIDR block provided: %s. Must be in the format x.x.x.x/y." cidr_block;
+    Core.error
+      "Invalid CIDR block provided: %s. Must be in the format x.x.x.x/y."
+      cidr_block;
   let ip_text, subnet =
-    match String.split_on_char '/' cidr_block with [ a; b ] -> (a, b) | _ -> assert false
+    match String.split_on_char '/' cidr_block with
+    | [ a; b ] -> (a, b)
+    | _ -> assert false
   in
   let subnet_value = int_of_string subnet in
   if subnet_value > 32 then
-    Core.error "Invalid CIDR block provided: %s. Prefix length must be between 0 and 32." cidr_block;
+    Core.error
+      "Invalid CIDR block provided: %s. Prefix length must be between 0 and 32."
+      cidr_block;
   let octets = List.map int_of_string (String.split_on_char '.' ip_text) in
   if List.exists (fun o -> o > 255) octets then
-    Core.error "Invalid CIDR block provided: %s. Each octet must be between 0 and 255." cidr_block;
+    Core.error
+      "Invalid CIDR block provided: %s. Each octet must be between 0 and 255."
+      cidr_block;
   if subnet_value = 32 then ip_text
   else
     let subnet_mask = 0xffffffff lsr subnet_value in
-    let raw_ip = List.fold_left (fun acc o -> (acc lsl 8) lor o) 0 octets land 0xffffffff in
+    let raw_ip =
+      List.fold_left (fun acc o -> (acc lsl 8) lor o) 0 octets land 0xffffffff
+    in
     let network_ip = raw_ip land lnot subnet_mask land 0xffffffff in
     let host_offset = Fk_number.int ~max:subnet_mask f in
-    let ip = (network_ip lor host_offset) land 0xffffffff in
+    let ip = network_ip lor host_offset land 0xffffffff in
     String.concat "."
       (List.map string_of_int
-         [ (ip lsr 24) land 0xff; (ip lsr 16) land 0xff; (ip lsr 8) land 0xff; ip land 0xff ])
+         [
+           (ip lsr 24) land 0xff;
+           (ip lsr 16) land 0xff;
+           (ip lsr 8) land 0xff;
+           ip land 0xff;
+         ])
 
-(** [ipv4 ?cidr_block ?network f]: [cidr_block] (e.g. ["192.168.0.0/16"])
-    takes precedence over [network] (default [`Any]). *)
+(** [ipv4 ?cidr_block ?network f]: [cidr_block] (e.g. ["192.168.0.0/16"]) takes
+    precedence over [network] (default [`Any]). *)
 let ipv4 ?cidr_block ?(network : ipv4_network = `Any) f =
-  let cidr_block = match cidr_block with Some c -> c | None -> ipv4_network_cidr network in
+  let cidr_block =
+    match cidr_block with Some c -> c | None -> ipv4_network_cidr network
+  in
   ipv4_of_cidr cidr_block f
 
 let ipv6 f =
   String.concat ":"
-    (List.init 8 (fun _ -> Fk_string.hexadecimal ~length:(`N 4) ~casing:`Lower ~prefix:"" f))
+    (List.init 8 (fun _ ->
+         Fk_string.hexadecimal ~length:(`N 4) ~casing:`Lower ~prefix:"" f))
 
 let ip f = if Fk_datatype.boolean f then ipv4 f else ipv6 f
 let port f = Fk_number.int ~min:1 ~max:65535 f
-let user_agent f = Fake.fake_json (Locale.get f "internet" "user_agent_pattern") f
+
+let user_agent f =
+  Fake.fake_json (Locale.get f "internet" "user_agent_pattern") f
 
 (** [mac ?separator f]: [separator] must be [":"], ["-"] or [""], otherwise
     [":"] is used. *)
 let mac ?(separator = ":") f =
-  let separator = if List.mem separator [ ":"; "-"; "" ] then separator else ":" in
+  let separator =
+    if List.mem separator [ ":"; "-"; "" ] then separator else ":"
+  in
   let b = Buffer.create 17 in
   for i = 0 to 11 do
     Buffer.add_string b (Fk_number.hex ~max:15 f);
@@ -332,11 +406,12 @@ let mac ?(separator = ":") f =
   done;
   Buffer.contents b
 
-(** [password ?length ?memorable ?pattern ?prefix f]: [length] defaults to
-    15, [pattern] (a predicate standing in for upstream's RegExp) to [/\w/].
-    Like upstream, never terminates if [pattern] rejects every character in
+(** [password ?length ?memorable ?pattern ?prefix f]: [length] defaults to 15,
+    [pattern] (a predicate standing in for upstream's RegExp) to [/\w/]. Like
+    upstream, never terminates if [pattern] rejects every character in
     ['!'..'\127']. *)
-let password ?(length = 15) ?(memorable = false) ?(pattern = Fk_helpers.is_word) ?(prefix = "") f =
+let password ?(length = 15) ?(memorable = false) ?(pattern = Fk_helpers.is_word)
+    ?(prefix = "") f =
   let is_vowel c = String.contains "aeiouAEIOU" c in
   let is_consonant c = is_alpha c && not (is_vowel c) in
   let result = Buffer.create (max 0 length) in
@@ -369,7 +444,11 @@ let emoji_of_strings types f =
 
 (** [emoji ?types f]: [types] defaults to all categories. *)
 let emoji ?(types : emoji_type list option) f =
-  emoji_of_strings (Option.map (fun l -> Array.of_list (List.map emoji_type_to_string l)) types) f
+  emoji_of_strings
+    (Option.map
+       (fun l -> Array.of_list (List.map emoji_type_to_string l))
+       types)
+    f
 
 let jwt_algorithm f = el "jwt_algorithm" f
 
@@ -389,7 +468,9 @@ let jwt_input ?header ?payload ?ref_date f =
     | Some p -> p
     | None ->
         let iat = round_s iat_default in
-        let exp = round_s (Fk_date.soon_input ~ref_date:(`Date iat_default) f) in
+        let exp =
+          round_s (Fk_date.soon_input ~ref_date:(`Date iat_default) f)
+        in
         let nbf = round_s (Fk_date.anytime_input ~ref_date f) in
         let iss = Fk_company.name f in
         let sub = Fk_string.uuid f in
@@ -435,14 +516,16 @@ let registry : (string * Registry.fn) list =
         let first_name, last_name = names o in
         str
           (email ?first_name ?last_name ?provider:(string o "provider")
-             ?allow_special_characters:(bool o "allowSpecialCharacters") f) );
+             ?allow_special_characters:(bool o "allowSpecialCharacters")
+             f) );
     ( "exampleEmail",
       fun f a ->
         let o = opts a in
         let first_name, last_name = names o in
         str
           (example_email ?first_name ?last_name
-             ?allow_special_characters:(bool o "allowSpecialCharacters") f) );
+             ?allow_special_characters:(bool o "allowSpecialCharacters")
+             f) );
     ( "username",
       fun f a ->
         let o = opts a in
@@ -456,11 +539,15 @@ let registry : (string * Registry.fn) list =
     ("protocol", fun f _ -> str (http_protocol_to_string (protocol f)));
     ("httpMethod", fun f _ -> str (http_method_to_string (http_method f)));
     ( "httpStatusCode",
-      fun f a -> let o = opts a in int_ (http_status_code_of_strings (str_array o "types") f) );
+      fun f a ->
+        let o = opts a in
+        int_ (http_status_code_of_strings (str_array o "types") f) );
     ( "url",
       fun f a ->
         let o = opts a in
-        let protocol = match string o "protocol" with Some "http" -> Some `Http | _ -> None in
+        let protocol =
+          match string o "protocol" with Some "http" -> Some `Http | _ -> None
+        in
         str (url ?append_slash:(bool o "appendSlash") ?protocol f) );
     ("domainName", s domain_name);
     ("domainSuffix", s domain_suffix);
@@ -487,7 +574,9 @@ let registry : (string * Registry.fn) list =
     ( "mac",
       fun f a ->
         let o = opts ~shorthand:"separator" a in
-        str (mac ?separator:(Option.map Json.to_js_string (get o "separator")) f) );
+        str
+          (mac ?separator:(Option.map Json.to_js_string (get o "separator")) f)
+    );
     ( "password",
       fun f a ->
         let o = opts a in
@@ -495,16 +584,21 @@ let registry : (string * Registry.fn) list =
         let pattern =
           match get o "pattern" with
           | None -> None
-          | Some _ -> Some (fun _ -> Core.error "currentPattern.test is not a function")
+          | Some _ ->
+              Some (fun _ -> Core.error "currentPattern.test is not a function")
         in
         str
-          (password ?length:(int o "length") ?memorable:(bool o "memorable") ?pattern
-             ?prefix:(string o "prefix") f) );
-    ("emoji", fun f a -> let o = opts a in str (emoji_of_strings (str_array o "types") f));
+          (password ?length:(int o "length") ?memorable:(bool o "memorable")
+             ?pattern ?prefix:(string o "prefix") f) );
+    ( "emoji",
+      fun f a ->
+        let o = opts a in
+        str (emoji_of_strings (str_array o "types") f) );
     ("jwtAlgorithm", s jwt_algorithm);
     ( "jwt",
       fun f a ->
         let o = opts a in
-        str (jwt_input ?header:(obj o "header") ?payload:(obj o "payload") ?ref_date:(Fk_date.ref_arg o) f)
-    );
+        str
+          (jwt_input ?header:(obj o "header") ?payload:(obj o "payload")
+             ?ref_date:(Fk_date.ref_arg o) f) );
   ]

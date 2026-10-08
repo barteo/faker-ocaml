@@ -1,7 +1,6 @@
 (* Port of src/modules/book/module.ts. *)
 
 let pick entry f = Fk_helpers.array_element (Locale.strings f "book" entry) f
-
 let author f = pick "author" f
 let format f = pick "format" f
 let genre f = pick "genre" f

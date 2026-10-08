@@ -1,16 +1,25 @@
 open T
 
-let keys = function J.Obj o -> J.Arr (Array.of_list (List.map (fun (k, _) -> s k) o)) | _ -> J.Null
+let keys = function
+  | J.Obj o -> J.Arr (Array.of_list (List.map (fun (k, _) -> s k) o))
+  | _ -> J.Null
+
 let member k o = Option.get (J.member k o)
 
 let cases : case list =
   [
-    ("create/emptyLocale", fun _ -> ignore (Faker.create ~locale:[] ()); J.Null);
+    ( "create/emptyLocale",
+      fun _ ->
+        ignore (Faker.create ~locale:[] ());
+        J.Null );
     ( "create/defaultRefDate",
       fun f ->
         let seed = Faker.Number.int ~max:1000 f in
         let g =
-          Faker.create ~seed ~default_ref_date:(Faker.Date_util.of_iso "2020-06-15T12:00:00.000Z") ()
+          Faker.create ~seed
+            ~default_ref_date:
+              (Faker.Date_util.of_iso "2020-06-15T12:00:00.000Z")
+            ()
         in
         date (Faker.Date.recent g) );
     ( "setDefaultRefDate/string",
@@ -38,7 +47,9 @@ let cases : case list =
       fun _ ->
         let m = Faker.merge_locales (Faker.Locales.De_AT.chain ()) in
         let first = member "female" (member "first_name" (member "person" m)) in
-        let first = match first with J.Arr a -> J.Arr (Array.sub a 0 3) | v -> v in
+        let first =
+          match first with J.Arr a -> J.Arr (Array.sub a 0 3) | v -> v
+        in
         J.Arr [| keys m; keys (member "person" m); first |] );
     ( "definitions/missing",
       fun _ ->

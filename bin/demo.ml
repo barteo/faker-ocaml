@@ -3,7 +3,9 @@
      node -e "const {allFakers}=require('@faker-js/faker');const f=allFakers.de;f.seed(42);..." *)
 
 let () =
-  let seed = if Array.length Sys.argv > 1 then int_of_string Sys.argv.(1) else 42 in
+  let seed =
+    if Array.length Sys.argv > 1 then int_of_string Sys.argv.(1) else 42
+  in
   let locale = if Array.length Sys.argv > 2 then Sys.argv.(2) else "en" in
   let chain =
     match Faker.All_locales.find_chain locale with
@@ -13,11 +15,13 @@ let () =
         exit 2
   in
   let f = Faker.create ~locale:chain ~seed () in
-  Faker.set_default_ref_date f (Faker.Date_util.of_iso "2025-01-01T00:00:00.000Z");
+  Faker.set_default_ref_date f
+    (Faker.Date_util.of_iso "2025-01-01T00:00:00.000Z");
   let show name v = Printf.printf "%-28s %s\n" name v in
   show "person.fullName" (Faker.Person.full_name f);
   show "person.jobTitle" (Faker.Person.job_title f);
-  show "location.streetAddress" (Faker.Location.street_address ~use_full_address:true f);
+  show "location.streetAddress"
+    (Faker.Location.street_address ~use_full_address:true f);
   show "location.city" (Faker.Location.city f);
   show "phone.number" (Faker.Phone.number f);
   show "company.name" (Faker.Company.name f);
@@ -51,5 +55,6 @@ let () =
   show "vehicle.vehicle" (Faker.Vehicle.vehicle f);
   show "string.uuid" (Faker.String.uuid f);
   show "number.int" (string_of_int (Faker.Number.int ~max:100 f));
-  show "helpers.fake" (Faker.Helpers.fake "{{person.firstName}} likes {{food.fruit}}" f);
+  show "helpers.fake"
+    (Faker.Helpers.fake "{{person.firstName}} likes {{food.fruit}}" f);
   show "helpers.fromRegExp" (Faker.Helpers.from_reg_exp "[A-Z]{3}-[0-9]{4}" f)

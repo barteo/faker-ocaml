@@ -2,728 +2,1221 @@
 
 let locale = "ur"
 
-let cases = [
-  ("airline.aircraftType", 42, {x|["regional","widebody"]|x});
-  ("airline.aircraftType", 1337, {x|["narrowbody","narrowbody"]|x});
-  ("airline.aircraftType", 7, {x|["narrowbody","widebody"]|x});
-  ("airline.airline", 42, {x|[{"name":"Etihad Airways","iataCode":"EY"},{"name":"Virgin Australia","iataCode":"VA"}]|x});
-  ("airline.airline", 1337, {x|[{"name":"Cebu Pacific Air","iataCode":"5J"},{"name":"Aircalin","iataCode":"SB"}]|x});
-  ("airline.airline", 7, {x|[{"name":"Air France","iataCode":"AF"},{"name":"South African Airways","iataCode":"SA"}]|x});
-  ("airline.airplane", 42, {x|[{"name":"Boeing 737-900","iataTypeCode":"739"},{"name":"McDonnell Douglas MD88","iataTypeCode":"M88"}]|x});
-  ("airline.airplane", 1337, {x|[{"name":"Boeing 717","iataTypeCode":"717"},{"name":"Airbus A350-1000","iataTypeCode":"351"}]|x});
-  ("airline.airplane", 7, {x|[{"name":"Airbus A321neo","iataTypeCode":"32Q"},{"name":"Embraer 195","iataTypeCode":"E95"}]|x});
-  ("airline.airport", 42, {x|[{"name":"Hartsfield-Jackson Atlanta International Airport","iataCode":"ATL"},{"name":"Viracopos International Airport","iataCode":"VCP"}]|x});
-  ("airline.airport", 1337, {x|[{"name":"Denver International Airport","iataCode":"DEN"},{"name":"Canberra Airport","iataCode":"CBR"}]|x});
-  ("airline.airport", 7, {x|[{"name":"Belem Val de Cans International Airport","iataCode":"BEL"},{"name":"San Francisco International Airport","iataCode":"SFO"}]|x});
-  ("airline.flightNumber", 42, {x|["97","210"]|x});
-  ("airline.flightNumber", 1337, {x|["22","35"]|x});
-  ("airline.flightNumber", 7, {x|["8","79"]|x});
-  ("airline.recordLocator", 42, {x|["JYTQDD","BWQTAZ"]|x});
-  ("airline.recordLocator", 1337, {x|["GDGMHN","GZTCJR"]|x});
-  ("airline.recordLocator", 7, {x|["BUMTZP","NBGNSV"]|x});
-  ("airline.seat", 42, {x|["14F","26D"]|x});
-  ("airline.seat", 1337, {x|["10A","10C"]|x});
-  ("airline.seat", 7, {x|["3E","16E"]|x});
-  ("animal.bear", 42, {x|["ایشیایٰ کالا بھالو","پانڈا"]|x});
-  ("animal.bear", 1337, {x|["ایشیایٰ کالا بھالو","امریکی کالا بھالو"]|x});
-  ("animal.bear", 7, {x|["امریکی کالا بھالو","بھورا بھالو"]|x});
-  ("animal.bird", 42, {x|["Golden Eagle","Wild Turkey"]|x});
-  ("animal.bird", 1337, {x|["Common Poorwill","Broad-billed Hummingbird"]|x});
-  ("animal.bird", 7, {x|["Bicknell's Thrush","Sharp-tailed Grouse"]|x});
-  ("animal.cat", 42, {x|["Himalayan","Toyger"]|x});
-  ("animal.cat", 1337, {x|["Devon Rex","Bombay"]|x});
-  ("animal.cat", 7, {x|["American Wirehair","Serengeti"]|x});
-  ("animal.cetacean", 42, {x|["Fraser’s Dolphin","Striped Dolphin"]|x});
-  ("animal.cetacean", 1337, {x|["Clymene Dolphin","Bottlenose Dolphin"]|x});
-  ("animal.cetacean", 7, {x|["Atlantic White-Sided Dolphin","Risso’s Dolphin"]|x});
-  ("animal.cow", 42, {x|["نیلی گاٗیے","گائے"]|x});
-  ("animal.cow", 1337, {x|["امریکی گاٗیے","امریکی گاٗیے"]|x});
-  ("animal.cow", 7, {x|["امریکی گاٗیے","گائے"]|x});
-  ("animal.crocodilia", 42, {x|["مشرقی افریقی گڑیال","گڑیال"]|x});
-  ("animal.crocodilia", 1337, {x|["آسٹریلیائ تازہ پانی کا گڑیال","امریکی گڑیال"]|x});
-  ("animal.crocodilia", 7, {x|["امریکی گڑیال","نیل گڑیال"]|x});
-  ("animal.dog", 42, {x|["Garafian Shepherd","Tyrolean Hound"]|x});
-  ("animal.dog", 1337, {x|["Chortai","Boxer"]|x});
-  ("animal.dog", 7, {x|["Bakharwal dog","Russian Toy"]|x});
-  ("animal.fish", 42, {x|["European anchovy","Wuchang bream"]|x});
-  ("animal.fish", 1337, {x|["Capelin","Bighead carp"]|x});
-  ("animal.fish", 7, {x|["Atlantic cod","Pacific saury"]|x});
-  ("animal.horse", 42, {x|["Furioso-North Star","Vyatka"]|x});
-  ("animal.horse", 1337, {x|["Colorado Ranger","Blazer Horse"]|x});
-  ("animal.horse", 7, {x|["Asian wild Horse","Russian Heavy Draft"]|x});
-  ("animal.insect", 42, {x|["مکھی","چیونٹی"]|x});
-  ("animal.insect", 1337, {x|["شہد کی مکھی","شہد کی مکھی"]|x});
-  ("animal.insect", 7, {x|["شہد کی مکھی","چیونٹی"]|x});
-  ("animal.lion", 42, {x|["شمالی مغربی کانگو کا شیر","مشرقی افریقی شیر"]|x});
-  ("animal.lion", 1337, {x|["ایشیایْ شیر","ایشیایْ شیر"]|x});
-  ("animal.lion", 7, {x|["ایشیایْ شیر","مشرقی افریقی شیر"]|x});
-  ("animal.petName", 42, {x|["Ginger","Stella"]|x});
-  ("animal.petName", 1337, {x|["Cooper","Bruno"]|x});
-  ("animal.petName", 7, {x|["Bandit","Murphey"]|x});
-  ("animal.rabbit", 42, {x|["English Spot","Standard Chinchilla"]|x});
-  ("animal.rabbit", 1337, {x|["Cinnamon","Blanc de Hotot"]|x});
-  ("animal.rabbit", 7, {x|["American Sable","Polish"]|x});
-  ("animal.rodent", 42, {x|["Famatina chinchilla rat","Talas tuco-tuco"]|x});
-  ("animal.rodent", 1337, {x|["Crested porcupine","Bridge's degu"]|x});
-  ("animal.rodent", 7, {x|["Bathyergus janetta","Porteous' tuco-tuco"]|x});
-  ("animal.snake", 42, {x|["Grand Canyon rattlesnake","Western coral snake"]|x});
-  ("animal.snake", 1337, {x|["Cuban wood snake","Buff striped keelback"]|x});
-  ("animal.snake", 7, {x|["Barred wolf snake","Schultze's pitviper"]|x});
-  ("animal.type", 42, {x|["cow","lion"]|x});
-  ("animal.type", 1337, {x|["cow","bear"]|x});
-  ("animal.type", 7, {x|["bear","insect"]|x});
-  ("book.author", 42, {x|["Henry David Thoreau","W.K. Marriott"]|x});
-  ("book.author", 1337, {x|["Frances Hodgson Burnett","Clifford R. Adams"]|x});
-  ("book.author", 7, {x|["Aylmer Maude","Richard Wright"]|x});
-  ("book.format", 42, {x|["Ebook","Paperback"]|x});
-  ("book.format", 1337, {x|["Ebook","Audiobook"]|x});
-  ("book.format", 7, {x|["Audiobook","Paperback"]|x});
-  ("book.genre", 42, {x|["Fantasy","Western"]|x});
-  ("book.genre", 1337, {x|["Comic","Children's Literature"]|x});
-  ("book.genre", 7, {x|["Biography","Religion"]|x});
-  ("book.publisher", 42, {x|["Flame Tree Publishing","University of Nebraska Press"]|x});
-  ("book.publisher", 1337, {x|["City Lights Publishers","Borgo Press"]|x});
-  ("book.publisher", 7, {x|["Bantam Books","Parragon"]|x});
-  ("book.series", 42, {x|["Sherlock Holmes","Twilight"]|x});
-  ("book.series", 1337, {x|["Jane Austen Murder Mysteries","Harry Potter"]|x});
-  ("book.series", 7, {x|["Colonel Race","The Maze Runner"]|x});
-  ("book.title", 42, {x|["Lord Jim","Tropic of Cancer"]|x});
-  ("book.title", 1337, {x|["Gone with the Wind","Candide"]|x});
-  ("book.title", 7, {x|["All Quiet on the Western Front","The Pickwick Papers"]|x});
-  ("color.cmyk", 42, {x|[[0.37,0.96,0.73,0.6],[0.15,0.15,0.05,0.87]]|x});
-  ("color.cmyk", 1337, {x|[[0.26,0.16,0.28,0.46],[0.32,0.52,0.26,0.98]]|x});
-  ("color.cmyk", 7, {x|[[0.07,0.78,0.44,0.73],[0.98,0.54,0.5,0.07]]|x});
-  ("color.colorByCSSColorSpace", 42, {x|[[0.3745,0.9508,0.732],[0.5987,0.156,0.156]]|x});
-  ("color.colorByCSSColorSpace", 1337, {x|[[0.262,0.1586,0.2781],[0.4593,0.321,0.5184]]|x});
-  ("color.colorByCSSColorSpace", 7, {x|[[0.0763,0.7799,0.4384],[0.7235,0.978,0.5385]]|x});
-  ("color.cssSupportedFunction", 42, {x|["hsla","color"]|x});
-  ("color.cssSupportedFunction", 1337, {x|["hsl","rgba"]|x});
-  ("color.cssSupportedFunction", 7, {x|["rgb","lch"]|x});
-  ("color.cssSupportedSpace", 42, {x|["display-p3","prophoto-rgb"]|x});
-  ("color.cssSupportedSpace", 1337, {x|["display-p3","sRGB"]|x});
-  ("color.cssSupportedSpace", 7, {x|["sRGB","a98-rgb"]|x});
-  ("color.hsl", 42, {x|[[135,0.96,0.73],[216,0.15,0.15]]|x});
-  ("color.hsl", 1337, {x|[[94,0.16,0.28],[165,0.32,0.52]]|x});
-  ("color.hsl", 7, {x|[[27,0.78,0.44],[261,0.98,0.54]]|x});
-  ("color.human", 42, {x|["مہندی","ہلکا ہرا"]|x});
-  ("color.human", 1337, {x|["سنہری","سفہد"]|x});
-  ("color.human", 7, {x|["آسمانی","کالا"]|x});
-  ("color.hwb", 42, {x|[[135,0.96,0.73],[216,0.15,0.15]]|x});
-  ("color.hwb", 1337, {x|[[94,0.16,0.28],[165,0.32,0.52]]|x});
-  ("color.hwb", 7, {x|[[27,0.78,0.44],[261,0.98,0.54]]|x});
-  ("color.lab", 42, {x|[[0.37454,90.1429,46.3988],[0.598659,-68.7963,-68.8011]]|x});
-  ("color.lab", 1337, {x|[[0.262024,-68.2632,-44.3747],[0.459317,-35.7999,3.6786]]|x});
-  ("color.lab", 7, {x|[[0.076308,55.9838,-12.3182],[0.723465,95.598,7.6992]]|x});
-  ("color.lch", 42, {x|[[0.37454,218.7,263.5],[0.598659,35.8,56.1]]|x});
-  ("color.lch", 1337, {x|[[0.262024,36.5,100.1],[0.459317,73.8,186.6]]|x});
-  ("color.lch", 7, {x|[[0.076308,179.4,157.8],[0.723465,225,193.9]]|x});
-  ("color.rgb", 42, {x|["#8ead33","#1ddf0f"]|x});
-  ("color.rgb", 1337, {x|["#536a7b","#5fa28d"]|x});
-  ("color.rgb", 7, {x|["#1b9ffb","#b15aeb"]|x});
-  ("color.space", 42, {x|["HSLA","sYCC"]|x});
-  ("color.space", 1337, {x|["DCI-P3","CIELUV"]|x});
-  ("color.space", 7, {x|["British Standard Colour (BS)","Rec. 601"]|x});
-  ("commerce.department", 42, {x|["خوبصورتی","گھر"]|x});
-  ("commerce.department", 1337, {x|["بچے","باغ"]|x});
-  ("commerce.department", 7, {x|["اوزار","کھیل"]|x});
-  ("commerce.isbn", 42, {x|["978-0-9751108-6-7","978-1-0982-1135-6"]|x});
-  ("commerce.isbn", 1337, {x|["978-0-12-435297-1","978-0-361-94773-2"]|x});
-  ("commerce.isbn", 7, {x|["978-0-7479-5502-3","978-0-683-02924-6"]|x});
-  ("commerce.price", 42, {x|["375.15","599.09"]|x});
-  ("commerce.price", 1337, {x|["262.79","459.85"]|x});
-  ("commerce.price", 7, {x|["77.29","723.75"]|x});
-  ("commerce.product", 42, {x|["صابن","کی بورڈ"]|x});
-  ("commerce.product", 1337, {x|["سلاد","جوتے"]|x});
-  ("commerce.product", 7, {x|["بایٰک","پنیر"]|x});
-  ("commerce.productAdjective", 42, {x|["بیترین","ہوشیار"]|x});
-  ("commerce.productAdjective", 1337, {x|["بیترین","آرامدہ"]|x});
-  ("commerce.productAdjective", 7, {x|["آرامدہ","چھوٹا"]|x});
-  ("commerce.productDescription", 42, {x|["New چاندنی میز with ergonomic design for crushing comfort","Discover the perfumed new پاپڑ with an exciting mix of تازہ ingredients"]|x});
-  ("commerce.productDescription", 1337, {x|["Innovative جوتے featuring lawful technology and ربڑ construction","Our zesty-inspired پتلون brings a taste of luxury to your ignorant lifestyle"]|x});
-  ("commerce.productDescription", 7, {x|["Discover the jittery new پتلون with an exciting mix of گرانایٹ ingredients","Our creamy-inspired سلاد brings a taste of luxury to your repentant lifestyle"]|x});
-  ("commerce.productMaterial", 42, {x|["رویٰ","گرانایٹ"]|x});
-  ("commerce.productMaterial", 1337, {x|["دھات","جم شدہ"]|x});
-  ("commerce.productMaterial", 7, {x|["تازہ","پلاسٹک"]|x});
-  ("commerce.productName", 42, {x|["بیترین گرانایٹ پتلون","خوبصورت جم شدہ جوتے"]|x});
-  ("commerce.productName", 1337, {x|["بیترین جم شدہ سلاد","خوبصورت ربڑ مرغ"]|x});
-  ("commerce.productName", 7, {x|["آرامدہ پلاسٹک ماوٰس","چھوٹا گرانایٹ مچھلی"]|x});
-  ("commerce.upc", 42, {x|["397511086709","982113542618"]|x});
-  ("commerce.upc", 1337, {x|["212435297133","619477345714"]|x});
-  ("commerce.upc", 7, {x|["074795502469","830292490698"]|x});
-  ("company.buzzAdjective", 42, {x|["global","viral"]|x});
-  ("company.buzzAdjective", 1337, {x|["efficient","cross-platform"]|x});
-  ("company.buzzAdjective", 7, {x|["back-end","smart"]|x});
-  ("company.buzzNoun", 42, {x|["initiatives","users"]|x});
-  ("company.buzzNoun", 1337, {x|["deliverables","communities"]|x});
-  ("company.buzzNoun", 7, {x|["applications","schemas"]|x});
-  ("company.buzzPhrase", 42, {x|["facilitate viral platforms","mesh cross-media channels"]|x});
-  ("company.buzzPhrase", 1337, {x|["engineer cross-platform e-commerce","implement frictionless methodologies"]|x});
-  ("company.buzzPhrase", 7, {x|["collaborate smart large language models","repurpose visionary metrics"]|x});
-  ("company.buzzVerb", 42, {x|["facilitate","utilize"]|x});
-  ("company.buzzVerb", 1337, {x|["engineer","disintermediate"]|x});
-  ("company.buzzVerb", 7, {x|["collaborate","seize"]|x});
-  ("company.catchPhrase", 42, {x|["Immersive well-modulated parallelism","Phased cloud-native capability"]|x});
-  ("company.catchPhrase", 1337, {x|["Extended coherent database","Multi-tiered empowering interface"]|x});
-  ("company.catchPhrase", 7, {x|["Centralized responsive help-desk","Realigned zero tolerance intranet"]|x});
-  ("company.catchPhraseAdjective", 42, {x|["Immersive","User-friendly"]|x});
-  ("company.catchPhraseAdjective", 1337, {x|["Extended","Decentralized"]|x});
-  ("company.catchPhraseAdjective", 7, {x|["Centralized","Secured"]|x});
-  ("company.catchPhraseDescriptor", 42, {x|["fault-tolerant","well-modulated"]|x});
-  ("company.catchPhraseDescriptor", 1337, {x|["directional","coherent"]|x});
-  ("company.catchPhraseDescriptor", 7, {x|["asynchronous","responsive"]|x});
-  ("company.catchPhraseNoun", 42, {x|["frame","time-frame"]|x});
-  ("company.catchPhraseNoun", 1337, {x|["customer loyalty","capability"]|x});
-  ("company.catchPhraseNoun", 7, {x|["approach","product"]|x});
-  ("company.name", 42, {x|["شریف Group","شنواری - چوہدری"]|x});
-  ("company.name", 1337, {x|["خان - باجوڑی","جبران, چوہدری and ملوک"]|x});
-  ("company.name", 7, {x|["علی - راجپوت","عبدالی - اعوان"]|x});
-  ("database.collation", 42, {x|["cp1250_bin","utf8_unicode_ci"]|x});
-  ("database.collation", 1337, {x|["ascii_general_ci","ascii_general_ci"]|x});
-  ("database.collation", 7, {x|["ascii_bin","utf8_general_ci"]|x});
-  ("database.column", 42, {x|["group","updatedAt"]|x});
-  ("database.column", 1337, {x|["createdAt","comment"]|x});
-  ("database.column", 7, {x|["category","status"]|x});
-  ("database.engine", 42, {x|["CSV","MyISAM"]|x});
-  ("database.engine", 1337, {x|["BLACKHOLE","ARCHIVE"]|x});
-  ("database.engine", 7, {x|["ARCHIVE","MEMORY"]|x});
-  ("database.mongodbObjectId", 42, {x|["8ead331ddf0fc4446b96d368","ab4bd1d31efb62f92a0e5e6b"]|x});
-  ("database.mongodbObjectId", 1337, {x|["536a7b5fa28d2f9bb79ca46e","a394bc4f9bb0af328f081b7f"]|x});
-  ("database.mongodbObjectId", 7, {x|["1b9ffbb15aeb816e49e0de5c","e2baea4a8a8ca6c697e8af9d"]|x});
-  ("database.type", 42, {x|["double","tinyint"]|x});
-  ("database.type", 1337, {x|["datetime","blob"]|x});
-  ("database.type", 7, {x|["binary","smallint"]|x});
-  ("datatype.boolean", 42, {x|[true,false]|x});
-  ("datatype.boolean", 1337, {x|[true,true]|x});
-  ("datatype.boolean", 7, {x|[true,false]|x});
-  ("date.anytime", 42, {x|["2024-10-01T09:56:34.376Z","2025-11-26T00:30:52.734Z"]|x});
-  ("date.anytime", 1337, {x|["2024-07-11T06:40:20.302Z","2024-04-26T20:08:35.491Z"]|x});
-  ("date.anytime", 7, {x|["2024-02-26T16:55:16.427Z","2025-07-24T08:10:38.064Z"]|x});
-  ("date.birthdate", 42, {x|["1967-08-07T04:02:06.836Z","2003-11-23T22:28:06.859Z"]|x});
-  ("date.birthdate", 1337, {x|["1960-07-05T04:30:23.510Z","1953-12-31T07:38:12.417Z"]|x});
-  ("date.birthdate", 7, {x|["1948-10-22T20:29:23.006Z","1993-02-18T22:21:13.776Z"]|x});
-  ("date.future", 42, {x|["2025-05-17T16:58:17.813Z","2025-12-14T00:15:26.417Z"]|x});
-  ("date.future", 1337, {x|["2025-04-06T15:20:10.889Z","2025-02-27T22:04:18.587Z"]|x});
-  ("date.future", 7, {x|["2025-01-28T20:27:39.137Z","2025-10-12T16:05:19.252Z"]|x});
-  ("date.month", 42, {x|["جولائ","نومبر"]|x});
-  ("date.month", 1337, {x|["جنوری","اکتوبر"]|x});
-  ("date.month", 7, {x|["اپریل","مئ"]|x});
-  ("date.past", 42, {x|["2024-05-17T01:57:37.080Z","2024-12-13T23:04:27.133Z"]|x});
-  ("date.past", 1337, {x|["2024-04-05T21:37:28.821Z","2024-02-28T01:52:47.882Z"]|x});
-  ("date.past", 7, {x|["2024-01-28T22:17:31.173Z","2024-10-12T10:48:23.236Z"]|x});
-  ("date.recent", 42, {x|["2024-12-31T08:59:19.892Z","2024-12-31T22:49:00.766Z"]|x});
-  ("date.recent", 1337, {x|["2024-12-31T06:17:18.670Z","2024-12-31T03:48:30.136Z"]|x});
-  ("date.recent", 7, {x|["2024-12-31T01:49:52.959Z","2024-12-31T18:43:04.204Z"]|x});
-  ("date.soon", 42, {x|["2025-01-01T08:59:20.892Z","2025-01-01T22:49:01.766Z"]|x});
-  ("date.soon", 1337, {x|["2025-01-01T06:17:19.670Z","2025-01-01T03:48:31.136Z"]|x});
-  ("date.soon", 7, {x|["2025-01-01T01:49:53.959Z","2025-01-01T18:43:05.204Z"]|x});
-  ("date.timeZone", 42, {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x});
-  ("date.timeZone", 1337, {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x});
-  ("date.timeZone", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
-  ("date.weekday", 42, {x|["جمعرات","ہفتہ"]|x});
-  ("date.weekday", 1337, {x|["بدھ","بدھ"]|x});
-  ("date.weekday", 7, {x|["اتور","پیر"]|x});
-  ("finance.accountName", 42, {x|["Current Account","Savings Account"]|x});
-  ("finance.accountName", 1337, {x|["Current Account","Current Account"]|x});
-  ("finance.accountName", 7, {x|["Current Account","Savings Account"]|x});
-  ("finance.accountNumber", 42, {x|["39751108","67098211"]|x});
-  ("finance.accountNumber", 1337, {x|["21243529","71361947"]|x});
-  ("finance.accountNumber", 7, {x|["07479550","24683029"]|x});
-  ("finance.amount", 42, {x|["374.54","950.72"]|x});
-  ("finance.amount", 1337, {x|["262.02","158.68"]|x});
-  ("finance.amount", 7, {x|["76.30","779.92"]|x});
-  ("finance.bic", 42, {x|["YTPECC2VXXX","AZVFCL6A"]|x});
-  ("finance.bic", 1337, {x|["EHLILK9ZXXX","KQDZJESSELR"]|x});
-  ("finance.bic", 7, {x|["ULSZLVI2HOS","BHXFJPX0XXX"]|x});
-  ("finance.bitcoinAddress", 42, {x|["3JAaa4SAH2YQdbbiwrhB9hnsMcvA3Ba4XY","bc1pa4pg4h2x9pajk6zsywmx372ce9ud9k5t3zs70uqrs3d4vmc3acrnwh4qsk"]|x});
-  ("finance.bitcoinAddress", 1337, {x|["3hsjwgYJ7oC8ZrMNmqzLbhEubpc","bc1u6yfjj0rz65dq0d2tdqhzumlz903yzhcr0sp7px"]|x});
-  ("finance.bitcoinAddress", 7, {x|["1rHYxv5guFNo4hUdsW2AXexU8wKEtcunt","3LjzhsmEnsHpUbJqqCwq16HwGXF4iAeXW"]|x});
-  ("finance.creditCardCVV", 42, {x|["397","511"]|x});
-  ("finance.creditCardCVV", 1337, {x|["212","435"]|x});
-  ("finance.creditCardCVV", 7, {x|["074","795"]|x});
-  ("finance.creditCardIssuer", 42, {x|["discover","visa"]|x});
-  ("finance.creditCardIssuer", 1337, {x|["diners_club","american_express"]|x});
-  ("finance.creditCardIssuer", 7, {x|["american_express","mastercard"]|x});
-  ("finance.creditCardNumber", 42, {x|["6575-1108-6709-8211","3034-261234-7153"]|x});
-  ("finance.creditCardNumber", 1337, {x|["3014-352971-3614","4773457126413"]|x});
-  ("finance.creditCardNumber", 7, {x|["3747-955024-68302","3624-906925-9159"]|x});
-  ("finance.currency", 42, {x|[{"name":"New Israeli Sheqel","code":"ILS","symbol":"₪","numericCode":"376"},{"name":"CFA Franc BCEAO","code":"XOF","symbol":"","numericCode":"952"}]|x});
-  ("finance.currency", 1337, {x|[{"name":"Ethiopian Birr","code":"ETB","symbol":"","numericCode":"230"},{"name":"Canadian Dollar","code":"CAD","symbol":"$","numericCode":"124"}]|x});
-  ("finance.currency", 7, {x|[{"name":"Barbados Dollar","code":"BBD","symbol":"$","numericCode":"052"},{"name":"Somali Shilling","code":"SOS","symbol":"S","numericCode":"706"}]|x});
-  ("finance.currencyCode", 42, {x|["ILS","XOF"]|x});
-  ("finance.currencyCode", 1337, {x|["ETB","CAD"]|x});
-  ("finance.currencyCode", 7, {x|["BBD","SOS"]|x});
-  ("finance.currencyName", 42, {x|["New Israeli Sheqel","CFA Franc BCEAO"]|x});
-  ("finance.currencyName", 1337, {x|["Ethiopian Birr","Canadian Dollar"]|x});
-  ("finance.currencyName", 7, {x|["Barbados Dollar","Somali Shilling"]|x});
-  ("finance.currencyNumericCode", 42, {x|["376","952"]|x});
-  ("finance.currencyNumericCode", 1337, {x|["230","124"]|x});
-  ("finance.currencyNumericCode", 7, {x|["052","706"]|x});
-  ("finance.currencySymbol", 42, {x|["₪","﷼"]|x});
-  ("finance.currencySymbol", 1337, {x|["$","$"]|x});
-  ("finance.currencySymbol", 7, {x|["$","S"]|x});
-  ("finance.ethereumAddress", 42, {x|["0x8ead331ddf0fc4446b96d368ab4bd1d31efb62f9","0x2a0e5e6bc4fbedde140785c76b3b1fa40bfaa172"]|x});
-  ("finance.ethereumAddress", 1337, {x|["0x536a7b5fa28d2f9bb79ca46ea394bc4f9bb0af32","0x8f081b7fafcdcf501efa7f0ae4ee3e7f5b3a98ba"]|x});
-  ("finance.ethereumAddress", 7, {x|["0x1b9ffbb15aeb816e49e0de5ce2baea4a8a8ca6c6","0x97e8af9d3a99db902fbfff16d5fecac26aaa3776"]|x});
-  ("finance.iban", 42, {x|["GT69T10P0V1346241560ZH610G35","CZ5078900130421070087031"]|x});
-  ("finance.iban", 1337, {x|["FI1300552916047457","CZ8005002804550900400374"]|x});
-  ("finance.iban", 7, {x|["BE61479500580024","TN7109091740043750043749"]|x});
-  ("finance.litecoinAddress", 42, {x|["3JAaa4SAH2YQdbbiwrhB9hnsMcvA","Ma4XYNi6Fr8u2UgEjwxbYLWTAV"]|x});
-  ("finance.litecoinAddress", 1337, {x|["LhsjwgYJ7oC8ZrMNmqzLbhEubpcw","LXqvv1JZa8nG1n4MmGuYQByZf16WYukH"]|x});
-  ("finance.litecoinAddress", 7, {x|["3rHYxv5guFNo4hUdsW2AXexU8w","3tcuntnQLjzhsmEnsHpUbJqqCwq16HwG"]|x});
-  ("finance.pin", 42, {x|["3975","1108"]|x});
-  ("finance.pin", 1337, {x|["2124","3529"]|x});
-  ("finance.pin", 7, {x|["0747","9550"]|x});
-  ("finance.routingNumber", 42, {x|["062197511","031308674"]|x});
-  ("finance.routingNumber", 1337, {x|["051412430","074029716"]|x});
-  ("finance.routingNumber", 7, {x|["021274792","075950240"]|x});
-  ("finance.transactionDescription", 42, {x|["You made a withdrawal of SAR 598.66 at میمن - احمد using card ending in ****9821 from account ***1354.","Transaction alert: payment at خان - راجپوت using card ending ****5061 for an amount of BAM 948.89 on account ***9830."]|x});
-  ("finance.transactionDescription", 1337, {x|["Payment of CAD 278.12 for invoice at چوہدری - جبران, processed with card ending ****6194 linked to account ***7734.","withdrawal at خان - اللَہ with a card ending in ****5819 for JPY 504.01 from account ***5079."]|x});
-  ("finance.transactionDescription", 7, {x|["A withdrawal for KGS 723.47 was made at اعوان, عبدالی and اعوان via card ending ****2924 on account ***9069.","Payment of MMK 909.13 for deposit at خان Group, processed with card ending ****4343 linked to account ***8735."]|x});
-  ("finance.transactionType", 42, {x|["invoice","withdrawal"]|x});
-  ("finance.transactionType", 1337, {x|["invoice","deposit"]|x});
-  ("finance.transactionType", 7, {x|["deposit","withdrawal"]|x});
-  ("food.adjective", 42, {x|["golden","zesty"]|x});
-  ("food.adjective", 1337, {x|["fluffy","crunchy"]|x});
-  ("food.adjective", 7, {x|["creamy","spicy"]|x});
-  ("food.description", 42, {x|["An exquisite quail roast, infused with the essence of butternut pumpkin, slow-roasted to bring out its natural flavors and served with a side of creamy asparagus","Stuffed parsnip baked with white flour and cayenne pepper."]|x});
-  ("food.description", 1337, {x|["A special سنہری dill from کومورس. To support the strong flavor it is sided with a tablespoon of pepper.","A delightful tart combining savory turnips and sweet passionfruit, set in a buttery pastry shell and finished with a hint of curry."]|x});
-  ("food.description", 7, {x|["A comforting bowl of juicy whiting wild rice and garlic, slow-cooked until tender.","A comforting bowl of moist sesame oil and bean shoots, slow-cooked until tender."]|x});
-  ("food.dish", 42, {x|["Jicama Salad","Tangy Parsnip And White Flour Bowl"]|x});
-  ("food.dish", 1337, {x|["Moist Green Beans And White Wine Vinegar Bowl","Bruschette With Tomato"]|x});
-  ("food.dish", 7, {x|["Parsley-rubbed Ostrich Salad","Baba Ganoush"]|x});
-  ("food.ethnicCategory", 42, {x|["Gujarati","Udupi"]|x});
-  ("food.ethnicCategory", 1337, {x|["Czech","British"]|x});
-  ("food.ethnicCategory", 7, {x|["Awadhi","Rajasthani"]|x});
-  ("food.fruit", 42, {x|["fig","strawberry"]|x});
-  ("food.fruit", 1337, {x|["cumquat","butternut pumpkin"]|x});
-  ("food.fruit", 7, {x|["berry","passionfruit"]|x});
-  ("food.ingredient", 42, {x|["flathead","warehou"]|x});
-  ("food.ingredient", 1337, {x|["coconut water","bulghur"]|x});
-  ("food.ingredient", 7, {x|["banana","rye bread"]|x});
-  ("food.meat", 42, {x|["goose","venison"]|x});
-  ("food.meat", 1337, {x|["emu","crocodile"]|x});
-  ("food.meat", 7, {x|["chicken","rabbit"]|x});
-  ("food.spice", 42, {x|["dhansak","thyme"]|x});
-  ("food.spice", 1337, {x|["chilli pepper","bay leaves"]|x});
-  ("food.spice", 7, {x|["aniseed","pot marjoram"]|x});
-  ("food.vegetable", 42, {x|["cos lettuce","sweet potato"]|x});
-  ("food.vegetable", 1337, {x|["carrot","broccolini"]|x});
-  ("food.vegetable", 7, {x|["bean shoots","pumpkin"]|x});
-  ("git.branch", 42, {x|["driver-transmit","pixel-navigate"]|x});
-  ("git.branch", 1337, {x|["card-calculate","card-index"]|x});
-  ("git.branch", 7, {x|["application-quantify","firewall-program"]|x});
-  ("git.commitDate", 42, {x|["Tue Dec 31 08:59:19 2024 +1100","Tue Dec 31 17:34:03 2024 +0300"]|x});
-  ("git.commitDate", 1337, {x|["Tue Dec 31 06:17:18 2024 -0800","Tue Dec 31 06:40:29 2024 +0000"]|x});
-  ("git.commitDate", 7, {x|["Tue Dec 31 01:49:52 2024 +0700","Tue Dec 31 10:31:18 2024 +0600"]|x});
-  ("git.commitEntry", 42, {x|["commit ead331ddf0fc4446b96d368ab4bd1d31efb62f92\r\nAuthor: aqds_ebdaly <aqds_ebdaly@yahoo.com>\r\nDate: Tue Dec 31 02:07:25 2024 -0700\r\n\r\n    back up digital feed\r\n","commit c76b3b1fa40bfaa172cd7167aeda2facaab9020e\r\nAuthor: rwzyn1c1.hsyn28 <rwzyn1c1_hsyn@yahoo.com>\r\nDate: Tue Dec 31 04:28:39 2024 +1000\r\n\r\n    input redundant sensor\r\n"]|x});
-  ("git.commitEntry", 1337, {x|["commit 36a7b5fa28d2f9bb79ca46ea394bc4f9bb0af328\r\nAuthor: abra1c1ym.mlwk <abra1c1ym_mlwk25@hotmail.com>\r\nDate: Tue Dec 31 02:08:13 2024 +1100\r\n\r\n    transmit multi-byte driver\r\n","commit 0ae4ee3e7f5b3a98bafb7efd9addb5eca598b2f0\r\nAuthor: مریم حسین <mrym.hsyn48@gmail.com>\r\nDate: Tue Dec 31 21:57:37 2024 +0600\r\n\r\n    program auxiliary alarm\r\n"]|x});
-  ("git.commitEntry", 7, {x|["commit b9ffbb15aeb816e49e0de5ce2baea4a8a8ca6c69\r\nMerge: 7e8af9d 3a99db9\r\nAuthor: آمنہ عبدالی <a18zmn1c1_ebdaly84@yahoo.com>\r\nDate: Tue Dec 31 20:11:42 2024 -0800\r\n\r\n    copy multi-byte pixel\r\n","commit 3776399bbbabdebe0d6abf3e17b9daca09a1bdce\r\nAuthor: hfs1c1_a18zfrydy <hfs1c1.a18zfrydy@yahoo.com>\r\nDate: Tue Dec 31 21:49:12 2024 -0700\r\n\r\n    hack optical protocol\r\n"]|x});
-  ("git.commitMessage", 42, {x|["generate wireless pixel","navigate back-end bandwidth"]|x});
-  ("git.commitMessage", 1337, {x|["connect back-end card","index digital interface"]|x});
-  ("git.commitMessage", 7, {x|["bypass redundant firewall","program wireless interface"]|x});
-  ("git.commitSha", 42, {x|["8ead331ddf0fc4446b96d368ab4bd1d31efb62f9","2a0e5e6bc4fbedde140785c76b3b1fa40bfaa172"]|x});
-  ("git.commitSha", 1337, {x|["536a7b5fa28d2f9bb79ca46ea394bc4f9bb0af32","8f081b7fafcdcf501efa7f0ae4ee3e7f5b3a98ba"]|x});
-  ("git.commitSha", 7, {x|["1b9ffbb15aeb816e49e0de5ce2baea4a8a8ca6c6","97e8af9d3a99db902fbfff16d5fecac26aaa3776"]|x});
-  ("hacker.abbreviation", 42, {x|["HTTP","VGA"]|x});
-  ("hacker.abbreviation", 1337, {x|["FTP","COM"]|x});
-  ("hacker.abbreviation", 7, {x|["API","SSL"]|x});
-  ("hacker.adjective", 42, {x|["haptic","wireless"]|x});
-  ("hacker.adjective", 1337, {x|["cross-platform","back-end"]|x});
-  ("hacker.adjective", 7, {x|["auxiliary","redundant"]|x});
-  ("hacker.ingverb", 42, {x|["copying","transmitting"]|x});
-  ("hacker.ingverb", 1337, {x|["connecting","calculating"]|x});
-  ("hacker.ingverb", 7, {x|["bypassing","programming"]|x});
-  ("hacker.noun", 42, {x|["driver","system"]|x});
-  ("hacker.noun", 1337, {x|["card","bandwidth"]|x});
-  ("hacker.noun", 7, {x|["application","port"]|x});
-  ("hacker.phrase", 42, {x|["The SQL bandwidth is down, bypass the online alarm so we can quantify the CSS circuit!","Use the digital CLI driver, then you can quantify the neural application!"]|x});
-  ("hacker.phrase", 1337, {x|["The FTP circuit is down, connect the primary feed so we can calculate the JBOD program!","The RSS bus is down, parse the bluetooth bus so we can quantify the XML interface!"]|x});
-  ("hacker.phrase", 7, {x|["I'll hack the wireless PCI card, that should panel the HTTP card!","hacking the alarm won't do anything, we need to transmit the neural CLI port!"]|x});
-  ("hacker.verb", 42, {x|["generate","transmit"]|x});
-  ("hacker.verb", 1337, {x|["connect","calculate"]|x});
-  ("hacker.verb", 7, {x|["bypass","quantify"]|x});
-  ("image.avatar", 42, {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/73.jpg","https://avatars.githubusercontent.com/u/15601864"]|x});
-  ("image.avatar", 1337, {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/27.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/51.jpg"]|x});
-  ("image.avatar", 7, {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/43.jpg","https://avatars.githubusercontent.com/u/97798952"]|x});
-  ("image.avatarGitHub", 42, {x|["https://avatars.githubusercontent.com/u/37454012","https://avatars.githubusercontent.com/u/95071431"]|x});
-  ("image.avatarGitHub", 1337, {x|["https://avatars.githubusercontent.com/u/26202467","https://avatars.githubusercontent.com/u/15868397"]|x});
-  ("image.avatarGitHub", 7, {x|["https://avatars.githubusercontent.com/u/7630829","https://avatars.githubusercontent.com/u/77991880"]|x});
-  ("image.dataUri", 42, {x|["data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImZ1bGwiIHdpZHRoPSIxNDk4IiBoZWlnaHQ9IjM4MDIiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNhZDMzMWQiLz48dGV4dCB4PSI3NDkiIHk9IjE5MDEiIGZvbnQtc2l6ZT0iMjAiIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSI+MTQ5OHgzODAyPC90ZXh0Pjwvc3ZnPg==","data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImZ1bGwiIHdpZHRoPSIyODMyIiBoZWlnaHQ9IjgzIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmM0NDQ2Ii8+PHRleHQgeD0iMTQxNiIgeT0iNDEuNSIgZm9udC1zaXplPSIyMCIgYWxpZ25tZW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIj4yODMyeDgzPC90ZXh0Pjwvc3ZnPg=="]|x});
-  ("image.dataUri", 1337, {x|["data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImZ1bGwiIHdpZHRoPSIxMDQ4IiBoZWlnaHQ9IjYzNSI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzZhN2I1ZiIvPjx0ZXh0IHg9IjUyNCIgeT0iMzE3LjUiIGZvbnQtc2l6ZT0iMjAiIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSI+MTA0OHg2MzU8L3RleHQ+PC9zdmc+","data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22461%22%20height%3D%221545%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23d2f9bb%22%2F%3E%3Ctext%20x%3D%22230.5%22%20y%3D%22772.5%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E461x1545%3C%2Ftext%3E%3C%2Fsvg%3E"]|x});
-  ("image.dataUri", 7, {x|["data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22306%22%20height%3D%223119%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%239ffbb1%22%2F%3E%3Ctext%20x%3D%22153%22%20y%3D%221559.5%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E306x3119%3C%2Ftext%3E%3C%2Fsvg%3E","data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%222000%22%20height%3D%222717%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23b816e4%22%2F%3E%3Ctext%20x%3D%221000%22%20y%3D%221358.5%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E2000x2717%3C%2Ftext%3E%3C%2Fsvg%3E"]|x});
-  ("image.personPortrait", 42, {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/95.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/59.jpg"]|x});
-  ("image.personPortrait", 1337, {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/15.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/45.jpg"]|x});
-  ("image.personPortrait", 7, {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/77.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/72.jpg"]|x});
-  ("image.url", 42, {x|["https://picsum.photos/seed/B993RBH1Y/1498/3802","https://picsum.photos/seed/biwqiB/3329/850"]|x});
-  ("image.url", 1337, {x|["https://picsum.photos/seed/sjwgYJ/1048/635","https://picsum.photos/seed/7YrMNmpA/461/1545"]|x});
-  ("image.url", 7, {x|["https://picsum.photos/seed/IYxv4gu/306/3119","https://picsum.photos/seed/4hUdsV1/2717/3215"]|x});
-  ("image.urlPicsumPhotos", 42, {x|["https://picsum.photos/seed/93RBH/1498/3802?blur=6","https://picsum.photos/seed/biwqiB/83/3879?blur=2"]|x});
-  ("image.urlPicsumPhotos", 1337, {x|["https://picsum.photos/seed/wgYJ7n/1048/635?grayscale&blur=5","https://picsum.photos/seed/NmpALbhFu/2514/501?blur=4"]|x});
-  ("image.urlPicsumPhotos", 7, {x|["https://picsum.photos/seed/xv4guGNn4h/306/3119?grayscale&blur=7","https://picsum.photos/seed/BWeyU/3638/854?grayscale&blur=10"]|x});
-  ("internet.displayName", 42, {x|["وردہ.اللَہ5","مسود18"]|x});
-  ("internet.displayName", 1337, {x|["حدید_جان26","اویس_الحق44"]|x});
-  ("internet.displayName", 7, {x|["مشال50","روبینہ.جبران28"]|x});
-  ("internet.domainName", 42, {x|["hospitable-unit.net","pastel-cleaner.biz"]|x});
-  ("internet.domainName", 1337, {x|["fatal-co-producer.com","lawful-feather.name"]|x});
-  ("internet.domainName", 7, {x|["blushing-saw.info","separate-warming.name"]|x});
-  ("internet.domainSuffix", 42, {x|["info","org"]|x});
-  ("internet.domainSuffix", 1337, {x|["com","biz"]|x});
-  ("internet.domainSuffix", 7, {x|["biz","net"]|x});
-  ("internet.domainWord", 42, {x|["hospitable-unit","shameful-negotiation"]|x});
-  ("internet.domainWord", 1337, {x|["fatal-co-producer","flickering-in-joke"]|x});
-  ("internet.domainWord", 7, {x|["blushing-saw","jittery-puritan"]|x});
-  ("internet.email", 42, {x|["mmtaz.all18u1c1@hotmail.com","wrd1c1.all18u1c1@yahoo.com"]|x});
-  ("internet.email", 1337, {x|["hmyr1c197@gmail.com","eaysh1c1_hsyn@gmail.com"]|x});
-  ("internet.email", 7, {x|["ebdall1c1_rajpwt7@gmail.com","wsym_bajw1apy@hotmail.com"]|x});
-  ("internet.emoji", 42, {x|["🦮","🔗"]|x});
-  ("internet.emoji", 1337, {x|["👩‍🎤","💆🏿"]|x});
-  ("internet.emoji", 7, {x|["🤎","🥤"]|x});
-  ("internet.exampleEmail", 42, {x|["mmtaz.all18u1c1@example.net","wrd1c1.all18u1c1@example.org"]|x});
-  ("internet.exampleEmail", 1337, {x|["hmyr1c197@example.com","eaysh1c1_hsyn@example.com"]|x});
-  ("internet.exampleEmail", 7, {x|["ebdall1c1_rajpwt7@example.com","wsym_bajw1apy@example.net"]|x});
-  ("internet.httpMethod", 42, {x|["POST","PATCH"]|x});
-  ("internet.httpMethod", 1337, {x|["POST","GET"]|x});
-  ("internet.httpMethod", 7, {x|["GET","DELETE"]|x});
-  ("internet.httpStatusCode", 42, {x|[226,417]|x});
-  ("internet.httpStatusCode", 1337, {x|[201,204]|x});
-  ("internet.httpStatusCode", 7, {x|[103,306]|x});
-  ("internet.ip", 42, {x|["243.98.3.69","d331:ddf0:fc44:46b9:6d36:8ab4:bd1d:31ef"]|x});
-  ("internet.ip", 1337, {x|["40.159.131.70","117.149.202.161"]|x});
-  ("internet.ip", 7, {x|["199.168.194.10","185.53.3.142"]|x});
-  ("internet.ipv4", 42, {x|["95.225.220.121","243.98.3.69"]|x});
-  ("internet.ipv4", 1337, {x|["67.20.12.145","40.159.131.70"]|x});
-  ("internet.ipv4", 7, {x|["19.136.240.167","199.168.194.10"]|x});
-  ("internet.ipv6", 42, {x|["8ead:331d:df0f:c444:6b96:d368:ab4b:d1d3","1efb:62f9:2a0e:5e6b:c4fb:edde:1407:85c7"]|x});
-  ("internet.ipv6", 1337, {x|["536a:7b5f:a28d:2f9b:b79c:a46e:a394:bc4f","9bb0:af32:8f08:1b7f:afcd:cf50:1efa:7f0a"]|x});
-  ("internet.ipv6", 7, {x|["1b9f:fbb1:5aeb:816e:49e0:de5c:e2ba:ea4a","8a8c:a6c6:97e8:af9d:3a99:db90:2fbf:ff16"]|x});
-  ("internet.jwt", 42, {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE3MzU2MzU1NjAsImV4cCI6MTczNTY5ODgwNCwibmJmIjoxNzQxOTEyMTg4LCJpc3MiOiLZhduM2YXZhiAtINin2K3ZhdivIiwic3ViIjoiZmQzMjI0ODYtNDkyNC00NTdjLTkzODktMDkyMWZmYzQxYTcxIiwiYXVkIjoiMGU0YTQ4ODItZmNmZS00OWUxLTgzMDUtNjRkNTQ4MmMxZmMzIiwianRpIjoiZGJiYzE1MWQtOTUxNC00NWJhLWFlNzEtYmM4Yzc4NjAxMGE1In0.UfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb","eyJhbGciOiJQUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDY3MjMsImV4cCI6MTczNTY2NTI2NSwibmJmIjoxNzA1MTk5ODI4LCJpc3MiOiLYp9mE2YTZjtuBIExMQyIsInN1YiI6IjZlMjUxZWU0LWFkODgtNDMxZS1hZWE1LTViZWVjYTEyZTkwMSIsImF1ZCI6IjAyOGJhM2IzLTViYWQtNGE5MS1hNTQzLWY2ZWFjODk3M2I0MCIsImp0aSI6IjJmZmU1MGU2LWZmZDQtNDZkNS05MjhlLWI5MTlmMjhlYmJiNSJ9.OORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK07"]|x});
-  ("internet.jwt", 1337, {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MjU4MzksImV4cCI6MTczNTY0OTg3MCwibmJmIjoxNzMzMTIzNjM1LCJpc3MiOiLahtmI24HYr9ix24wgLSDYrNio2LHYp9mGIiwic3ViIjoiYTJmN2NjNTYtOWMzNC00YTcyLWE2MzgtZDJmNjg4MGJmMjI1IiwiYXVkIjoiMDUwYzViN2YtZDk5Zi00NDAxLTlmZjctNWIwY2EzYWUyZTViIiwianRpIjoiODI3NzZjN2ItYzVlYi00ZTY3LWFlYTgtM2Y4YzM2NjgyYTAzIn0.VCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cD","eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2Mjc5MDgsImV4cCI6MTczNTY1Nzc5OCwibmJmIjoxNzM1NjczMDE5LCJpc3MiOiLYtNix24zZgSBMTEMiLCJzdWIiOiIyYjY4OWRiYS0wMDhjLTRiMzQtYTM2YS00NGNkOGI2ZGQwYmIiLCJhdWQiOiJjZWEyYmZlZC0wMGJiLTRiMjEtYTJkNi0yYTAxMWI5OWRiMzEiLCJqdGkiOiI1NDhiZTc4Yy02YmYzLTQ5YjItOGRiYi1kYmJhYWRkM2EyZDAifQ.1Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBypP"]|x});
-  ("internet.jwt", 7, {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDk3OTMsImV4cCI6MTczNTY0NzY3MiwibmJmIjoxNzQ5NzgzOTk2LCJpc3MiOiLYp9i52YjYp9mGLCDYudio2K_Yp9mE24wgYW5kINin2LnZiNin2YYiLCJzdWIiOiI0ZTM3ZTA5Zi0zOGUyLTQ4Y2EtOTczNy01NzVkYzU5NDc1YTUiLCJhdWQiOiJiNmUyYjY2YS04NjAxLTRiOGItOWZhMC00OTNmZmQ3ZDI0N2IiLCJqdGkiOiIyNTU0MjY3Yy1jODdjLTRlYWMtYmYwZS00N2NiMmExNWQ2OWIifQ.L0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MTM2MjMsImV4cCI6MTczNTYxNjI1MywibmJmIjoxNzQ2NTczMzY5LCJpc3MiOiLYp9mE2YTZjtuBIC0g2KzYp9mGIiwic3ViIjoiYjIzNTYzZWQtMTUzNy00NDhlLTk2YTktYzBiZjk0YWJhMmZmIiwiYXVkIjoiOTBmZGFjMzQtMzkxZS00NzcxLWJhZGEtM2MyZDk0OGE0ZDZlIiwianRpIjoiMWE0Yzg3ZTAtODUwYy00OGU5LTk1ZjEtMGI1NWU1ZWE1MDNmIn0.9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0Fa"]|x});
-  ("internet.jwtAlgorithm", 42, {x|["HS384","none"]|x});
-  ("internet.jwtAlgorithm", 1337, {x|["HS256","ES512"]|x});
-  ("internet.jwtAlgorithm", 7, {x|["ES256","RS384"]|x});
-  ("internet.mac", 42, {x|["5f:b9:22:0d:9b:0f","d3:22:48:64:92:45"]|x});
-  ("internet.mac", 1337, {x|["42:47:58:4f:b1:6a","2f:7c:c5:69:c3:4a"]|x});
-  ("internet.mac", 7, {x|["1c:7b:f8:81:47:ac","61:4e:37:e0:9f:38"]|x});
-  ("internet.password", 42, {x|["DfYsZdp522RJCLk","3QYZ1mbJPw9_RT2"]|x});
-  ("internet.password", 1337, {x|["90LR9fEKllCHXi2","P1H3Sp2IPQf0DbD"]|x});
-  ("internet.password", 7, {x|["kJeTPPamEw5KyZ6","UwRhM4ODNCpjWLB"]|x});
-  ("internet.port", 42, {x|[24546,62306]|x});
-  ("internet.port", 1337, {x|[17172,10400]|x});
-  ("internet.port", 7, {x|[5001,51112]|x});
-  ("internet.protocol", 42, {x|["http","https"]|x});
-  ("internet.protocol", 1337, {x|["http","http"]|x});
-  ("internet.protocol", 7, {x|["http","https"]|x});
-  ("internet.url", 42, {x|["https://weird-rawhide.name/","https://crushing-backburn.org/"]|x});
-  ("internet.url", 1337, {x|["https://cumbersome-duster.info/","https://minty-diver.org/"]|x});
-  ("internet.url", 7, {x|["https://sparkling-hundred.net/","https://narrow-knight.biz"]|x});
-  ("internet.userAgent", 42, {x|["Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/118.0","Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_15_7) AppleWebKit/546.15.5 (KHTML, like Gecko) Chrome/121.6.14.0 Safari/603.83.21"]|x});
-  ("internet.userAgent", 1337, {x|["Mozilla/5.0 (Linux; Android 6; SM-G998B) AppleWebKit/568.32 (KHTML, like Gecko) Chrome/94.2.20.15 Mobile Safari/544.38","Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/604.44 (KHTML, like Gecko) Chrome/115.7.7.8 Safari/576.76 Edg/114.2.14.10"]|x});
-  ("internet.userAgent", 7, {x|["FakerBot/7.9.15","Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/541.26.49 (KHTML, like Gecko) Version/16_4 Mobile/15E148 Safari/562.6"]|x});
-  ("internet.username", 42, {x|["wrd1c15","mswd.mlk18"]|x});
-  ("internet.username", 1337, {x|["hdyd26","awys44"]|x});
-  ("internet.username", 7, {x|["mshal_chw1c1dry50","rwbyn1c128"]|x});
-  ("location.buildingNumber", 42, {x|["9751","18670"]|x});
-  ("location.buildingNumber", 1337, {x|["22435","97136"]|x});
-  ("location.buildingNumber", 7, {x|["84795","1246"]|x});
-  ("location.cardinalDirection", 42, {x|["مشرق","مغرب"]|x});
-  ("location.cardinalDirection", 1337, {x|["مشرق","شمال"]|x});
-  ("location.cardinalDirection", 7, {x|["شمال","مغرب"]|x});
-  ("location.city", 42, {x|["بندرگاہ فرہان","مغرب منایلٹاوْن"]|x});
-  ("location.city", 1337, {x|["مغرب روبینہ","جنوب وردہ"]|x});
-  ("location.city", 7, {x|["جھیل مریمٹاوْن","قصُور"]|x});
-  ("location.continent", 42, {x|["Asia","South America"]|x});
-  ("location.continent", 1337, {x|["Antarctica","Antarctica"]|x});
-  ("location.continent", 7, {x|["Africa","North America"]|x});
-  ("location.country", 42, {x|["گابون","متحدہ ریاست امریکا"]|x});
-  ("location.country", 1337, {x|["کومورس","بھوٹان"]|x});
-  ("location.country", 7, {x|["اروبا","سنیگال"]|x});
-  ("location.countryCode", 42, {x|["GY","VC"]|x});
-  ("location.countryCode", 1337, {x|["EH","CD"]|x});
-  ("location.countryCode", 7, {x|["BE","SC"]|x});
-  ("location.county", 42, {x|["Borders","West Glamorgan"]|x});
-  ("location.county", 1337, {x|["Morgan County","Johnson County"]|x});
-  ("location.county", 7, {x|["Franklin County","North Yorkshire"]|x});
-  ("location.direction", 42, {x|["جنوب","جنوب مغرب"]|x});
-  ("location.direction", 1337, {x|["جنوب","مشرق"]|x});
-  ("location.direction", 7, {x|["شمال","جنوب مشرق"]|x});
-  ("location.language", 42, {x|[{"name":"جاپانی","alpha2":"ja","alpha3":"jpn"},{"name":"مالٹی","alpha2":"mt","alpha3":"mlt"}]|x});
-  ("location.language", 1337, {x|[{"name":"پرتگالی","alpha2":"pt","alpha3":"por"},{"name":"فرانسیسی","alpha2":"fr","alpha3":"fra"}]|x});
-  ("location.language", 7, {x|[{"name":"انگریزی","alpha2":"en","alpha3":"eng"},{"name":"کروشیائی","alpha2":"hr","alpha3":"hrv"}]|x});
-  ("location.latitude", 42, {x|[-22.5828,81.1286]|x});
-  ("location.latitude", 1337, {x|[-42.8356,-61.4369]|x});
-  ("location.latitude", 7, {x|[-76.2646,50.3854]|x});
-  ("location.longitude", 42, {x|[-45.1656,162.2572]|x});
-  ("location.longitude", 1337, {x|[-85.6711,-122.8738]|x});
-  ("location.longitude", 7, {x|[-152.5291,100.7708]|x});
-  ("location.nearbyGPSCoordinate", 42, {x|[[-22.5828,162.2572],[41.7589,35.5171]]|x});
-  ("location.nearbyGPSCoordinate", 1337, {x|[[-42.8356,-122.8738],[-39.9372,-14.6459]]|x});
-  ("location.nearbyGPSCoordinate", 7, {x|[[-76.2646,100.7708],[-11.0863,80.4475]]|x});
-  ("location.ordinalDirection", 42, {x|["سمال مغرب","جنوب مغرب"]|x});
-  ("location.ordinalDirection", 1337, {x|["سمال مغرب","شمال مشرق"]|x});
-  ("location.ordinalDirection", 7, {x|["شمال مشرق","جنوب مغرب"]|x});
-  ("location.postalAddress", 42, {x|["751 منایل کالونی\nملکٹاوْن\nاسلام آباد\n13542","گھر. 334\n255 حمزہ گاوْں\nنارو وال\nپنجاب\n06414"]|x});
-  ("location.postalAddress", 1337, {x|["34352 جبران کالونی\nبندرگاہ مشالٹاوْن\nپنجاب\n45712","گھر. 241\n8194 علی گھڑی\nمشرق عمائمٹاوْن\nپنجاب\n07374"]|x});
-  ("location.postalAddress", 7, {x|["479 باجوڑی آباد\nاعوانٹاوْن\nگلگت بلتستان\n24906","گھر. 591\n7642 روبینہ گلی\nدسکہ\nآزاد کشمیر\n24363"]|x});
-  ("location.secondaryAddress", 42, {x|["گھر. 975","گھر. 208"]|x});
-  ("location.secondaryAddress", 1337, {x|["گھر. 224","گھر. 529"]|x});
-  ("location.secondaryAddress", 7, {x|["گھر. 847","گلی 550"]|x});
-  ("location.state", 42, {x|["پنجاب","گلگت بلتستان"]|x});
-  ("location.state", 1337, {x|["اسلام آباد","اسلام آباد"]|x});
-  ("location.state", 7, {x|["خیبر پختونخواہ","بلوچستان"]|x});
-  ("location.street", 42, {x|["ممتاز آباد","آمنہ گھڑی"]|x});
-  ("location.street", 1337, {x|["حمیرہ آباد","سیف گھڑی"]|x});
-  ("location.street", 7, {x|["عبداللہ کالونی","اعوان گلی"]|x});
-  ("location.streetAddress", 42, {x|["9751 منایل کالونی","198 حسنہ گلی"]|x});
-  ("location.streetAddress", 1337, {x|["22435 ممتاز گاوْں","6194 حسین آباد"]|x});
-  ("location.streetAddress", 7, {x|["84795 خان کالونی","402 نیازی گاوْں"]|x});
-  ("location.timeZone", 42, {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x});
-  ("location.timeZone", 1337, {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x});
-  ("location.timeZone", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
-  ("location.zipCode", 42, {x|["39751","10867"]|x});
-  ("location.zipCode", 1337, {x|["21243","52971"]|x});
-  ("location.zipCode", 7, {x|["07479","55024"]|x});
-  ("lorem.lines", 42, {x|["باسد عو انب انب ساد باسدباسدفنباسد عو سبا سگ سدطاسدگاسدگ.\nابنسد ابس ابس باسدب سدگ ط بس سدبگا نان.","اسدبگ طسد ادسگ سدگ عو.\nسدبگا ابس ساد."]|x});
-  ("lorem.lines", 1337, {x|["دف اسدبگ باسدب سدگ.\nسدطاسدگاسدگ باسد باس ابسد اسبد.","اسدبگ طسد چسد رعابھ سب عو دسب ادسگ بس ساب."]|x});
-  ("lorem.lines", 7, {x|["ط باسد چاسدسد اسگ اھگسد دسھا دف اھگسد سدب.","ساد بس سندافاھگسدبا ابنسد اسدبگ ساسدبھ اسدفگبطاسدفد.\nعو ساسدبھ اسدفگبطاسدفد ابنسد.\nسندافاھگسدبا نان سدگ دسب ساب اسدگ ادسگ.\nابسد اسدگ رعابھ سبادفھناسدھ طسد باسدب.\nدف اسدبگ رعابھ ساب رعابھ اسدبگ سبا."]|x});
-  ("lorem.paragraph", 42, {x|["ساسدبھ اسدفگبطاسدفد باسد عو انب انب. باسدباسدفنباسد عو سبا. سدطاسدگاسدگ اسداسدھدسبابگ ابنسد.","ابس باسدب سدگ ط. سدبگا نان بس رعابھ اسدبگ. ادسگ سدگ عو دگاس سدبگا ابس ساد ساسدبھ اسدفگبطاسدفد سدطاسدگاسدگ."]|x});
-  ("lorem.paragraph", 1337, {x|["انب دف اسدبگ باسدب سدگ. سدطاسدگاسدگ باسد باس ابسد اسبد. چاسدسد اسدبگ طسد چسد.","سب عو دسب ادسگ بس. اھگسد ابس سب ادسگ سدگ اسداسدھدسبابگ ابس سدطاسدگاسدگ. اھگسد اھگسد سگ باسد چاسدسد ابس."]|x});
-  ("lorem.paragraph", 7, {x|["طسد ط باسد. اسگ اھگسد دسھا دف اھگسد سدب چسد ابسد ساد بس. ابنسد اسدبگ ساسدبھ اسدفگبطاسدفد دگاس عو ساسدبھ اسدفگبطاسدفد ابنسد اسگ سندافاھگسدبا نان.","دسب ساب اسدگ ادسگ اھگسد ابسد اسدگ. سبادفھناسدھ طسد باسدب شبچ دف. رعابھ ساب رعابھ اسدبگ سبا سب."]|x});
-  ("lorem.paragraphs", 42, {x|["ساسدبھ اسدفگبطاسدفد باسد عو انب انب. باسدباسدفنباسد عو سبا. سدطاسدگاسدگ اسداسدھدسبابگ ابنسد.\nابس باسدب سدگ ط. سدبگا نان بس رعابھ اسدبگ. ادسگ سدگ عو دگاس سدبگا ابس ساد ساسدبھ اسدفگبطاسدفد سدطاسدگاسدگ.\nباسدب باس سدب ط نان اھگسد دگاس سندافاھگسدبا دف. باسدب سدگ اسگ ابس سدطاسدگاسدگ طسد ساسدبھ اسدفگبطاسدفد ابسانفسدد. سندافاھگسدبا دسھا ادسگ دگاس باسدب ابسد دف.","رعابھ بس اسگ انب چسد دسھا چاسدسد طسد ادسگ. اسداسدھدسبابگ سبا باسد. دسھا رعابھ باس باسدباسدفنباسد سدبگا باسدبا ساد باسدب باسدب.\nاسبد ابسانفسدد اسدگ نان سبا دسب شبچ طسد. سدگ ط دگاس باس دگاس اسبد. اھگسد سندافاھگسدبا سفد سب دسب.\nدسھا بس انب سندافاھگسدبا. اسبد باسدباسدفنباسد چسد ادسگ ابسانفسدد اسگ چسد ابسانفسدد باسدب. ابنسد ط اسداسدھدسبابگ."]|x});
-  ("lorem.paragraphs", 1337, {x|["انب دف اسدبگ باسدب سدگ. سدطاسدگاسدگ باسد باس ابسد اسبد. چاسدسد اسدبگ طسد چسد.\nسب عو دسب ادسگ بس. اھگسد ابس سب ادسگ سدگ اسداسدھدسبابگ ابس سدطاسدگاسدگ. اھگسد اھگسد سگ باسد چاسدسد ابس.\nابسد سدب سگ رعابھ. طسد رعابھ سبا. سدطاسدگاسدگ اسداسدھدسبابگ سدبگا شبچ چاسدسد سفد.","دسھا ساسدبھ اسدفگبطاسدفد سدطاسدگاسدگ. باسدبا باسد سگ دسب ساب ادسگ. سندافاھگسدبا انب سندافاھگسدبا باسدب سبا دف سدگ ابس.\nاسدبگ سب چسد اھگسد باسد چسد. سندافاھگسدبا سبا ابسانفسدد ط اسدگ. اسبد سدگ سفد ساسدبھ اسدفگبطاسدفد شبچ دسب سفد ط ابسد اھگسد.\nسدب دگاس سفد باسد. سدبگا سب سبادفھناسدھ چاسدسد بس ابسد سبا رعابھ دگاس رعابھ. ساد سندافاھگسدبا باسد طسد باس دگاس."]|x});
-  ("lorem.paragraphs", 7, {x|["طسد ط باسد. اسگ اھگسد دسھا دف اھگسد سدب چسد ابسد ساد بس. ابنسد اسدبگ ساسدبھ اسدفگبطاسدفد دگاس عو ساسدبھ اسدفگبطاسدفد ابنسد اسگ سندافاھگسدبا نان.\nدسب ساب اسدگ ادسگ اھگسد ابسد اسدگ. سبادفھناسدھ طسد باسدب شبچ دف. رعابھ ساب رعابھ اسدبگ سبا سب.\nابس باسد ط ط اسبد سدگ سب سگ دسھا سبا. سدب سدطاسدگاسدگ سدب ساد باسدب عو سفد. ساسدبھ اسدفگبطاسدفد سبادفھناسدھ اسدگ سبادفھناسدھ نان باسدب اسدبگ باسد اسدگ نان.","باسدب بس ابس سب اسدبگ. چسد سدگ اسدبگ طسد ابسانفسدد سدب چسد ساسدبھ اسدفگبطاسدفد دگاس. دف اسدگ چسد سبا انب ساب ساد رعابھ چسد ط.\nباسد اسداسدھدسبابگ دسب سگ ط اسدبگ ساد. سدبگا اسداسدھدسبابگ ساسدبھ اسدفگبطاسدفد نان ابنسد ساب نان. شبچ ابس طسد سبادفھناسدھ.\nسدگ چسد سدطاسدگاسدگ. ابس باسدباسدفنباسد سندافاھگسدبا ادسگ ط. سبادفھناسدھ ابس ساب چسد اسگ ابس دگاس بس."]|x});
-  ("lorem.sentence", 42, {x|["ساسدبھ اسدفگبطاسدفد باسد عو انب انب.","باسدباسدفنباسد عو سبا."]|x});
-  ("lorem.sentence", 1337, {x|["انب دف اسدبگ باسدب سدگ.","سدطاسدگاسدگ باسد باس ابسد اسبد."]|x});
-  ("lorem.sentence", 7, {x|["طسد ط باسد.","اسگ اھگسد دسھا دف اھگسد سدب چسد ابسد ساد بس."]|x});
-  ("lorem.sentences", 42, {x|["باسد عو انب انب ساد باسدباسدفنباسد عو سبا سگ سدطاسدگاسدگ. ابنسد ابس ابس باسدب سدگ ط بس سدبگا نان. رعابھ اسدبگ طسد ادسگ سدگ.","سدبگا ابس ساد. سدطاسدگاسدگ چسد باسدب باس سدب ط نان اھگسد دگاس سندافاھگسدبا. ساب باسدب سدگ اسگ ابس. طسد ساسدبھ اسدفگبطاسدفد ابسانفسدد عو سندافاھگسدبا دسھا ادسگ دگاس باسدب ابسد."]|x});
-  ("lorem.sentences", 1337, {x|["دف اسدبگ باسدب سدگ. سدطاسدگاسدگ باسد باس ابسد اسبد. چاسدسد اسدبگ طسد چسد.","عو دسب ادسگ بس ساب اھگسد. سب ادسگ سدگ اسداسدھدسبابگ. سدطاسدگاسدگ ط اھگسد اھگسد."]|x});
-  ("lorem.sentences", 7, {x|["ط باسد چاسدسد اسگ اھگسد دسھا دف اھگسد سدب. ابسد ساد بس سندافاھگسدبا ابنسد اسدبگ ساسدبھ اسدفگبطاسدفد دگاس عو.","اسگ سندافاھگسدبا نان سدگ. ساب اسدگ ادسگ اھگسد ابسد اسدگ رعابھ سبادفھناسدھ طسد. شبچ دف اسدبگ رعابھ ساب. اسدبگ سبا سب ابسانفسدد ابس. ط ط اسبد سدگ سب سگ دسھا سبا. سدب سدطاسدگاسدگ سدب ساد باسدب عو سفد."]|x});
-  ("lorem.slug", 42, {x|["---","--"]|x});
-  ("lorem.slug", 1337, {x|["--","--"]|x});
-  ("lorem.slug", 7, {x|["--","--"]|x});
-  ("lorem.text", 42, {x|["عو انب انب ساد باسدباسدفنباسد عو سبا سگ. اسداسدھدسبابگ ابنسد ابس ابس باسدب سدگ ط بس سدبگا نان. رعابھ اسدبگ طسد ادسگ سدگ. دگاس سدبگا ابس ساد ساسدبھ اسدفگبطاسدفد سدطاسدگاسدگ چسد. باس سدب ط نان اھگسد. سندافاھگسدبا دف ساب.","ابس سدطاسدگاسدگ طسد ساسدبھ اسدفگبطاسدفد ابسانفسدد عو سندافاھگسدبا. ادسگ دگاس باسدب. دف اسداسدھدسبابگ رعابھ بس اسگ انب. دسھا چاسدسد طسد ادسگ سگ اسداسدھدسبابگ سبا باسد طسد."]|x});
-  ("lorem.text", 1337, {x|["اسدبگ باسدب سدگ دف سدطاسدگاسدگ. باس ابسد اسبد نان چاسدسد اسدبگ طسد چسد.","دسب ادسگ بس ساب اھگسد ابس سب. سدگ اسداسدھدسبابگ ابس سدطاسدگاسدگ. اھگسد اھگسد سگ باسد چاسدسد ابس. ابسد سدب سگ رعابھ."]|x});
-  ("lorem.text", 7, {x|["ط باسد چاسدسد اسگ اھگسد دسھا دف اھگسد سدب.","بس سندافاھگسدبا ابنسد.\nساسدبھ اسدفگبطاسدفد دگاس عو ساسدبھ اسدفگبطاسدفد ابنسد اسگ."]|x});
-  ("lorem.word", 42, {x|["ابسد","ساسدبھ اسدفگبطاسدفد"]|x});
-  ("lorem.word", 1337, {x|["دف","انب"]|x});
-  ("lorem.word", 7, {x|["دسھا","طسد"]|x});
-  ("lorem.words", 42, {x|["ابسد ساسدبھ اسدفگبطاسدفد باسد","عو انب انب"]|x});
-  ("lorem.words", 1337, {x|["دف انب دف","اسدبگ باسدب سدگ"]|x});
-  ("lorem.words", 7, {x|["دسھا طسد ط","باسد چاسدسد اسگ"]|x});
-  ("music.album", 42, {x|["Heard It In A Past Life","Vida"]|x});
-  ("music.album", 1337, {x|["Dulce Beat","Carnival"]|x});
-  ("music.album", 7, {x|["Aura","Stay Dangerous"]|x});
-  ("music.artist", 42, {x|["James TW","Vanessa Carlton"]|x});
-  ("music.artist", 1337, {x|["Evanescence","Cher"]|x});
-  ("music.artist", 7, {x|["Bachman-Turner Overdrive","Smokey Robinson"]|x});
-  ("music.genre", 42, {x|["فلک","کلاسکی"]|x});
-  ("music.genre", 1337, {x|["ریپ","دنیایٰ"]|x});
-  ("music.genre", 7, {x|["جاز","پرانی"]|x});
-  ("music.songName", 42, {x|["I Honestly Love You","Why Do Fools Fall in Love?"]|x});
-  ("music.songName", 1337, {x|["Frankenstein","Cars"]|x});
-  ("music.songName", 7, {x|["Bad Day","Take Me Home, Country Roads"]|x});
-  ("number.bigInt", 42, {x|["975110867098211","542612347155061"]|x});
-  ("number.bigInt", 1337, {x|["124352971361947","345712641415819"]|x});
-  ("number.bigInt", 7, {x|["747955024683029","490692591576424"]|x});
-  ("number.binary", 42, {x|["0","1"]|x});
-  ("number.binary", 1337, {x|["0","0"]|x});
-  ("number.binary", 7, {x|["0","1"]|x});
-  ("number.float", 42, {x|[0.3745401188473625,0.9507143064099162]|x});
-  ("number.float", 1337, {x|[0.2620246750155817,0.1586839721544656]|x});
-  ("number.float", 7, {x|[0.07630828937395717,0.7799187922401146]|x});
-  ("number.hex", 42, {x|["5","f"]|x});
-  ("number.hex", 1337, {x|["4","2"]|x});
-  ("number.hex", 7, {x|["1","c"]|x});
-  ("number.int", 42, {x|[3373557479352566,8563273192166996]|x});
-  ("number.int", 1337, {x|[2360108457524098,1429298155729043]|x});
-  ("number.int", 7, {x|[687323967179667,7024883964223655]|x});
-  ("number.octal", 42, {x|["2","7"]|x});
-  ("number.octal", 1337, {x|["2","1"]|x});
-  ("number.octal", 7, {x|["0","6"]|x});
-  ("number.romanNumeral", 42, {x|["MCDXCVIII","MMMDCCCII"]|x});
-  ("number.romanNumeral", 1337, {x|["MXLVIII","DCXXXV"]|x});
-  ("number.romanNumeral", 7, {x|["CCCVI","MMMCXIX"]|x});
-  ("person.bio", 42, {x|["traveler, philosopher, model","creator, author"]|x});
-  ("person.bio", 1337, {x|["creator, engineer, friend","grad, educator, writer"]|x});
-  ("person.bio", 7, {x|["photographer","person, writer, inventor ⛄"]|x});
-  ("person.firstName", 42, {x|["وردہ","فرہان"]|x});
-  ("person.firstName", 1337, {x|["حدید","روبینہ"]|x});
-  ("person.firstName", 7, {x|["مشال","مریم"]|x});
-  ("person.fullName", 42, {x|["وردہ شریف بڑے","ڈاکٹر منایل علی"]|x});
-  ("person.fullName", 1337, {x|["حدید خان","سیف علی سوم"]|x});
-  ("person.fullName", 7, {x|["مشال علی","عمیر باجوڑی"]|x});
-  ("person.gender", 42, {x|["Gender nonconforming","Two-spirit person"]|x});
-  ("person.gender", 1337, {x|["Demigender","Cisgender woman"]|x});
-  ("person.gender", 7, {x|["Cis male","Trans woman"]|x});
-  ("person.jobArea", 42, {x|["آگاہی","جال"]|x});
-  ("person.jobArea", 1337, {x|["سکیورٹی","برانڈ"]|x});
-  ("person.jobArea", 7, {x|["پروگرام","تقسیم"]|x});
-  ("person.jobDescriptor", 42, {x|["درمیانہ","پرنسپل"]|x});
-  ("person.jobDescriptor", 1337, {x|["شہری","مستقبل"]|x});
-  ("person.jobDescriptor", 7, {x|["اعلیٰ","اندرونی"]|x});
-  ("person.jobTitle", 42, {x|["درمیانہ جال Producer","بین ال اقوامی برانڈ Liaison"]|x});
-  ("person.jobTitle", 1337, {x|["شہری برانڈ Engineer","گلوبل ریسرچ Analyst"]|x});
-  ("person.jobTitle", 7, {x|["اعلیٰ تقسیم Administrator","اندرونی جال Designer"]|x});
-  ("person.jobType", 42, {x|["Coordinator","Representative"]|x});
-  ("person.jobType", 1337, {x|["Engineer","Liaison"]|x});
-  ("person.jobType", 7, {x|["Associate","Consultant"]|x});
-  ("person.lastName", 42, {x|["علی","اللَہ"]|x});
-  ("person.lastName", 1337, {x|["باجوڑی","راجپوت"]|x});
-  ("person.lastName", 7, {x|["حسین","راجپوت"]|x});
-  ("person.middleName", 42, {x|["Rebel","Cameron"]|x});
-  ("person.middleName", 1337, {x|["Dawn","Isla"]|x});
-  ("person.middleName", 7, {x|["Gwen","London"]|x});
-  ("person.prefix", 42, {x|["ڈاکٹر","محترم."]|x});
-  ("person.prefix", 1337, {x|["محترمہ.","محترمہ."]|x});
-  ("person.prefix", 7, {x|["ڈاکٹر","محترمہ."]|x});
-  ("person.sex", 42, {x|["عورت","مرد"]|x});
-  ("person.sex", 1337, {x|["عورت","عورت"]|x});
-  ("person.sex", 7, {x|["عورت","مرد"]|x});
-  ("person.sexType", 42, {x|["female","male"]|x});
-  ("person.sexType", 1337, {x|["female","female"]|x});
-  ("person.sexType", 7, {x|["female","male"]|x});
-  ("person.suffix", 42, {x|["سوم","دسم"]|x});
-  ("person.suffix", 1337, {x|["پہل","بڑے"]|x});
-  ("person.suffix", 7, {x|["چھوٹے","هفتم"]|x});
-  ("person.zodiacSign", 42, {x|["Gemini","Capricorn"]|x});
-  ("person.zodiacSign", 1337, {x|["Taurus","Pisces"]|x});
-  ("person.zodiacSign", 7, {x|["Aquarius","Scorpio"]|x});
-  ("phone.imei", 42, {x|["39-751108-670982-8","11-354261-234715-8"]|x});
-  ("phone.imei", 1337, {x|["21-243529-713619-6","47-734571-264141-7"]|x});
-  ("phone.imei", 7, {x|["07-479550-246830-5","29-249069-259157-1"]|x});
-  ("phone.number", 42, {x|["975.310.8670 x982","335-526-1234 x7155"]|x});
-  ("phone.number", 1337, {x|["324.452.9713","(394) 873-4571 x2641"]|x});
-  ("phone.number", 7, {x|["847-955-0246 x830","924.906.9259"]|x});
-  ("science.chemicalElement", 42, {x|[{"symbol":"Rh","name":"Rhodium","atomicNumber":45},{"symbol":"Nh","name":"Nihonium","atomicNumber":113}]|x});
-  ("science.chemicalElement", 1337, {x|[{"symbol":"Ga","name":"Gallium","atomicNumber":31},{"symbol":"K","name":"Potassium","atomicNumber":19}]|x});
-  ("science.chemicalElement", 7, {x|[{"symbol":"Ne","name":"Neon","atomicNumber":10},{"symbol":"Np","name":"Neptunium","atomicNumber":93}]|x});
-  ("science.unit", 42, {x|[{"name":"pascal","symbol":"Pa"},{"name":"lux","symbol":"lx"}]|x});
-  ("science.unit", 1337, {x|[{"name":"radian","symbol":"rad"},{"name":"kelvin","symbol":"K"}]|x});
-  ("science.unit", 7, {x|[{"name":"mole","symbol":"mol"},{"name":"steradian","symbol":"sr"}]|x});
-  ("string.alpha", 42, {x|["t","X"]|x});
-  ("string.alpha", 1337, {x|["n","i"]|x});
-  ("string.alpha", 7, {x|["d","O"]|x});
-  ("string.alphanumeric", 42, {x|["n","W"]|x});
-  ("string.alphanumeric", 1337, {x|["g","9"]|x});
-  ("string.alphanumeric", 7, {x|["4","M"]|x});
-  ("string.binary", 42, {x|["0b0","0b1"]|x});
-  ("string.binary", 1337, {x|["0b0","0b0"]|x});
-  ("string.binary", 7, {x|["0b0","0b1"]|x});
-  ("string.hexadecimal", 42, {x|["0x8","0xE"]|x});
-  ("string.hexadecimal", 1337, {x|["0x5","0x3"]|x});
-  ("string.hexadecimal", 7, {x|["0x1","0xB"]|x});
-  ("string.nanoid", 42, {x|["WB9RHYdbwi8mMv2aWO6ru","UFwb-TVckgmxNZcOJ47C3"]|x});
-  ("string.nanoid", 1337, {x|["9swY7CYMmAbFbcPXv0Z7G","mMHYBZ0W_ILbUUHwtouNU"]|x});
-  ("string.nanoid", 7, {x|["MI-4uN4Us1Wy8KtutPjhl","mIUJqw0HHGjeWt8sulipM"]|x});
-  ("string.numeric", 42, {x|["3","9"]|x});
-  ("string.numeric", 1337, {x|["2","1"]|x});
-  ("string.numeric", 7, {x|["0","7"]|x});
-  ("string.octal", 42, {x|["0o2","0o7"]|x});
-  ("string.octal", 1337, {x|["0o2","0o1"]|x});
-  ("string.octal", 7, {x|["0o0","0o6"]|x});
-  ("string.sample", 42, {x|["CyeX//&qXb","\"{n412=QI<"]|x});
-  ("string.sample", 1337, {x|["9/:K>Q9{e+","D[,|JjjBGW"]|x});
-  ("string.sample", 7, {x|["(iId{SO'9O","`kD';u4Kw#"]|x});
-  ("string.symbol", 42, {x|[",","}"]|x});
-  ("string.symbol", 1337, {x|[")","&"]|x});
-  ("string.symbol", 7, {x|["#","]"]|x});
-  ("string.ulid", 42, {x|["01JGFJJZ00BYQK441VKP0ZT655","01JGFJJZ009GD9K49BES6GJ1K5"]|x});
-  ("string.ulid", 1337, {x|["01JGFJJZ00858EAG8ZQ3CM4ZES","01JGFJJZ00SBDJR69NF5D6HT5Y"]|x});
-  ("string.ulid", 7, {x|["01JGFJJZ002REQZHG28FNSC29X","01JGFJJZ006EX0KY7HX4GRNE6F"]|x});
-  ("string.uuid", 42, {x|["5fb9220d-9b0f-4d32-a248-6492457c3890","21ffc41a-7170-4e4a-9488-2fcfe9e13056"]|x});
-  ("string.uuid", 1337, {x|["4247584f-b16a-42f7-8cc5-69c34a72638d","f6880bf2-25b0-450c-a5b7-fd99f401ff75"]|x});
-  ("string.uuid", 7, {x|["1c7bf881-47ac-4614-8e37-e09f38e28ca7","7575dc59-475a-457b-a6e2-b66a8601b8bf"]|x});
-  ("system.commonFileExt", 42, {x|["png","shtml"]|x});
-  ("system.commonFileExt", 1337, {x|["wav","m3a"]|x});
-  ("system.commonFileExt", 7, {x|["pdf","mpe"]|x});
-  ("system.commonFileName", 42, {x|["unnaturally_dreamily.m3a","following_huzzah.pdf"]|x});
-  ("system.commonFileName", 1337, {x|["wallaby.mp4","circa_masquerade.mp2"]|x});
-  ("system.commonFileName", 7, {x|["bleak.wav","for_often.htm"]|x});
-  ("system.commonFileType", 42, {x|["audio","application"]|x});
-  ("system.commonFileType", 1337, {x|["audio","video"]|x});
-  ("system.commonFileType", 7, {x|["video","text"]|x});
-  ("system.cron", 42, {x|["* * ? 8 ?","* 4 6 4 WED"]|x});
-  ("system.cron", 1337, {x|["* * 9 6 *","* 10 25 * TUE"]|x});
-  ("system.cron", 7, {x|["4 18 * * ?","* * 29 * ?"]|x});
-  ("system.directoryPath", 42, {x|["/net","/var/spool"]|x});
-  ("system.directoryPath", 1337, {x|["/home","/etc"]|x});
-  ("system.directoryPath", 7, {x|["/Users","/usr/libexec"]|x});
-  ("system.fileExt", 42, {x|["docx","m2v"]|x});
-  ("system.fileExt", 1337, {x|["xul","exe"]|x});
-  ("system.fileExt", 7, {x|["bin","ico"]|x});
-  ("system.fileName", 42, {x|["unnaturally_dreamily.mar","fun.csh"]|x});
-  ("system.fileName", 1337, {x|["wallaby.jpg","seal.pptx"]|x});
-  ("system.fileName", 7, {x|["bleak.xla","for_often.3gp"]|x});
-  ("system.filePath", 42, {x|["/net/supposing_dreamily_embarrassment.xlsx","/opt/sbin/baseboard_meanwhile_beside.xsd"]|x});
-  ("system.filePath", 1337, {x|["/home/mmm.distz","/opt/knavishly_boohoo.vsw"]|x});
-  ("system.filePath", 7, {x|["/Users/drowse_task_geez.3g2","/var/concerning.sh"]|x});
-  ("system.fileType", 42, {x|["font","video"]|x});
-  ("system.fileType", 1337, {x|["audio","application"]|x});
-  ("system.fileType", 7, {x|["application","text"]|x});
-  ("system.mimeType", 42, {x|["application/x-bzip","video/mpeg"]|x});
-  ("system.mimeType", 1337, {x|["application/vnd.oasis.opendocument.text","application/vnd.apple.installer+xml"]|x});
-  ("system.mimeType", 7, {x|["application/msword","image/vnd.microsoft.icon"]|x});
-  ("system.networkInterface", 42, {x|["wlp5s1f0","wlx0fd322486492"]|x});
-  ("system.networkInterface", 1337, {x|["eno2","wls5f9"]|x});
-  ("system.networkInterface", 7, {x|["P7enp9s5d2","wlxc614e37e09f3"]|x});
-  ("system.semver", 42, {x|["3.19.15","5.3.3"]|x});
-  ("system.semver", 1337, {x|["2.3.5","4.6.10"]|x});
-  ("system.semver", 7, {x|["0.16.9","7.20.11"]|x});
-  ("vehicle.bicycle", 42, {x|["سہراب سائکل","چائنہ سائکل"]|x});
-  ("vehicle.bicycle", 1337, {x|["سہراب سائکل","سہراب سائکل"]|x});
-  ("vehicle.bicycle", 7, {x|["سہراب سائکل","چائنہ سائکل"]|x});
-  ("vehicle.color", 42, {x|["مہندی","ہلکا ہرا"]|x});
-  ("vehicle.color", 1337, {x|["سنہری","سفہد"]|x});
-  ("vehicle.color", 7, {x|["آسمانی","کالا"]|x});
-  ("vehicle.fuel", 42, {x|["شمسی","ڈیزل"]|x});
-  ("vehicle.fuel", 1337, {x|["شمسی","بجلی"]|x});
-  ("vehicle.fuel", 7, {x|["بجلی","ڈیزل"]|x});
-  ("vehicle.manufacturer", 42, {x|["بینٹلے","ہنڈا"]|x});
-  ("vehicle.manufacturer", 1337, {x|["بینٹلے","بی ایم ڈبلیو"]|x});
-  ("vehicle.manufacturer", 7, {x|["آستن مارٹن","مزدا"]|x});
-  ("vehicle.model", 42, {x|["سوک","کرولا"]|x});
-  ("vehicle.model", 1337, {x|["اکورڈ","اکورڈ"]|x});
-  ("vehicle.model", 7, {x|["اکورڈ","کرولا"]|x});
-  ("vehicle.type", 42, {x|["سواری","ہیچ بیک"]|x});
-  ("vehicle.type", 1337, {x|["سواری","سواری"]|x});
-  ("vehicle.type", 7, {x|["سواری","ہیچ بیک"]|x});
-  ("vehicle.vehicle", 42, {x|["بینٹلے کرولا","مرسیڈیز سوک"]|x});
-  ("vehicle.vehicle", 1337, {x|["بینٹلے اکورڈ","بینٹلے سوک"]|x});
-  ("vehicle.vehicle", 7, {x|["آستن مارٹن کرولا","جیپ کرولا"]|x});
-  ("vehicle.vin", 42, {x|["CYRK551V7PAZ82113","HE9L49CF06MK06109"]|x});
-  ("vehicle.vin", 1337, {x|["859FAH8Z23JL19477","BDKS69NG0DEH81945"]|x});
-  ("vehicle.vin", 7, {x|["2SEPZHG25GST30292","EX0KY7JX1HUN42434"]|x});
-  ("vehicle.vrm", 42, {x|["JY75EEB","WP70ZVF"]|x});
-  ("vehicle.vrm", 1337, {x|["GE24ING","ZT13QDZ"]|x});
-  ("vehicle.vrm", 7, {x|["BU47ZON","BG46UJB"]|x});
-  ("word.adjective", 42, {x|["hospitable","weird"]|x});
-  ("word.adjective", 1337, {x|["fatal","cumbersome"]|x});
-  ("word.adjective", 7, {x|["blushing","sparkling"]|x});
-  ("word.adverb", 42, {x|["jaggedly","wearily"]|x});
-  ("word.adverb", 1337, {x|["frankly","deceivingly"]|x});
-  ("word.adverb", 7, {x|["briefly","successfully"]|x});
-  ("word.conjunction", 42, {x|["instead","whose"]|x});
-  ("word.conjunction", 1337, {x|["how","even"]|x});
-  ("word.conjunction", 7, {x|["as","whenever"]|x});
-  ("word.interjection", 42, {x|["yahoo","ick"]|x});
-  ("word.interjection", 1337, {x|["ew","huzzah"]|x});
-  ("word.interjection", 7, {x|["blah","phew"]|x});
-  ("word.noun", 42, {x|["gerbil","unit"]|x});
-  ("word.noun", 1337, {x|["diversity","co-producer"]|x});
-  ("word.noun", 7, {x|["best-seller","saw"]|x});
-  ("word.preposition", 42, {x|["concerning","via"]|x});
-  ("word.preposition", 1337, {x|["barring","anenst"]|x});
-  ("word.preposition", 7, {x|["after","since"]|x});
-  ("word.sample", 42, {x|["bleakly","custody"]|x});
-  ("word.sample", 1337, {x|["how","yet"]|x});
-  ("word.sample", 7, {x|["masticate","afore"]|x});
-  ("word.verb", 42, {x|["glow","unfurl"]|x});
-  ("word.verb", 1337, {x|["downshift","condense"]|x});
-  ("word.verb", 7, {x|["bludgeon","scuffle"]|x});
-  ("word.words", 42, {x|["unnaturally dreamily","embarrassment"]|x});
-  ("word.words", 1337, {x|["wallaby","suspiciously generously till"]|x});
-  ("word.words", 7, {x|["bleak","task"]|x});
-  ("faker.getMetadata", 42, {x|[{"title":"Urdu","code":"ur","language":"ur","endonym":"اردو","dir":"rtl","script":"Arab"},{"title":"Urdu","code":"ur","language":"ur","endonym":"اردو","dir":"rtl","script":"Arab"}]|x});
-  ("faker.getMetadata", 1337, {x|[{"title":"Urdu","code":"ur","language":"ur","endonym":"اردو","dir":"rtl","script":"Arab"},{"title":"Urdu","code":"ur","language":"ur","endonym":"اردو","dir":"rtl","script":"Arab"}]|x});
-  ("faker.getMetadata", 7, {x|[{"title":"Urdu","code":"ur","language":"ur","endonym":"اردو","dir":"rtl","script":"Arab"},{"title":"Urdu","code":"ur","language":"ur","endonym":"اردو","dir":"rtl","script":"Arab"}]|x});
-]
+let cases =
+  [
+    ("airline.aircraftType", 42, {x|["regional","widebody"]|x});
+    ("airline.aircraftType", 1337, {x|["narrowbody","narrowbody"]|x});
+    ("airline.aircraftType", 7, {x|["narrowbody","widebody"]|x});
+    ( "airline.airline",
+      42,
+      {x|[{"name":"Etihad Airways","iataCode":"EY"},{"name":"Virgin Australia","iataCode":"VA"}]|x}
+    );
+    ( "airline.airline",
+      1337,
+      {x|[{"name":"Cebu Pacific Air","iataCode":"5J"},{"name":"Aircalin","iataCode":"SB"}]|x}
+    );
+    ( "airline.airline",
+      7,
+      {x|[{"name":"Air France","iataCode":"AF"},{"name":"South African Airways","iataCode":"SA"}]|x}
+    );
+    ( "airline.airplane",
+      42,
+      {x|[{"name":"Boeing 737-900","iataTypeCode":"739"},{"name":"McDonnell Douglas MD88","iataTypeCode":"M88"}]|x}
+    );
+    ( "airline.airplane",
+      1337,
+      {x|[{"name":"Boeing 717","iataTypeCode":"717"},{"name":"Airbus A350-1000","iataTypeCode":"351"}]|x}
+    );
+    ( "airline.airplane",
+      7,
+      {x|[{"name":"Airbus A321neo","iataTypeCode":"32Q"},{"name":"Embraer 195","iataTypeCode":"E95"}]|x}
+    );
+    ( "airline.airport",
+      42,
+      {x|[{"name":"Hartsfield-Jackson Atlanta International Airport","iataCode":"ATL"},{"name":"Viracopos International Airport","iataCode":"VCP"}]|x}
+    );
+    ( "airline.airport",
+      1337,
+      {x|[{"name":"Denver International Airport","iataCode":"DEN"},{"name":"Canberra Airport","iataCode":"CBR"}]|x}
+    );
+    ( "airline.airport",
+      7,
+      {x|[{"name":"Belem Val de Cans International Airport","iataCode":"BEL"},{"name":"San Francisco International Airport","iataCode":"SFO"}]|x}
+    );
+    ("airline.flightNumber", 42, {x|["97","210"]|x});
+    ("airline.flightNumber", 1337, {x|["22","35"]|x});
+    ("airline.flightNumber", 7, {x|["8","79"]|x});
+    ("airline.recordLocator", 42, {x|["JYTQDD","BWQTAZ"]|x});
+    ("airline.recordLocator", 1337, {x|["GDGMHN","GZTCJR"]|x});
+    ("airline.recordLocator", 7, {x|["BUMTZP","NBGNSV"]|x});
+    ("airline.seat", 42, {x|["14F","26D"]|x});
+    ("airline.seat", 1337, {x|["10A","10C"]|x});
+    ("airline.seat", 7, {x|["3E","16E"]|x});
+    ("animal.bear", 42, {x|["ایشیایٰ کالا بھالو","پانڈا"]|x});
+    ("animal.bear", 1337, {x|["ایشیایٰ کالا بھالو","امریکی کالا بھالو"]|x});
+    ("animal.bear", 7, {x|["امریکی کالا بھالو","بھورا بھالو"]|x});
+    ("animal.bird", 42, {x|["Golden Eagle","Wild Turkey"]|x});
+    ("animal.bird", 1337, {x|["Common Poorwill","Broad-billed Hummingbird"]|x});
+    ("animal.bird", 7, {x|["Bicknell's Thrush","Sharp-tailed Grouse"]|x});
+    ("animal.cat", 42, {x|["Himalayan","Toyger"]|x});
+    ("animal.cat", 1337, {x|["Devon Rex","Bombay"]|x});
+    ("animal.cat", 7, {x|["American Wirehair","Serengeti"]|x});
+    ("animal.cetacean", 42, {x|["Fraser’s Dolphin","Striped Dolphin"]|x});
+    ("animal.cetacean", 1337, {x|["Clymene Dolphin","Bottlenose Dolphin"]|x});
+    ( "animal.cetacean",
+      7,
+      {x|["Atlantic White-Sided Dolphin","Risso’s Dolphin"]|x} );
+    ("animal.cow", 42, {x|["نیلی گاٗیے","گائے"]|x});
+    ("animal.cow", 1337, {x|["امریکی گاٗیے","امریکی گاٗیے"]|x});
+    ("animal.cow", 7, {x|["امریکی گاٗیے","گائے"]|x});
+    ("animal.crocodilia", 42, {x|["مشرقی افریقی گڑیال","گڑیال"]|x});
+    ( "animal.crocodilia",
+      1337,
+      {x|["آسٹریلیائ تازہ پانی کا گڑیال","امریکی گڑیال"]|x} );
+    ("animal.crocodilia", 7, {x|["امریکی گڑیال","نیل گڑیال"]|x});
+    ("animal.dog", 42, {x|["Garafian Shepherd","Tyrolean Hound"]|x});
+    ("animal.dog", 1337, {x|["Chortai","Boxer"]|x});
+    ("animal.dog", 7, {x|["Bakharwal dog","Russian Toy"]|x});
+    ("animal.fish", 42, {x|["European anchovy","Wuchang bream"]|x});
+    ("animal.fish", 1337, {x|["Capelin","Bighead carp"]|x});
+    ("animal.fish", 7, {x|["Atlantic cod","Pacific saury"]|x});
+    ("animal.horse", 42, {x|["Furioso-North Star","Vyatka"]|x});
+    ("animal.horse", 1337, {x|["Colorado Ranger","Blazer Horse"]|x});
+    ("animal.horse", 7, {x|["Asian wild Horse","Russian Heavy Draft"]|x});
+    ("animal.insect", 42, {x|["مکھی","چیونٹی"]|x});
+    ("animal.insect", 1337, {x|["شہد کی مکھی","شہد کی مکھی"]|x});
+    ("animal.insect", 7, {x|["شہد کی مکھی","چیونٹی"]|x});
+    ("animal.lion", 42, {x|["شمالی مغربی کانگو کا شیر","مشرقی افریقی شیر"]|x});
+    ("animal.lion", 1337, {x|["ایشیایْ شیر","ایشیایْ شیر"]|x});
+    ("animal.lion", 7, {x|["ایشیایْ شیر","مشرقی افریقی شیر"]|x});
+    ("animal.petName", 42, {x|["Ginger","Stella"]|x});
+    ("animal.petName", 1337, {x|["Cooper","Bruno"]|x});
+    ("animal.petName", 7, {x|["Bandit","Murphey"]|x});
+    ("animal.rabbit", 42, {x|["English Spot","Standard Chinchilla"]|x});
+    ("animal.rabbit", 1337, {x|["Cinnamon","Blanc de Hotot"]|x});
+    ("animal.rabbit", 7, {x|["American Sable","Polish"]|x});
+    ("animal.rodent", 42, {x|["Famatina chinchilla rat","Talas tuco-tuco"]|x});
+    ("animal.rodent", 1337, {x|["Crested porcupine","Bridge's degu"]|x});
+    ("animal.rodent", 7, {x|["Bathyergus janetta","Porteous' tuco-tuco"]|x});
+    ( "animal.snake",
+      42,
+      {x|["Grand Canyon rattlesnake","Western coral snake"]|x} );
+    ("animal.snake", 1337, {x|["Cuban wood snake","Buff striped keelback"]|x});
+    ("animal.snake", 7, {x|["Barred wolf snake","Schultze's pitviper"]|x});
+    ("animal.type", 42, {x|["cow","lion"]|x});
+    ("animal.type", 1337, {x|["cow","bear"]|x});
+    ("animal.type", 7, {x|["bear","insect"]|x});
+    ("book.author", 42, {x|["Henry David Thoreau","W.K. Marriott"]|x});
+    ("book.author", 1337, {x|["Frances Hodgson Burnett","Clifford R. Adams"]|x});
+    ("book.author", 7, {x|["Aylmer Maude","Richard Wright"]|x});
+    ("book.format", 42, {x|["Ebook","Paperback"]|x});
+    ("book.format", 1337, {x|["Ebook","Audiobook"]|x});
+    ("book.format", 7, {x|["Audiobook","Paperback"]|x});
+    ("book.genre", 42, {x|["Fantasy","Western"]|x});
+    ("book.genre", 1337, {x|["Comic","Children's Literature"]|x});
+    ("book.genre", 7, {x|["Biography","Religion"]|x});
+    ( "book.publisher",
+      42,
+      {x|["Flame Tree Publishing","University of Nebraska Press"]|x} );
+    ("book.publisher", 1337, {x|["City Lights Publishers","Borgo Press"]|x});
+    ("book.publisher", 7, {x|["Bantam Books","Parragon"]|x});
+    ("book.series", 42, {x|["Sherlock Holmes","Twilight"]|x});
+    ("book.series", 1337, {x|["Jane Austen Murder Mysteries","Harry Potter"]|x});
+    ("book.series", 7, {x|["Colonel Race","The Maze Runner"]|x});
+    ("book.title", 42, {x|["Lord Jim","Tropic of Cancer"]|x});
+    ("book.title", 1337, {x|["Gone with the Wind","Candide"]|x});
+    ( "book.title",
+      7,
+      {x|["All Quiet on the Western Front","The Pickwick Papers"]|x} );
+    ("color.cmyk", 42, {x|[[0.37,0.96,0.73,0.6],[0.15,0.15,0.05,0.87]]|x});
+    ("color.cmyk", 1337, {x|[[0.26,0.16,0.28,0.46],[0.32,0.52,0.26,0.98]]|x});
+    ("color.cmyk", 7, {x|[[0.07,0.78,0.44,0.73],[0.98,0.54,0.5,0.07]]|x});
+    ( "color.colorByCSSColorSpace",
+      42,
+      {x|[[0.3745,0.9508,0.732],[0.5987,0.156,0.156]]|x} );
+    ( "color.colorByCSSColorSpace",
+      1337,
+      {x|[[0.262,0.1586,0.2781],[0.4593,0.321,0.5184]]|x} );
+    ( "color.colorByCSSColorSpace",
+      7,
+      {x|[[0.0763,0.7799,0.4384],[0.7235,0.978,0.5385]]|x} );
+    ("color.cssSupportedFunction", 42, {x|["hsla","color"]|x});
+    ("color.cssSupportedFunction", 1337, {x|["hsl","rgba"]|x});
+    ("color.cssSupportedFunction", 7, {x|["rgb","lch"]|x});
+    ("color.cssSupportedSpace", 42, {x|["display-p3","prophoto-rgb"]|x});
+    ("color.cssSupportedSpace", 1337, {x|["display-p3","sRGB"]|x});
+    ("color.cssSupportedSpace", 7, {x|["sRGB","a98-rgb"]|x});
+    ("color.hsl", 42, {x|[[135,0.96,0.73],[216,0.15,0.15]]|x});
+    ("color.hsl", 1337, {x|[[94,0.16,0.28],[165,0.32,0.52]]|x});
+    ("color.hsl", 7, {x|[[27,0.78,0.44],[261,0.98,0.54]]|x});
+    ("color.human", 42, {x|["مہندی","ہلکا ہرا"]|x});
+    ("color.human", 1337, {x|["سنہری","سفہد"]|x});
+    ("color.human", 7, {x|["آسمانی","کالا"]|x});
+    ("color.hwb", 42, {x|[[135,0.96,0.73],[216,0.15,0.15]]|x});
+    ("color.hwb", 1337, {x|[[94,0.16,0.28],[165,0.32,0.52]]|x});
+    ("color.hwb", 7, {x|[[27,0.78,0.44],[261,0.98,0.54]]|x});
+    ( "color.lab",
+      42,
+      {x|[[0.37454,90.1429,46.3988],[0.598659,-68.7963,-68.8011]]|x} );
+    ( "color.lab",
+      1337,
+      {x|[[0.262024,-68.2632,-44.3747],[0.459317,-35.7999,3.6786]]|x} );
+    ( "color.lab",
+      7,
+      {x|[[0.076308,55.9838,-12.3182],[0.723465,95.598,7.6992]]|x} );
+    ("color.lch", 42, {x|[[0.37454,218.7,263.5],[0.598659,35.8,56.1]]|x});
+    ("color.lch", 1337, {x|[[0.262024,36.5,100.1],[0.459317,73.8,186.6]]|x});
+    ("color.lch", 7, {x|[[0.076308,179.4,157.8],[0.723465,225,193.9]]|x});
+    ("color.rgb", 42, {x|["#8ead33","#1ddf0f"]|x});
+    ("color.rgb", 1337, {x|["#536a7b","#5fa28d"]|x});
+    ("color.rgb", 7, {x|["#1b9ffb","#b15aeb"]|x});
+    ("color.space", 42, {x|["HSLA","sYCC"]|x});
+    ("color.space", 1337, {x|["DCI-P3","CIELUV"]|x});
+    ("color.space", 7, {x|["British Standard Colour (BS)","Rec. 601"]|x});
+    ("commerce.department", 42, {x|["خوبصورتی","گھر"]|x});
+    ("commerce.department", 1337, {x|["بچے","باغ"]|x});
+    ("commerce.department", 7, {x|["اوزار","کھیل"]|x});
+    ("commerce.isbn", 42, {x|["978-0-9751108-6-7","978-1-0982-1135-6"]|x});
+    ("commerce.isbn", 1337, {x|["978-0-12-435297-1","978-0-361-94773-2"]|x});
+    ("commerce.isbn", 7, {x|["978-0-7479-5502-3","978-0-683-02924-6"]|x});
+    ("commerce.price", 42, {x|["375.15","599.09"]|x});
+    ("commerce.price", 1337, {x|["262.79","459.85"]|x});
+    ("commerce.price", 7, {x|["77.29","723.75"]|x});
+    ("commerce.product", 42, {x|["صابن","کی بورڈ"]|x});
+    ("commerce.product", 1337, {x|["سلاد","جوتے"]|x});
+    ("commerce.product", 7, {x|["بایٰک","پنیر"]|x});
+    ("commerce.productAdjective", 42, {x|["بیترین","ہوشیار"]|x});
+    ("commerce.productAdjective", 1337, {x|["بیترین","آرامدہ"]|x});
+    ("commerce.productAdjective", 7, {x|["آرامدہ","چھوٹا"]|x});
+    ( "commerce.productDescription",
+      42,
+      {x|["New چاندنی میز with ergonomic design for crushing comfort","Discover the perfumed new پاپڑ with an exciting mix of تازہ ingredients"]|x}
+    );
+    ( "commerce.productDescription",
+      1337,
+      {x|["Innovative جوتے featuring lawful technology and ربڑ construction","Our zesty-inspired پتلون brings a taste of luxury to your ignorant lifestyle"]|x}
+    );
+    ( "commerce.productDescription",
+      7,
+      {x|["Discover the jittery new پتلون with an exciting mix of گرانایٹ ingredients","Our creamy-inspired سلاد brings a taste of luxury to your repentant lifestyle"]|x}
+    );
+    ("commerce.productMaterial", 42, {x|["رویٰ","گرانایٹ"]|x});
+    ("commerce.productMaterial", 1337, {x|["دھات","جم شدہ"]|x});
+    ("commerce.productMaterial", 7, {x|["تازہ","پلاسٹک"]|x});
+    ( "commerce.productName",
+      42,
+      {x|["بیترین گرانایٹ پتلون","خوبصورت جم شدہ جوتے"]|x} );
+    ( "commerce.productName",
+      1337,
+      {x|["بیترین جم شدہ سلاد","خوبصورت ربڑ مرغ"]|x} );
+    ( "commerce.productName",
+      7,
+      {x|["آرامدہ پلاسٹک ماوٰس","چھوٹا گرانایٹ مچھلی"]|x} );
+    ("commerce.upc", 42, {x|["397511086709","982113542618"]|x});
+    ("commerce.upc", 1337, {x|["212435297133","619477345714"]|x});
+    ("commerce.upc", 7, {x|["074795502469","830292490698"]|x});
+    ("company.buzzAdjective", 42, {x|["global","viral"]|x});
+    ("company.buzzAdjective", 1337, {x|["efficient","cross-platform"]|x});
+    ("company.buzzAdjective", 7, {x|["back-end","smart"]|x});
+    ("company.buzzNoun", 42, {x|["initiatives","users"]|x});
+    ("company.buzzNoun", 1337, {x|["deliverables","communities"]|x});
+    ("company.buzzNoun", 7, {x|["applications","schemas"]|x});
+    ( "company.buzzPhrase",
+      42,
+      {x|["facilitate viral platforms","mesh cross-media channels"]|x} );
+    ( "company.buzzPhrase",
+      1337,
+      {x|["engineer cross-platform e-commerce","implement frictionless methodologies"]|x}
+    );
+    ( "company.buzzPhrase",
+      7,
+      {x|["collaborate smart large language models","repurpose visionary metrics"]|x}
+    );
+    ("company.buzzVerb", 42, {x|["facilitate","utilize"]|x});
+    ("company.buzzVerb", 1337, {x|["engineer","disintermediate"]|x});
+    ("company.buzzVerb", 7, {x|["collaborate","seize"]|x});
+    ( "company.catchPhrase",
+      42,
+      {x|["Immersive well-modulated parallelism","Phased cloud-native capability"]|x}
+    );
+    ( "company.catchPhrase",
+      1337,
+      {x|["Extended coherent database","Multi-tiered empowering interface"]|x}
+    );
+    ( "company.catchPhrase",
+      7,
+      {x|["Centralized responsive help-desk","Realigned zero tolerance intranet"]|x}
+    );
+    ("company.catchPhraseAdjective", 42, {x|["Immersive","User-friendly"]|x});
+    ("company.catchPhraseAdjective", 1337, {x|["Extended","Decentralized"]|x});
+    ("company.catchPhraseAdjective", 7, {x|["Centralized","Secured"]|x});
+    ( "company.catchPhraseDescriptor",
+      42,
+      {x|["fault-tolerant","well-modulated"]|x} );
+    ("company.catchPhraseDescriptor", 1337, {x|["directional","coherent"]|x});
+    ("company.catchPhraseDescriptor", 7, {x|["asynchronous","responsive"]|x});
+    ("company.catchPhraseNoun", 42, {x|["frame","time-frame"]|x});
+    ("company.catchPhraseNoun", 1337, {x|["customer loyalty","capability"]|x});
+    ("company.catchPhraseNoun", 7, {x|["approach","product"]|x});
+    ("company.name", 42, {x|["شریف Group","شنواری - چوہدری"]|x});
+    ("company.name", 1337, {x|["خان - باجوڑی","جبران, چوہدری and ملوک"]|x});
+    ("company.name", 7, {x|["علی - راجپوت","عبدالی - اعوان"]|x});
+    ("database.collation", 42, {x|["cp1250_bin","utf8_unicode_ci"]|x});
+    ("database.collation", 1337, {x|["ascii_general_ci","ascii_general_ci"]|x});
+    ("database.collation", 7, {x|["ascii_bin","utf8_general_ci"]|x});
+    ("database.column", 42, {x|["group","updatedAt"]|x});
+    ("database.column", 1337, {x|["createdAt","comment"]|x});
+    ("database.column", 7, {x|["category","status"]|x});
+    ("database.engine", 42, {x|["CSV","MyISAM"]|x});
+    ("database.engine", 1337, {x|["BLACKHOLE","ARCHIVE"]|x});
+    ("database.engine", 7, {x|["ARCHIVE","MEMORY"]|x});
+    ( "database.mongodbObjectId",
+      42,
+      {x|["8ead331ddf0fc4446b96d368","ab4bd1d31efb62f92a0e5e6b"]|x} );
+    ( "database.mongodbObjectId",
+      1337,
+      {x|["536a7b5fa28d2f9bb79ca46e","a394bc4f9bb0af328f081b7f"]|x} );
+    ( "database.mongodbObjectId",
+      7,
+      {x|["1b9ffbb15aeb816e49e0de5c","e2baea4a8a8ca6c697e8af9d"]|x} );
+    ("database.type", 42, {x|["double","tinyint"]|x});
+    ("database.type", 1337, {x|["datetime","blob"]|x});
+    ("database.type", 7, {x|["binary","smallint"]|x});
+    ("datatype.boolean", 42, {x|[true,false]|x});
+    ("datatype.boolean", 1337, {x|[true,true]|x});
+    ("datatype.boolean", 7, {x|[true,false]|x});
+    ( "date.anytime",
+      42,
+      {x|["2024-10-01T09:56:34.376Z","2025-11-26T00:30:52.734Z"]|x} );
+    ( "date.anytime",
+      1337,
+      {x|["2024-07-11T06:40:20.302Z","2024-04-26T20:08:35.491Z"]|x} );
+    ( "date.anytime",
+      7,
+      {x|["2024-02-26T16:55:16.427Z","2025-07-24T08:10:38.064Z"]|x} );
+    ( "date.birthdate",
+      42,
+      {x|["1967-08-07T04:02:06.836Z","2003-11-23T22:28:06.859Z"]|x} );
+    ( "date.birthdate",
+      1337,
+      {x|["1960-07-05T04:30:23.510Z","1953-12-31T07:38:12.417Z"]|x} );
+    ( "date.birthdate",
+      7,
+      {x|["1948-10-22T20:29:23.006Z","1993-02-18T22:21:13.776Z"]|x} );
+    ( "date.future",
+      42,
+      {x|["2025-05-17T16:58:17.813Z","2025-12-14T00:15:26.417Z"]|x} );
+    ( "date.future",
+      1337,
+      {x|["2025-04-06T15:20:10.889Z","2025-02-27T22:04:18.587Z"]|x} );
+    ( "date.future",
+      7,
+      {x|["2025-01-28T20:27:39.137Z","2025-10-12T16:05:19.252Z"]|x} );
+    ("date.month", 42, {x|["جولائ","نومبر"]|x});
+    ("date.month", 1337, {x|["جنوری","اکتوبر"]|x});
+    ("date.month", 7, {x|["اپریل","مئ"]|x});
+    ( "date.past",
+      42,
+      {x|["2024-05-17T01:57:37.080Z","2024-12-13T23:04:27.133Z"]|x} );
+    ( "date.past",
+      1337,
+      {x|["2024-04-05T21:37:28.821Z","2024-02-28T01:52:47.882Z"]|x} );
+    ( "date.past",
+      7,
+      {x|["2024-01-28T22:17:31.173Z","2024-10-12T10:48:23.236Z"]|x} );
+    ( "date.recent",
+      42,
+      {x|["2024-12-31T08:59:19.892Z","2024-12-31T22:49:00.766Z"]|x} );
+    ( "date.recent",
+      1337,
+      {x|["2024-12-31T06:17:18.670Z","2024-12-31T03:48:30.136Z"]|x} );
+    ( "date.recent",
+      7,
+      {x|["2024-12-31T01:49:52.959Z","2024-12-31T18:43:04.204Z"]|x} );
+    ( "date.soon",
+      42,
+      {x|["2025-01-01T08:59:20.892Z","2025-01-01T22:49:01.766Z"]|x} );
+    ( "date.soon",
+      1337,
+      {x|["2025-01-01T06:17:19.670Z","2025-01-01T03:48:31.136Z"]|x} );
+    ( "date.soon",
+      7,
+      {x|["2025-01-01T01:49:53.959Z","2025-01-01T18:43:05.204Z"]|x} );
+    ("date.timeZone", 42, {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x});
+    ( "date.timeZone",
+      1337,
+      {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x} );
+    ("date.timeZone", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
+    ("date.weekday", 42, {x|["جمعرات","ہفتہ"]|x});
+    ("date.weekday", 1337, {x|["بدھ","بدھ"]|x});
+    ("date.weekday", 7, {x|["اتور","پیر"]|x});
+    ("finance.accountName", 42, {x|["Current Account","Savings Account"]|x});
+    ("finance.accountName", 1337, {x|["Current Account","Current Account"]|x});
+    ("finance.accountName", 7, {x|["Current Account","Savings Account"]|x});
+    ("finance.accountNumber", 42, {x|["39751108","67098211"]|x});
+    ("finance.accountNumber", 1337, {x|["21243529","71361947"]|x});
+    ("finance.accountNumber", 7, {x|["07479550","24683029"]|x});
+    ("finance.amount", 42, {x|["374.54","950.72"]|x});
+    ("finance.amount", 1337, {x|["262.02","158.68"]|x});
+    ("finance.amount", 7, {x|["76.30","779.92"]|x});
+    ("finance.bic", 42, {x|["YTPECC2VXXX","AZVFCL6A"]|x});
+    ("finance.bic", 1337, {x|["EHLILK9ZXXX","KQDZJESSELR"]|x});
+    ("finance.bic", 7, {x|["ULSZLVI2HOS","BHXFJPX0XXX"]|x});
+    ( "finance.bitcoinAddress",
+      42,
+      {x|["3JAaa4SAH2YQdbbiwrhB9hnsMcvA3Ba4XY","bc1pa4pg4h2x9pajk6zsywmx372ce9ud9k5t3zs70uqrs3d4vmc3acrnwh4qsk"]|x}
+    );
+    ( "finance.bitcoinAddress",
+      1337,
+      {x|["3hsjwgYJ7oC8ZrMNmqzLbhEubpc","bc1u6yfjj0rz65dq0d2tdqhzumlz903yzhcr0sp7px"]|x}
+    );
+    ( "finance.bitcoinAddress",
+      7,
+      {x|["1rHYxv5guFNo4hUdsW2AXexU8wKEtcunt","3LjzhsmEnsHpUbJqqCwq16HwGXF4iAeXW"]|x}
+    );
+    ("finance.creditCardCVV", 42, {x|["397","511"]|x});
+    ("finance.creditCardCVV", 1337, {x|["212","435"]|x});
+    ("finance.creditCardCVV", 7, {x|["074","795"]|x});
+    ("finance.creditCardIssuer", 42, {x|["discover","visa"]|x});
+    ("finance.creditCardIssuer", 1337, {x|["diners_club","american_express"]|x});
+    ("finance.creditCardIssuer", 7, {x|["american_express","mastercard"]|x});
+    ( "finance.creditCardNumber",
+      42,
+      {x|["6575-1108-6709-8211","3034-261234-7153"]|x} );
+    ( "finance.creditCardNumber",
+      1337,
+      {x|["3014-352971-3614","4773457126413"]|x} );
+    ( "finance.creditCardNumber",
+      7,
+      {x|["3747-955024-68302","3624-906925-9159"]|x} );
+    ( "finance.currency",
+      42,
+      {x|[{"name":"New Israeli Sheqel","code":"ILS","symbol":"₪","numericCode":"376"},{"name":"CFA Franc BCEAO","code":"XOF","symbol":"","numericCode":"952"}]|x}
+    );
+    ( "finance.currency",
+      1337,
+      {x|[{"name":"Ethiopian Birr","code":"ETB","symbol":"","numericCode":"230"},{"name":"Canadian Dollar","code":"CAD","symbol":"$","numericCode":"124"}]|x}
+    );
+    ( "finance.currency",
+      7,
+      {x|[{"name":"Barbados Dollar","code":"BBD","symbol":"$","numericCode":"052"},{"name":"Somali Shilling","code":"SOS","symbol":"S","numericCode":"706"}]|x}
+    );
+    ("finance.currencyCode", 42, {x|["ILS","XOF"]|x});
+    ("finance.currencyCode", 1337, {x|["ETB","CAD"]|x});
+    ("finance.currencyCode", 7, {x|["BBD","SOS"]|x});
+    ("finance.currencyName", 42, {x|["New Israeli Sheqel","CFA Franc BCEAO"]|x});
+    ("finance.currencyName", 1337, {x|["Ethiopian Birr","Canadian Dollar"]|x});
+    ("finance.currencyName", 7, {x|["Barbados Dollar","Somali Shilling"]|x});
+    ("finance.currencyNumericCode", 42, {x|["376","952"]|x});
+    ("finance.currencyNumericCode", 1337, {x|["230","124"]|x});
+    ("finance.currencyNumericCode", 7, {x|["052","706"]|x});
+    ("finance.currencySymbol", 42, {x|["₪","﷼"]|x});
+    ("finance.currencySymbol", 1337, {x|["$","$"]|x});
+    ("finance.currencySymbol", 7, {x|["$","S"]|x});
+    ( "finance.ethereumAddress",
+      42,
+      {x|["0x8ead331ddf0fc4446b96d368ab4bd1d31efb62f9","0x2a0e5e6bc4fbedde140785c76b3b1fa40bfaa172"]|x}
+    );
+    ( "finance.ethereumAddress",
+      1337,
+      {x|["0x536a7b5fa28d2f9bb79ca46ea394bc4f9bb0af32","0x8f081b7fafcdcf501efa7f0ae4ee3e7f5b3a98ba"]|x}
+    );
+    ( "finance.ethereumAddress",
+      7,
+      {x|["0x1b9ffbb15aeb816e49e0de5ce2baea4a8a8ca6c6","0x97e8af9d3a99db902fbfff16d5fecac26aaa3776"]|x}
+    );
+    ( "finance.iban",
+      42,
+      {x|["GT69T10P0V1346241560ZH610G35","CZ5078900130421070087031"]|x} );
+    ( "finance.iban",
+      1337,
+      {x|["FI1300552916047457","CZ8005002804550900400374"]|x} );
+    ("finance.iban", 7, {x|["BE61479500580024","TN7109091740043750043749"]|x});
+    ( "finance.litecoinAddress",
+      42,
+      {x|["3JAaa4SAH2YQdbbiwrhB9hnsMcvA","Ma4XYNi6Fr8u2UgEjwxbYLWTAV"]|x} );
+    ( "finance.litecoinAddress",
+      1337,
+      {x|["LhsjwgYJ7oC8ZrMNmqzLbhEubpcw","LXqvv1JZa8nG1n4MmGuYQByZf16WYukH"]|x}
+    );
+    ( "finance.litecoinAddress",
+      7,
+      {x|["3rHYxv5guFNo4hUdsW2AXexU8w","3tcuntnQLjzhsmEnsHpUbJqqCwq16HwG"]|x} );
+    ("finance.pin", 42, {x|["3975","1108"]|x});
+    ("finance.pin", 1337, {x|["2124","3529"]|x});
+    ("finance.pin", 7, {x|["0747","9550"]|x});
+    ("finance.routingNumber", 42, {x|["062197511","031308674"]|x});
+    ("finance.routingNumber", 1337, {x|["051412430","074029716"]|x});
+    ("finance.routingNumber", 7, {x|["021274792","075950240"]|x});
+    ( "finance.transactionDescription",
+      42,
+      {x|["You made a withdrawal of SAR 598.66 at میمن - احمد using card ending in ****9821 from account ***1354.","Transaction alert: payment at خان - راجپوت using card ending ****5061 for an amount of BAM 948.89 on account ***9830."]|x}
+    );
+    ( "finance.transactionDescription",
+      1337,
+      {x|["Payment of CAD 278.12 for invoice at چوہدری - جبران, processed with card ending ****6194 linked to account ***7734.","withdrawal at خان - اللَہ with a card ending in ****5819 for JPY 504.01 from account ***5079."]|x}
+    );
+    ( "finance.transactionDescription",
+      7,
+      {x|["A withdrawal for KGS 723.47 was made at اعوان, عبدالی and اعوان via card ending ****2924 on account ***9069.","Payment of MMK 909.13 for deposit at خان Group, processed with card ending ****4343 linked to account ***8735."]|x}
+    );
+    ("finance.transactionType", 42, {x|["invoice","withdrawal"]|x});
+    ("finance.transactionType", 1337, {x|["invoice","deposit"]|x});
+    ("finance.transactionType", 7, {x|["deposit","withdrawal"]|x});
+    ("food.adjective", 42, {x|["golden","zesty"]|x});
+    ("food.adjective", 1337, {x|["fluffy","crunchy"]|x});
+    ("food.adjective", 7, {x|["creamy","spicy"]|x});
+    ( "food.description",
+      42,
+      {x|["An exquisite quail roast, infused with the essence of butternut pumpkin, slow-roasted to bring out its natural flavors and served with a side of creamy asparagus","Stuffed parsnip baked with white flour and cayenne pepper."]|x}
+    );
+    ( "food.description",
+      1337,
+      {x|["A special سنہری dill from کومورس. To support the strong flavor it is sided with a tablespoon of pepper.","A delightful tart combining savory turnips and sweet passionfruit, set in a buttery pastry shell and finished with a hint of curry."]|x}
+    );
+    ( "food.description",
+      7,
+      {x|["A comforting bowl of juicy whiting wild rice and garlic, slow-cooked until tender.","A comforting bowl of moist sesame oil and bean shoots, slow-cooked until tender."]|x}
+    );
+    ( "food.dish",
+      42,
+      {x|["Jicama Salad","Tangy Parsnip And White Flour Bowl"]|x} );
+    ( "food.dish",
+      1337,
+      {x|["Moist Green Beans And White Wine Vinegar Bowl","Bruschette With Tomato"]|x}
+    );
+    ("food.dish", 7, {x|["Parsley-rubbed Ostrich Salad","Baba Ganoush"]|x});
+    ("food.ethnicCategory", 42, {x|["Gujarati","Udupi"]|x});
+    ("food.ethnicCategory", 1337, {x|["Czech","British"]|x});
+    ("food.ethnicCategory", 7, {x|["Awadhi","Rajasthani"]|x});
+    ("food.fruit", 42, {x|["fig","strawberry"]|x});
+    ("food.fruit", 1337, {x|["cumquat","butternut pumpkin"]|x});
+    ("food.fruit", 7, {x|["berry","passionfruit"]|x});
+    ("food.ingredient", 42, {x|["flathead","warehou"]|x});
+    ("food.ingredient", 1337, {x|["coconut water","bulghur"]|x});
+    ("food.ingredient", 7, {x|["banana","rye bread"]|x});
+    ("food.meat", 42, {x|["goose","venison"]|x});
+    ("food.meat", 1337, {x|["emu","crocodile"]|x});
+    ("food.meat", 7, {x|["chicken","rabbit"]|x});
+    ("food.spice", 42, {x|["dhansak","thyme"]|x});
+    ("food.spice", 1337, {x|["chilli pepper","bay leaves"]|x});
+    ("food.spice", 7, {x|["aniseed","pot marjoram"]|x});
+    ("food.vegetable", 42, {x|["cos lettuce","sweet potato"]|x});
+    ("food.vegetable", 1337, {x|["carrot","broccolini"]|x});
+    ("food.vegetable", 7, {x|["bean shoots","pumpkin"]|x});
+    ("git.branch", 42, {x|["driver-transmit","pixel-navigate"]|x});
+    ("git.branch", 1337, {x|["card-calculate","card-index"]|x});
+    ("git.branch", 7, {x|["application-quantify","firewall-program"]|x});
+    ( "git.commitDate",
+      42,
+      {x|["Tue Dec 31 08:59:19 2024 +1100","Tue Dec 31 17:34:03 2024 +0300"]|x}
+    );
+    ( "git.commitDate",
+      1337,
+      {x|["Tue Dec 31 06:17:18 2024 -0800","Tue Dec 31 06:40:29 2024 +0000"]|x}
+    );
+    ( "git.commitDate",
+      7,
+      {x|["Tue Dec 31 01:49:52 2024 +0700","Tue Dec 31 10:31:18 2024 +0600"]|x}
+    );
+    ( "git.commitEntry",
+      42,
+      {x|["commit ead331ddf0fc4446b96d368ab4bd1d31efb62f92\r\nAuthor: aqds_ebdaly <aqds_ebdaly@yahoo.com>\r\nDate: Tue Dec 31 02:07:25 2024 -0700\r\n\r\n    back up digital feed\r\n","commit c76b3b1fa40bfaa172cd7167aeda2facaab9020e\r\nAuthor: rwzyn1c1.hsyn28 <rwzyn1c1_hsyn@yahoo.com>\r\nDate: Tue Dec 31 04:28:39 2024 +1000\r\n\r\n    input redundant sensor\r\n"]|x}
+    );
+    ( "git.commitEntry",
+      1337,
+      {x|["commit 36a7b5fa28d2f9bb79ca46ea394bc4f9bb0af328\r\nAuthor: abra1c1ym.mlwk <abra1c1ym_mlwk25@hotmail.com>\r\nDate: Tue Dec 31 02:08:13 2024 +1100\r\n\r\n    transmit multi-byte driver\r\n","commit 0ae4ee3e7f5b3a98bafb7efd9addb5eca598b2f0\r\nAuthor: مریم حسین <mrym.hsyn48@gmail.com>\r\nDate: Tue Dec 31 21:57:37 2024 +0600\r\n\r\n    program auxiliary alarm\r\n"]|x}
+    );
+    ( "git.commitEntry",
+      7,
+      {x|["commit b9ffbb15aeb816e49e0de5ce2baea4a8a8ca6c69\r\nMerge: 7e8af9d 3a99db9\r\nAuthor: آمنہ عبدالی <a18zmn1c1_ebdaly84@yahoo.com>\r\nDate: Tue Dec 31 20:11:42 2024 -0800\r\n\r\n    copy multi-byte pixel\r\n","commit 3776399bbbabdebe0d6abf3e17b9daca09a1bdce\r\nAuthor: hfs1c1_a18zfrydy <hfs1c1.a18zfrydy@yahoo.com>\r\nDate: Tue Dec 31 21:49:12 2024 -0700\r\n\r\n    hack optical protocol\r\n"]|x}
+    );
+    ( "git.commitMessage",
+      42,
+      {x|["generate wireless pixel","navigate back-end bandwidth"]|x} );
+    ( "git.commitMessage",
+      1337,
+      {x|["connect back-end card","index digital interface"]|x} );
+    ( "git.commitMessage",
+      7,
+      {x|["bypass redundant firewall","program wireless interface"]|x} );
+    ( "git.commitSha",
+      42,
+      {x|["8ead331ddf0fc4446b96d368ab4bd1d31efb62f9","2a0e5e6bc4fbedde140785c76b3b1fa40bfaa172"]|x}
+    );
+    ( "git.commitSha",
+      1337,
+      {x|["536a7b5fa28d2f9bb79ca46ea394bc4f9bb0af32","8f081b7fafcdcf501efa7f0ae4ee3e7f5b3a98ba"]|x}
+    );
+    ( "git.commitSha",
+      7,
+      {x|["1b9ffbb15aeb816e49e0de5ce2baea4a8a8ca6c6","97e8af9d3a99db902fbfff16d5fecac26aaa3776"]|x}
+    );
+    ("hacker.abbreviation", 42, {x|["HTTP","VGA"]|x});
+    ("hacker.abbreviation", 1337, {x|["FTP","COM"]|x});
+    ("hacker.abbreviation", 7, {x|["API","SSL"]|x});
+    ("hacker.adjective", 42, {x|["haptic","wireless"]|x});
+    ("hacker.adjective", 1337, {x|["cross-platform","back-end"]|x});
+    ("hacker.adjective", 7, {x|["auxiliary","redundant"]|x});
+    ("hacker.ingverb", 42, {x|["copying","transmitting"]|x});
+    ("hacker.ingverb", 1337, {x|["connecting","calculating"]|x});
+    ("hacker.ingverb", 7, {x|["bypassing","programming"]|x});
+    ("hacker.noun", 42, {x|["driver","system"]|x});
+    ("hacker.noun", 1337, {x|["card","bandwidth"]|x});
+    ("hacker.noun", 7, {x|["application","port"]|x});
+    ( "hacker.phrase",
+      42,
+      {x|["The SQL bandwidth is down, bypass the online alarm so we can quantify the CSS circuit!","Use the digital CLI driver, then you can quantify the neural application!"]|x}
+    );
+    ( "hacker.phrase",
+      1337,
+      {x|["The FTP circuit is down, connect the primary feed so we can calculate the JBOD program!","The RSS bus is down, parse the bluetooth bus so we can quantify the XML interface!"]|x}
+    );
+    ( "hacker.phrase",
+      7,
+      {x|["I'll hack the wireless PCI card, that should panel the HTTP card!","hacking the alarm won't do anything, we need to transmit the neural CLI port!"]|x}
+    );
+    ("hacker.verb", 42, {x|["generate","transmit"]|x});
+    ("hacker.verb", 1337, {x|["connect","calculate"]|x});
+    ("hacker.verb", 7, {x|["bypass","quantify"]|x});
+    ( "image.avatar",
+      42,
+      {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/73.jpg","https://avatars.githubusercontent.com/u/15601864"]|x}
+    );
+    ( "image.avatar",
+      1337,
+      {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/27.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/51.jpg"]|x}
+    );
+    ( "image.avatar",
+      7,
+      {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/43.jpg","https://avatars.githubusercontent.com/u/97798952"]|x}
+    );
+    ( "image.avatarGitHub",
+      42,
+      {x|["https://avatars.githubusercontent.com/u/37454012","https://avatars.githubusercontent.com/u/95071431"]|x}
+    );
+    ( "image.avatarGitHub",
+      1337,
+      {x|["https://avatars.githubusercontent.com/u/26202467","https://avatars.githubusercontent.com/u/15868397"]|x}
+    );
+    ( "image.avatarGitHub",
+      7,
+      {x|["https://avatars.githubusercontent.com/u/7630829","https://avatars.githubusercontent.com/u/77991880"]|x}
+    );
+    ( "image.dataUri",
+      42,
+      {x|["data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImZ1bGwiIHdpZHRoPSIxNDk4IiBoZWlnaHQ9IjM4MDIiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNhZDMzMWQiLz48dGV4dCB4PSI3NDkiIHk9IjE5MDEiIGZvbnQtc2l6ZT0iMjAiIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSI+MTQ5OHgzODAyPC90ZXh0Pjwvc3ZnPg==","data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImZ1bGwiIHdpZHRoPSIyODMyIiBoZWlnaHQ9IjgzIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmM0NDQ2Ii8+PHRleHQgeD0iMTQxNiIgeT0iNDEuNSIgZm9udC1zaXplPSIyMCIgYWxpZ25tZW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIj4yODMyeDgzPC90ZXh0Pjwvc3ZnPg=="]|x}
+    );
+    ( "image.dataUri",
+      1337,
+      {x|["data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImZ1bGwiIHdpZHRoPSIxMDQ4IiBoZWlnaHQ9IjYzNSI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzZhN2I1ZiIvPjx0ZXh0IHg9IjUyNCIgeT0iMzE3LjUiIGZvbnQtc2l6ZT0iMjAiIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSI+MTA0OHg2MzU8L3RleHQ+PC9zdmc+","data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22461%22%20height%3D%221545%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23d2f9bb%22%2F%3E%3Ctext%20x%3D%22230.5%22%20y%3D%22772.5%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E461x1545%3C%2Ftext%3E%3C%2Fsvg%3E"]|x}
+    );
+    ( "image.dataUri",
+      7,
+      {x|["data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22306%22%20height%3D%223119%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%239ffbb1%22%2F%3E%3Ctext%20x%3D%22153%22%20y%3D%221559.5%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E306x3119%3C%2Ftext%3E%3C%2Fsvg%3E","data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%222000%22%20height%3D%222717%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23b816e4%22%2F%3E%3Ctext%20x%3D%221000%22%20y%3D%221358.5%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E2000x2717%3C%2Ftext%3E%3C%2Fsvg%3E"]|x}
+    );
+    ( "image.personPortrait",
+      42,
+      {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/95.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/59.jpg"]|x}
+    );
+    ( "image.personPortrait",
+      1337,
+      {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/15.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/45.jpg"]|x}
+    );
+    ( "image.personPortrait",
+      7,
+      {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/77.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/72.jpg"]|x}
+    );
+    ( "image.url",
+      42,
+      {x|["https://picsum.photos/seed/B993RBH1Y/1498/3802","https://picsum.photos/seed/biwqiB/3329/850"]|x}
+    );
+    ( "image.url",
+      1337,
+      {x|["https://picsum.photos/seed/sjwgYJ/1048/635","https://picsum.photos/seed/7YrMNmpA/461/1545"]|x}
+    );
+    ( "image.url",
+      7,
+      {x|["https://picsum.photos/seed/IYxv4gu/306/3119","https://picsum.photos/seed/4hUdsV1/2717/3215"]|x}
+    );
+    ( "image.urlPicsumPhotos",
+      42,
+      {x|["https://picsum.photos/seed/93RBH/1498/3802?blur=6","https://picsum.photos/seed/biwqiB/83/3879?blur=2"]|x}
+    );
+    ( "image.urlPicsumPhotos",
+      1337,
+      {x|["https://picsum.photos/seed/wgYJ7n/1048/635?grayscale&blur=5","https://picsum.photos/seed/NmpALbhFu/2514/501?blur=4"]|x}
+    );
+    ( "image.urlPicsumPhotos",
+      7,
+      {x|["https://picsum.photos/seed/xv4guGNn4h/306/3119?grayscale&blur=7","https://picsum.photos/seed/BWeyU/3638/854?grayscale&blur=10"]|x}
+    );
+    ("internet.displayName", 42, {x|["وردہ.اللَہ5","مسود18"]|x});
+    ("internet.displayName", 1337, {x|["حدید_جان26","اویس_الحق44"]|x});
+    ("internet.displayName", 7, {x|["مشال50","روبینہ.جبران28"]|x});
+    ( "internet.domainName",
+      42,
+      {x|["hospitable-unit.net","pastel-cleaner.biz"]|x} );
+    ( "internet.domainName",
+      1337,
+      {x|["fatal-co-producer.com","lawful-feather.name"]|x} );
+    ( "internet.domainName",
+      7,
+      {x|["blushing-saw.info","separate-warming.name"]|x} );
+    ("internet.domainSuffix", 42, {x|["info","org"]|x});
+    ("internet.domainSuffix", 1337, {x|["com","biz"]|x});
+    ("internet.domainSuffix", 7, {x|["biz","net"]|x});
+    ("internet.domainWord", 42, {x|["hospitable-unit","shameful-negotiation"]|x});
+    ( "internet.domainWord",
+      1337,
+      {x|["fatal-co-producer","flickering-in-joke"]|x} );
+    ("internet.domainWord", 7, {x|["blushing-saw","jittery-puritan"]|x});
+    ( "internet.email",
+      42,
+      {x|["mmtaz.all18u1c1@hotmail.com","wrd1c1.all18u1c1@yahoo.com"]|x} );
+    ( "internet.email",
+      1337,
+      {x|["hmyr1c197@gmail.com","eaysh1c1_hsyn@gmail.com"]|x} );
+    ( "internet.email",
+      7,
+      {x|["ebdall1c1_rajpwt7@gmail.com","wsym_bajw1apy@hotmail.com"]|x} );
+    ("internet.emoji", 42, {x|["🦮","🔗"]|x});
+    ("internet.emoji", 1337, {x|["👩‍🎤","💆🏿"]|x});
+    ("internet.emoji", 7, {x|["🤎","🥤"]|x});
+    ( "internet.exampleEmail",
+      42,
+      {x|["mmtaz.all18u1c1@example.net","wrd1c1.all18u1c1@example.org"]|x} );
+    ( "internet.exampleEmail",
+      1337,
+      {x|["hmyr1c197@example.com","eaysh1c1_hsyn@example.com"]|x} );
+    ( "internet.exampleEmail",
+      7,
+      {x|["ebdall1c1_rajpwt7@example.com","wsym_bajw1apy@example.net"]|x} );
+    ("internet.httpMethod", 42, {x|["POST","PATCH"]|x});
+    ("internet.httpMethod", 1337, {x|["POST","GET"]|x});
+    ("internet.httpMethod", 7, {x|["GET","DELETE"]|x});
+    ("internet.httpStatusCode", 42, {x|[226,417]|x});
+    ("internet.httpStatusCode", 1337, {x|[201,204]|x});
+    ("internet.httpStatusCode", 7, {x|[103,306]|x});
+    ( "internet.ip",
+      42,
+      {x|["243.98.3.69","d331:ddf0:fc44:46b9:6d36:8ab4:bd1d:31ef"]|x} );
+    ("internet.ip", 1337, {x|["40.159.131.70","117.149.202.161"]|x});
+    ("internet.ip", 7, {x|["199.168.194.10","185.53.3.142"]|x});
+    ("internet.ipv4", 42, {x|["95.225.220.121","243.98.3.69"]|x});
+    ("internet.ipv4", 1337, {x|["67.20.12.145","40.159.131.70"]|x});
+    ("internet.ipv4", 7, {x|["19.136.240.167","199.168.194.10"]|x});
+    ( "internet.ipv6",
+      42,
+      {x|["8ead:331d:df0f:c444:6b96:d368:ab4b:d1d3","1efb:62f9:2a0e:5e6b:c4fb:edde:1407:85c7"]|x}
+    );
+    ( "internet.ipv6",
+      1337,
+      {x|["536a:7b5f:a28d:2f9b:b79c:a46e:a394:bc4f","9bb0:af32:8f08:1b7f:afcd:cf50:1efa:7f0a"]|x}
+    );
+    ( "internet.ipv6",
+      7,
+      {x|["1b9f:fbb1:5aeb:816e:49e0:de5c:e2ba:ea4a","8a8c:a6c6:97e8:af9d:3a99:db90:2fbf:ff16"]|x}
+    );
+    ( "internet.jwt",
+      42,
+      {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE3MzU2MzU1NjAsImV4cCI6MTczNTY5ODgwNCwibmJmIjoxNzQxOTEyMTg4LCJpc3MiOiLZhduM2YXZhiAtINin2K3ZhdivIiwic3ViIjoiZmQzMjI0ODYtNDkyNC00NTdjLTkzODktMDkyMWZmYzQxYTcxIiwiYXVkIjoiMGU0YTQ4ODItZmNmZS00OWUxLTgzMDUtNjRkNTQ4MmMxZmMzIiwianRpIjoiZGJiYzE1MWQtOTUxNC00NWJhLWFlNzEtYmM4Yzc4NjAxMGE1In0.UfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5Pjb","eyJhbGciOiJQUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDY3MjMsImV4cCI6MTczNTY2NTI2NSwibmJmIjoxNzA1MTk5ODI4LCJpc3MiOiLYp9mE2YTZjtuBIExMQyIsInN1YiI6IjZlMjUxZWU0LWFkODgtNDMxZS1hZWE1LTViZWVjYTEyZTkwMSIsImF1ZCI6IjAyOGJhM2IzLTViYWQtNGE5MS1hNTQzLWY2ZWFjODk3M2I0MCIsImp0aSI6IjJmZmU1MGU2LWZmZDQtNDZkNS05MjhlLWI5MTlmMjhlYmJiNSJ9.OORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqfmK07"]|x}
+    );
+    ( "internet.jwt",
+      1337,
+      {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MjU4MzksImV4cCI6MTczNTY0OTg3MCwibmJmIjoxNzMzMTIzNjM1LCJpc3MiOiLahtmI24HYr9ix24wgLSDYrNio2LHYp9mGIiwic3ViIjoiYTJmN2NjNTYtOWMzNC00YTcyLWE2MzgtZDJmNjg4MGJmMjI1IiwiYXVkIjoiMDUwYzViN2YtZDk5Zi00NDAxLTlmZjctNWIwY2EzYWUyZTViIiwianRpIjoiODI3NzZjN2ItYzVlYi00ZTY3LWFlYTgtM2Y4YzM2NjgyYTAzIn0.VCpQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cD","eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2Mjc5MDgsImV4cCI6MTczNTY1Nzc5OCwibmJmIjoxNzM1NjczMDE5LCJpc3MiOiLYtNix24zZgSBMTEMiLCJzdWIiOiIyYjY4OWRiYS0wMDhjLTRiMzQtYTM2YS00NGNkOGI2ZGQwYmIiLCJhdWQiOiJjZWEyYmZlZC0wMGJiLTRiMjEtYTJkNi0yYTAxMWI5OWRiMzEiLCJqdGkiOiI1NDhiZTc4Yy02YmYzLTQ5YjItOGRiYi1kYmJhYWRkM2EyZDAifQ.1Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBypP"]|x}
+    );
+    ( "internet.jwt",
+      7,
+      {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDk3OTMsImV4cCI6MTczNTY0NzY3MiwibmJmIjoxNzQ5NzgzOTk2LCJpc3MiOiLYp9i52YjYp9mGLCDYudio2K_Yp9mE24wgYW5kINin2LnZiNin2YYiLCJzdWIiOiI0ZTM3ZTA5Zi0zOGUyLTQ4Y2EtOTczNy01NzVkYzU5NDc1YTUiLCJhdWQiOiJiNmUyYjY2YS04NjAxLTRiOGItOWZhMC00OTNmZmQ3ZDI0N2IiLCJqdGkiOiIyNTU0MjY3Yy1jODdjLTRlYWMtYmYwZS00N2NiMmExNWQ2OWIifQ.L0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLRBS1gh","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MTM2MjMsImV4cCI6MTczNTYxNjI1MywibmJmIjoxNzQ2NTczMzY5LCJpc3MiOiLYp9mE2YTZjtuBIC0g2KzYp9mGIiwic3ViIjoiYjIzNTYzZWQtMTUzNy00NDhlLTk2YTktYzBiZjk0YWJhMmZmIiwiYXVkIjoiOTBmZGFjMzQtMzkxZS00NzcxLWJhZGEtM2MyZDk0OGE0ZDZlIiwianRpIjoiMWE0Yzg3ZTAtODUwYy00OGU5LTk1ZjEtMGI1NWU1ZWE1MDNmIn0.9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P0Fa"]|x}
+    );
+    ("internet.jwtAlgorithm", 42, {x|["HS384","none"]|x});
+    ("internet.jwtAlgorithm", 1337, {x|["HS256","ES512"]|x});
+    ("internet.jwtAlgorithm", 7, {x|["ES256","RS384"]|x});
+    ("internet.mac", 42, {x|["5f:b9:22:0d:9b:0f","d3:22:48:64:92:45"]|x});
+    ("internet.mac", 1337, {x|["42:47:58:4f:b1:6a","2f:7c:c5:69:c3:4a"]|x});
+    ("internet.mac", 7, {x|["1c:7b:f8:81:47:ac","61:4e:37:e0:9f:38"]|x});
+    ("internet.password", 42, {x|["DfYsZdp522RJCLk","3QYZ1mbJPw9_RT2"]|x});
+    ("internet.password", 1337, {x|["90LR9fEKllCHXi2","P1H3Sp2IPQf0DbD"]|x});
+    ("internet.password", 7, {x|["kJeTPPamEw5KyZ6","UwRhM4ODNCpjWLB"]|x});
+    ("internet.port", 42, {x|[24546,62306]|x});
+    ("internet.port", 1337, {x|[17172,10400]|x});
+    ("internet.port", 7, {x|[5001,51112]|x});
+    ("internet.protocol", 42, {x|["http","https"]|x});
+    ("internet.protocol", 1337, {x|["http","http"]|x});
+    ("internet.protocol", 7, {x|["http","https"]|x});
+    ( "internet.url",
+      42,
+      {x|["https://weird-rawhide.name/","https://crushing-backburn.org/"]|x} );
+    ( "internet.url",
+      1337,
+      {x|["https://cumbersome-duster.info/","https://minty-diver.org/"]|x} );
+    ( "internet.url",
+      7,
+      {x|["https://sparkling-hundred.net/","https://narrow-knight.biz"]|x} );
+    ( "internet.userAgent",
+      42,
+      {x|["Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/118.0","Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_15_7) AppleWebKit/546.15.5 (KHTML, like Gecko) Chrome/121.6.14.0 Safari/603.83.21"]|x}
+    );
+    ( "internet.userAgent",
+      1337,
+      {x|["Mozilla/5.0 (Linux; Android 6; SM-G998B) AppleWebKit/568.32 (KHTML, like Gecko) Chrome/94.2.20.15 Mobile Safari/544.38","Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/604.44 (KHTML, like Gecko) Chrome/115.7.7.8 Safari/576.76 Edg/114.2.14.10"]|x}
+    );
+    ( "internet.userAgent",
+      7,
+      {x|["FakerBot/7.9.15","Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/541.26.49 (KHTML, like Gecko) Version/16_4 Mobile/15E148 Safari/562.6"]|x}
+    );
+    ("internet.username", 42, {x|["wrd1c15","mswd.mlk18"]|x});
+    ("internet.username", 1337, {x|["hdyd26","awys44"]|x});
+    ("internet.username", 7, {x|["mshal_chw1c1dry50","rwbyn1c128"]|x});
+    ("location.buildingNumber", 42, {x|["9751","18670"]|x});
+    ("location.buildingNumber", 1337, {x|["22435","97136"]|x});
+    ("location.buildingNumber", 7, {x|["84795","1246"]|x});
+    ("location.cardinalDirection", 42, {x|["مشرق","مغرب"]|x});
+    ("location.cardinalDirection", 1337, {x|["مشرق","شمال"]|x});
+    ("location.cardinalDirection", 7, {x|["شمال","مغرب"]|x});
+    ("location.city", 42, {x|["بندرگاہ فرہان","مغرب منایلٹاوْن"]|x});
+    ("location.city", 1337, {x|["مغرب روبینہ","جنوب وردہ"]|x});
+    ("location.city", 7, {x|["جھیل مریمٹاوْن","قصُور"]|x});
+    ("location.continent", 42, {x|["Asia","South America"]|x});
+    ("location.continent", 1337, {x|["Antarctica","Antarctica"]|x});
+    ("location.continent", 7, {x|["Africa","North America"]|x});
+    ("location.country", 42, {x|["گابون","متحدہ ریاست امریکا"]|x});
+    ("location.country", 1337, {x|["کومورس","بھوٹان"]|x});
+    ("location.country", 7, {x|["اروبا","سنیگال"]|x});
+    ("location.countryCode", 42, {x|["GY","VC"]|x});
+    ("location.countryCode", 1337, {x|["EH","CD"]|x});
+    ("location.countryCode", 7, {x|["BE","SC"]|x});
+    ("location.county", 42, {x|["Borders","West Glamorgan"]|x});
+    ("location.county", 1337, {x|["Morgan County","Johnson County"]|x});
+    ("location.county", 7, {x|["Franklin County","North Yorkshire"]|x});
+    ("location.direction", 42, {x|["جنوب","جنوب مغرب"]|x});
+    ("location.direction", 1337, {x|["جنوب","مشرق"]|x});
+    ("location.direction", 7, {x|["شمال","جنوب مشرق"]|x});
+    ( "location.language",
+      42,
+      {x|[{"name":"جاپانی","alpha2":"ja","alpha3":"jpn"},{"name":"مالٹی","alpha2":"mt","alpha3":"mlt"}]|x}
+    );
+    ( "location.language",
+      1337,
+      {x|[{"name":"پرتگالی","alpha2":"pt","alpha3":"por"},{"name":"فرانسیسی","alpha2":"fr","alpha3":"fra"}]|x}
+    );
+    ( "location.language",
+      7,
+      {x|[{"name":"انگریزی","alpha2":"en","alpha3":"eng"},{"name":"کروشیائی","alpha2":"hr","alpha3":"hrv"}]|x}
+    );
+    ("location.latitude", 42, {x|[-22.5828,81.1286]|x});
+    ("location.latitude", 1337, {x|[-42.8356,-61.4369]|x});
+    ("location.latitude", 7, {x|[-76.2646,50.3854]|x});
+    ("location.longitude", 42, {x|[-45.1656,162.2572]|x});
+    ("location.longitude", 1337, {x|[-85.6711,-122.8738]|x});
+    ("location.longitude", 7, {x|[-152.5291,100.7708]|x});
+    ( "location.nearbyGPSCoordinate",
+      42,
+      {x|[[-22.5828,162.2572],[41.7589,35.5171]]|x} );
+    ( "location.nearbyGPSCoordinate",
+      1337,
+      {x|[[-42.8356,-122.8738],[-39.9372,-14.6459]]|x} );
+    ( "location.nearbyGPSCoordinate",
+      7,
+      {x|[[-76.2646,100.7708],[-11.0863,80.4475]]|x} );
+    ("location.ordinalDirection", 42, {x|["سمال مغرب","جنوب مغرب"]|x});
+    ("location.ordinalDirection", 1337, {x|["سمال مغرب","شمال مشرق"]|x});
+    ("location.ordinalDirection", 7, {x|["شمال مشرق","جنوب مغرب"]|x});
+    ( "location.postalAddress",
+      42,
+      {x|["751 منایل کالونی\nملکٹاوْن\nاسلام آباد\n13542","گھر. 334\n255 حمزہ گاوْں\nنارو وال\nپنجاب\n06414"]|x}
+    );
+    ( "location.postalAddress",
+      1337,
+      {x|["34352 جبران کالونی\nبندرگاہ مشالٹاوْن\nپنجاب\n45712","گھر. 241\n8194 علی گھڑی\nمشرق عمائمٹاوْن\nپنجاب\n07374"]|x}
+    );
+    ( "location.postalAddress",
+      7,
+      {x|["479 باجوڑی آباد\nاعوانٹاوْن\nگلگت بلتستان\n24906","گھر. 591\n7642 روبینہ گلی\nدسکہ\nآزاد کشمیر\n24363"]|x}
+    );
+    ("location.secondaryAddress", 42, {x|["گھر. 975","گھر. 208"]|x});
+    ("location.secondaryAddress", 1337, {x|["گھر. 224","گھر. 529"]|x});
+    ("location.secondaryAddress", 7, {x|["گھر. 847","گلی 550"]|x});
+    ("location.state", 42, {x|["پنجاب","گلگت بلتستان"]|x});
+    ("location.state", 1337, {x|["اسلام آباد","اسلام آباد"]|x});
+    ("location.state", 7, {x|["خیبر پختونخواہ","بلوچستان"]|x});
+    ("location.street", 42, {x|["ممتاز آباد","آمنہ گھڑی"]|x});
+    ("location.street", 1337, {x|["حمیرہ آباد","سیف گھڑی"]|x});
+    ("location.street", 7, {x|["عبداللہ کالونی","اعوان گلی"]|x});
+    ("location.streetAddress", 42, {x|["9751 منایل کالونی","198 حسنہ گلی"]|x});
+    ("location.streetAddress", 1337, {x|["22435 ممتاز گاوْں","6194 حسین آباد"]|x});
+    ("location.streetAddress", 7, {x|["84795 خان کالونی","402 نیازی گاوْں"]|x});
+    ( "location.timeZone",
+      42,
+      {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x} );
+    ( "location.timeZone",
+      1337,
+      {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x} );
+    ("location.timeZone", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
+    ("location.zipCode", 42, {x|["39751","10867"]|x});
+    ("location.zipCode", 1337, {x|["21243","52971"]|x});
+    ("location.zipCode", 7, {x|["07479","55024"]|x});
+    ( "lorem.lines",
+      42,
+      {x|["باسد عو انب انب ساد باسدباسدفنباسد عو سبا سگ سدطاسدگاسدگ.\nابنسد ابس ابس باسدب سدگ ط بس سدبگا نان.","اسدبگ طسد ادسگ سدگ عو.\nسدبگا ابس ساد."]|x}
+    );
+    ( "lorem.lines",
+      1337,
+      {x|["دف اسدبگ باسدب سدگ.\nسدطاسدگاسدگ باسد باس ابسد اسبد.","اسدبگ طسد چسد رعابھ سب عو دسب ادسگ بس ساب."]|x}
+    );
+    ( "lorem.lines",
+      7,
+      {x|["ط باسد چاسدسد اسگ اھگسد دسھا دف اھگسد سدب.","ساد بس سندافاھگسدبا ابنسد اسدبگ ساسدبھ اسدفگبطاسدفد.\nعو ساسدبھ اسدفگبطاسدفد ابنسد.\nسندافاھگسدبا نان سدگ دسب ساب اسدگ ادسگ.\nابسد اسدگ رعابھ سبادفھناسدھ طسد باسدب.\nدف اسدبگ رعابھ ساب رعابھ اسدبگ سبا."]|x}
+    );
+    ( "lorem.paragraph",
+      42,
+      {x|["ساسدبھ اسدفگبطاسدفد باسد عو انب انب. باسدباسدفنباسد عو سبا. سدطاسدگاسدگ اسداسدھدسبابگ ابنسد.","ابس باسدب سدگ ط. سدبگا نان بس رعابھ اسدبگ. ادسگ سدگ عو دگاس سدبگا ابس ساد ساسدبھ اسدفگبطاسدفد سدطاسدگاسدگ."]|x}
+    );
+    ( "lorem.paragraph",
+      1337,
+      {x|["انب دف اسدبگ باسدب سدگ. سدطاسدگاسدگ باسد باس ابسد اسبد. چاسدسد اسدبگ طسد چسد.","سب عو دسب ادسگ بس. اھگسد ابس سب ادسگ سدگ اسداسدھدسبابگ ابس سدطاسدگاسدگ. اھگسد اھگسد سگ باسد چاسدسد ابس."]|x}
+    );
+    ( "lorem.paragraph",
+      7,
+      {x|["طسد ط باسد. اسگ اھگسد دسھا دف اھگسد سدب چسد ابسد ساد بس. ابنسد اسدبگ ساسدبھ اسدفگبطاسدفد دگاس عو ساسدبھ اسدفگبطاسدفد ابنسد اسگ سندافاھگسدبا نان.","دسب ساب اسدگ ادسگ اھگسد ابسد اسدگ. سبادفھناسدھ طسد باسدب شبچ دف. رعابھ ساب رعابھ اسدبگ سبا سب."]|x}
+    );
+    ( "lorem.paragraphs",
+      42,
+      {x|["ساسدبھ اسدفگبطاسدفد باسد عو انب انب. باسدباسدفنباسد عو سبا. سدطاسدگاسدگ اسداسدھدسبابگ ابنسد.\nابس باسدب سدگ ط. سدبگا نان بس رعابھ اسدبگ. ادسگ سدگ عو دگاس سدبگا ابس ساد ساسدبھ اسدفگبطاسدفد سدطاسدگاسدگ.\nباسدب باس سدب ط نان اھگسد دگاس سندافاھگسدبا دف. باسدب سدگ اسگ ابس سدطاسدگاسدگ طسد ساسدبھ اسدفگبطاسدفد ابسانفسدد. سندافاھگسدبا دسھا ادسگ دگاس باسدب ابسد دف.","رعابھ بس اسگ انب چسد دسھا چاسدسد طسد ادسگ. اسداسدھدسبابگ سبا باسد. دسھا رعابھ باس باسدباسدفنباسد سدبگا باسدبا ساد باسدب باسدب.\nاسبد ابسانفسدد اسدگ نان سبا دسب شبچ طسد. سدگ ط دگاس باس دگاس اسبد. اھگسد سندافاھگسدبا سفد سب دسب.\nدسھا بس انب سندافاھگسدبا. اسبد باسدباسدفنباسد چسد ادسگ ابسانفسدد اسگ چسد ابسانفسدد باسدب. ابنسد ط اسداسدھدسبابگ."]|x}
+    );
+    ( "lorem.paragraphs",
+      1337,
+      {x|["انب دف اسدبگ باسدب سدگ. سدطاسدگاسدگ باسد باس ابسد اسبد. چاسدسد اسدبگ طسد چسد.\nسب عو دسب ادسگ بس. اھگسد ابس سب ادسگ سدگ اسداسدھدسبابگ ابس سدطاسدگاسدگ. اھگسد اھگسد سگ باسد چاسدسد ابس.\nابسد سدب سگ رعابھ. طسد رعابھ سبا. سدطاسدگاسدگ اسداسدھدسبابگ سدبگا شبچ چاسدسد سفد.","دسھا ساسدبھ اسدفگبطاسدفد سدطاسدگاسدگ. باسدبا باسد سگ دسب ساب ادسگ. سندافاھگسدبا انب سندافاھگسدبا باسدب سبا دف سدگ ابس.\nاسدبگ سب چسد اھگسد باسد چسد. سندافاھگسدبا سبا ابسانفسدد ط اسدگ. اسبد سدگ سفد ساسدبھ اسدفگبطاسدفد شبچ دسب سفد ط ابسد اھگسد.\nسدب دگاس سفد باسد. سدبگا سب سبادفھناسدھ چاسدسد بس ابسد سبا رعابھ دگاس رعابھ. ساد سندافاھگسدبا باسد طسد باس دگاس."]|x}
+    );
+    ( "lorem.paragraphs",
+      7,
+      {x|["طسد ط باسد. اسگ اھگسد دسھا دف اھگسد سدب چسد ابسد ساد بس. ابنسد اسدبگ ساسدبھ اسدفگبطاسدفد دگاس عو ساسدبھ اسدفگبطاسدفد ابنسد اسگ سندافاھگسدبا نان.\nدسب ساب اسدگ ادسگ اھگسد ابسد اسدگ. سبادفھناسدھ طسد باسدب شبچ دف. رعابھ ساب رعابھ اسدبگ سبا سب.\nابس باسد ط ط اسبد سدگ سب سگ دسھا سبا. سدب سدطاسدگاسدگ سدب ساد باسدب عو سفد. ساسدبھ اسدفگبطاسدفد سبادفھناسدھ اسدگ سبادفھناسدھ نان باسدب اسدبگ باسد اسدگ نان.","باسدب بس ابس سب اسدبگ. چسد سدگ اسدبگ طسد ابسانفسدد سدب چسد ساسدبھ اسدفگبطاسدفد دگاس. دف اسدگ چسد سبا انب ساب ساد رعابھ چسد ط.\nباسد اسداسدھدسبابگ دسب سگ ط اسدبگ ساد. سدبگا اسداسدھدسبابگ ساسدبھ اسدفگبطاسدفد نان ابنسد ساب نان. شبچ ابس طسد سبادفھناسدھ.\nسدگ چسد سدطاسدگاسدگ. ابس باسدباسدفنباسد سندافاھگسدبا ادسگ ط. سبادفھناسدھ ابس ساب چسد اسگ ابس دگاس بس."]|x}
+    );
+    ( "lorem.sentence",
+      42,
+      {x|["ساسدبھ اسدفگبطاسدفد باسد عو انب انب.","باسدباسدفنباسد عو سبا."]|x} );
+    ( "lorem.sentence",
+      1337,
+      {x|["انب دف اسدبگ باسدب سدگ.","سدطاسدگاسدگ باسد باس ابسد اسبد."]|x} );
+    ( "lorem.sentence",
+      7,
+      {x|["طسد ط باسد.","اسگ اھگسد دسھا دف اھگسد سدب چسد ابسد ساد بس."]|x} );
+    ( "lorem.sentences",
+      42,
+      {x|["باسد عو انب انب ساد باسدباسدفنباسد عو سبا سگ سدطاسدگاسدگ. ابنسد ابس ابس باسدب سدگ ط بس سدبگا نان. رعابھ اسدبگ طسد ادسگ سدگ.","سدبگا ابس ساد. سدطاسدگاسدگ چسد باسدب باس سدب ط نان اھگسد دگاس سندافاھگسدبا. ساب باسدب سدگ اسگ ابس. طسد ساسدبھ اسدفگبطاسدفد ابسانفسدد عو سندافاھگسدبا دسھا ادسگ دگاس باسدب ابسد."]|x}
+    );
+    ( "lorem.sentences",
+      1337,
+      {x|["دف اسدبگ باسدب سدگ. سدطاسدگاسدگ باسد باس ابسد اسبد. چاسدسد اسدبگ طسد چسد.","عو دسب ادسگ بس ساب اھگسد. سب ادسگ سدگ اسداسدھدسبابگ. سدطاسدگاسدگ ط اھگسد اھگسد."]|x}
+    );
+    ( "lorem.sentences",
+      7,
+      {x|["ط باسد چاسدسد اسگ اھگسد دسھا دف اھگسد سدب. ابسد ساد بس سندافاھگسدبا ابنسد اسدبگ ساسدبھ اسدفگبطاسدفد دگاس عو.","اسگ سندافاھگسدبا نان سدگ. ساب اسدگ ادسگ اھگسد ابسد اسدگ رعابھ سبادفھناسدھ طسد. شبچ دف اسدبگ رعابھ ساب. اسدبگ سبا سب ابسانفسدد ابس. ط ط اسبد سدگ سب سگ دسھا سبا. سدب سدطاسدگاسدگ سدب ساد باسدب عو سفد."]|x}
+    );
+    ("lorem.slug", 42, {x|["---","--"]|x});
+    ("lorem.slug", 1337, {x|["--","--"]|x});
+    ("lorem.slug", 7, {x|["--","--"]|x});
+    ( "lorem.text",
+      42,
+      {x|["عو انب انب ساد باسدباسدفنباسد عو سبا سگ. اسداسدھدسبابگ ابنسد ابس ابس باسدب سدگ ط بس سدبگا نان. رعابھ اسدبگ طسد ادسگ سدگ. دگاس سدبگا ابس ساد ساسدبھ اسدفگبطاسدفد سدطاسدگاسدگ چسد. باس سدب ط نان اھگسد. سندافاھگسدبا دف ساب.","ابس سدطاسدگاسدگ طسد ساسدبھ اسدفگبطاسدفد ابسانفسدد عو سندافاھگسدبا. ادسگ دگاس باسدب. دف اسداسدھدسبابگ رعابھ بس اسگ انب. دسھا چاسدسد طسد ادسگ سگ اسداسدھدسبابگ سبا باسد طسد."]|x}
+    );
+    ( "lorem.text",
+      1337,
+      {x|["اسدبگ باسدب سدگ دف سدطاسدگاسدگ. باس ابسد اسبد نان چاسدسد اسدبگ طسد چسد.","دسب ادسگ بس ساب اھگسد ابس سب. سدگ اسداسدھدسبابگ ابس سدطاسدگاسدگ. اھگسد اھگسد سگ باسد چاسدسد ابس. ابسد سدب سگ رعابھ."]|x}
+    );
+    ( "lorem.text",
+      7,
+      {x|["ط باسد چاسدسد اسگ اھگسد دسھا دف اھگسد سدب.","بس سندافاھگسدبا ابنسد.\nساسدبھ اسدفگبطاسدفد دگاس عو ساسدبھ اسدفگبطاسدفد ابنسد اسگ."]|x}
+    );
+    ("lorem.word", 42, {x|["ابسد","ساسدبھ اسدفگبطاسدفد"]|x});
+    ("lorem.word", 1337, {x|["دف","انب"]|x});
+    ("lorem.word", 7, {x|["دسھا","طسد"]|x});
+    ("lorem.words", 42, {x|["ابسد ساسدبھ اسدفگبطاسدفد باسد","عو انب انب"]|x});
+    ("lorem.words", 1337, {x|["دف انب دف","اسدبگ باسدب سدگ"]|x});
+    ("lorem.words", 7, {x|["دسھا طسد ط","باسد چاسدسد اسگ"]|x});
+    ("music.album", 42, {x|["Heard It In A Past Life","Vida"]|x});
+    ("music.album", 1337, {x|["Dulce Beat","Carnival"]|x});
+    ("music.album", 7, {x|["Aura","Stay Dangerous"]|x});
+    ("music.artist", 42, {x|["James TW","Vanessa Carlton"]|x});
+    ("music.artist", 1337, {x|["Evanescence","Cher"]|x});
+    ("music.artist", 7, {x|["Bachman-Turner Overdrive","Smokey Robinson"]|x});
+    ("music.genre", 42, {x|["فلک","کلاسکی"]|x});
+    ("music.genre", 1337, {x|["ریپ","دنیایٰ"]|x});
+    ("music.genre", 7, {x|["جاز","پرانی"]|x});
+    ( "music.songName",
+      42,
+      {x|["I Honestly Love You","Why Do Fools Fall in Love?"]|x} );
+    ("music.songName", 1337, {x|["Frankenstein","Cars"]|x});
+    ("music.songName", 7, {x|["Bad Day","Take Me Home, Country Roads"]|x});
+    ("number.bigInt", 42, {x|["975110867098211","542612347155061"]|x});
+    ("number.bigInt", 1337, {x|["124352971361947","345712641415819"]|x});
+    ("number.bigInt", 7, {x|["747955024683029","490692591576424"]|x});
+    ("number.binary", 42, {x|["0","1"]|x});
+    ("number.binary", 1337, {x|["0","0"]|x});
+    ("number.binary", 7, {x|["0","1"]|x});
+    ("number.float", 42, {x|[0.3745401188473625,0.9507143064099162]|x});
+    ("number.float", 1337, {x|[0.2620246750155817,0.1586839721544656]|x});
+    ("number.float", 7, {x|[0.07630828937395717,0.7799187922401146]|x});
+    ("number.hex", 42, {x|["5","f"]|x});
+    ("number.hex", 1337, {x|["4","2"]|x});
+    ("number.hex", 7, {x|["1","c"]|x});
+    ("number.int", 42, {x|[3373557479352566,8563273192166996]|x});
+    ("number.int", 1337, {x|[2360108457524098,1429298155729043]|x});
+    ("number.int", 7, {x|[687323967179667,7024883964223655]|x});
+    ("number.octal", 42, {x|["2","7"]|x});
+    ("number.octal", 1337, {x|["2","1"]|x});
+    ("number.octal", 7, {x|["0","6"]|x});
+    ("number.romanNumeral", 42, {x|["MCDXCVIII","MMMDCCCII"]|x});
+    ("number.romanNumeral", 1337, {x|["MXLVIII","DCXXXV"]|x});
+    ("number.romanNumeral", 7, {x|["CCCVI","MMMCXIX"]|x});
+    ("person.bio", 42, {x|["traveler, philosopher, model","creator, author"]|x});
+    ( "person.bio",
+      1337,
+      {x|["creator, engineer, friend","grad, educator, writer"]|x} );
+    ("person.bio", 7, {x|["photographer","person, writer, inventor ⛄"]|x});
+    ("person.firstName", 42, {x|["وردہ","فرہان"]|x});
+    ("person.firstName", 1337, {x|["حدید","روبینہ"]|x});
+    ("person.firstName", 7, {x|["مشال","مریم"]|x});
+    ("person.fullName", 42, {x|["وردہ شریف بڑے","ڈاکٹر منایل علی"]|x});
+    ("person.fullName", 1337, {x|["حدید خان","سیف علی سوم"]|x});
+    ("person.fullName", 7, {x|["مشال علی","عمیر باجوڑی"]|x});
+    ("person.gender", 42, {x|["Gender nonconforming","Two-spirit person"]|x});
+    ("person.gender", 1337, {x|["Demigender","Cisgender woman"]|x});
+    ("person.gender", 7, {x|["Cis male","Trans woman"]|x});
+    ("person.jobArea", 42, {x|["آگاہی","جال"]|x});
+    ("person.jobArea", 1337, {x|["سکیورٹی","برانڈ"]|x});
+    ("person.jobArea", 7, {x|["پروگرام","تقسیم"]|x});
+    ("person.jobDescriptor", 42, {x|["درمیانہ","پرنسپل"]|x});
+    ("person.jobDescriptor", 1337, {x|["شہری","مستقبل"]|x});
+    ("person.jobDescriptor", 7, {x|["اعلیٰ","اندرونی"]|x});
+    ( "person.jobTitle",
+      42,
+      {x|["درمیانہ جال Producer","بین ال اقوامی برانڈ Liaison"]|x} );
+    ( "person.jobTitle",
+      1337,
+      {x|["شہری برانڈ Engineer","گلوبل ریسرچ Analyst"]|x} );
+    ( "person.jobTitle",
+      7,
+      {x|["اعلیٰ تقسیم Administrator","اندرونی جال Designer"]|x} );
+    ("person.jobType", 42, {x|["Coordinator","Representative"]|x});
+    ("person.jobType", 1337, {x|["Engineer","Liaison"]|x});
+    ("person.jobType", 7, {x|["Associate","Consultant"]|x});
+    ("person.lastName", 42, {x|["علی","اللَہ"]|x});
+    ("person.lastName", 1337, {x|["باجوڑی","راجپوت"]|x});
+    ("person.lastName", 7, {x|["حسین","راجپوت"]|x});
+    ("person.middleName", 42, {x|["Rebel","Cameron"]|x});
+    ("person.middleName", 1337, {x|["Dawn","Isla"]|x});
+    ("person.middleName", 7, {x|["Gwen","London"]|x});
+    ("person.prefix", 42, {x|["ڈاکٹر","محترم."]|x});
+    ("person.prefix", 1337, {x|["محترمہ.","محترمہ."]|x});
+    ("person.prefix", 7, {x|["ڈاکٹر","محترمہ."]|x});
+    ("person.sex", 42, {x|["عورت","مرد"]|x});
+    ("person.sex", 1337, {x|["عورت","عورت"]|x});
+    ("person.sex", 7, {x|["عورت","مرد"]|x});
+    ("person.sexType", 42, {x|["female","male"]|x});
+    ("person.sexType", 1337, {x|["female","female"]|x});
+    ("person.sexType", 7, {x|["female","male"]|x});
+    ("person.suffix", 42, {x|["سوم","دسم"]|x});
+    ("person.suffix", 1337, {x|["پہل","بڑے"]|x});
+    ("person.suffix", 7, {x|["چھوٹے","هفتم"]|x});
+    ("person.zodiacSign", 42, {x|["Gemini","Capricorn"]|x});
+    ("person.zodiacSign", 1337, {x|["Taurus","Pisces"]|x});
+    ("person.zodiacSign", 7, {x|["Aquarius","Scorpio"]|x});
+    ("phone.imei", 42, {x|["39-751108-670982-8","11-354261-234715-8"]|x});
+    ("phone.imei", 1337, {x|["21-243529-713619-6","47-734571-264141-7"]|x});
+    ("phone.imei", 7, {x|["07-479550-246830-5","29-249069-259157-1"]|x});
+    ("phone.number", 42, {x|["975.310.8670 x982","335-526-1234 x7155"]|x});
+    ("phone.number", 1337, {x|["324.452.9713","(394) 873-4571 x2641"]|x});
+    ("phone.number", 7, {x|["847-955-0246 x830","924.906.9259"]|x});
+    ( "science.chemicalElement",
+      42,
+      {x|[{"symbol":"Rh","name":"Rhodium","atomicNumber":45},{"symbol":"Nh","name":"Nihonium","atomicNumber":113}]|x}
+    );
+    ( "science.chemicalElement",
+      1337,
+      {x|[{"symbol":"Ga","name":"Gallium","atomicNumber":31},{"symbol":"K","name":"Potassium","atomicNumber":19}]|x}
+    );
+    ( "science.chemicalElement",
+      7,
+      {x|[{"symbol":"Ne","name":"Neon","atomicNumber":10},{"symbol":"Np","name":"Neptunium","atomicNumber":93}]|x}
+    );
+    ( "science.unit",
+      42,
+      {x|[{"name":"pascal","symbol":"Pa"},{"name":"lux","symbol":"lx"}]|x} );
+    ( "science.unit",
+      1337,
+      {x|[{"name":"radian","symbol":"rad"},{"name":"kelvin","symbol":"K"}]|x} );
+    ( "science.unit",
+      7,
+      {x|[{"name":"mole","symbol":"mol"},{"name":"steradian","symbol":"sr"}]|x}
+    );
+    ("string.alpha", 42, {x|["t","X"]|x});
+    ("string.alpha", 1337, {x|["n","i"]|x});
+    ("string.alpha", 7, {x|["d","O"]|x});
+    ("string.alphanumeric", 42, {x|["n","W"]|x});
+    ("string.alphanumeric", 1337, {x|["g","9"]|x});
+    ("string.alphanumeric", 7, {x|["4","M"]|x});
+    ("string.binary", 42, {x|["0b0","0b1"]|x});
+    ("string.binary", 1337, {x|["0b0","0b0"]|x});
+    ("string.binary", 7, {x|["0b0","0b1"]|x});
+    ("string.hexadecimal", 42, {x|["0x8","0xE"]|x});
+    ("string.hexadecimal", 1337, {x|["0x5","0x3"]|x});
+    ("string.hexadecimal", 7, {x|["0x1","0xB"]|x});
+    ( "string.nanoid",
+      42,
+      {x|["WB9RHYdbwi8mMv2aWO6ru","UFwb-TVckgmxNZcOJ47C3"]|x} );
+    ( "string.nanoid",
+      1337,
+      {x|["9swY7CYMmAbFbcPXv0Z7G","mMHYBZ0W_ILbUUHwtouNU"]|x} );
+    ("string.nanoid", 7, {x|["MI-4uN4Us1Wy8KtutPjhl","mIUJqw0HHGjeWt8sulipM"]|x});
+    ("string.numeric", 42, {x|["3","9"]|x});
+    ("string.numeric", 1337, {x|["2","1"]|x});
+    ("string.numeric", 7, {x|["0","7"]|x});
+    ("string.octal", 42, {x|["0o2","0o7"]|x});
+    ("string.octal", 1337, {x|["0o2","0o1"]|x});
+    ("string.octal", 7, {x|["0o0","0o6"]|x});
+    ("string.sample", 42, {x|["CyeX//&qXb","\"{n412=QI<"]|x});
+    ("string.sample", 1337, {x|["9/:K>Q9{e+","D[,|JjjBGW"]|x});
+    ("string.sample", 7, {x|["(iId{SO'9O","`kD';u4Kw#"]|x});
+    ("string.symbol", 42, {x|[",","}"]|x});
+    ("string.symbol", 1337, {x|[")","&"]|x});
+    ("string.symbol", 7, {x|["#","]"]|x});
+    ( "string.ulid",
+      42,
+      {x|["01JGFJJZ00BYQK441VKP0ZT655","01JGFJJZ009GD9K49BES6GJ1K5"]|x} );
+    ( "string.ulid",
+      1337,
+      {x|["01JGFJJZ00858EAG8ZQ3CM4ZES","01JGFJJZ00SBDJR69NF5D6HT5Y"]|x} );
+    ( "string.ulid",
+      7,
+      {x|["01JGFJJZ002REQZHG28FNSC29X","01JGFJJZ006EX0KY7HX4GRNE6F"]|x} );
+    ( "string.uuid",
+      42,
+      {x|["5fb9220d-9b0f-4d32-a248-6492457c3890","21ffc41a-7170-4e4a-9488-2fcfe9e13056"]|x}
+    );
+    ( "string.uuid",
+      1337,
+      {x|["4247584f-b16a-42f7-8cc5-69c34a72638d","f6880bf2-25b0-450c-a5b7-fd99f401ff75"]|x}
+    );
+    ( "string.uuid",
+      7,
+      {x|["1c7bf881-47ac-4614-8e37-e09f38e28ca7","7575dc59-475a-457b-a6e2-b66a8601b8bf"]|x}
+    );
+    ("system.commonFileExt", 42, {x|["png","shtml"]|x});
+    ("system.commonFileExt", 1337, {x|["wav","m3a"]|x});
+    ("system.commonFileExt", 7, {x|["pdf","mpe"]|x});
+    ( "system.commonFileName",
+      42,
+      {x|["unnaturally_dreamily.m3a","following_huzzah.pdf"]|x} );
+    ("system.commonFileName", 1337, {x|["wallaby.mp4","circa_masquerade.mp2"]|x});
+    ("system.commonFileName", 7, {x|["bleak.wav","for_often.htm"]|x});
+    ("system.commonFileType", 42, {x|["audio","application"]|x});
+    ("system.commonFileType", 1337, {x|["audio","video"]|x});
+    ("system.commonFileType", 7, {x|["video","text"]|x});
+    ("system.cron", 42, {x|["* * ? 8 ?","* 4 6 4 WED"]|x});
+    ("system.cron", 1337, {x|["* * 9 6 *","* 10 25 * TUE"]|x});
+    ("system.cron", 7, {x|["4 18 * * ?","* * 29 * ?"]|x});
+    ("system.directoryPath", 42, {x|["/net","/var/spool"]|x});
+    ("system.directoryPath", 1337, {x|["/home","/etc"]|x});
+    ("system.directoryPath", 7, {x|["/Users","/usr/libexec"]|x});
+    ("system.fileExt", 42, {x|["docx","m2v"]|x});
+    ("system.fileExt", 1337, {x|["xul","exe"]|x});
+    ("system.fileExt", 7, {x|["bin","ico"]|x});
+    ("system.fileName", 42, {x|["unnaturally_dreamily.mar","fun.csh"]|x});
+    ("system.fileName", 1337, {x|["wallaby.jpg","seal.pptx"]|x});
+    ("system.fileName", 7, {x|["bleak.xla","for_often.3gp"]|x});
+    ( "system.filePath",
+      42,
+      {x|["/net/supposing_dreamily_embarrassment.xlsx","/opt/sbin/baseboard_meanwhile_beside.xsd"]|x}
+    );
+    ( "system.filePath",
+      1337,
+      {x|["/home/mmm.distz","/opt/knavishly_boohoo.vsw"]|x} );
+    ( "system.filePath",
+      7,
+      {x|["/Users/drowse_task_geez.3g2","/var/concerning.sh"]|x} );
+    ("system.fileType", 42, {x|["font","video"]|x});
+    ("system.fileType", 1337, {x|["audio","application"]|x});
+    ("system.fileType", 7, {x|["application","text"]|x});
+    ("system.mimeType", 42, {x|["application/x-bzip","video/mpeg"]|x});
+    ( "system.mimeType",
+      1337,
+      {x|["application/vnd.oasis.opendocument.text","application/vnd.apple.installer+xml"]|x}
+    );
+    ( "system.mimeType",
+      7,
+      {x|["application/msword","image/vnd.microsoft.icon"]|x} );
+    ("system.networkInterface", 42, {x|["wlp5s1f0","wlx0fd322486492"]|x});
+    ("system.networkInterface", 1337, {x|["eno2","wls5f9"]|x});
+    ("system.networkInterface", 7, {x|["P7enp9s5d2","wlxc614e37e09f3"]|x});
+    ("system.semver", 42, {x|["3.19.15","5.3.3"]|x});
+    ("system.semver", 1337, {x|["2.3.5","4.6.10"]|x});
+    ("system.semver", 7, {x|["0.16.9","7.20.11"]|x});
+    ("vehicle.bicycle", 42, {x|["سہراب سائکل","چائنہ سائکل"]|x});
+    ("vehicle.bicycle", 1337, {x|["سہراب سائکل","سہراب سائکل"]|x});
+    ("vehicle.bicycle", 7, {x|["سہراب سائکل","چائنہ سائکل"]|x});
+    ("vehicle.color", 42, {x|["مہندی","ہلکا ہرا"]|x});
+    ("vehicle.color", 1337, {x|["سنہری","سفہد"]|x});
+    ("vehicle.color", 7, {x|["آسمانی","کالا"]|x});
+    ("vehicle.fuel", 42, {x|["شمسی","ڈیزل"]|x});
+    ("vehicle.fuel", 1337, {x|["شمسی","بجلی"]|x});
+    ("vehicle.fuel", 7, {x|["بجلی","ڈیزل"]|x});
+    ("vehicle.manufacturer", 42, {x|["بینٹلے","ہنڈا"]|x});
+    ("vehicle.manufacturer", 1337, {x|["بینٹلے","بی ایم ڈبلیو"]|x});
+    ("vehicle.manufacturer", 7, {x|["آستن مارٹن","مزدا"]|x});
+    ("vehicle.model", 42, {x|["سوک","کرولا"]|x});
+    ("vehicle.model", 1337, {x|["اکورڈ","اکورڈ"]|x});
+    ("vehicle.model", 7, {x|["اکورڈ","کرولا"]|x});
+    ("vehicle.type", 42, {x|["سواری","ہیچ بیک"]|x});
+    ("vehicle.type", 1337, {x|["سواری","سواری"]|x});
+    ("vehicle.type", 7, {x|["سواری","ہیچ بیک"]|x});
+    ("vehicle.vehicle", 42, {x|["بینٹلے کرولا","مرسیڈیز سوک"]|x});
+    ("vehicle.vehicle", 1337, {x|["بینٹلے اکورڈ","بینٹلے سوک"]|x});
+    ("vehicle.vehicle", 7, {x|["آستن مارٹن کرولا","جیپ کرولا"]|x});
+    ("vehicle.vin", 42, {x|["CYRK551V7PAZ82113","HE9L49CF06MK06109"]|x});
+    ("vehicle.vin", 1337, {x|["859FAH8Z23JL19477","BDKS69NG0DEH81945"]|x});
+    ("vehicle.vin", 7, {x|["2SEPZHG25GST30292","EX0KY7JX1HUN42434"]|x});
+    ("vehicle.vrm", 42, {x|["JY75EEB","WP70ZVF"]|x});
+    ("vehicle.vrm", 1337, {x|["GE24ING","ZT13QDZ"]|x});
+    ("vehicle.vrm", 7, {x|["BU47ZON","BG46UJB"]|x});
+    ("word.adjective", 42, {x|["hospitable","weird"]|x});
+    ("word.adjective", 1337, {x|["fatal","cumbersome"]|x});
+    ("word.adjective", 7, {x|["blushing","sparkling"]|x});
+    ("word.adverb", 42, {x|["jaggedly","wearily"]|x});
+    ("word.adverb", 1337, {x|["frankly","deceivingly"]|x});
+    ("word.adverb", 7, {x|["briefly","successfully"]|x});
+    ("word.conjunction", 42, {x|["instead","whose"]|x});
+    ("word.conjunction", 1337, {x|["how","even"]|x});
+    ("word.conjunction", 7, {x|["as","whenever"]|x});
+    ("word.interjection", 42, {x|["yahoo","ick"]|x});
+    ("word.interjection", 1337, {x|["ew","huzzah"]|x});
+    ("word.interjection", 7, {x|["blah","phew"]|x});
+    ("word.noun", 42, {x|["gerbil","unit"]|x});
+    ("word.noun", 1337, {x|["diversity","co-producer"]|x});
+    ("word.noun", 7, {x|["best-seller","saw"]|x});
+    ("word.preposition", 42, {x|["concerning","via"]|x});
+    ("word.preposition", 1337, {x|["barring","anenst"]|x});
+    ("word.preposition", 7, {x|["after","since"]|x});
+    ("word.sample", 42, {x|["bleakly","custody"]|x});
+    ("word.sample", 1337, {x|["how","yet"]|x});
+    ("word.sample", 7, {x|["masticate","afore"]|x});
+    ("word.verb", 42, {x|["glow","unfurl"]|x});
+    ("word.verb", 1337, {x|["downshift","condense"]|x});
+    ("word.verb", 7, {x|["bludgeon","scuffle"]|x});
+    ("word.words", 42, {x|["unnaturally dreamily","embarrassment"]|x});
+    ("word.words", 1337, {x|["wallaby","suspiciously generously till"]|x});
+    ("word.words", 7, {x|["bleak","task"]|x});
+    ( "faker.getMetadata",
+      42,
+      {x|[{"title":"Urdu","code":"ur","language":"ur","endonym":"اردو","dir":"rtl","script":"Arab"},{"title":"Urdu","code":"ur","language":"ur","endonym":"اردو","dir":"rtl","script":"Arab"}]|x}
+    );
+    ( "faker.getMetadata",
+      1337,
+      {x|[{"title":"Urdu","code":"ur","language":"ur","endonym":"اردو","dir":"rtl","script":"Arab"},{"title":"Urdu","code":"ur","language":"ur","endonym":"اردو","dir":"rtl","script":"Arab"}]|x}
+    );
+    ( "faker.getMetadata",
+      7,
+      {x|[{"title":"Urdu","code":"ur","language":"ur","endonym":"اردو","dir":"rtl","script":"Arab"},{"title":"Urdu","code":"ur","language":"ur","endonym":"اردو","dir":"rtl","script":"Arab"}]|x}
+    );
+  ]

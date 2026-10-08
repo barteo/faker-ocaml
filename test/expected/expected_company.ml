@@ -2,35 +2,73 @@
 
 let locale = "en"
 
-let cases = [
-  ("name", 42, {x|["Miller Group","Mills - Wisozk","Deckow, Kemmer and Conn"]|x});
-  ("name", 1337, {x|["Koelpin - Gibson","Howe, Wyman and Schimmel","Rowe Group"]|x});
-  ("name", 7, {x|["Reilly - Kuvalis","Parisian - Bergstrom","Klein - Mills"]|x});
-  ("catchPhrase", 42, {x|["Immersive well-modulated parallelism","Phased cloud-native capability","Balanced systemic matrix"]|x});
-  ("catchPhrase", 1337, {x|["Extended coherent database","Multi-tiered empowering interface","Extended zero defect parallelism"]|x});
-  ("catchPhrase", 7, {x|["Centralized responsive help-desk","Realigned zero tolerance intranet","Open-source asynchronous data-warehouse"]|x});
-  ("buzzPhrase", 42, {x|["facilitate viral platforms","mesh cross-media channels","brand turn-key models"]|x});
-  ("buzzPhrase", 1337, {x|["engineer cross-platform e-commerce","implement frictionless methodologies","engineer visionary platforms"]|x});
-  ("buzzPhrase", 7, {x|["collaborate smart large language models","repurpose visionary metrics","innovate back-end e-commerce"]|x});
-  ("catchPhraseAdjective", 42, {x|["Immersive","User-friendly","Reduced"]|x});
-  ("catchPhraseAdjective", 1337, {x|["Extended","Decentralized","Face to face"]|x});
-  ("catchPhraseAdjective", 7, {x|["Centralized","Secured","Managed"]|x});
-  ("catchPhraseDescriptor", 42, {x|["fault-tolerant","well-modulated","real-time"]|x});
-  ("catchPhraseDescriptor", 1337, {x|["directional","coherent","discrete"]|x});
-  ("catchPhraseDescriptor", 7, {x|["asynchronous","responsive","holistic"]|x});
-  ("catchPhraseNoun", 42, {x|["frame","time-frame","parallelism"]|x});
-  ("catchPhraseNoun", 1337, {x|["customer loyalty","capability","database"]|x});
-  ("catchPhraseNoun", 7, {x|["approach","product","help-desk"]|x});
-  ("buzzAdjective", 42, {x|["global","viral","robust"]|x});
-  ("buzzAdjective", 1337, {x|["efficient","cross-platform","end-to-end"]|x});
-  ("buzzAdjective", 7, {x|["back-end","smart","innovative"]|x});
-  ("buzzVerb", 42, {x|["facilitate","utilize","repurpose"]|x});
-  ("buzzVerb", 1337, {x|["engineer","disintermediate","enhance"]|x});
-  ("buzzVerb", 7, {x|["collaborate","seize","harness"]|x});
-  ("buzzNoun", 42, {x|["initiatives","users","platforms"]|x});
-  ("buzzNoun", 1337, {x|["deliverables","communities","e-commerce"]|x});
-  ("buzzNoun", 7, {x|["applications","schemas","large language models"]|x});
-  ("fake", 42, {x|["Miller Group|Decentralized asymmetric standardization|mesh rich AI|Versatile|sustainable|complexity|customized|embrace|experiences","Moore Group|Focused exuding hub|seize cutting-edge methodologies|Persistent|analyzing|methodology|cross-platform|brand|users","Boyle, Cartwright and Vandervort|Expanded national encoding|integrate magnetic content|Versatile|resilient|throughput|user-centric|mesh|technologies"]|x});
-  ("fake", 1337, {x|["Koelpin - Gibson|Virtual real-time artificial intelligence|gamify plug-and-play blockchains|Virtual|holistic|productivity|sticky|facilitate|interfaces","Green LLC|Open-source cohesive generative AI|empower magnetic solutions|Distributed|zero administration|hardware|killer|innovate|AI","Cassin, Abernathy and Schamberger|Grass-roots optimal installation|visualize synergistic networks|Organized|zero trust|core|24/7|collaborate|technologies"]|x});
-  ("fake", 7, {x|["Reilly - Kuvalis|Business-focused directional installation|redefine strategic initiatives|Business-focused|disintermediate|synergy|decentralized|implement|technologies","Fay-Lowe - Ledner|Reverse-engineered needs-based implementation|empower intuitive initiatives|Networked|exuding|software|smart|expedite|mindshare","O'Reilly - Reichel|Integrated transitional challenge|revolutionize impactful large language models|Profit-focused|intangible|generative AI|24/7|cultivate|partnerships"]|x});
-]
+let cases =
+  [
+    ( "name",
+      42,
+      {x|["Miller Group","Mills - Wisozk","Deckow, Kemmer and Conn"]|x} );
+    ( "name",
+      1337,
+      {x|["Koelpin - Gibson","Howe, Wyman and Schimmel","Rowe Group"]|x} );
+    ( "name",
+      7,
+      {x|["Reilly - Kuvalis","Parisian - Bergstrom","Klein - Mills"]|x} );
+    ( "catchPhrase",
+      42,
+      {x|["Immersive well-modulated parallelism","Phased cloud-native capability","Balanced systemic matrix"]|x}
+    );
+    ( "catchPhrase",
+      1337,
+      {x|["Extended coherent database","Multi-tiered empowering interface","Extended zero defect parallelism"]|x}
+    );
+    ( "catchPhrase",
+      7,
+      {x|["Centralized responsive help-desk","Realigned zero tolerance intranet","Open-source asynchronous data-warehouse"]|x}
+    );
+    ( "buzzPhrase",
+      42,
+      {x|["facilitate viral platforms","mesh cross-media channels","brand turn-key models"]|x}
+    );
+    ( "buzzPhrase",
+      1337,
+      {x|["engineer cross-platform e-commerce","implement frictionless methodologies","engineer visionary platforms"]|x}
+    );
+    ( "buzzPhrase",
+      7,
+      {x|["collaborate smart large language models","repurpose visionary metrics","innovate back-end e-commerce"]|x}
+    );
+    ("catchPhraseAdjective", 42, {x|["Immersive","User-friendly","Reduced"]|x});
+    ( "catchPhraseAdjective",
+      1337,
+      {x|["Extended","Decentralized","Face to face"]|x} );
+    ("catchPhraseAdjective", 7, {x|["Centralized","Secured","Managed"]|x});
+    ( "catchPhraseDescriptor",
+      42,
+      {x|["fault-tolerant","well-modulated","real-time"]|x} );
+    ("catchPhraseDescriptor", 1337, {x|["directional","coherent","discrete"]|x});
+    ("catchPhraseDescriptor", 7, {x|["asynchronous","responsive","holistic"]|x});
+    ("catchPhraseNoun", 42, {x|["frame","time-frame","parallelism"]|x});
+    ("catchPhraseNoun", 1337, {x|["customer loyalty","capability","database"]|x});
+    ("catchPhraseNoun", 7, {x|["approach","product","help-desk"]|x});
+    ("buzzAdjective", 42, {x|["global","viral","robust"]|x});
+    ("buzzAdjective", 1337, {x|["efficient","cross-platform","end-to-end"]|x});
+    ("buzzAdjective", 7, {x|["back-end","smart","innovative"]|x});
+    ("buzzVerb", 42, {x|["facilitate","utilize","repurpose"]|x});
+    ("buzzVerb", 1337, {x|["engineer","disintermediate","enhance"]|x});
+    ("buzzVerb", 7, {x|["collaborate","seize","harness"]|x});
+    ("buzzNoun", 42, {x|["initiatives","users","platforms"]|x});
+    ("buzzNoun", 1337, {x|["deliverables","communities","e-commerce"]|x});
+    ("buzzNoun", 7, {x|["applications","schemas","large language models"]|x});
+    ( "fake",
+      42,
+      {x|["Miller Group|Decentralized asymmetric standardization|mesh rich AI|Versatile|sustainable|complexity|customized|embrace|experiences","Moore Group|Focused exuding hub|seize cutting-edge methodologies|Persistent|analyzing|methodology|cross-platform|brand|users","Boyle, Cartwright and Vandervort|Expanded national encoding|integrate magnetic content|Versatile|resilient|throughput|user-centric|mesh|technologies"]|x}
+    );
+    ( "fake",
+      1337,
+      {x|["Koelpin - Gibson|Virtual real-time artificial intelligence|gamify plug-and-play blockchains|Virtual|holistic|productivity|sticky|facilitate|interfaces","Green LLC|Open-source cohesive generative AI|empower magnetic solutions|Distributed|zero administration|hardware|killer|innovate|AI","Cassin, Abernathy and Schamberger|Grass-roots optimal installation|visualize synergistic networks|Organized|zero trust|core|24/7|collaborate|technologies"]|x}
+    );
+    ( "fake",
+      7,
+      {x|["Reilly - Kuvalis|Business-focused directional installation|redefine strategic initiatives|Business-focused|disintermediate|synergy|decentralized|implement|technologies","Fay-Lowe - Ledner|Reverse-engineered needs-based implementation|empower intuitive initiatives|Networked|exuding|software|smart|expedite|mindshare","O'Reilly - Reichel|Integrated transitional challenge|revolutionize impactful large language models|Profit-focused|intangible|generative AI|24/7|cultivate|partnerships"]|x}
+    );
+  ]

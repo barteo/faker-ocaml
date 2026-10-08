@@ -1,10 +1,17 @@
 open T
 module F = Faker.Finance
 
-let many ?(count = 40) fn f = ss (Faker.Helpers.multiple ~count:(`N count) (fun _ -> fn f) f)
+let many ?(count = 40) fn f =
+  ss (Faker.Helpers.multiple ~count:(`N count) (fun _ -> fn f) f)
 
 let currency (c : F.currency) =
-  J.Obj [ ("name", s c.name); ("code", s c.code); ("symbol", s c.symbol); ("numericCode", s c.numeric_code) ]
+  J.Obj
+    [
+      ("name", s c.name);
+      ("code", s c.code);
+      ("symbol", s c.symbol);
+      ("numericCode", s c.numeric_code);
+    ]
 
 let cases : case list =
   [
@@ -15,14 +22,24 @@ let cases : case list =
     ("routingNumber", fun f -> s (F.routing_number f));
     ("routingNumber/many", many F.routing_number);
     ("amount", fun f -> s (F.amount f));
-    ("amount/opts", fun f -> s (F.amount ~min:5.0 ~max:10.0 ~dec:0 ~symbol:"$" f));
+    ( "amount/opts",
+      fun f -> s (F.amount ~min:5.0 ~max:10.0 ~dec:0 ~symbol:"$" f) );
     ("amount/dec4", fun f -> s (F.amount ~min:(-1000.0) ~max:1000.0 ~dec:4 f));
-    ("amount/auto", fun f -> s (F.amount ~min:1000.0 ~max:100000000.0 ~auto_format:true f));
+    ( "amount/auto",
+      fun f -> s (F.amount ~min:1000.0 ~max:100000000.0 ~auto_format:true f) );
     ( "amount/auto0",
-      fun f -> s (F.amount ~min:100.0 ~max:10000000.0 ~dec:0 ~auto_format:true ~symbol:"€" f) );
-    ("amount/auto5", fun f -> s (F.amount ~min:(-9999999.0) ~max:9999999.0 ~dec:5 ~auto_format:true f));
+      fun f ->
+        s
+          (F.amount ~min:100.0 ~max:10000000.0 ~dec:0 ~auto_format:true
+             ~symbol:"€" f) );
+    ( "amount/auto5",
+      fun f ->
+        s (F.amount ~min:(-9999999.0) ~max:9999999.0 ~dec:5 ~auto_format:true f)
+    );
     ("amount/autosmall", fun f -> s (F.amount ~max:999.0 ~auto_format:true f));
-    ("amount/autoneg", fun f -> s (F.amount ~min:(-5000.0) ~max:(-1000.0) ~dec:1 ~auto_format:true f));
+    ( "amount/autoneg",
+      fun f ->
+        s (F.amount ~min:(-5000.0) ~max:(-1000.0) ~dec:1 ~auto_format:true f) );
     ("amount/err", fun f -> s (F.amount ~min:10.0 ~max:1.0 f));
     ("amount/errdec", fun f -> s (F.amount ~dec:(-1) f));
     ("transactionType", fun f -> s (F.transaction_type f));
@@ -35,22 +52,32 @@ let cases : case list =
     ("bitcoinAddress", fun f -> s (F.bitcoin_address f));
     ("bitcoinAddress/many", many ~count:12 (fun f -> F.bitcoin_address f));
     ("bitcoinAddress/legacy", fun f -> s (F.bitcoin_address ~type_:`Legacy f));
-    ("bitcoinAddress/segwit", fun f -> s (F.bitcoin_address ~type_:`Segwit ~network:`Testnet f));
+    ( "bitcoinAddress/segwit",
+      fun f -> s (F.bitcoin_address ~type_:`Segwit ~network:`Testnet f) );
     ("bitcoinAddress/bech32", fun f -> s (F.bitcoin_address ~type_:`Bech32 f));
-    ("bitcoinAddress/bech32t", fun f -> s (F.bitcoin_address ~type_:`Bech32 ~network:`Testnet f));
-    ("bitcoinAddress/taproot", fun f -> s (F.bitcoin_address ~type_:`Taproot ~network:`Mainnet f));
-    ("bitcoinAddress/testnet", fun f -> s (F.bitcoin_address ~network:`Testnet f));
+    ( "bitcoinAddress/bech32t",
+      fun f -> s (F.bitcoin_address ~type_:`Bech32 ~network:`Testnet f) );
+    ( "bitcoinAddress/taproot",
+      fun f -> s (F.bitcoin_address ~type_:`Taproot ~network:`Mainnet f) );
+    ( "bitcoinAddress/testnet",
+      fun f -> s (F.bitcoin_address ~network:`Testnet f) );
     ("litecoinAddress", fun f -> s (F.litecoin_address f));
     ("creditCardNumber", fun f -> s (F.credit_card_number f));
     ("creditCardNumber/many", many ~count:20 (fun f -> F.credit_card_number f));
     ("creditCardNumber/visa", fun f -> s (F.credit_card_number ~issuer:"visa" f));
-    ("creditCardNumber/Mastercard", fun f -> s (F.credit_card_number ~issuer:"MasterCard" f));
+    ( "creditCardNumber/Mastercard",
+      fun f -> s (F.credit_card_number ~issuer:"MasterCard" f) );
     ("creditCardNumber/jcb", fun f -> s (F.credit_card_number ~issuer:"jcb" f));
-    ("creditCardNumber/diners", fun f -> s (F.credit_card_number ~issuer:"diners_club" f));
-    ("creditCardNumber/amex", fun f -> s (F.credit_card_number ~issuer:"american_express" f));
-    ("creditCardNumber/custom", fun f -> s (F.credit_card_number ~issuer:"63[7-9]#-####-####-###L" f));
-    ("creditCardNumber/slash", fun f -> s (F.credit_card_number ~issuer:"1234/####/####L" f));
-    ("creditCardNumber/unknown", fun f -> s (F.credit_card_number ~issuer:"foo" f));
+    ( "creditCardNumber/diners",
+      fun f -> s (F.credit_card_number ~issuer:"diners_club" f) );
+    ( "creditCardNumber/amex",
+      fun f -> s (F.credit_card_number ~issuer:"american_express" f) );
+    ( "creditCardNumber/custom",
+      fun f -> s (F.credit_card_number ~issuer:"63[7-9]#-####-####-###L" f) );
+    ( "creditCardNumber/slash",
+      fun f -> s (F.credit_card_number ~issuer:"1234/####/####L" f) );
+    ( "creditCardNumber/unknown",
+      fun f -> s (F.credit_card_number ~issuer:"foo" f) );
     ("creditCardCVV", fun f -> s (F.credit_card_cvv f));
     ("creditCardIssuer", fun f -> s (F.credit_card_issuer f));
     ("pin", fun f -> s (F.pin f));
@@ -76,7 +103,13 @@ let cases : case list =
       fun f ->
         s
           (Faker.Helpers.fake
-             "{{finance.amount({\"min\":1,\"max\":5,\"symbol\":\"$\"})}} {{finance.iban}} {{finance.pin(6)}} {{finance.creditCardNumber(\"visa\")}}"
+             "{{finance.amount({\"min\":1,\"max\":5,\"symbol\":\"$\"})}} \
+              {{finance.iban}} {{finance.pin(6)}} \
+              {{finance.creditCardNumber(\"visa\")}}"
              f) );
-    ("fake/currency", fun f -> s (Faker.Helpers.fake "{{finance.currency.code}} {{finance.currencyName}}" f));
+    ( "fake/currency",
+      fun f ->
+        s
+          (Faker.Helpers.fake
+             "{{finance.currency.code}} {{finance.currencyName}}" f) );
   ]
