@@ -98,6 +98,7 @@ every method. It translates like this:
 | `faker.person.firstName({ sex: 'female' })` | `Faker.Person.first_name ~sex:`Female f` |
 | `faker.number.int({ min: 1, max: 10 })` | `Faker.Number.int ~min:1 ~max:10 f` |
 | `faker.string.alpha({ length: { min: 3, max: 5 } })` | `Faker.String.alpha ~length:(`Range (3, 5)) f` |
+| `faker.number.bigInt({ max: 10n ** 30n })` | `Faker.Number.big_int ~max:(Faker.Bigint.of_string "1000000000000000000000000000000") f` |
 | `faker.helpers.arrayElement(arr)` | `Faker.Helpers.array_element arr f` |
 | `faker.helpers.enumValue(Color)` | `Faker.Helpers.enum_value [ ("Red", "red"); ... ] f` |
 | `new Faker({ locale: [en, base], seed })` | `Faker.create ~seed ()` |
@@ -119,6 +120,8 @@ every method. It translates like this:
 - A `NumberOrRange` option becomes `` `N n `` or `` `Range (min, max) ``. String unions become
   polymorphic variants.
 - Dates are `float` epoch milliseconds. Use `Faker.Date_util.to_iso` and `of_iso` to convert.
+- A `bigint` is a `Faker.Bigint.t`, an arbitrary-precision integer (`of_int`, `of_string`,
+  `to_string`, ...).
 - Errors raise `Faker.Faker_error msg`, with the same messages as faker-js.
 
 ## 💎 Modules
@@ -205,7 +208,6 @@ such as FMA contraction on arm64, UTF-16 vs UTF-8, and JS number formatting.
 
 ## ⚠️ Known differences
 
-- `number.bigInt` uses native 63-bit `int`, so ranges wider than about 4.6e17 raise an error.
 - Date strings are parsed as ISO 8601. A date-time string without a timezone offset is read as
   UTC, while JS reads it as local time.
 - `finance.amount ~auto_format:true` always formats as en-US. faker-js uses the runtime's

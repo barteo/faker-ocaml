@@ -11,6 +11,7 @@ module Unicode = struct
   let nfkd = Fk_internet_nfkd.nfkd
 end
 
+module Bigint = Bigint
 module Randomizer = Randomizer
 module Mersenne = Mersenne
 module Distributor = Distributor
@@ -77,11 +78,19 @@ let () =
       ( "bigInt",
         fun f a ->
           let o = Args.opts ~shorthand:"max" a in
+          (* Converted in upstream's order: min, max, then multipleOf after
+             the min/max check. *)
+          let min = Args.bigint o "min" in
+          let max = Args.bigint o "max" in
+          let multiple_of =
+            Option.map
+              (fun _ () ->
+                Option.value ~default:Bigint.one (Args.bigint o "multipleOf"))
+              (Args.get o "multipleOf")
+          in
           Json.Str
-            (string_of_int
-               (Fk_number_bigint.big_int ?min:(Args.int o "min")
-                  ?max:(Args.int o "max") ?multiple_of:(Args.int o "multipleOf")
-                  f)) );
+            (Bigint.to_string
+               (Fk_number_bigint.big_int_lazy ?min ?max ?multiple_of f)) );
     ];
   Registry.add "datatype" Fk_datatype.registry;
   Registry.add "string" Fk_string.registry;

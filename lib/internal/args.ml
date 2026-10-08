@@ -18,6 +18,15 @@ let get (o : opts) key =
 let float o key = match get o key with Some (Json.Num n) -> Some n | _ -> None
 let int o key = Option.map int_of_float (float o key)
 
+(** Decodes a [bigint] option like JS [BigInt(...)]: numbers, strings and
+    booleans. *)
+let bigint o key =
+  match get o key with
+  | Some (Json.Num n) -> Some (Bigint.of_float n)
+  | Some (Json.Str s) -> Some (Bigint.of_string s)
+  | Some (Json.Bool b) -> Some (Bigint.of_bool b)
+  | _ -> None
+
 let string o key =
   match get o key with Some (Json.Str s) -> Some s | _ -> None
 
