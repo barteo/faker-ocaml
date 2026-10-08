@@ -31,14 +31,18 @@ jobs:
       # Cache the fully-installed local switch (_opam) so most runs skip
       # setup-ocaml and the dependency install. The ISO week in the key makes
       # the first run of each week rebuild it against the newest opam releases.
-      - id: week
-        run: echo "week=$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
+      # Only the opam `depends` block is hashed, so metadata edits (description,
+      # version, URLs) keep the cache.
+      - id: key
+        run: |
+          echo "week=$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
+          echo "deps=$(sed -n '/^depends:/,/^]/p' *.opam | shasum -a 256 | cut -c1-16)" >> "$GITHUB_OUTPUT"
 
       - id: switch-cache
         uses: actions/cache/restore@v6
         with:
           path: _opam
-          key: switch-${{ runner.os }}-${{ runner.arch }}-ocaml${{ matrix.ocaml-compiler }}-${{ hashFiles('*.opam') }}-${{ steps.week.outputs.week }}
+          key: switch-${{ runner.os }}-${{ runner.arch }}-ocaml${{ matrix.ocaml-compiler }}-${{ steps.key.outputs.deps }}-${{ steps.key.outputs.week }}
 
       - if: steps.switch-cache.outputs.cache-hit != 'true'
         uses: ocaml/setup-ocaml@v3
