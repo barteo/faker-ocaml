@@ -4395,11 +4395,14 @@ let hangul b cp =
   Buffer.add_utf_8_uchar b (Uchar.of_int v);
   if t <> 0x11A7 then Buffer.add_utf_8_uchar b (Uchar.of_int t)
 
-(** String.prototype.normalize('NFKD') (without canonical reordering of
-    combining marks). *)
+(** String.prototype.normalize('NFKD'). *)
 let nfkd s =
   let t = Lazy.force tbl in
-  Unicode.nfkd
-    (Unicode.fold_uchars s (fun b cp raw ->
-         if cp >= 0xAC00 && cp <= 0xD7A3 then hangul b cp
-         else match Hashtbl.find_opt t cp with Some d -> Buffer.add_string b d | None -> Buffer.add_string b raw))
+  Unicode.canonical_order
+    (Unicode.nfkd
+       (Unicode.fold_uchars s (fun b cp raw ->
+            if cp >= 0xAC00 && cp <= 0xD7A3 then hangul b cp
+            else
+              match Hashtbl.find_opt t cp with
+              | Some d -> Buffer.add_string b d
+              | None -> Buffer.add_string b raw)))

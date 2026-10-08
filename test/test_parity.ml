@@ -4,13 +4,54 @@
 let runs = 3
 let ref_date = 1735689600000.0 (* 2025-01-01T00:00:00.000Z *)
 
-let groups : (string * (string * int * string) list * (string * (Faker.t -> Faker.Json.t)) list) list =
-  [ ("mersenne", Expected_mersenne.cases, Cases_mersenne.cases) ]
-  @ Groups.groups
+type group = {
+  name : string;
+  locale : string;
+  expected : (string * int * string) list;
+  find : string -> (Faker.t -> Faker.Json.t) option;
+}
+
+let of_list cases =
+  let tbl = Hashtbl.create 64 in
+  List.iter (fun (id, fn) -> Hashtbl.replace tbl id fn) cases;
+  Hashtbl.find_opt tbl
+
+let groups =
+  {
+    name = "mersenne";
+    locale = Expected_mersenne.locale;
+    expected = Expected_mersenne.cases;
+    find = of_list Cases_mersenne.cases;
+  }
+  :: List.map
+       (fun (name, locale, expected, cases) -> { name; locale; expected; find = of_list cases })
+       Groups.groups
+  @ List.map
+      (fun (name, locale, expected) -> { name; locale; expected; find = Cases_sweep.find })
+      (Expected_sweep.groups @ Expected_l10n.groups)
+
+(* Each locale chain is merged once. *)
+let merged = Hashtbl.create 16
+
+let definitions code =
+  match Hashtbl.find_opt merged code with
+  | Some d -> d
+  | None ->
+      let chain =
+        match Faker.All_locales.find_chain code with
+        | Some c -> c
+        | None -> failwith ("unknown locale " ^ code)
+      in
+      let d = Faker.merge_locales chain in
+      Hashtbl.replace merged code d;
+      d
 
 let run_case group fn seed expected =
-  let runs = if group = "mersenne" then 1 else runs in
-  let f = Faker.create ~seed () in
+  (* Case files may override the number of calls (tools/gen_fixtures.mjs `runs`). *)
+  let runs =
+    match Faker.Json.parse expected with Faker.Json.Arr a -> Array.length a | _ -> runs
+  in
+  let f = Faker.create ~locale:[ definitions group.locale ] ~seed () in
   Faker.set_default_ref_date f ref_date;
   let results =
     List.init runs (fun _ ->
@@ -19,25 +60,32 @@ let run_case group fn seed expected =
   let actual = Faker.Json.to_string (Faker.Json.Arr (Array.of_list results)) in
   Alcotest.(check string) "matches faker-js" expected actual
 
+(* ONLY=person runs one group; ONLY=sweep_* runs every group with that prefix. *)
+let selected name =
+  match Sys.getenv_opt "ONLY" with
+  | None -> true
+  | Some o when String.ends_with ~suffix:"*" o ->
+      String.starts_with ~prefix:(String.sub o 0 (String.length o - 1)) name
+  | Some o -> o = name
+
 let () =
-  let only = Sys.getenv_opt "ONLY" in
   let tests =
     List.filter_map
-      (fun (group, expected, cases) ->
-        if Option.fold ~none:false ~some:(fun o -> o <> group) only then None
+      (fun group ->
+        if not (selected group.name) then None
         else
-          let tbl = Hashtbl.create 64 in
-          List.iter (fun (id, fn) -> Hashtbl.replace tbl id fn) cases;
           let tcs =
             List.map
               (fun (id, seed, json) ->
                 let name = Printf.sprintf "%s seed=%d" id seed in
-                match Hashtbl.find_opt tbl id with
+                match group.find id with
                 | Some fn -> Alcotest.test_case name `Quick (fun () -> run_case group fn seed json)
-                | None -> Alcotest.test_case name `Quick (fun () -> Alcotest.skip ()))
-              expected
+                | None ->
+                    Alcotest.test_case name `Quick (fun () ->
+                        Alcotest.fail ("no OCaml case (or registry entry) for " ^ id)))
+              group.expected
           in
-          Some (group, tcs))
+          Some (group.name, tcs))
       groups
   in
   Alcotest.run ~compact:true "faker parity" tests

@@ -6,6 +6,8 @@ export const cases = [
   ['arrayElements/3', (f) => f.helpers.arrayElements(arr, 3)],
   ['arrayElements/range', (f) => f.helpers.arrayElements(arr, { min: 2, max: 4 })],
   ['arrayElements/all', (f) => f.helpers.arrayElements(arr, 10)],
+  ['arrayElements/0', (f) => f.helpers.arrayElements(arr, 0)],
+  ['shuffle/inplace', (f) => f.helpers.shuffle([...arr], { inplace: true })],
   ['shuffle', (f) => f.helpers.shuffle(arr)],
   ['weightedArrayElement', (f) => f.helpers.weightedArrayElement([{ weight: 5, value: 'sunny' }, { weight: 4, value: 'rainy' }, { weight: 1, value: 'snowy' }])],
   ['uniqueArray', (f) => f.helpers.uniqueArray(['a', 'a', 'b', 'c', 'c', 'd'], 3)],
@@ -17,6 +19,11 @@ export const cases = [
   ['objectKey', (f) => f.helpers.objectKey({ a: 1, b: 2, c: 3 })],
   ['objectValue', (f) => f.helpers.objectValue({ a: 1, b: 2, c: 3 })],
   ['objectEntry', (f) => f.helpers.objectEntry({ a: 1, b: 2, c: 3 })],
+  ['enumValue/string', (f) => f.helpers.enumValue({ Red: 'red', Green: 'green', Blue: 'blue' })],
+  // A compiled numeric TypeScript enum, with its reverse mappings.
+  ['enumValue/numeric', (f) => f.helpers.enumValue({ 0: 'Zero', 1: 'One', 2: 'Two', Zero: 0, One: 1, Two: 2 })],
+  ['enumValue/mixed', (f) => f.helpers.enumValue({ 1: 'A', A: 1, B: 'b', '1e3': 'x', '0x1f': 'y', ' ': 'z', NaN: 'n' })],
+  ['enumValue/empty', (f) => f.helpers.enumValue({})],
   ['rangeToNumber', (f) => f.helpers.rangeToNumber({ min: 1, max: 100 })],
   ['slugify', (f) => [' Hello World! ', 'Ça va très bien', 'über_cool-ness.txt', 'a/b\\c', 'ﬁne', 'Ærøskøbing'].map((s) => f.helpers.slugify(s))],
   ['replaceSymbols', (f) => f.helpers.replaceSymbols('#?*#?*-##??**')],
@@ -43,5 +50,6 @@ export const cases = [
   ['fake/string', (f) => f.helpers.fake('{{string.alpha(5)}}-{{string.numeric({"length":3})}}-{{string.uuid}}')],
   ['fake/helpers', (f) => f.helpers.fake('{{helpers.arrayElement(["a","b","c"])}}{{helpers.fromRegExp(X{3})}}')],
   ['fake/array', (f) => f.helpers.fake(['{{number.int(9)}}', 'x{{datatype.boolean}}'])],
+  ['fake/registry', (f) => f.helpers.fake('{{number.bigInt}} {{number.bigInt(10)}} {{number.bigInt({"min":5,"max":9})}} {{helpers.objectEntry({"a":1,"b":2})}} {{helpers.enumValue({"A":"x","B":"y"})}}')],
   ['fake/unresolvable', (f) => f.helpers.fake('{{foo.bar}}')],
 ];

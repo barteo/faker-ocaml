@@ -9,6 +9,30 @@ let for_seeds name prop =
         if not (prop f) then Alcotest.failf "%s failed for seed %d" name seed
       done)
 
+(* Invariants that must hold in every locale (fewer seeds per locale). *)
+let locale_seeds = 30
+
+let for_locales name prop =
+  Alcotest.test_case name `Quick (fun () ->
+      List.iter
+        (fun (code, chain) ->
+          let locale = [ Faker.merge_locales (chain ()) ] in
+          for seed = 1 to locale_seeds do
+            let f = Faker.create ~locale ~seed () in
+            (* Missing locale data raises Faker_error, like faker-js; nothing to check then. *)
+            if not (try prop f with Faker.Faker_error _ -> true) then
+              Alcotest.failf "%s failed for locale %s, seed %d" name code seed
+          done)
+        Faker.All_locales.all_chains)
+
+(* Every registry method, with default options: only Faker_error may escape. *)
+let registry_methods =
+  let l = ref [] in
+  Hashtbl.iter
+    (fun m tbl -> Hashtbl.iter (fun name fn -> if m <> "helpers" then l := (m ^ "." ^ name, fn) :: !l) tbl)
+    Faker.Registry.modules;
+  List.sort compare !l
+
 let all_chars p s = String.for_all p s
 let is_digit c = c >= '0' && c <= '9'
 let is_hex c = is_digit c || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F')
@@ -63,6 +87,36 @@ let () =
           for_seeds "fromRegExp digits" (fun f ->
               let s = Faker.Helpers.from_reg_exp "[0-9]{4}" f in
               String.length s = 4 && all_chars is_digit s);
+        ] );
+      ( "locales",
+        [
+          for_locales "methods only raise Faker_error" (fun f ->
+              List.for_all
+                (fun (name, fn) ->
+                  match fn f [] with
+                  | _ -> true
+                  | exception Faker.Faker_error _ -> true
+                  | exception e -> Alcotest.failf "%s raised %s" name (Printexc.to_string e))
+                registry_methods);
+          for_locales "email local part" (fun f ->
+              match String.split_on_char '@' (Faker.Internet.email f) with
+              | [ local; domain ] ->
+                  local <> "" && domain <> ""
+                  && all_chars
+                       (fun c ->
+                         (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || is_digit c
+                         || String.contains "._+-" c)
+                       local
+              | _ -> false);
+          for_locales "username is ASCII" (fun f ->
+              all_chars (fun c -> Char.code c < 128) (Faker.Internet.username f));
+          for_locales "slug is word characters" (fun f ->
+              all_chars
+                (fun c ->
+                  (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || is_digit c || String.contains "_.-" c)
+                (Faker.Lorem.slug f));
+          for_locales "sentence ends with a period" (fun f ->
+              String.ends_with ~suffix:"." (Faker.Lorem.sentence f));
         ] );
       ( "seeding",
         [

@@ -21,8 +21,12 @@ let cases : case list =
     ("float/mult", fun f -> n (N.float ~min:0.0 ~max:10.0 ~multiple_of:0.25 f));
     ("float/mult3", fun f -> n (N.float ~min:0.0 ~max:100.0 ~multiple_of:3.0 f));
     ("float/err", fun f -> n (N.float ~min:2.0 ~max:1.0 f));
+    ("float/errMultFd", fun f -> n (N.float ~max:10.0 ~multiple_of:0.5 ~fraction_digits:2 f));
     ("binary", fun f -> s (N.binary f));
     ("binary/255", fun f -> s (N.binary ~max:255 f));
+    ("binary/range", fun f -> s (N.binary ~min:4 ~max:9 f));
+    ("octal/default", fun f -> s (N.octal f));
+    ("hex/255", fun f -> s (N.hex ~max:255 f));
     ("octal", fun f -> s (N.octal ~min:10 ~max:5000 f));
     ("hex", fun f -> s (N.hex f));
     ("hex/range", fun f -> s (N.hex ~min:0 ~max:65535 f));
@@ -32,4 +36,6 @@ let cases : case list =
     ("bigInt/mult", fun f -> s (string_of_int (N.big_int ~min:5 ~max:500000 ~multiple_of:7 f)));
     ("romanNumeral", fun f -> s (N.roman_numeral f));
     ("romanNumeral/range", fun f -> s (N.roman_numeral ~min:1 ~max:20 f));
+    ("romanNumeral/errMin", fun f -> s (N.roman_numeral ~min:0 ~max:5 f));
+    ("romanNumeral/errMax", fun f -> s (N.roman_numeral ~min:1 ~max:4000 f));
   ]

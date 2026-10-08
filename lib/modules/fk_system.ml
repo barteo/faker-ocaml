@@ -52,13 +52,10 @@ let dedup (l : string list) =
        l)
 
 (* s.toLowerCase().replaceAll(/\W/g, '_'): every non-[A-Za-z0-9_] UTF-16 code unit
-   becomes '_' (non-ASCII case mapping never yields ASCII word characters except
-   for a few special cases not present in the word data). *)
+   becomes '_'. *)
 let to_base_name s =
-  Unicode.fold_uchars s (fun b cp raw ->
-      if cp < 0x80 then
-        let c = Char.lowercase_ascii raw.[0] in
-        Buffer.add_char b (if Fk_helpers.is_word c then c else '_')
+  Unicode.fold_uchars (Unicode.js_lower s) (fun b cp raw ->
+      if cp < 0x80 then Buffer.add_char b (if Fk_helpers.is_word raw.[0] then raw.[0] else '_')
       else Buffer.add_string b (if cp >= 0x10000 then "__" else "_"))
 
 (** [file_ext ?mime_type f]: an extension of [mime_type] (raises if unknown),

@@ -29,6 +29,15 @@ let registry : (string * Registry.fn) list =
       fun f a -> match nth a 0 with Some (Json.Obj o) -> str (Fk_helpers.object_key o f) | _ -> Json.Null );
     ( "objectValue",
       fun f a -> match nth a 0 with Some (Json.Obj o) -> Fk_helpers.object_value o f | _ -> Json.Null );
+    ( "objectEntry",
+      fun f a ->
+        match nth a 0 with
+        | Some (Json.Obj o) ->
+            let k, v = Fk_helpers.object_entry o f in
+            Json.Arr [| str k; v |]
+        | _ -> Json.Null );
+    ( "enumValue",
+      fun f a -> match nth a 0 with Some (Json.Obj o) -> Fk_helpers.enum_value o f | _ -> Json.Null );
     ( "rangeToNumber",
       fun f a ->
         match nth a 0 with

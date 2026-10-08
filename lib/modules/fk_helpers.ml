@@ -110,10 +110,18 @@ let object_entry (obj : (string * 'a) list) f : string * 'a =
   let k = object_key obj f in
   (k, List.assoc k obj)
 
+(** [enum_value enum f]: a random value of a TypeScript enum given as its object's
+    [(key, value)] entries. Numeric keys (the reverse mappings TypeScript adds to numeric enums)
+    are ignored. *)
+let enum_value (enum : (string * 'a) list) f : 'a =
+  let keys = List.filter (fun (k, _) -> Float.is_nan (Js.to_number k)) enum in
+  let key = array_element (Array.of_list (List.map fst keys)) f in
+  List.assoc key enum
+
 (* ---------- strings ---------- *)
 
 let slugify s =
-  let s = Unicode.strip_combining_marks (Unicode.nfkd s) in
+  let s = Unicode.strip_combining_marks (Fk_internet_nfkd.nfkd s) in
   let s = Js.replace_all ~sub:" " ~by:"-" s in
   String.concat ""
     (List.filter_map

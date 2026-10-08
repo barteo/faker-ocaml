@@ -10,12 +10,7 @@ let join sep a = String.concat sep (Array.to_list a)
 let words ?(word_count = `N 3) f = join " " (Fk_helpers.multiple ~count:word_count (fun _ -> word f) f)
 
 (* sentence.charAt(0).toUpperCase() + sentence.substring(1) *)
-let upper_first s =
-  match Js.code_points s with
-  | [] -> ""
-  | c :: _ ->
-      let n = String.length c in
-      String.uppercase_ascii c ^ String.sub s n (String.length s - n)
+let upper_first = Unicode.js_upper_first
 
 (** [sentence ?word_count f]: [word_count] defaults to 3..10. *)
 let sentence ?(word_count = `Range (3, 10)) f = upper_first (words ~word_count f) ^ "."

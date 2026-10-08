@@ -21,7 +21,7 @@ Thanks for wanting to help with the OCaml port of faker-js!
 | `lib/core.ml`, `lib/randomizer.ml` | The faker instance and the MersenneTwister19937 randomizer. |
 | `lib/modules/fk_<m>.ml` | The line-by-line port of upstream `src/modules/<m>/module.ts`. |
 | `lib/internal/` | Shared helpers: JSON, JS number and string semantics, dates, Unicode. |
-| `lib/locales/<name>_data.ml` | Generated locale data. **Don't edit it by hand.** |
+| `lib/locales/` | Generated locale modules: `<code>_data.ml` (data), `locale_<code>.ml` (chain and instance), `faker_locales.ml` (`Faker.Locales`) and `faker_all_locales.ml` (`Faker.All_locales`). **Don't edit them by hand.** |
 | `tools/` | Node scripts that generate locale data and test fixtures from the real faker-js. |
 | `test/` | Parity fixtures (`test_parity.ml`) and property tests (`test_props.ml`). |
 
@@ -33,13 +33,17 @@ When porting a method, use the faker-js source at the
 All locale data comes from the faker-js npm package. Never add or fix data here by hand.
 Data fixes belong in faker-js.
 
-To add a locale:
+Every faker-js locale is already included. When the faker-js version changes (or it gains a
+locale), regenerate them all:
 
-1. Run `cd tools && npm install && node gen_locale.mjs <locale>`. This writes
-   `lib/locales/<locale>_data.ml`.
-2. Register it in `lib/locale.ml` (next to `en` and `base`) and expose it in `Faker.Locales`
-   in `lib/faker.ml`.
-3. Add parity cases that create the instance with that locale chain.
+```sh
+cd tools && npm install && node gen_locale.mjs
+```
+
+This writes the data, fallback chain and prebuilt instance of every locale in
+`lib/locales/`, plus the `Faker.Locales` and `Faker.All_locales` modules. It derives each
+chain from the locale code (`de_AT -> de -> en -> base`) and fails if the result differs from
+faker-js's own prebuilt instance. The locale sweeps (below) pick up new locales automatically.
 
 ## Building
 
@@ -75,12 +79,31 @@ cd tools && node gen_fixtures.mjs <m>   # writes test/expected/expected_<m>.ml
 ```
 
 Each case runs for seeds 42, 1337 and 7, and calls the method three times in a row. Thrown
-errors are compared too, so cover the invalid-input paths as well.
+errors are compared too, so cover the invalid-input paths as well. A case file can override
+`seeds` and `runs`, and can set `export const locale = 'de_AT'` to run in another locale.
+
+#### Locale sweeps
+
+Two parametric case files run in every locale. They export `locales`, so `gen_fixtures.mjs`
+writes one fixture file per locale (`expected_sweep_de.ml`, ...) plus an index:
+
+- `tools/cases/sweep.mjs` calls every method of every module (except `helpers`) with its
+  default options. The ids are `module.method`.
+- `tools/cases/l10n.mjs` calls methods with locale-sensitive options. The ids are
+  `module.method(json args)`.
+
+The OCaml side (`test/cases/cases_sweep.ml`) evaluates both kinds of id through the
+`helpers.fake` registry, so there is nothing to write by hand. To add a locale-sensitive case,
+add its expression to `l10n.mjs` and run `node gen_fixtures.mjs l10n`.
+
+For a wider, temporary check, `FIXTURE_SEEDS=20 node gen_fixtures.mjs sweep` regenerates with
+20 seeds. Regenerate without it before committing.
 
 #### Property (random-seed) tests
 
 Add invariants that must hold for any seed, such as "a UUID is 36 hex-and-dash characters", to
-`test/test_props.ml`. They run for 1000 seeds.
+`test/test_props.ml`. They run for 1000 seeds. Invariants added with `for_locales` run in every
+locale (30 seeds each).
 
 ## Committing
 

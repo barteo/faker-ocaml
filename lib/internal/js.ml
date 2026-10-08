@@ -116,6 +116,61 @@ let parse_int (s : string) : int option =
     let v = int_of_string (String.sub s start (!i - start)) in
     Some (if neg then -v else v)
 
+(* ---------- Number(s) ---------- *)
+
+(* StringToNumber: trimmed decimal literals, Infinity, 0x/0o/0b integers; "" is 0. Only ASCII
+   whitespace is trimmed. *)
+let to_number (s : string) : float =
+  let s = String.trim s in
+  let digits_in ok s = s <> "" && String.for_all ok s in
+  let radix prefix ok =
+    String.length s > 2
+    && String.lowercase_ascii (String.sub s 0 2) = prefix
+    && digits_in ok (String.sub s 2 (String.length s - 2))
+  in
+  let is_dec c = c >= '0' && c <= '9' in
+  let decimal s =
+    (* [+-]? (digits [. digits?] | . digits) ([eE] [+-]? digits)? *)
+    let n = String.length s in
+    let i = ref (if n > 0 && (s.[0] = '+' || s.[0] = '-') then 1 else 0) in
+    let count () =
+      let start = !i in
+      while !i < n && is_dec s.[!i] do incr i done;
+      !i - start
+    in
+    let int_digits = count () in
+    let frac_digits = if !i < n && s.[!i] = '.' then (incr i; count ()) else 0 in
+    let mantissa = int_digits + frac_digits > 0 in
+    let exponent_ok =
+      if !i < n && (s.[!i] = 'e' || s.[!i] = 'E') then begin
+        incr i;
+        if !i < n && (s.[!i] = '+' || s.[!i] = '-') then incr i;
+        count () > 0
+      end
+      else true
+    in
+    mantissa && exponent_ok && !i = n
+  in
+  (* Exact below 2^53, like JS. *)
+  let digits base =
+    let v = ref 0.0 in
+    String.iteri
+      (fun i c ->
+        if i >= 2 then
+          let d = match c with '0' .. '9' -> Char.code c - 48 | c -> Char.code (Char.lowercase_ascii c) - 87 in
+          v := (!v *. float_of_int base) +. float_of_int d)
+      s;
+    !v
+  in
+  if s = "" then 0.0
+  else if s = "Infinity" || s = "+Infinity" then Float.infinity
+  else if s = "-Infinity" then Float.neg_infinity
+  else if radix "0x" (function '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' -> true | _ -> false) then digits 16
+  else if radix "0o" (function '0' .. '7' -> true | _ -> false) then digits 8
+  else if radix "0b" (function '0' | '1' -> true | _ -> false) then digits 2
+  else if decimal s then float_of_string s
+  else Float.nan
+
 (* ---------- String helpers ---------- *)
 
 let repeat s n =
