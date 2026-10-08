@@ -1,6 +1,8 @@
 (* Port of src/modules/database/module.ts. *)
 
-let pick entry f = Fk_helpers.array_element (Locale.strings f "database" entry) f
+let pick entry f =
+  Fk_helpers.array_element (Locale.strings f "database" entry) f
+
 let column f = pick "column" f
 let type_ f = pick "type" f
 let collation f = pick "collation" f

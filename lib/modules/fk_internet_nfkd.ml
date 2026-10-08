@@ -2146,7 +2146,9 @@ let table : (int * string) array =
     (0xfdf7, "\u{639}\u{644}\u{64a}\u{647}");
     (0xfdf8, "\u{648}\u{633}\u{644}\u{645}");
     (0xfdf9, "\u{635}\u{644}\u{649}");
-    (0xfdfa, "\u{635}\u{644}\u{649} \u{627}\u{644}\u{644}\u{647} \u{639}\u{644}\u{64a}\u{647} \u{648}\u{633}\u{644}\u{645}");
+    ( 0xfdfa,
+      "\u{635}\u{644}\u{649} \u{627}\u{644}\u{644}\u{647} \
+       \u{639}\u{644}\u{64a}\u{647} \u{648}\u{633}\u{644}\u{645}" );
     (0xfdfb, "\u{62c}\u{644} \u{62c}\u{644}\u{627}\u{644}\u{647}");
     (0xfdfc, "\u{631}\u{6cc}\u{627}\u{644}");
     (0xfe10, ",");
@@ -4390,7 +4392,9 @@ let tbl =
 (* Hangul syllable decomposition (Unicode 3.12). *)
 let hangul b cp =
   let s = cp - 0xAC00 in
-  let l = 0x1100 + (s / 588) and v = 0x1161 + (s mod 588 / 28) and t = 0x11A7 + (s mod 28) in
+  let l = 0x1100 + (s / 588)
+  and v = 0x1161 + (s mod 588 / 28)
+  and t = 0x11A7 + (s mod 28) in
   Buffer.add_utf_8_uchar b (Uchar.of_int l);
   Buffer.add_utf_8_uchar b (Uchar.of_int v);
   if t <> 0x11A7 then Buffer.add_utf_8_uchar b (Uchar.of_int t)

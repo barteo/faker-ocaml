@@ -17,4 +17,6 @@ let add (module_name : string) (methods : (string * fn) list) =
   List.iter (fun (name, fn) -> Hashtbl.replace tbl name fn) methods
 
 let find_module name = Hashtbl.find_opt modules name
-let find_method m name = Option.bind (find_module m) (fun t -> Hashtbl.find_opt t name)
+
+let find_method m name =
+  Option.bind (find_module m) (fun t -> Hashtbl.find_opt t name)

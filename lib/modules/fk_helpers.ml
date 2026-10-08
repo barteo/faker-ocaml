@@ -30,7 +30,9 @@ let array_elements ?count (arr : 'a array) f : 'a array =
   if len = 0 then [||]
   else
     let num_elements =
-      range_to_number (match count with Some c -> c | None -> `Range (1, len)) f
+      range_to_number
+        (match count with Some c -> c | None -> `Range (1, len))
+        f
     in
     if num_elements >= len then shuffle arr f
     else if num_elements <= 0 then [||]
@@ -50,8 +52,8 @@ let weighted_array_element (arr : (float * 'a) array) f : 'a =
     Core.error "weightedArrayElement expects an array with at least one element";
   if Array.exists (fun (w, _) -> w <= 0.0) arr then
     Core.error
-      "weightedArrayElement expects an array of { weight, value } objects where weight is a \
-       positive number";
+      "weightedArrayElement expects an array of { weight, value } objects \
+       where weight is a positive number";
   let total = Array.fold_left (fun acc (w, _) -> acc +. w) 0.0 arr in
   let random = Fk_number.float ~min:0.0 ~max:total f in
   let rec go i current =
@@ -104,15 +106,16 @@ let maybe ?probability (callback : unit -> 'a) f : 'a option =
 let object_key (obj : (string * 'a) list) f : string =
   array_element (Array.of_list (List.map fst obj)) f
 
-let object_value (obj : (string * 'a) list) f : 'a = List.assoc (object_key obj f) obj
+let object_value (obj : (string * 'a) list) f : 'a =
+  List.assoc (object_key obj f) obj
 
 let object_entry (obj : (string * 'a) list) f : string * 'a =
   let k = object_key obj f in
   (k, List.assoc k obj)
 
-(** [enum_value enum f]: a random value of a TypeScript enum given as its object's
-    [(key, value)] entries. Numeric keys (the reverse mappings TypeScript adds to numeric enums)
-    are ignored. *)
+(** [enum_value enum f]: a random value of a TypeScript enum given as its
+    object's [(key, value)] entries. Numeric keys (the reverse mappings
+    TypeScript adds to numeric enums) are ignored. *)
 let enum_value (enum : (string * 'a) list) f : 'a =
   let keys = List.filter (fun (k, _) -> Float.is_nan (Js.to_number k)) enum in
   let key = array_element (Array.of_list (List.map fst keys)) f in
@@ -127,7 +130,8 @@ let slugify s =
     (List.filter_map
        (fun c ->
          match c with
-         | 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' | '-' -> Some (String.make 1 c)
+         | 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' | '-' ->
+             Some (String.make 1 c)
          | _ -> None)
        (List.init (String.length s) (String.get s)))
 
@@ -151,7 +155,8 @@ let replace_symbols s f =
 (* Luhn (src/modules/helpers/luhn-check.ts) *)
 let luhn_checksum str =
   let digits =
-    List.filter (fun c -> not (c = ' ' || c = '-' || c = '\t' || c = '\n' || c = '\r'))
+    List.filter
+      (fun c -> not (c = ' ' || c = '-' || c = '\t' || c = '\n' || c = '\r'))
       (List.init (String.length str) (String.get str))
   in
   let sum = ref 0 and alternate = ref false in
@@ -172,14 +177,20 @@ let luhn_checksum str =
 let luhn_check str = luhn_checksum str = 0
 
 let luhn_check_value str =
-  let str = if Js.ends_with ~suffix:"L" str then String.sub str 0 (String.length str - 1) ^ "0" else str ^ "0" in
+  let str =
+    if Js.ends_with ~suffix:"L" str then
+      String.sub str 0 (String.length str - 1) ^ "0"
+    else str ^ "0"
+  in
   let checksum = luhn_checksum str in
   if checksum = 0 then 0 else 10 - checksum
 
 (* --- tiny matchers replacing the regular expressions used upstream --- *)
 
 let is_digit c = c >= '0' && c <= '9'
-let is_word c = is_digit c || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c = '_'
+
+let is_word c =
+  is_digit c || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c = '_'
 
 (* Reads [\d+] at [i]; returns (value string, next index). *)
 let read_digits s i =
@@ -198,7 +209,8 @@ let find_range_rep s =
       match read_digits s (i + 2) with
       | Some (a, j) when j < len && s.[j] = ',' -> (
           match read_digits s (j + 1) with
-          | Some (b, k) when k < len && s.[k] = '}' -> Some (i, k + 1, s.[i], a, b)
+          | Some (b, k) when k < len && s.[k] = '}' ->
+              Some (i, k + 1, s.[i], a, b)
           | _ -> at (i + 1))
       | _ -> at (i + 1)
     else at (i + 1)
@@ -276,7 +288,8 @@ let legacy_replace_symbol_with_number ?(symbol = '#') s f =
   String.iter
     (fun c ->
       if c = symbol then Buffer.add_string b (string_of_int (int9 f))
-      else if c = '!' then Buffer.add_string b (string_of_int (Fk_number.int ~min:2 ~max:9 f))
+      else if c = '!' then
+        Buffer.add_string b (string_of_int (Fk_number.int ~min:2 ~max:9 f))
       else Buffer.add_char b c)
     s;
   Buffer.contents b

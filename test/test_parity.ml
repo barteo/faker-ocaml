@@ -24,10 +24,12 @@ let groups =
     find = of_list Cases_mersenne.cases;
   }
   :: List.map
-       (fun (name, locale, expected, cases) -> { name; locale; expected; find = of_list cases })
+       (fun (name, locale, expected, cases) ->
+         { name; locale; expected; find = of_list cases })
        Groups.groups
   @ List.map
-      (fun (name, locale, expected) -> { name; locale; expected; find = Cases_sweep.find })
+      (fun (name, locale, expected) ->
+        { name; locale; expected; find = Cases_sweep.find })
       (Expected_sweep.groups @ Expected_l10n.groups)
 
 (* Each locale chain is merged once. *)
@@ -49,13 +51,17 @@ let definitions code =
 let run_case group fn seed expected =
   (* Case files may override the number of calls (tools/gen_fixtures.mjs `runs`). *)
   let runs =
-    match Faker.Json.parse expected with Faker.Json.Arr a -> Array.length a | _ -> runs
+    match Faker.Json.parse expected with
+    | Faker.Json.Arr a -> Array.length a
+    | _ -> runs
   in
   let f = Faker.create ~locale:[ definitions group.locale ] ~seed () in
   Faker.set_default_ref_date f ref_date;
   let results =
     List.init runs (fun _ ->
-        try fn f with Faker.Faker_error msg -> Faker.Json.Obj [ ("error", Faker.Json.Str msg) ])
+        try fn f
+        with Faker.Faker_error msg ->
+          Faker.Json.Obj [ ("error", Faker.Json.Str msg) ])
   in
   let actual = Faker.Json.to_string (Faker.Json.Arr (Array.of_list results)) in
   Alcotest.(check string) "matches faker-js" expected actual
@@ -79,10 +85,13 @@ let () =
               (fun (id, seed, json) ->
                 let name = Printf.sprintf "%s seed=%d" id seed in
                 match group.find id with
-                | Some fn -> Alcotest.test_case name `Quick (fun () -> run_case group fn seed json)
+                | Some fn ->
+                    Alcotest.test_case name `Quick (fun () ->
+                        run_case group fn seed json)
                 | None ->
                     Alcotest.test_case name `Quick (fun () ->
-                        Alcotest.fail ("no OCaml case (or registry entry) for " ^ id)))
+                        Alcotest.fail
+                          ("no OCaml case (or registry entry) for " ^ id)))
               group.expected
           in
           Some (group.name, tcs))

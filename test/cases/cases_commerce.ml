@@ -34,6 +34,7 @@ let cases : case list =
       fun f ->
         s
           (Faker.Helpers.fake
-             "{{commerce.price({\"min\":3,\"max\":9,\"symbol\":\"$\"})}} {{commerce.isbn(10)}} {{commerce.productName}}"
+             "{{commerce.price({\"min\":3,\"max\":9,\"symbol\":\"$\"})}} \
+              {{commerce.isbn(10)}} {{commerce.productName}}"
              f) );
   ]

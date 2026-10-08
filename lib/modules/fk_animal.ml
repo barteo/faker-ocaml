@@ -1,7 +1,6 @@
 (* Port of src/modules/animal/module.ts. *)
 
 let pick entry f = Fk_helpers.array_element (Locale.strings f "animal" entry) f
-
 let dog f = pick "dog" f
 let cat f = pick "cat" f
 let snake f = pick "snake" f

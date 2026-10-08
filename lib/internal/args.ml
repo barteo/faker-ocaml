@@ -12,10 +12,15 @@ let opts ?shorthand (args : Json.t list) : opts =
   | v :: _, Some key -> [ (key, v) ]
   | _ :: _, None -> []
 
-let get (o : opts) key = match List.assoc_opt key o with Some Json.Null | None -> None | v -> v
+let get (o : opts) key =
+  match List.assoc_opt key o with Some Json.Null | None -> None | v -> v
+
 let float o key = match get o key with Some (Json.Num n) -> Some n | _ -> None
 let int o key = Option.map int_of_float (float o key)
-let string o key = match get o key with Some (Json.Str s) -> Some s | _ -> None
+
+let string o key =
+  match get o key with Some (Json.Str s) -> Some s | _ -> None
+
 let bool o key = match get o key with Some (Json.Bool b) -> Some b | _ -> None
 
 let range o key : Types.range option =
@@ -23,7 +28,8 @@ let range o key : Types.range option =
   | Some (Json.Num n) -> Some (`N (int_of_float n))
   | Some (Json.Obj _ as r) -> (
       match (Json.member "min" r, Json.member "max" r) with
-      | Some (Json.Num a), Some (Json.Num b) -> Some (`Range (int_of_float a, int_of_float b))
+      | Some (Json.Num a), Some (Json.Num b) ->
+          Some (`Range (int_of_float a, int_of_float b))
       | _ -> None)
   | _ -> None
 
@@ -35,7 +41,10 @@ let casing o key : Types.casing option =
   | _ -> None
 
 let sex o key : Types.sex option =
-  match string o key with Some "female" -> Some `Female | Some "male" -> Some `Male | _ -> None
+  match string o key with
+  | Some "female" -> Some `Female
+  | Some "male" -> Some `Male
+  | _ -> None
 
 let strings o key =
   match get o key with
@@ -52,7 +61,6 @@ let date o key =
 
 (* positional helpers *)
 let nth (args : Json.t list) i = List.nth_opt args i
-
 let str s = Json.Str s
 let num n = Json.Num n
 let int_ i = Json.Num (float_of_int i)

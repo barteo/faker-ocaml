@@ -28,12 +28,18 @@ let merge_locales (locales : Json.t list) : Json.t =
                   let combined =
                     List.map
                       (fun (k, v) ->
-                        match List.assoc_opt k existing with Some e -> (k, e) | None -> (k, v))
+                        match List.assoc_opt k existing with
+                        | Some e -> (k, e)
+                        | None -> (k, v))
                       entries
-                    @ List.filter (fun (k, _) -> not (List.mem_assoc k entries)) existing
+                    @ List.filter
+                        (fun (k, _) -> not (List.mem_assoc k entries))
+                        existing
                   in
                   merged :=
-                    List.map (fun (c, e) -> if c = cat then (c, combined) else (c, e)) !merged)
+                    List.map
+                      (fun (c, e) -> if c = cat then (c, combined) else (c, e))
+                      !merged)
             cats
       | _ -> ())
     locales;

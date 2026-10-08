@@ -285,5 +285,10 @@ let table : (int * string) array =
   |]
 
 let lookup =
-  let h = lazy (let h = Hashtbl.create 512 in Array.iter (fun (k, v) -> Hashtbl.replace h k v) table; h) in
+  let h =
+    lazy
+      (let h = Hashtbl.create 512 in
+       Array.iter (fun (k, v) -> Hashtbl.replace h k v) table;
+       h)
+  in
   fun cp -> Hashtbl.find_opt (Lazy.force h) cp

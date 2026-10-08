@@ -2,167 +2,346 @@
 
 let locale = "ko"
 
-let cases = [
-  ("person.firstName(\"female\")", 42, {x|["혜민","유리"]|x});
-  ("person.firstName(\"female\")", 1337, {x|["라윤","시은"]|x});
-  ("person.firstName(\"female\")", 7, {x|["지영","재인"]|x});
-  ("person.firstName(\"male\")", 42, {x|["현성","이한"]|x});
-  ("person.firstName(\"male\")", 1337, {x|["민규","예성"]|x});
-  ("person.firstName(\"male\")", 7, {x|["지운","준성"]|x});
-  ("person.lastName(\"female\")", 42, {x|["허","오"]|x});
-  ("person.lastName(\"female\")", 1337, {x|["나","성"]|x});
-  ("person.lastName(\"female\")", 7, {x|["조","인"]|x});
-  ("person.lastName(\"male\")", 42, {x|["허","오"]|x});
-  ("person.lastName(\"male\")", 1337, {x|["나","성"]|x});
-  ("person.lastName(\"male\")", 7, {x|["조","인"]|x});
-  ("person.middleName(\"female\")", 42, {x|["Venus","Kali"]|x});
-  ("person.middleName(\"female\")", 1337, {x|["Brielle","Hippolyta"]|x});
-  ("person.middleName(\"female\")", 7, {x|["Michelle","Maddie"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 42, {x|["오혜민","오나연"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 1337, {x|["성라윤","임서린"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 7, {x|["인지영","모여진"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 42, {x|["오현성","오대현"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 1337, {x|["성민규","임성민"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 7, {x|["인지운","모우진"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 42, {x|["인Anna","경Anna"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 1337, {x|["목Anna","명Anna"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 7, {x|["선Anna","시Anna"]|x});
-  ("person.prefix(\"female\")", 42, {x|["Ms.","Mrs."]|x});
-  ("person.prefix(\"female\")", 1337, {x|["Miss","Mrs."]|x});
-  ("person.prefix(\"female\")", 7, {x|["Ms.","Ms."]|x});
-  ("person.prefix(\"male\")", 42, {x|["Mr.","Dr."]|x});
-  ("person.prefix(\"male\")", 1337, {x|["Mr.","Mr."]|x});
-  ("person.prefix(\"male\")", 7, {x|["Mr.","Dr."]|x});
-  ("person.suffix()", 42, {x|["III","DVM"]|x});
-  ("person.suffix()", 1337, {x|["I","Sr."]|x});
-  ("person.suffix()", 7, {x|["Jr.","DDS"]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 42, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 1337, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 7, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 42, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 1337, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 7, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode(\"###\")", 42, {x|["397","511"]|x});
-  ("location.zipCode(\"###\")", 1337, {x|["212","435"]|x});
-  ("location.zipCode(\"###\")", 7, {x|["074","795"]|x});
-  ("location.state({\"abbreviated\":true})", 42, {x|["대전","세종"]|x});
-  ("location.state({\"abbreviated\":true})", 1337, {x|["광주","경남"]|x});
-  ("location.state({\"abbreviated\":true})", 7, {x|["경기","제주"]|x});
-  ("location.streetAddress(true)", 42, {x|["9751 매기대로 670호","821 면목1길 426호"]|x});
-  ("location.streetAddress(true)", 1337, {x|["22435 병목골9길 236호","94773 신도시5길 226호"]|x});
-  ("location.streetAddress(true)", 7, {x|["84795 오계화산대로 아파트 568동","1292 어룡도9길 아파트 692동"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 42, {x|["9751 매기대로 670호","821 면목1길 426호"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 1337, {x|["22435 병목골9길 236호","94773 신도시5길 226호"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 7, {x|["84795 오계화산대로 아파트 568동","1292 어룡도9길 아파트 692동"]|x});
-  ("location.countryCode(\"alpha-3\")", 42, {x|["GUY","VCT"]|x});
-  ("location.countryCode(\"alpha-3\")", 1337, {x|["ESH","COD"]|x});
-  ("location.countryCode(\"alpha-3\")", 7, {x|["BEL","SYC"]|x});
-  ("location.countryCode(\"numeric\")", 42, {x|["328","670"]|x});
-  ("location.countryCode(\"numeric\")", 1337, {x|["732","180"]|x});
-  ("location.countryCode(\"numeric\")", 7, {x|["056","690"]|x});
-  ("location.timeZone()", 42, {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x});
-  ("location.timeZone()", 1337, {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x});
-  ("location.timeZone()", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
-  ("date.month({\"abbreviated\":true})", 42, {x|["2월","9월"]|x});
-  ("date.month({\"abbreviated\":true})", 1337, {x|["1월","11월"]|x});
-  ("date.month({\"abbreviated\":true})", 7, {x|["10월","7월"]|x});
-  ("date.month({\"context\":true})", 42, {x|["2월","9월"]|x});
-  ("date.month({\"context\":true})", 1337, {x|["1월","11월"]|x});
-  ("date.month({\"context\":true})", 7, {x|["10월","7월"]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 42, {x|["2월","9월"]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 1337, {x|["1월","11월"]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 7, {x|["10월","7월"]|x});
-  ("date.weekday({\"abbreviated\":true})", 42, {x|["수","화"]|x});
-  ("date.weekday({\"abbreviated\":true})", 1337, {x|["목","목"]|x});
-  ("date.weekday({\"abbreviated\":true})", 7, {x|["금","토"]|x});
-  ("date.weekday({\"context\":true})", 42, {x|["수요일","화요일"]|x});
-  ("date.weekday({\"context\":true})", 1337, {x|["목요일","목요일"]|x});
-  ("date.weekday({\"context\":true})", 7, {x|["금요일","토요일"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 42, {x|["수","화"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 1337, {x|["목","목"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 7, {x|["금","토"]|x});
-  ("phone.number({\"style\":\"human\"})", 42, {x|["097-511-0867","098-2113-5426"]|x});
-  ("phone.number({\"style\":\"human\"})", 1337, {x|["012-4352-9713","019-477-3457"]|x});
-  ("phone.number({\"style\":\"human\"})", 7, {x|["074-7955-0246","03-02924-9069"]|x});
-  ("phone.number({\"style\":\"national\"})", 42, {x|["097-5110-8670","082-113-5426"]|x});
-  ("phone.number({\"style\":\"national\"})", 1337, {x|["012-4352-9713","019-477-3457"]|x});
-  ("phone.number({\"style\":\"national\"})", 7, {x|["074-7955-0246","030-292-4906"]|x});
-  ("phone.number({\"style\":\"international\"})", 42, {x|["+82975110867","+82982113542"]|x});
-  ("phone.number({\"style\":\"international\"})", 1337, {x|["+82124352971","+82619477345"]|x});
-  ("phone.number({\"style\":\"international\"})", 7, {x|["+82747955024","+828302924906"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 42, {x|["부족한","향긋한"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 1337, {x|["막대한","기초적인"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 7, {x|["공정한","전통적인"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 42, {x|["아드레날린","아드레날린"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 1337, {x|["아드레날린","아드레날린"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 7, {x|["아드레날린","아드레날린"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 42, {x|["jot","veg"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 1337, {x|["gad","cow"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 7, {x|["bus","sit"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 42, {x|["거만하게","에이전트"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 1337, {x|["once","when"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 7, {x|["lend","anti"]|x});
-  ("word.words(5)", 42, {x|["거만하게 대행사 gee psst why","meh ugh 통통한 wherever without"]|x});
-  ("word.words(5)", 1337, {x|["how yet 잔혹한 대수학 including","열심히 악어 간단히 accredit 천하게"]|x});
-  ("word.words(5)", 7, {x|["masticate afore eek 전능자 circa","forswear 날씬한 yuck bank 사랑하는"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 42, {x|["예술가의","무상으로"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 1337, {x|["해당하는","정한다."]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 7, {x|["보장하기","처벌받지"]|x});
-  ("lorem.sentences(3)", 42, {x|["침해받지 때까지는 영장을 전통문화의 전통문화의. 대하여 청구할 판결이. 무상으로 아니하며, 통신·방송의.","창달에 법률로 도피 경우와. 수 가진다. 사항은 승인된 3년. 노력하여야 범하고 영장을 의하여 청구할 민족문화의 보호할 침해받지 의무교육은."]|x});
-  ("lorem.sentences(3)", 1337, {x|["계승·발전과 필요한 3년 헌법에 도피. 무상으로 때까지는 국민은 국내법과 있다.. 모성의 장기 구성하지 구성하지.","다만, 사후에 행위시의 창달에 사항은. 죄를 민족문화의 다만, 노력하여야 또는 아니하며, 창달에 침해받지. 죄를 범하고 법률이 때까지는 보호를 계승·발전과."]|x});
-  ("lorem.sentences(3)", 7, {x|["범죄를 경우와 확정될. 증거인멸의 죄를 보호할 위하여 죄를 보호한다. 아니하는 국내법과 보호할 사항은. 통신·방송의 장기 사생활의 정하는 청구할 침해받지 시설기준과 염려가 평생교육을 자유를.","추정된다. 법률로써 이상의 한다. 해당하는 국제법규는 형에. 아니하며, 법률에 정한다. 때에는 필요한. 일반적으로 권리는 국제법규는 3년 확정될 다만,."]|x});
-  ("lorem.paragraphs(2)", 42, {x|["침해받지 때까지는 영장을 전통문화의 전통문화의. 대하여 청구할 판결이. 무상으로 아니하며, 통신·방송의.\n창달에 법률로 도피 경우와. 수 가진다. 사항은 승인된 3년. 노력하여야 범하고 영장을 의하여 청구할 민족문화의 보호할 침해받지 의무교육은.","법률로 모든 형사피고인은 경우와 신체의 죄를 바에 평생교육을 보장하기. 정한다. 도피 증거인멸의 창달에 무상으로 법률에 비밀과 아니한다.. 진흥하여야 진다. 노력하여야 의하여 헌법에 국내법과 위하여.\n일반적으로 필요한 증거인멸의 가진다. 아니하는 의무를 모성의 법률에 노력하여야. 행위로 판결이 때까지는. 의무를 승인된 신체의 범죄에 있다. 체결·공포된 보호할 정한다. 헌법에."]|x});
-  ("lorem.paragraphs(2)", 1337, {x|["계승·발전과 필요한 3년 헌법에 도피. 무상으로 때까지는 국민은 국내법과 있다.. 모성의 장기 구성하지 구성하지.\n다만, 사후에 행위시의 창달에 사항은. 죄를 민족문화의 다만, 노력하여야 또는 아니하며, 창달에 침해받지. 죄를 범하고 법률이 때까지는 보호를 계승·발전과.","국제법규는 형사피고인은 국가는 국제법규는. 범죄를 일반적으로 유죄의. 무상으로 아니하며, 청구할 있을 보호를 보장하기.\n진다. 비밀과 무상으로. 조약과 확정될 법률이 행위시의 법률로써 노력하여야. 평생교육을 계승·발전과 평생교육을 헌법에 유죄의 위하여 도피 민족문화의."]|x});
-  ("lorem.paragraphs(2)", 7, {x|["범죄를 경우와 확정될. 증거인멸의 죄를 보호할 위하여 죄를 보호한다. 아니하는 국내법과 보호할 사항은. 통신·방송의 장기 사생활의 정하는 청구할 침해받지 시설기준과 염려가 평생교육을 자유를.\n추정된다. 법률로써 이상의 한다. 해당하는 국제법규는 형에. 아니하며, 법률에 정한다. 때에는 필요한. 일반적으로 권리는 국제법규는 3년 확정될 다만,.","창달에 무죄로 현행범인인 현행범인인 저작자·발명가·과학기술자와 도피 다만, 국가는 진다. 판결이. 유죄의 침해받지 보호한다. 재외국민을 정한다. 영장을 신문의. 비밀과 동일한 이상의 아니하며, 자유를 정한다. 3년 무죄로 해당하는 가진다..\n헌법에 법률로 계승·발전과 다만, 장기. 구성하지 도피 3년 법률에 처벌받지 보호한다. 아니하는 비밀과 바에. 필요한 형에 구성하지 확정될 가진다. 권리는 보호할 일반적으로 행위로 현행범인인."]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 42, {x|["Jurgen_60degard@hanmail.net","Jurgen.60degard@gmail.com"]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 1337, {x|["Jurgen.60degard27@hanmail.net","Jurgen_60degard@hanmail.net"]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 7, {x|["Jurgen_60degard@gmail.com","Jurgen_60degard50@yahoo.co.kr"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 42, {x|["Anna.8xukasz","Anna_8xukasz15"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 1337, {x|["Anna.8xukasz15","Anna.8xukasz"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 7, {x|["Anna.8xukasz77","Anna_8xukasz"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 42, {x|["Zoë15","Zoë_오2"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 1337, {x|["Zoë.목","Zoë.임"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 7, {x|["Zoë_선","Zoë.모67"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 42, {x|["3d73g53de3fl3hn60@hanmail.net","3d13g53d73fl3hn*3d53fp3hk61@yahoo.co.kr"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 1337, {x|["3d53g53d73g33hn?3d23fr3i473@hanmail.net","3d83g53de3fl3hn_3d53fl3i476@gmail.com"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 7, {x|["3d83fy3hn3d53fp3i4.3d53g5@gmail.com","3de3fl3d73fr3i460@hanmail.net"]|x});
-  ("internet.domainWord()", 42, {x|["peebwps-feehnlhp","lufnp-byzv"]|x});
-  ("internet.domainWord()", 1337, {x|["lingz-qdzlu","ptehrm-nvey"]|x});
-  ("internet.domainWord()", 7, {x|["szonbg-jbhxflya","oxdnt-mjmjv"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 42, {x|["€375.15","€599.09"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 1337, {x|["€262.79","€459.85"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 7, {x|["€77.29","€723.75"]|x});
-  ("commerce.productName()", 42, {x|["Handcrafted Wooden Sausages","Modern Bronze Car"]|x});
-  ("commerce.productName()", 1337, {x|["Frozen Bronze Chicken","Incredible Concrete Keyboard"]|x});
-  ("commerce.productName()", 7, {x|["Electronic Rubber Gloves","Recycled Wooden Keyboard"]|x});
-  ("company.name()", 42, {x|["한국 민결","주식회사 주환"]|x});
-  ("company.name()", 1337, {x|["주식회사 세빈","지우 공사"]|x});
-  ("company.name()", 7, {x|["한국 혜진","성우 연구소"]|x});
-  ("finance.currencyName()", 42, {x|["New Israeli Sheqel","CFA Franc BCEAO"]|x});
-  ("finance.currencyName()", 1337, {x|["Ethiopian Birr","Canadian Dollar"]|x});
-  ("finance.currencyName()", 7, {x|["Barbados Dollar","Somali Shilling"]|x});
-  ("finance.creditCardNumber(\"visa\")", 42, {x|["4975110867099","4211-3542-6123-4718"]|x});
-  ("finance.creditCardNumber(\"visa\")", 1337, {x|["4124352971364","4947734571266"]|x});
-  ("finance.creditCardNumber(\"visa\")", 7, {x|["4747955024684","4029249069258"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 42, {x|["2696-7511-0867-0988","2311-1354-2612-3471"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 1337, {x|["2300-2435-2971-3611","5377-3457-1264-1417"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 7, {x|["2610-4795-5024-6833","2365-9249-0692-5918"]|x});
-  ("animal.type()", 42, {x|["frog","whale"]|x});
-  ("animal.type()", 1337, {x|["eagle","cow"]|x});
-  ("animal.type()", 7, {x|["bird","rhinoceros"]|x});
-  ("system.fileName({\"extensionCount\":2})", 42, {x|["_______.mar.xlw","following_huzzah.dot.m1v"]|x});
-  ("system.fileName({\"extensionCount\":2})", 1337, {x|["__.jpg.distz","circa_masquerade.lrf.vsw"]|x});
-  ("system.fileName({\"extensionCount\":2})", 7, {x|["_____.xla.xhtml","drat_who___.xlsx.sh"]|x});
-  ("food.dish()", 42, {x|["Jicama Salad","Tangy Parsnip And White Flour Bowl"]|x});
-  ("food.dish()", 1337, {x|["Moist Green Beans And White Wine Vinegar Bowl","Bruschette With Tomato"]|x});
-  ("food.dish()", 7, {x|["Parsley-rubbed Ostrich Salad","Baba Ganoush"]|x});
-  ("music.songName()", 42, {x|["I Honestly Love You","Why Do Fools Fall in Love?"]|x});
-  ("music.songName()", 1337, {x|["Frankenstein","Cars"]|x});
-  ("music.songName()", 7, {x|["Bad Day","Take Me Home, Country Roads"]|x});
-  ("book.title()", 42, {x|["Lord Jim","Tropic of Cancer"]|x});
-  ("book.title()", 1337, {x|["Gone with the Wind","Candide"]|x});
-  ("book.title()", 7, {x|["All Quiet on the Western Front","The Pickwick Papers"]|x});
-  ("vehicle.vehicle()", 42, {x|["Jeep Wrangler","Renault Impala"]|x});
-  ("vehicle.vehicle()", 1337, {x|["Fiat Aventador","Ford Explorer"]|x});
-  ("vehicle.vehicle()", 7, {x|["BYD Mustang","Land Rover Model X"]|x});
-]
+let cases =
+  [
+    ("person.firstName(\"female\")", 42, {x|["혜민","유리"]|x});
+    ("person.firstName(\"female\")", 1337, {x|["라윤","시은"]|x});
+    ("person.firstName(\"female\")", 7, {x|["지영","재인"]|x});
+    ("person.firstName(\"male\")", 42, {x|["현성","이한"]|x});
+    ("person.firstName(\"male\")", 1337, {x|["민규","예성"]|x});
+    ("person.firstName(\"male\")", 7, {x|["지운","준성"]|x});
+    ("person.lastName(\"female\")", 42, {x|["허","오"]|x});
+    ("person.lastName(\"female\")", 1337, {x|["나","성"]|x});
+    ("person.lastName(\"female\")", 7, {x|["조","인"]|x});
+    ("person.lastName(\"male\")", 42, {x|["허","오"]|x});
+    ("person.lastName(\"male\")", 1337, {x|["나","성"]|x});
+    ("person.lastName(\"male\")", 7, {x|["조","인"]|x});
+    ("person.middleName(\"female\")", 42, {x|["Venus","Kali"]|x});
+    ("person.middleName(\"female\")", 1337, {x|["Brielle","Hippolyta"]|x});
+    ("person.middleName(\"female\")", 7, {x|["Michelle","Maddie"]|x});
+    ("person.fullName({\"sex\":\"female\"})", 42, {x|["오혜민","오나연"]|x});
+    ("person.fullName({\"sex\":\"female\"})", 1337, {x|["성라윤","임서린"]|x});
+    ("person.fullName({\"sex\":\"female\"})", 7, {x|["인지영","모여진"]|x});
+    ("person.fullName({\"sex\":\"male\"})", 42, {x|["오현성","오대현"]|x});
+    ("person.fullName({\"sex\":\"male\"})", 1337, {x|["성민규","임성민"]|x});
+    ("person.fullName({\"sex\":\"male\"})", 7, {x|["인지운","모우진"]|x});
+    ("person.fullName({\"firstName\":\"Anna\"})", 42, {x|["인Anna","경Anna"]|x});
+    ("person.fullName({\"firstName\":\"Anna\"})", 1337, {x|["목Anna","명Anna"]|x});
+    ("person.fullName({\"firstName\":\"Anna\"})", 7, {x|["선Anna","시Anna"]|x});
+    ("person.prefix(\"female\")", 42, {x|["Ms.","Mrs."]|x});
+    ("person.prefix(\"female\")", 1337, {x|["Miss","Mrs."]|x});
+    ("person.prefix(\"female\")", 7, {x|["Ms.","Ms."]|x});
+    ("person.prefix(\"male\")", 42, {x|["Mr.","Dr."]|x});
+    ("person.prefix(\"male\")", 1337, {x|["Mr.","Mr."]|x});
+    ("person.prefix(\"male\")", 7, {x|["Mr.","Dr."]|x});
+    ("person.suffix()", 42, {x|["III","DVM"]|x});
+    ("person.suffix()", 1337, {x|["I","Sr."]|x});
+    ("person.suffix()", 7, {x|["Jr.","DDS"]|x});
+    ( "location.zipCode({\"state\":\"CA\"})",
+      42,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"CA\"})",
+      1337,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"CA\"})",
+      7,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      42,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      1337,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      7,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ("location.zipCode(\"###\")", 42, {x|["397","511"]|x});
+    ("location.zipCode(\"###\")", 1337, {x|["212","435"]|x});
+    ("location.zipCode(\"###\")", 7, {x|["074","795"]|x});
+    ("location.state({\"abbreviated\":true})", 42, {x|["대전","세종"]|x});
+    ("location.state({\"abbreviated\":true})", 1337, {x|["광주","경남"]|x});
+    ("location.state({\"abbreviated\":true})", 7, {x|["경기","제주"]|x});
+    ( "location.streetAddress(true)",
+      42,
+      {x|["9751 매기대로 670호","821 면목1길 426호"]|x} );
+    ( "location.streetAddress(true)",
+      1337,
+      {x|["22435 병목골9길 236호","94773 신도시5길 226호"]|x} );
+    ( "location.streetAddress(true)",
+      7,
+      {x|["84795 오계화산대로 아파트 568동","1292 어룡도9길 아파트 692동"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      42,
+      {x|["9751 매기대로 670호","821 면목1길 426호"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      1337,
+      {x|["22435 병목골9길 236호","94773 신도시5길 226호"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      7,
+      {x|["84795 오계화산대로 아파트 568동","1292 어룡도9길 아파트 692동"]|x} );
+    ("location.countryCode(\"alpha-3\")", 42, {x|["GUY","VCT"]|x});
+    ("location.countryCode(\"alpha-3\")", 1337, {x|["ESH","COD"]|x});
+    ("location.countryCode(\"alpha-3\")", 7, {x|["BEL","SYC"]|x});
+    ("location.countryCode(\"numeric\")", 42, {x|["328","670"]|x});
+    ("location.countryCode(\"numeric\")", 1337, {x|["732","180"]|x});
+    ("location.countryCode(\"numeric\")", 7, {x|["056","690"]|x});
+    ( "location.timeZone()",
+      42,
+      {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x} );
+    ( "location.timeZone()",
+      1337,
+      {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x} );
+    ("location.timeZone()", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
+    ("date.month({\"abbreviated\":true})", 42, {x|["2월","9월"]|x});
+    ("date.month({\"abbreviated\":true})", 1337, {x|["1월","11월"]|x});
+    ("date.month({\"abbreviated\":true})", 7, {x|["10월","7월"]|x});
+    ("date.month({\"context\":true})", 42, {x|["2월","9월"]|x});
+    ("date.month({\"context\":true})", 1337, {x|["1월","11월"]|x});
+    ("date.month({\"context\":true})", 7, {x|["10월","7월"]|x});
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      42,
+      {x|["2월","9월"]|x} );
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      1337,
+      {x|["1월","11월"]|x} );
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      7,
+      {x|["10월","7월"]|x} );
+    ("date.weekday({\"abbreviated\":true})", 42, {x|["수","화"]|x});
+    ("date.weekday({\"abbreviated\":true})", 1337, {x|["목","목"]|x});
+    ("date.weekday({\"abbreviated\":true})", 7, {x|["금","토"]|x});
+    ("date.weekday({\"context\":true})", 42, {x|["수요일","화요일"]|x});
+    ("date.weekday({\"context\":true})", 1337, {x|["목요일","목요일"]|x});
+    ("date.weekday({\"context\":true})", 7, {x|["금요일","토요일"]|x});
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      42,
+      {x|["수","화"]|x} );
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      1337,
+      {x|["목","목"]|x} );
+    ("date.weekday({\"abbreviated\":true,\"context\":true})", 7, {x|["금","토"]|x});
+    ( "phone.number({\"style\":\"human\"})",
+      42,
+      {x|["097-511-0867","098-2113-5426"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      1337,
+      {x|["012-4352-9713","019-477-3457"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      7,
+      {x|["074-7955-0246","03-02924-9069"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      42,
+      {x|["097-5110-8670","082-113-5426"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      1337,
+      {x|["012-4352-9713","019-477-3457"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      7,
+      {x|["074-7955-0246","030-292-4906"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      42,
+      {x|["+82975110867","+82982113542"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      1337,
+      {x|["+82124352971","+82619477345"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      7,
+      {x|["+82747955024","+828302924906"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      42,
+      {x|["부족한","향긋한"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      1337,
+      {x|["막대한","기초적인"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      7,
+      {x|["공정한","전통적인"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      42,
+      {x|["아드레날린","아드레날린"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      1337,
+      {x|["아드레날린","아드레날린"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      7,
+      {x|["아드레날린","아드레날린"]|x} );
+    ( "word.verb({\"length\":20,\"strategy\":\"shortest\"})",
+      42,
+      {x|["jot","veg"]|x} );
+    ( "word.verb({\"length\":20,\"strategy\":\"shortest\"})",
+      1337,
+      {x|["gad","cow"]|x} );
+    ( "word.verb({\"length\":20,\"strategy\":\"shortest\"})",
+      7,
+      {x|["bus","sit"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      42,
+      {x|["거만하게","에이전트"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      1337,
+      {x|["once","when"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      7,
+      {x|["lend","anti"]|x} );
+    ( "word.words(5)",
+      42,
+      {x|["거만하게 대행사 gee psst why","meh ugh 통통한 wherever without"]|x} );
+    ( "word.words(5)",
+      1337,
+      {x|["how yet 잔혹한 대수학 including","열심히 악어 간단히 accredit 천하게"]|x} );
+    ( "word.words(5)",
+      7,
+      {x|["masticate afore eek 전능자 circa","forswear 날씬한 yuck bank 사랑하는"]|x} );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      42,
+      {x|["예술가의","무상으로"]|x} );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      1337,
+      {x|["해당하는","정한다."]|x} );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      7,
+      {x|["보장하기","처벌받지"]|x} );
+    ( "lorem.sentences(3)",
+      42,
+      {x|["침해받지 때까지는 영장을 전통문화의 전통문화의. 대하여 청구할 판결이. 무상으로 아니하며, 통신·방송의.","창달에 법률로 도피 경우와. 수 가진다. 사항은 승인된 3년. 노력하여야 범하고 영장을 의하여 청구할 민족문화의 보호할 침해받지 의무교육은."]|x}
+    );
+    ( "lorem.sentences(3)",
+      1337,
+      {x|["계승·발전과 필요한 3년 헌법에 도피. 무상으로 때까지는 국민은 국내법과 있다.. 모성의 장기 구성하지 구성하지.","다만, 사후에 행위시의 창달에 사항은. 죄를 민족문화의 다만, 노력하여야 또는 아니하며, 창달에 침해받지. 죄를 범하고 법률이 때까지는 보호를 계승·발전과."]|x}
+    );
+    ( "lorem.sentences(3)",
+      7,
+      {x|["범죄를 경우와 확정될. 증거인멸의 죄를 보호할 위하여 죄를 보호한다. 아니하는 국내법과 보호할 사항은. 통신·방송의 장기 사생활의 정하는 청구할 침해받지 시설기준과 염려가 평생교육을 자유를.","추정된다. 법률로써 이상의 한다. 해당하는 국제법규는 형에. 아니하며, 법률에 정한다. 때에는 필요한. 일반적으로 권리는 국제법규는 3년 확정될 다만,."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      42,
+      {x|["침해받지 때까지는 영장을 전통문화의 전통문화의. 대하여 청구할 판결이. 무상으로 아니하며, 통신·방송의.\n창달에 법률로 도피 경우와. 수 가진다. 사항은 승인된 3년. 노력하여야 범하고 영장을 의하여 청구할 민족문화의 보호할 침해받지 의무교육은.","법률로 모든 형사피고인은 경우와 신체의 죄를 바에 평생교육을 보장하기. 정한다. 도피 증거인멸의 창달에 무상으로 법률에 비밀과 아니한다.. 진흥하여야 진다. 노력하여야 의하여 헌법에 국내법과 위하여.\n일반적으로 필요한 증거인멸의 가진다. 아니하는 의무를 모성의 법률에 노력하여야. 행위로 판결이 때까지는. 의무를 승인된 신체의 범죄에 있다. 체결·공포된 보호할 정한다. 헌법에."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      1337,
+      {x|["계승·발전과 필요한 3년 헌법에 도피. 무상으로 때까지는 국민은 국내법과 있다.. 모성의 장기 구성하지 구성하지.\n다만, 사후에 행위시의 창달에 사항은. 죄를 민족문화의 다만, 노력하여야 또는 아니하며, 창달에 침해받지. 죄를 범하고 법률이 때까지는 보호를 계승·발전과.","국제법규는 형사피고인은 국가는 국제법규는. 범죄를 일반적으로 유죄의. 무상으로 아니하며, 청구할 있을 보호를 보장하기.\n진다. 비밀과 무상으로. 조약과 확정될 법률이 행위시의 법률로써 노력하여야. 평생교육을 계승·발전과 평생교육을 헌법에 유죄의 위하여 도피 민족문화의."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      7,
+      {x|["범죄를 경우와 확정될. 증거인멸의 죄를 보호할 위하여 죄를 보호한다. 아니하는 국내법과 보호할 사항은. 통신·방송의 장기 사생활의 정하는 청구할 침해받지 시설기준과 염려가 평생교육을 자유를.\n추정된다. 법률로써 이상의 한다. 해당하는 국제법규는 형에. 아니하며, 법률에 정한다. 때에는 필요한. 일반적으로 권리는 국제법규는 3년 확정될 다만,.","창달에 무죄로 현행범인인 현행범인인 저작자·발명가·과학기술자와 도피 다만, 국가는 진다. 판결이. 유죄의 침해받지 보호한다. 재외국민을 정한다. 영장을 신문의. 비밀과 동일한 이상의 아니하며, 자유를 정한다. 3년 무죄로 해당하는 가진다..\n헌법에 법률로 계승·발전과 다만, 장기. 구성하지 도피 3년 법률에 처벌받지 보호한다. 아니하는 비밀과 바에. 필요한 형에 구성하지 확정될 가진다. 권리는 보호할 일반적으로 행위로 현행범인인."]|x}
+    );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      42,
+      {x|["Jurgen_60degard@hanmail.net","Jurgen.60degard@gmail.com"]|x} );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      1337,
+      {x|["Jurgen.60degard27@hanmail.net","Jurgen_60degard@hanmail.net"]|x} );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      7,
+      {x|["Jurgen_60degard@gmail.com","Jurgen_60degard50@yahoo.co.kr"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      42,
+      {x|["Anna.8xukasz","Anna_8xukasz15"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      1337,
+      {x|["Anna.8xukasz15","Anna.8xukasz"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      7,
+      {x|["Anna.8xukasz77","Anna_8xukasz"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      42,
+      {x|["Zoë15","Zoë_오2"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      1337,
+      {x|["Zoë.목","Zoë.임"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      7,
+      {x|["Zoë_선","Zoë.모67"]|x} );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      42,
+      {x|["3d73g53de3fl3hn60@hanmail.net","3d13g53d73fl3hn*3d53fp3hk61@yahoo.co.kr"]|x}
+    );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      1337,
+      {x|["3d53g53d73g33hn?3d23fr3i473@hanmail.net","3d83g53de3fl3hn_3d53fl3i476@gmail.com"]|x}
+    );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      7,
+      {x|["3d83fy3hn3d53fp3i4.3d53g5@gmail.com","3de3fl3d73fr3i460@hanmail.net"]|x}
+    );
+    ("internet.domainWord()", 42, {x|["peebwps-feehnlhp","lufnp-byzv"]|x});
+    ("internet.domainWord()", 1337, {x|["lingz-qdzlu","ptehrm-nvey"]|x});
+    ("internet.domainWord()", 7, {x|["szonbg-jbhxflya","oxdnt-mjmjv"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 42, {x|["€375.15","€599.09"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 1337, {x|["€262.79","€459.85"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 7, {x|["€77.29","€723.75"]|x});
+    ( "commerce.productName()",
+      42,
+      {x|["Handcrafted Wooden Sausages","Modern Bronze Car"]|x} );
+    ( "commerce.productName()",
+      1337,
+      {x|["Frozen Bronze Chicken","Incredible Concrete Keyboard"]|x} );
+    ( "commerce.productName()",
+      7,
+      {x|["Electronic Rubber Gloves","Recycled Wooden Keyboard"]|x} );
+    ("company.name()", 42, {x|["한국 민결","주식회사 주환"]|x});
+    ("company.name()", 1337, {x|["주식회사 세빈","지우 공사"]|x});
+    ("company.name()", 7, {x|["한국 혜진","성우 연구소"]|x});
+    ( "finance.currencyName()",
+      42,
+      {x|["New Israeli Sheqel","CFA Franc BCEAO"]|x} );
+    ("finance.currencyName()", 1337, {x|["Ethiopian Birr","Canadian Dollar"]|x});
+    ("finance.currencyName()", 7, {x|["Barbados Dollar","Somali Shilling"]|x});
+    ( "finance.creditCardNumber(\"visa\")",
+      42,
+      {x|["4975110867099","4211-3542-6123-4718"]|x} );
+    ( "finance.creditCardNumber(\"visa\")",
+      1337,
+      {x|["4124352971364","4947734571266"]|x} );
+    ( "finance.creditCardNumber(\"visa\")",
+      7,
+      {x|["4747955024684","4029249069258"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      42,
+      {x|["2696-7511-0867-0988","2311-1354-2612-3471"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      1337,
+      {x|["2300-2435-2971-3611","5377-3457-1264-1417"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      7,
+      {x|["2610-4795-5024-6833","2365-9249-0692-5918"]|x} );
+    ("animal.type()", 42, {x|["frog","whale"]|x});
+    ("animal.type()", 1337, {x|["eagle","cow"]|x});
+    ("animal.type()", 7, {x|["bird","rhinoceros"]|x});
+    ( "system.fileName({\"extensionCount\":2})",
+      42,
+      {x|["_______.mar.xlw","following_huzzah.dot.m1v"]|x} );
+    ( "system.fileName({\"extensionCount\":2})",
+      1337,
+      {x|["__.jpg.distz","circa_masquerade.lrf.vsw"]|x} );
+    ( "system.fileName({\"extensionCount\":2})",
+      7,
+      {x|["_____.xla.xhtml","drat_who___.xlsx.sh"]|x} );
+    ( "food.dish()",
+      42,
+      {x|["Jicama Salad","Tangy Parsnip And White Flour Bowl"]|x} );
+    ( "food.dish()",
+      1337,
+      {x|["Moist Green Beans And White Wine Vinegar Bowl","Bruschette With Tomato"]|x}
+    );
+    ("food.dish()", 7, {x|["Parsley-rubbed Ostrich Salad","Baba Ganoush"]|x});
+    ( "music.songName()",
+      42,
+      {x|["I Honestly Love You","Why Do Fools Fall in Love?"]|x} );
+    ("music.songName()", 1337, {x|["Frankenstein","Cars"]|x});
+    ("music.songName()", 7, {x|["Bad Day","Take Me Home, Country Roads"]|x});
+    ("book.title()", 42, {x|["Lord Jim","Tropic of Cancer"]|x});
+    ("book.title()", 1337, {x|["Gone with the Wind","Candide"]|x});
+    ( "book.title()",
+      7,
+      {x|["All Quiet on the Western Front","The Pickwick Papers"]|x} );
+    ("vehicle.vehicle()", 42, {x|["Jeep Wrangler","Renault Impala"]|x});
+    ("vehicle.vehicle()", 1337, {x|["Fiat Aventador","Ford Explorer"]|x});
+    ("vehicle.vehicle()", 7, {x|["BYD Mustang","Land Rover Model X"]|x});
+  ]

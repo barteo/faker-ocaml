@@ -1,8 +1,8 @@
 (* Port of src/modules/person/module.ts. *)
 
+type sex_type = [ `Female | `Generic | `Male ]
 (** [SexType]: 'female' | 'generic' | 'male'. Functions taking [?sex] accept any
     subset, so a [Types.sex] value can be passed directly. *)
-type sex_type = [ `Female | `Generic | `Male ]
 
 let sex_type_to_string : [< sex_type ] -> string = function
   | `Female -> "female"
@@ -18,14 +18,18 @@ let sex_type_of_string = function
 (** [sex_type ?include_generic f]: a random sex type ([`Generic] only if
     [include_generic]). *)
 let sex_type ?(include_generic = false) f : sex_type =
-  if include_generic then Fk_helpers.array_element [| `Female; `Generic; `Male |] f
+  if include_generic then
+    Fk_helpers.array_element [| `Female; `Generic; `Male |] f
   else Fk_helpers.array_element [| `Female; `Male |] f
 
-let member k v = match Json.member k v with Some Json.Null | None -> None | x -> x
+let member k v =
+  match Json.member k v with Some Json.Null | None -> None | x -> x
+
 let to_array = function Json.Arr a -> a | v -> [| v |]
 
 (* selectDefinition: [entry] is a {generic?, female?, male?} definition. *)
-let select_definition f (sex : [< sex_type ] option) (entry : Json.t) : Json.t array =
+let select_definition f (sex : [< sex_type ] option) (entry : Json.t) :
+    Json.t array =
   let sex = match sex with Some s -> (s :> sex_type) | None -> sex_type f in
   let generic = member "generic" entry
   and female = member "female" entry
@@ -48,7 +52,8 @@ let select_definition f (sex : [< sex_type ] option) (entry : Json.t) : Json.t a
               let generic = to_array generic in
               Fk_helpers.weighted_array_element
                 [|
-                  (Js.mul 3.0 (Float.sqrt (float_of_int (Array.length binary))), binary);
+                  ( Js.mul 3.0 (Float.sqrt (float_of_int (Array.length binary))),
+                    binary );
                   (Float.sqrt (float_of_int (Array.length generic)), generic);
                 |]
                 f
@@ -58,8 +63,12 @@ let select_definition f (sex : [< sex_type ] option) (entry : Json.t) : Json.t a
 let weighted_of_json (a : Json.t array) : (float * Json.t) array =
   Array.map
     (fun o ->
-      let w = match Json.member "weight" o with Some (Json.Num n) -> n | _ -> nan in
-      let v = match Json.member "value" o with Some v -> v | None -> Json.Null in
+      let w =
+        match Json.member "weight" o with Some (Json.Num n) -> n | _ -> nan
+      in
+      let v =
+        match Json.member "value" o with Some v -> v | None -> Json.Null
+      in
       (w, v))
     a
 
@@ -73,7 +82,9 @@ let last_name ?sex f =
   match Locale.find f "person" "last_name_pattern" with
   | Some patterns ->
       let pattern =
-        Fk_helpers.weighted_array_element (weighted_of_json (select_definition f sex patterns)) f
+        Fk_helpers.weighted_array_element
+          (weighted_of_json (select_definition f sex patterns))
+          f
       in
       Fake.fake (Locale.to_string pattern) f
   | None ->
@@ -95,12 +106,16 @@ let suffix f = el "suffix" f
     [`Female] / [`Male]. *)
 let full_name ?first_name:fn ?last_name:ln ?sex f =
   let sex : sex_type =
-    match sex with Some s -> (s :> sex_type) | None -> Fk_helpers.array_element [| `Female; `Male |] f
+    match sex with
+    | Some s -> (s :> sex_type)
+    | None -> Fk_helpers.array_element [| `Female; `Male |] f
   in
   let fn = match fn with Some v -> v | None -> first_name ~sex f in
   let ln = match ln with Some v -> v | None -> last_name ~sex f in
   let pattern =
-    Fk_helpers.weighted_array_element (weighted_of_json (to_array (Locale.get f "person" "name"))) f
+    Fk_helpers.weighted_array_element
+      (weighted_of_json (to_array (Locale.get f "person" "name")))
+      f
   in
   Fake.mustache
     (Some (Locale.to_string pattern))
@@ -136,7 +151,8 @@ let registry : (string * Registry.fn) list =
       fun f a ->
         let o = opts a in
         str
-          (full_name ?first_name:(string o "firstName") ?last_name:(string o "lastName")
+          (full_name ?first_name:(string o "firstName")
+             ?last_name:(string o "lastName")
              ?sex:(Option.bind (string o "sex") sex_type_of_string)
              f) );
     ("gender", s gender);
@@ -144,7 +160,9 @@ let registry : (string * Registry.fn) list =
     ( "sexType",
       fun f a ->
         let o = opts a in
-        str (sex_type_to_string (sex_type ?include_generic:(bool o "includeGeneric") f)) );
+        str
+          (sex_type_to_string
+             (sex_type ?include_generic:(bool o "includeGeneric") f)) );
     ("bio", s bio);
     ("prefix", fun f a -> str (prefix ?sex:(sex_arg a) f));
     ("suffix", s suffix);

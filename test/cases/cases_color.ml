@@ -13,7 +13,8 @@ let cases : case list =
     ("rgb/upper", fun f -> s (C.rgb ~casing:`Upper f));
     ("rgb/mixed", fun f -> s (C.rgb ~casing:`Mixed ~prefix:"0x" f));
     ("rgb/noprefix", fun f -> s (C.rgb ~prefix:"" ~include_alpha:true f));
-    ("rgb/hexalpha", fun f -> s (C.rgb ~format:`Hex ~include_alpha:true ~casing:`Upper f));
+    ( "rgb/hexalpha",
+      fun f -> s (C.rgb ~format:`Hex ~include_alpha:true ~casing:`Upper f) );
     ("rgb/css", fun f -> s (C.rgb ~format:`Css f));
     ("rgb/cssalpha", fun f -> s (C.rgb ~format:`Css ~include_alpha:true f));
     ("rgb/binary", fun f -> s (C.rgb ~format:`Binary f));
@@ -28,7 +29,8 @@ let cases : case list =
     ("hsl/css", fun f -> s (C.hsl_string ~format:`Css f));
     ("hsl/cssalpha", fun f -> s (C.hsl_string ~include_alpha:true f));
     ("hsl/binary", fun f -> s (C.hsl_string ~format:`Binary f));
-    ("hsl/binaryalpha", fun f -> s (C.hsl_string ~format:`Binary ~include_alpha:true f));
+    ( "hsl/binaryalpha",
+      fun f -> s (C.hsl_string ~format:`Binary ~include_alpha:true f) );
     ("hwb", fun f -> fs (C.hwb f));
     ("hwb/css", fun f -> s (C.hwb_string f));
     ("hwb/binary", fun f -> s (C.hwb_string ~format:`Binary f));
@@ -39,17 +41,26 @@ let cases : case list =
     ("lch/css", fun f -> s (C.lch_string f));
     ("lch/binary", fun f -> s (C.lch_string ~format:`Binary f));
     ("colorByCSSColorSpace", fun f -> fs (C.color_by_css_color_space f));
-    ("colorByCSSColorSpace/css", fun f -> s (C.color_by_css_color_space_string f));
-    ("colorByCSSColorSpace/p3", fun f -> s (C.color_by_css_color_space_string ~space:`Display_p3 f));
-    ("colorByCSSColorSpace/rec", fun f -> s (C.color_by_css_color_space_string ~space:`Rec2020 f));
-    ("colorByCSSColorSpace/a98", fun f -> s (C.color_by_css_color_space_string ~space:`A98_rgb f));
-    ("colorByCSSColorSpace/pro", fun f -> s (C.color_by_css_color_space_string ~space:`Prophoto_rgb f));
+    ( "colorByCSSColorSpace/css",
+      fun f -> s (C.color_by_css_color_space_string f) );
+    ( "colorByCSSColorSpace/p3",
+      fun f -> s (C.color_by_css_color_space_string ~space:`Display_p3 f) );
+    ( "colorByCSSColorSpace/rec",
+      fun f -> s (C.color_by_css_color_space_string ~space:`Rec2020 f) );
+    ( "colorByCSSColorSpace/a98",
+      fun f -> s (C.color_by_css_color_space_string ~space:`A98_rgb f) );
+    ( "colorByCSSColorSpace/pro",
+      fun f -> s (C.color_by_css_color_space_string ~space:`Prophoto_rgb f) );
     ( "colorByCSSColorSpace/binary",
-      fun f -> s (C.color_by_css_color_space_string ~format:`Binary ~space:`Display_p3 f) );
+      fun f ->
+        s
+          (C.color_by_css_color_space_string ~format:`Binary ~space:`Display_p3
+             f) );
     ( "fake",
       fun f ->
         s
           (Faker.Helpers.fake
-             "{{color.human}} {{color.rgb({\"format\":\"css\"})}} {{color.hsl}} {{color.lab({\"format\":\"binary\"})}}"
+             "{{color.human}} {{color.rgb({\"format\":\"css\"})}} \
+              {{color.hsl}} {{color.lab({\"format\":\"binary\"})}}"
              f) );
   ]

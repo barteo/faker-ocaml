@@ -50,7 +50,8 @@ let vin f =
   let c = Fk_string.alphanumeric ~length:(`N 1) ~casing:`Upper ~exclude f in
   let d = Fk_string.numeric ~length:(`N 5) ~allow_leading_zeros:true f in
   let vin = a ^ b ^ c ^ d in
-  String.sub vin 0 8 ^ vin_check_digit vin ^ String.sub vin 9 (String.length vin - 9)
+  String.sub vin 0 8 ^ vin_check_digit vin
+  ^ String.sub vin 9 (String.length vin - 9)
 
 let color f = Fk_color.human f
 

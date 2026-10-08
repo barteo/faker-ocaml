@@ -19,5 +19,10 @@ let cases : case list =
     ("rodent", fun f -> s (M.rodent f));
     ("type", fun f -> s (M.type_ f));
     ("petName", fun f -> s (M.pet_name f));
-    ("fake", fun f -> s (Faker.Helpers.fake "{{animal.dog}}|{{animal.cat}}|{{animal.snake}}|{{animal.bear}}|{{animal.lion}}|{{animal.cetacean}}|{{animal.horse}}|{{animal.bird}}|{{animal.cow}}|{{animal.fish}}|{{animal.crocodilia}}|{{animal.insect}}|{{animal.rabbit}}|{{animal.rodent}}|{{animal.type}}|{{animal.petName}}|" f));
+    ( "fake",
+      fun f ->
+        s
+          (Faker.Helpers.fake
+             "{{animal.dog}}|{{animal.cat}}|{{animal.snake}}|{{animal.bear}}|{{animal.lion}}|{{animal.cetacean}}|{{animal.horse}}|{{animal.bird}}|{{animal.cow}}|{{animal.fish}}|{{animal.crocodilia}}|{{animal.insect}}|{{animal.rabbit}}|{{animal.rodent}}|{{animal.type}}|{{animal.petName}}|"
+             f) );
   ]

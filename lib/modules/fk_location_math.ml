@@ -10,12 +10,18 @@
 
 let ( *: ) = Js.mul
 let fma = Float.fma
-let high x = Int64.to_int (Int64.shift_right_logical (Int64.bits_of_float x) 32) land 0xffffffff
+
+let high x =
+  Int64.to_int (Int64.shift_right_logical (Int64.bits_of_float x) 32)
+  land 0xffffffff
 
 let kernel_sin x y iy =
-  let s1 = -1.66666666666666324348e-01 and s2 = 8.33333333332248946124e-03
-  and s3 = -1.98412698298579493134e-04 and s4 = 2.75573137070700676789e-06
-  and s5 = -2.50507602534068634195e-08 and s6 = 1.58969099521155010221e-10 in
+  let s1 = -1.66666666666666324348e-01
+  and s2 = 8.33333333332248946124e-03
+  and s3 = -1.98412698298579493134e-04
+  and s4 = 2.75573137070700676789e-06
+  and s5 = -2.50507602534068634195e-08
+  and s6 = 1.58969099521155010221e-10 in
   let ix = high x land 0x7fffffff in
   if ix < 0x3e400000 then x
   else
@@ -29,9 +35,12 @@ let kernel_sin x y iy =
       x -. fma (-.v) s1 q
 
 let kernel_cos x y =
-  let c1 = 4.16666666666666019037e-02 and c2 = -1.38888888888741095749e-03
-  and c3 = 2.48015872894767294178e-05 and c4 = -2.75573143513906633035e-07
-  and c5 = 2.08757232129817482790e-09 and c6 = -1.13596475577881948265e-11 in
+  let c1 = 4.16666666666666019037e-02
+  and c2 = -1.38888888888741095749e-03
+  and c3 = 2.48015872894767294178e-05
+  and c4 = -2.75573143513906633035e-07
+  and c5 = 2.08757232129817482790e-09
+  and c6 = -1.13596475577881948265e-11 in
   let ix = high x land 0x7fffffff in
   if ix < 0x3e400000 then 1.0
   else
@@ -41,24 +50,58 @@ let kernel_cos x y =
     else
       let qx =
         if ix > 0x3fe90000 then 0.28125
-        else Int64.float_of_bits (Int64.shift_left (Int64.of_int (ix - 0x00200000)) 32)
+        else
+          Int64.float_of_bits
+            (Int64.shift_left (Int64.of_int (ix - 0x00200000)) 32)
       in
       let hz = fma 0.5 z (-.qx) in
       let a = 1.0 -. qx in
       a -. (hz -. fma z r (-.(x *: y)))
 
 let npio2_hw =
-  [| 0x3FF921FB; 0x400921FB; 0x4012D97C; 0x401921FB; 0x401F6A7A; 0x4022D97C; 0x4025FDBB;
-     0x402921FB; 0x402C463A; 0x402F6A7A; 0x4031475C; 0x4032D97C; 0x40346B9C; 0x4035FDBB;
-     0x40378FDB; 0x403921FB; 0x403AB41B; 0x403C463A; 0x403DD85A; 0x403F6A7A; 0x40407E4C;
-     0x4041475C; 0x4042106C; 0x4042D97C; 0x4043A28C; 0x40446B9C; 0x404534AC; 0x4045FDBB;
-     0x4046C6CB; 0x40478FDB; 0x404858EB; 0x404921FB |]
+  [|
+    0x3FF921FB;
+    0x400921FB;
+    0x4012D97C;
+    0x401921FB;
+    0x401F6A7A;
+    0x4022D97C;
+    0x4025FDBB;
+    0x402921FB;
+    0x402C463A;
+    0x402F6A7A;
+    0x4031475C;
+    0x4032D97C;
+    0x40346B9C;
+    0x4035FDBB;
+    0x40378FDB;
+    0x403921FB;
+    0x403AB41B;
+    0x403C463A;
+    0x403DD85A;
+    0x403F6A7A;
+    0x40407E4C;
+    0x4041475C;
+    0x4042106C;
+    0x4042D97C;
+    0x4043A28C;
+    0x40446B9C;
+    0x404534AC;
+    0x4045FDBB;
+    0x4046C6CB;
+    0x40478FDB;
+    0x404858EB;
+    0x404921FB;
+  |]
 
 (* __ieee754_rem_pio2 for |x| <= 2^19 * pi/2: Some (n, y0, y1) with x = n * pi/2 + y0 + y1. *)
 let rem_pio2 x =
-  let invpio2 = 6.36619772367581382433e-01 and pio2_1 = 1.57079632673412561417e+00
-  and pio2_1t = 6.07710050650619224932e-11 and pio2_2 = 6.07710050630396597660e-11
-  and pio2_2t = 2.02226624879595063154e-21 and pio2_3 = 2.02226624871116645580e-21
+  let invpio2 = 6.36619772367581382433e-01
+  and pio2_1 = 1.57079632673412561417e+00
+  and pio2_1t = 6.07710050650619224932e-11
+  and pio2_2 = 6.07710050630396597660e-11
+  and pio2_2t = 2.02226624879595063154e-21
+  and pio2_3 = 2.02226624871116645580e-21
   and pio2_3t = 8.47842766036889956997e-32 in
   let hx = high x in
   let neg = hx land 0x80000000 <> 0 in

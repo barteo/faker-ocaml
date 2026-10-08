@@ -15,8 +15,10 @@ let cases : case list =
     ("commitEntry/lf", fun f -> s (G.commit_entry ~eol:`LF f));
     ("commitEntry/crlf", fun f -> s (G.commit_entry ~eol:`CRLF ~merge:true f));
     ("commitEntry/ref", fun f -> s (G.commit_entry ~ref_date:r f));
-    ("commitEntry/refnum", fun f -> s (G.commit_entry ~ref_date:1600000000123.0 f));
-    ("commitEntry/old", fun f -> s (G.commit_entry ~ref_date:old ~eol:`LF ~merge:true f));
+    ( "commitEntry/refnum",
+      fun f -> s (G.commit_entry ~ref_date:1600000000123.0 f) );
+    ( "commitEntry/old",
+      fun f -> s (G.commit_entry ~ref_date:old ~eol:`LF ~merge:true f) );
     ("commitEntry/referr", fun f -> s (G.commit_entry ~ref_date:nan f));
     ("commitMessage", fun f -> s (G.commit_message f));
     ("commitDate", fun f -> s (G.commit_date f));

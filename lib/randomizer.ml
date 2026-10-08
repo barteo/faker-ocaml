@@ -10,7 +10,7 @@ type t = {
 (* Port of src/internal/seed.ts: [Math.ceil(Math.random() * MAX_SAFE_INTEGER)]. *)
 let random_seed =
   let state = lazy (Random.State.make_self_init ()) in
-  fun () -> 1 + Random.State.full_int (Lazy.force state) (1 lsl 53 - 1)
+  fun () -> 1 + Random.State.full_int (Lazy.force state) ((1 lsl 53) - 1)
 
 let of_mersenne next ?(seed = random_seed ()) () =
   let twister = Mersenne.create (`Int seed) in

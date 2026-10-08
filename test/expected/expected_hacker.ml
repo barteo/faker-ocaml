@@ -2,26 +2,45 @@
 
 let locale = "en"
 
-let cases = [
-  ("abbreviation", 42, {x|["HTTP","VGA","SQL"]|x});
-  ("abbreviation", 1337, {x|["FTP","COM","FTP"]|x});
-  ("abbreviation", 7, {x|["API","SSL","JBOD"]|x});
-  ("adjective", 42, {x|["haptic","wireless","primary"]|x});
-  ("adjective", 1337, {x|["cross-platform","back-end","digital"]|x});
-  ("adjective", 7, {x|["auxiliary","redundant","mobile"]|x});
-  ("noun", 42, {x|["driver","system","pixel"]|x});
-  ("noun", 1337, {x|["card","bandwidth","card"]|x});
-  ("noun", 7, {x|["application","port","firewall"]|x});
-  ("verb", 42, {x|["generate","transmit","program"]|x});
-  ("verb", 1337, {x|["connect","calculate","copy"]|x});
-  ("verb", 7, {x|["bypass","quantify","hack"]|x});
-  ("ingverb", 42, {x|["copying","transmitting","parsing"]|x});
-  ("ingverb", 1337, {x|["connecting","calculating","connecting"]|x});
-  ("ingverb", 7, {x|["bypassing","programming","hacking"]|x});
-  ("phrase", 42, {x|["The SQL bandwidth is down, bypass the online alarm so we can quantify the CSS circuit!","Use the digital CLI driver, then you can quantify the neural application!","Use the auxiliary XML circuit, then you can parse the back-end alarm!"]|x});
-  ("phrase", 1337, {x|["The FTP circuit is down, connect the primary feed so we can calculate the JBOD program!","The RSS bus is down, parse the bluetooth bus so we can quantify the XML interface!","Use the primary COM driver, then you can back up the auxiliary driver!"]|x});
-  ("phrase", 7, {x|["I'll hack the wireless PCI card, that should panel the HTTP card!","hacking the alarm won't do anything, we need to transmit the neural CLI port!","We need to compress the haptic HTTP port!"]|x});
-  ("fake", 42, {x|["system Use the back-end UDP panel, then you can transmit the bluetooth bus!","interface The CLI driver is down, quantify the neural application so we can compress the VGA program!","array Try to index the UTF8 monitor, maybe it will input the bluetooth port!"]|x});
-  ("fake", 1337, {x|["bandwidth Try to input the XML array, maybe it will override the wireless port!","driver Use the bluetooth SMS bus, then you can compress the redundant system!","interface I'll transmit the back-end SMTP driver, that should port the SMTP transmitter!"]|x});
-  ("fake", 7, {x|["port We need to input the auxiliary OCR program!","application hacking the alarm won't do anything, we need to transmit the neural CLI port!","hard drive Try to index the TLS circuit, maybe it will connect the haptic driver!"]|x});
-]
+let cases =
+  [
+    ("abbreviation", 42, {x|["HTTP","VGA","SQL"]|x});
+    ("abbreviation", 1337, {x|["FTP","COM","FTP"]|x});
+    ("abbreviation", 7, {x|["API","SSL","JBOD"]|x});
+    ("adjective", 42, {x|["haptic","wireless","primary"]|x});
+    ("adjective", 1337, {x|["cross-platform","back-end","digital"]|x});
+    ("adjective", 7, {x|["auxiliary","redundant","mobile"]|x});
+    ("noun", 42, {x|["driver","system","pixel"]|x});
+    ("noun", 1337, {x|["card","bandwidth","card"]|x});
+    ("noun", 7, {x|["application","port","firewall"]|x});
+    ("verb", 42, {x|["generate","transmit","program"]|x});
+    ("verb", 1337, {x|["connect","calculate","copy"]|x});
+    ("verb", 7, {x|["bypass","quantify","hack"]|x});
+    ("ingverb", 42, {x|["copying","transmitting","parsing"]|x});
+    ("ingverb", 1337, {x|["connecting","calculating","connecting"]|x});
+    ("ingverb", 7, {x|["bypassing","programming","hacking"]|x});
+    ( "phrase",
+      42,
+      {x|["The SQL bandwidth is down, bypass the online alarm so we can quantify the CSS circuit!","Use the digital CLI driver, then you can quantify the neural application!","Use the auxiliary XML circuit, then you can parse the back-end alarm!"]|x}
+    );
+    ( "phrase",
+      1337,
+      {x|["The FTP circuit is down, connect the primary feed so we can calculate the JBOD program!","The RSS bus is down, parse the bluetooth bus so we can quantify the XML interface!","Use the primary COM driver, then you can back up the auxiliary driver!"]|x}
+    );
+    ( "phrase",
+      7,
+      {x|["I'll hack the wireless PCI card, that should panel the HTTP card!","hacking the alarm won't do anything, we need to transmit the neural CLI port!","We need to compress the haptic HTTP port!"]|x}
+    );
+    ( "fake",
+      42,
+      {x|["system Use the back-end UDP panel, then you can transmit the bluetooth bus!","interface The CLI driver is down, quantify the neural application so we can compress the VGA program!","array Try to index the UTF8 monitor, maybe it will input the bluetooth port!"]|x}
+    );
+    ( "fake",
+      1337,
+      {x|["bandwidth Try to input the XML array, maybe it will override the wireless port!","driver Use the bluetooth SMS bus, then you can compress the redundant system!","interface I'll transmit the back-end SMTP driver, that should port the SMTP transmitter!"]|x}
+    );
+    ( "fake",
+      7,
+      {x|["port We need to input the auxiliary OCR program!","application hacking the alarm won't do anything, we need to transmit the neural CLI port!","hard drive Try to index the TLS circuit, maybe it will connect the haptic driver!"]|x}
+    );
+  ]

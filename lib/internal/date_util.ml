@@ -8,7 +8,7 @@ let days_from_civil y m d =
   let era = (if y >= 0 then y else y - 399) / 400 in
   let yoe = y - (era * 400) in
   let mp = (m + 9) mod 12 in
-  let doy = ((153 * mp) + 2) / 5 + d - 1 in
+  let doy = (((153 * mp) + 2) / 5) + d - 1 in
   let doe = (yoe * 365) + (yoe / 4) - (yoe / 100) + doy in
   (era * 146097) + doe - 719468
 
@@ -63,17 +63,18 @@ let utc ?(hours = 0) ?(minutes = 0) ?(seconds = 0) ?(ms = 0) year month0 day =
 
 (** Date.prototype.toISOString *)
 let to_iso (t : float) =
-  if Float.is_nan t || Float.abs t > 8.64e15 then raise (Invalid_argument "Invalid time value");
+  if Float.is_nan t || Float.abs t > 8.64e15 then
+    raise (Invalid_argument "Invalid time value");
   let p = to_parts t in
   let year =
     if p.year >= 0 && p.year <= 9999 then Printf.sprintf "%04d" p.year
     else Printf.sprintf "%c%06d" (if p.year < 0 then '-' else '+') (abs p.year)
   in
-  Printf.sprintf "%s-%02d-%02dT%02d:%02d:%02d.%03dZ" year (p.month + 1) p.day p.hours p.minutes
-    p.seconds p.ms
+  Printf.sprintf "%s-%02d-%02dT%02d:%02d:%02d.%03dZ" year (p.month + 1) p.day
+    p.hours p.minutes p.seconds p.ms
 
-(** Parses the ISO formats accepted by [new Date(string)] (UTC unless an offset is given).
-    Date-only forms are UTC, like in JavaScript. *)
+(** Parses the ISO formats accepted by [new Date(string)] (UTC unless an offset
+    is given). Date-only forms are UTC, like in JavaScript. *)
 let of_iso (s : string) : float =
   let fail () = invalid_arg ("Invalid date: " ^ s) in
   let len = String.length s in
@@ -85,7 +86,12 @@ let of_iso (s : string) : float =
     pos := !pos + n;
     int_of_string v
   in
-  let accept c = if !pos < len && s.[!pos] = c then (incr pos; true) else false in
+  let accept c =
+    if !pos < len && s.[!pos] = c then (
+      incr pos;
+      true)
+    else false
+  in
   let year =
     if accept '+' then num 6 else if accept '-' then -num 6 else num 4
   in
@@ -100,7 +106,9 @@ let of_iso (s : string) : float =
       let ms =
         if accept '.' then begin
           let start = !pos in
-          while !pos < len && s.[!pos] >= '0' && s.[!pos] <= '9' do incr pos done;
+          while !pos < len && s.[!pos] >= '0' && s.[!pos] <= '9' do
+            incr pos
+          done;
           let frac = String.sub s start (!pos - start) in
           if frac = "" then fail ();
           int_of_string (String.sub (frac ^ "00") 0 3)
@@ -124,4 +132,5 @@ let of_iso (s : string) : float =
     else 0
   in
   if !pos <> len then fail ();
-  utc ~hours:h ~minutes:mi ~seconds:sec ~ms year (month - 1) day -. float_of_int (offset * 60000)
+  utc ~hours:h ~minutes:mi ~seconds:sec ~ms year (month - 1) day
+  -. float_of_int (offset * 60000)

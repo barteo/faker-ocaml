@@ -2,119 +2,253 @@
 
 let locale = "en"
 
-let cases = [
-  ("fileName", 42, {x|["unnaturally_dreamily.mar","fun.csh","baseboard_meanwhile_beside.xsd"]|x});
-  ("fileName", 1337, {x|["wallaby.jpg","seal.pptx","boohoo_honesty.rng"]|x});
-  ("fileName", 7, {x|["bleak.xla","for_often.3gp","concerning.sh"]|x});
-  ("fileName/0", 42, {x|["unnaturally_dreamily","embarrassment","perspire_bus"]|x});
-  ("fileName/0", 1337, {x|["wallaby","suspiciously_generously_till","um"]|x});
-  ("fileName/0", 7, {x|["bleak","task","often"]|x});
-  ("fileName/3", 42, {x|["unnaturally_dreamily.mar.xlw.xsl","sell_baseboard.m1v.mpeg.css","unto.mpkg.weba.eot"]|x});
-  ("fileName/3", 1337, {x|["wallaby.jpg.distz.rar","knavishly_boohoo.vsw.msm.zip","mmm_hm_snoop.mp2a.mid.avi"]|x});
-  ("fileName/3", 7, {x|["bleak.xla.xhtml.ttf","trench_among_concerning.sh.pptx.shtml","homely_excepting_per.xsl.woff2.m2v"]|x});
-  ("fileName/range", 42, {x|["unnaturally_dreamily.xlw","following_huzzah.m1v","meh_ugh_utilized.msi"]|x});
-  ("fileName/range", 1337, {x|["wallaby.distz.rar.oga","modulo.mar.xlm.otf.xhtml","honesty.xml.ear.jpeg"]|x});
-  ("fileName/range", 7, {x|["bleak.xhtml.ttf","trench_among_concerning.pptx.shtml","homely_excepting_per.woff2.m2v.ttf"]|x});
-  ("fileName/range0", 42, {x|["unnaturally_dreamily","fun.webp","wearily.css.xlw"]|x});
-  ("fileName/range0", 1337, {x|["wallaby.distz.rar","knavishly_boohoo.msm","aggravating_yuck.doc"]|x});
-  ("fileName/range0", 7, {x|["bleak","for_often.dmg.xsl","circa_forswear_delicious.7z.abw"]|x});
-  ("commonFileName", 42, {x|["unnaturally_dreamily.m3a","following_huzzah.pdf","amidst_or_passionate.htm"]|x});
-  ("commonFileName", 1337, {x|["wallaby.mp4","circa_masquerade.mp2","including.pdf"]|x});
-  ("commonFileName", 7, {x|["bleak.wav","for_often.htm","libel_inveigle.png"]|x});
-  ("commonFileName/ext", 42, {x|["unnaturally_dreamily.txt","embarrassment.txt","perspire_bus.txt"]|x});
-  ("commonFileName/ext", 1337, {x|["wallaby.txt","suspiciously_generously_till.txt","um.txt"]|x});
-  ("commonFileName/ext", 7, {x|["bleak.txt","task.txt","often.txt"]|x});
-  ("commonFileName/empty", 42, {x|["unnaturally_dreamily.m3a","following_huzzah.pdf","amidst_or_passionate.htm"]|x});
-  ("commonFileName/empty", 1337, {x|["wallaby.mp4","circa_masquerade.mp2","including.pdf"]|x});
-  ("commonFileName/empty", 7, {x|["bleak.wav","for_often.htm","libel_inveigle.png"]|x});
-  ("mimeType", 42, {x|["application/x-bzip","video/mpeg","image/jpeg"]|x});
-  ("mimeType", 1337, {x|["application/vnd.oasis.opendocument.text","application/vnd.apple.installer+xml","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]|x});
-  ("mimeType", 7, {x|["application/msword","image/vnd.microsoft.icon","application/x-sh"]|x});
-  ("commonFileType", 42, {x|["audio","application","text"]|x});
-  ("commonFileType", 1337, {x|["audio","video","audio"]|x});
-  ("commonFileType", 7, {x|["video","text","image"]|x});
-  ("commonFileExt", 42, {x|["png","shtml","gif"]|x});
-  ("commonFileExt", 1337, {x|["wav","m3a","jpe"]|x});
-  ("commonFileExt", 7, {x|["pdf","mpe","mpg4"]|x});
-  ("fileType", 42, {x|["font","video","text"]|x});
-  ("fileType", 1337, {x|["audio","application","audio"]|x});
-  ("fileType", 7, {x|["application","text","font"]|x});
-  ("fileExt", 42, {x|["docx","m2v","jpeg"]|x});
-  ("fileExt", 1337, {x|["xul","exe","xlc"]|x});
-  ("fileExt", 7, {x|["bin","ico","boz"]|x});
-  ("fileExt/png", 42, {x|["png","png","png"]|x});
-  ("fileExt/png", 1337, {x|["png","png","png"]|x});
-  ("fileExt/png", 7, {x|["png","png","png"]|x});
-  ("fileExt/jpeg", 42, {x|["jpeg","jpg","jpg"]|x});
-  ("fileExt/jpeg", 1337, {x|["jpe","jpe","jpe"]|x});
-  ("fileExt/jpeg", 7, {x|["jpe","jpg","jpeg"]|x});
-  ("fileExt/mpeg", 42, {x|["mp2","mpga","mp3"]|x});
-  ("fileExt/mpeg", 1337, {x|["m3a","m2a","m3a"]|x});
-  ("fileExt/mpeg", 7, {x|["m2a","mp3","mp2"]|x});
-  ("fileExt/err", 42, {x|[{"error":"MIME type foo/bar is not supported."},{"error":"MIME type foo/bar is not supported."},{"error":"MIME type foo/bar is not supported."}]|x});
-  ("fileExt/err", 1337, {x|[{"error":"MIME type foo/bar is not supported."},{"error":"MIME type foo/bar is not supported."},{"error":"MIME type foo/bar is not supported."}]|x});
-  ("fileExt/err", 7, {x|[{"error":"MIME type foo/bar is not supported."},{"error":"MIME type foo/bar is not supported."},{"error":"MIME type foo/bar is not supported."}]|x});
-  ("fileExt/errempty", 42, {x|[{"error":"MIME type  is not supported."},{"error":"MIME type  is not supported."},{"error":"MIME type  is not supported."}]|x});
-  ("fileExt/errempty", 1337, {x|[{"error":"MIME type  is not supported."},{"error":"MIME type  is not supported."},{"error":"MIME type  is not supported."}]|x});
-  ("fileExt/errempty", 7, {x|[{"error":"MIME type  is not supported."},{"error":"MIME type  is not supported."},{"error":"MIME type  is not supported."}]|x});
-  ("directoryPath", 42, {x|["/net","/var/spool","/usr/include"]|x});
-  ("directoryPath", 1337, {x|["/home","/etc","/home/user"]|x});
-  ("directoryPath", 7, {x|["/Users","/usr/libexec","/opt/lib"]|x});
-  ("filePath", 42, {x|["/net/supposing_dreamily_embarrassment.xlsx","/opt/sbin/baseboard_meanwhile_beside.xsd","/proc/brilliant.msi"]|x});
-  ("filePath", 1337, {x|["/home/mmm.distz","/opt/knavishly_boohoo.vsw","/etc/mail/aggravating_yuck.xlsx"]|x});
-  ("filePath", 7, {x|["/Users/drowse_task_geez.3g2","/var/concerning.sh","/mnt/pepper_release_boulevard.bmp"]|x});
-  ("semver", 42, {x|["3.19.15","5.3.3","0.18.12"]|x});
-  ("semver", 1337, {x|["2.3.5","4.6.10","2.20.15"]|x});
-  ("semver", 7, {x|["0.16.9","7.20.11","5.1.5"]|x});
-  ("networkInterface", 42, {x|["wlp5s1f0","wlx0fd322486492","ens4d5"]|x});
-  ("networkInterface", 1337, {x|["eno2","wls5f9","ens6f9d7"]|x});
-  ("networkInterface", 7, {x|["P7enp9s5d2","wlxc614e37e09f3","P5wlp7s6f2d3"]|x});
-  ("networkInterface/type:en", 42, {x|["ens9","eno1","eno8"]|x});
-  ("networkInterface/type:en", 1337, {x|["ens1f4d5","ens9d3","enx2f7cc569c34a"]|x});
-  ("networkInterface/type:en", 7, {x|["eno7","ens7","enx147ac614e37e"]|x});
-  ("networkInterface/type:wl", 42, {x|["wls9","wlo1","wlo8"]|x});
-  ("networkInterface/type:wl", 1337, {x|["wls1f4d5","wls9d3","wlx2f7cc569c34a"]|x});
-  ("networkInterface/type:wl", 7, {x|["wlo7","wls7","wlx147ac614e37e"]|x});
-  ("networkInterface/type:ww", 42, {x|["wws9","wwo1","wwo8"]|x});
-  ("networkInterface/type:ww", 1337, {x|["wws1f4d5","wws9d3","wwx2f7cc569c34a"]|x});
-  ("networkInterface/type:ww", 7, {x|["wwo7","wws7","wwx147ac614e37e"]|x});
-  ("networkInterface/schema:index", 42, {x|["wlo9","wwo5","eno1"]|x});
-  ("networkInterface/schema:index", 1337, {x|["eno1","eno4","eno5"]|x});
-  ("networkInterface/schema:index", 7, {x|["eno7","wlo7","wwo5"]|x});
-  ("networkInterface/schema:slot", 42, {x|["wls9","ens1f8","wws0"]|x});
-  ("networkInterface/schema:slot", 1337, {x|["ens1f4d5","ens9d3","wls1d7"]|x});
-  ("networkInterface/schema:slot", 7, {x|["ens7f7","wls5f2d6","wws3f2"]|x});
-  ("networkInterface/schema:mac", 42, {x|["wlxfb9220d9b0fd","enx22486492457c","enx890921ffc41a"]|x});
-  ("networkInterface/schema:mac", 1337, {x|["enx247584fb16a2","wwx7cc569c34a72","wlx38d2f6880bf2"]|x});
-  ("networkInterface/schema:mac", 7, {x|["enxc7bf88147ac6","enx4e37e09f38e2","wlxca737575dc59"]|x});
-  ("networkInterface/schema:pci", 42, {x|["wlp7s5f1d8","wlp0s9d1","P5enp4s2d2"]|x});
-  ("networkInterface/schema:pci", 1337, {x|["P2enp4s3d9","P3wwp6s1d7","P4wwp5s7f2"]|x});
-  ("networkInterface/schema:pci", 7, {x|["enp4s7","P2wlp4s6d0","enp2s4d6"]|x});
-  ("networkInterface/both", 42, {x|["P9wlp7s5f1d8","wlp7s0","P1wlp1s3d2"]|x});
-  ("networkInterface/both", 1337, {x|["P1wlp2s4f5d9","wlp1s3d9","P7wlp7s3f5"]|x});
-  ("networkInterface/both", 7, {x|["P7wlp4s7","wlp0s2f6","P0wlp2s9f4"]|x});
-  ("cron", 42, {x|["* * ? 8 ?","* 4 6 4 WED","* * ? 1 4"]|x});
-  ("cron", 1337, {x|["* * 9 6 *","* 10 25 * TUE","* * 17 * ?"]|x});
-  ("cron", 7, {x|["4 18 * * ?","* * 29 * ?","31 18 ? * WED"]|x});
-  ("cron/year", 42, {x|["* * ? 8 ? *","* 4 6 4 WED *","* * ? 1 4 *"]|x});
-  ("cron/year", 1337, {x|["* * 9 6 * 2004","* 10 25 * TUE 2045","* * 17 * ? 2025"]|x});
-  ("cron/year", 7, {x|["4 18 * * ? 2035","* * 29 * ? 1973","31 18 ? * WED *"]|x});
-  ("cron/nonstandard", 42, {x|["* * ? 8 ?","@reboot","2 14 ? 1 6"]|x});
-  ("cron/nonstandard", 1337, {x|["@monthly","@weekly","* 22 14 7 *"]|x});
-  ("cron/nonstandard", 7, {x|["4 18 * * ?","@reboot","@hourly"]|x});
-  ("cron/both", 42, {x|["* * ? 8 ? *","@reboot","2 14 ? 1 6 2075"]|x});
-  ("cron/both", 1337, {x|["@monthly","@weekly","* 22 14 7 * 2065"]|x});
-  ("cron/both", 7, {x|["4 18 * * ? 2035","@reboot","@hourly"]|x});
-  ("cron/false", 42, {x|["* * ? 8 ?","* 4 6 4 WED","* * ? 1 4"]|x});
-  ("cron/false", 1337, {x|["* * 9 6 *","* 10 25 * TUE","* * 17 * ?"]|x});
-  ("cron/false", 7, {x|["4 18 * * ?","* * 29 * ?","31 18 ? * WED"]|x});
-  ("fake/misc", 42, {x|["unnaturally_dreamily.mar|fun.jpg|application/vnd.ms-fontobject|image|gif|application|mp2a|/etc/defaults|/System/amidst_or_passionate.ts|0.4.0|ens2d2|32 * ? * ?","fencing_when.kar|quirkily_astride_sundae.m1v|video/3gpp|image|mpg|audio|dist|/etc/periodic|/opt/include/brr_white_in.jsonld|2.19.5|ens9f6|* 17 12 8 *","versus.dms|object_flat.png|image/jpeg|application|mpeg|image|bpk|/etc|/usr/src/unless_though.mjs|6.11.1|wls2d8|37 19 * 7 ?"]|x});
-  ("fake/misc", 1337, {x|["wallaby.jpg|seal.png|application/x-freearc|image|mp4|audio|otf|/private|/etc/defaults/maul_jaggedly.woff2|0.7.1|wws7f9|* 13 * * 0","redress_where_unpleasant.7z|round_oh.wav|image/png|application|gif|font|conf|/var/yp|/home/user/dir/unto_fast.ttf|4.19.12|eno3|* 1 ? 1 *","after_testimonial_crest.ogg|openly.gif|application/vnd.apple.installer+xml|text|png|image|rmi|/usr/ports|/usr/bin/frenetically_to.3g2|7.9.17|wwo7|* * ? 12 4"]|x});
-  ("fake/misc", 7, {x|["bleak.xla|for_often.htm|audio/3gpp2|text|mp4v|audio|xht|/net|/opt/share/forswear_delicious.png|4.8.13|wls0f7|* * ? 1 ?","beneath.img|unhappy_meaningfully.mpeg|application/vnd.amazon.ebook|text|pdf|font|csv|/opt/include|/sbin/provided_but_moralise.ifb|9.5.3|P4wwp7s8f6|32 3 2 4 *","abaft_trustworthy.jar|fuss.png|application/vnd.ms-excel|image|jpe|text|exe|/etc/mail|/mnt/nor_skeletal.doc|7.19.12|enxba2ff690fdac|11 7 ? * *"]|x});
-  ("fake/args", 42, {x|["unnaturally_dreamily.mar.xlw|following_huzzah.pdf|gif|wws0|@daily","enormously_ew_cycle.epub.csv|than_underneath_given.pdf|gif|wws5f0d0|@yearly","carpool_except_unless.pptx.mpeg|in_without_pretend.pdf|gif|wws6d8|19 * 2 * SUN *"]|x});
-  ("fake/args", 1337, {x|["wallaby.jpg.distz|circa_masquerade.pdf|gif|wws1f1|* * 30 6 WED *","snoop_versus.mpg.xht|thunderbolt_boohoo.pdf|gif|wws4f3|@monthly","oh_yellow_jellyfish.map.3gp|duh_lazily_sans.pdf|gif|wws3d5|@monthly"]|x});
-  ("fake/args", 7, {x|["bleak.xla.xhtml|drat_who_jungle.pdf|gif|wws3f3|@hourly","misreport_furthermore.mpeg.m1v|jet_drat_reflecting.pdf|gif|wws8d8|@annually","amidst_whenever.conf.war|fooey_navigate.pdf|gif|wws1f2|@daily"]|x});
-  ("fake/fileExtErr", 42, {x|[{"error":"MIME type nope/nope is not supported."},{"error":"MIME type nope/nope is not supported."},{"error":"MIME type nope/nope is not supported."}]|x});
-  ("fake/fileExtErr", 1337, {x|[{"error":"MIME type nope/nope is not supported."},{"error":"MIME type nope/nope is not supported."},{"error":"MIME type nope/nope is not supported."}]|x});
-  ("fake/fileExtErr", 7, {x|[{"error":"MIME type nope/nope is not supported."},{"error":"MIME type nope/nope is not supported."},{"error":"MIME type nope/nope is not supported."}]|x});
-]
+let cases =
+  [
+    ( "fileName",
+      42,
+      {x|["unnaturally_dreamily.mar","fun.csh","baseboard_meanwhile_beside.xsd"]|x}
+    );
+    ("fileName", 1337, {x|["wallaby.jpg","seal.pptx","boohoo_honesty.rng"]|x});
+    ("fileName", 7, {x|["bleak.xla","for_often.3gp","concerning.sh"]|x});
+    ( "fileName/0",
+      42,
+      {x|["unnaturally_dreamily","embarrassment","perspire_bus"]|x} );
+    ("fileName/0", 1337, {x|["wallaby","suspiciously_generously_till","um"]|x});
+    ("fileName/0", 7, {x|["bleak","task","often"]|x});
+    ( "fileName/3",
+      42,
+      {x|["unnaturally_dreamily.mar.xlw.xsl","sell_baseboard.m1v.mpeg.css","unto.mpkg.weba.eot"]|x}
+    );
+    ( "fileName/3",
+      1337,
+      {x|["wallaby.jpg.distz.rar","knavishly_boohoo.vsw.msm.zip","mmm_hm_snoop.mp2a.mid.avi"]|x}
+    );
+    ( "fileName/3",
+      7,
+      {x|["bleak.xla.xhtml.ttf","trench_among_concerning.sh.pptx.shtml","homely_excepting_per.xsl.woff2.m2v"]|x}
+    );
+    ( "fileName/range",
+      42,
+      {x|["unnaturally_dreamily.xlw","following_huzzah.m1v","meh_ugh_utilized.msi"]|x}
+    );
+    ( "fileName/range",
+      1337,
+      {x|["wallaby.distz.rar.oga","modulo.mar.xlm.otf.xhtml","honesty.xml.ear.jpeg"]|x}
+    );
+    ( "fileName/range",
+      7,
+      {x|["bleak.xhtml.ttf","trench_among_concerning.pptx.shtml","homely_excepting_per.woff2.m2v.ttf"]|x}
+    );
+    ( "fileName/range0",
+      42,
+      {x|["unnaturally_dreamily","fun.webp","wearily.css.xlw"]|x} );
+    ( "fileName/range0",
+      1337,
+      {x|["wallaby.distz.rar","knavishly_boohoo.msm","aggravating_yuck.doc"]|x}
+    );
+    ( "fileName/range0",
+      7,
+      {x|["bleak","for_often.dmg.xsl","circa_forswear_delicious.7z.abw"]|x} );
+    ( "commonFileName",
+      42,
+      {x|["unnaturally_dreamily.m3a","following_huzzah.pdf","amidst_or_passionate.htm"]|x}
+    );
+    ( "commonFileName",
+      1337,
+      {x|["wallaby.mp4","circa_masquerade.mp2","including.pdf"]|x} );
+    ( "commonFileName",
+      7,
+      {x|["bleak.wav","for_often.htm","libel_inveigle.png"]|x} );
+    ( "commonFileName/ext",
+      42,
+      {x|["unnaturally_dreamily.txt","embarrassment.txt","perspire_bus.txt"]|x}
+    );
+    ( "commonFileName/ext",
+      1337,
+      {x|["wallaby.txt","suspiciously_generously_till.txt","um.txt"]|x} );
+    ("commonFileName/ext", 7, {x|["bleak.txt","task.txt","often.txt"]|x});
+    ( "commonFileName/empty",
+      42,
+      {x|["unnaturally_dreamily.m3a","following_huzzah.pdf","amidst_or_passionate.htm"]|x}
+    );
+    ( "commonFileName/empty",
+      1337,
+      {x|["wallaby.mp4","circa_masquerade.mp2","including.pdf"]|x} );
+    ( "commonFileName/empty",
+      7,
+      {x|["bleak.wav","for_often.htm","libel_inveigle.png"]|x} );
+    ("mimeType", 42, {x|["application/x-bzip","video/mpeg","image/jpeg"]|x});
+    ( "mimeType",
+      1337,
+      {x|["application/vnd.oasis.opendocument.text","application/vnd.apple.installer+xml","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]|x}
+    );
+    ( "mimeType",
+      7,
+      {x|["application/msword","image/vnd.microsoft.icon","application/x-sh"]|x}
+    );
+    ("commonFileType", 42, {x|["audio","application","text"]|x});
+    ("commonFileType", 1337, {x|["audio","video","audio"]|x});
+    ("commonFileType", 7, {x|["video","text","image"]|x});
+    ("commonFileExt", 42, {x|["png","shtml","gif"]|x});
+    ("commonFileExt", 1337, {x|["wav","m3a","jpe"]|x});
+    ("commonFileExt", 7, {x|["pdf","mpe","mpg4"]|x});
+    ("fileType", 42, {x|["font","video","text"]|x});
+    ("fileType", 1337, {x|["audio","application","audio"]|x});
+    ("fileType", 7, {x|["application","text","font"]|x});
+    ("fileExt", 42, {x|["docx","m2v","jpeg"]|x});
+    ("fileExt", 1337, {x|["xul","exe","xlc"]|x});
+    ("fileExt", 7, {x|["bin","ico","boz"]|x});
+    ("fileExt/png", 42, {x|["png","png","png"]|x});
+    ("fileExt/png", 1337, {x|["png","png","png"]|x});
+    ("fileExt/png", 7, {x|["png","png","png"]|x});
+    ("fileExt/jpeg", 42, {x|["jpeg","jpg","jpg"]|x});
+    ("fileExt/jpeg", 1337, {x|["jpe","jpe","jpe"]|x});
+    ("fileExt/jpeg", 7, {x|["jpe","jpg","jpeg"]|x});
+    ("fileExt/mpeg", 42, {x|["mp2","mpga","mp3"]|x});
+    ("fileExt/mpeg", 1337, {x|["m3a","m2a","m3a"]|x});
+    ("fileExt/mpeg", 7, {x|["m2a","mp3","mp2"]|x});
+    ( "fileExt/err",
+      42,
+      {x|[{"error":"MIME type foo/bar is not supported."},{"error":"MIME type foo/bar is not supported."},{"error":"MIME type foo/bar is not supported."}]|x}
+    );
+    ( "fileExt/err",
+      1337,
+      {x|[{"error":"MIME type foo/bar is not supported."},{"error":"MIME type foo/bar is not supported."},{"error":"MIME type foo/bar is not supported."}]|x}
+    );
+    ( "fileExt/err",
+      7,
+      {x|[{"error":"MIME type foo/bar is not supported."},{"error":"MIME type foo/bar is not supported."},{"error":"MIME type foo/bar is not supported."}]|x}
+    );
+    ( "fileExt/errempty",
+      42,
+      {x|[{"error":"MIME type  is not supported."},{"error":"MIME type  is not supported."},{"error":"MIME type  is not supported."}]|x}
+    );
+    ( "fileExt/errempty",
+      1337,
+      {x|[{"error":"MIME type  is not supported."},{"error":"MIME type  is not supported."},{"error":"MIME type  is not supported."}]|x}
+    );
+    ( "fileExt/errempty",
+      7,
+      {x|[{"error":"MIME type  is not supported."},{"error":"MIME type  is not supported."},{"error":"MIME type  is not supported."}]|x}
+    );
+    ("directoryPath", 42, {x|["/net","/var/spool","/usr/include"]|x});
+    ("directoryPath", 1337, {x|["/home","/etc","/home/user"]|x});
+    ("directoryPath", 7, {x|["/Users","/usr/libexec","/opt/lib"]|x});
+    ( "filePath",
+      42,
+      {x|["/net/supposing_dreamily_embarrassment.xlsx","/opt/sbin/baseboard_meanwhile_beside.xsd","/proc/brilliant.msi"]|x}
+    );
+    ( "filePath",
+      1337,
+      {x|["/home/mmm.distz","/opt/knavishly_boohoo.vsw","/etc/mail/aggravating_yuck.xlsx"]|x}
+    );
+    ( "filePath",
+      7,
+      {x|["/Users/drowse_task_geez.3g2","/var/concerning.sh","/mnt/pepper_release_boulevard.bmp"]|x}
+    );
+    ("semver", 42, {x|["3.19.15","5.3.3","0.18.12"]|x});
+    ("semver", 1337, {x|["2.3.5","4.6.10","2.20.15"]|x});
+    ("semver", 7, {x|["0.16.9","7.20.11","5.1.5"]|x});
+    ("networkInterface", 42, {x|["wlp5s1f0","wlx0fd322486492","ens4d5"]|x});
+    ("networkInterface", 1337, {x|["eno2","wls5f9","ens6f9d7"]|x});
+    ( "networkInterface",
+      7,
+      {x|["P7enp9s5d2","wlxc614e37e09f3","P5wlp7s6f2d3"]|x} );
+    ("networkInterface/type:en", 42, {x|["ens9","eno1","eno8"]|x});
+    ( "networkInterface/type:en",
+      1337,
+      {x|["ens1f4d5","ens9d3","enx2f7cc569c34a"]|x} );
+    ("networkInterface/type:en", 7, {x|["eno7","ens7","enx147ac614e37e"]|x});
+    ("networkInterface/type:wl", 42, {x|["wls9","wlo1","wlo8"]|x});
+    ( "networkInterface/type:wl",
+      1337,
+      {x|["wls1f4d5","wls9d3","wlx2f7cc569c34a"]|x} );
+    ("networkInterface/type:wl", 7, {x|["wlo7","wls7","wlx147ac614e37e"]|x});
+    ("networkInterface/type:ww", 42, {x|["wws9","wwo1","wwo8"]|x});
+    ( "networkInterface/type:ww",
+      1337,
+      {x|["wws1f4d5","wws9d3","wwx2f7cc569c34a"]|x} );
+    ("networkInterface/type:ww", 7, {x|["wwo7","wws7","wwx147ac614e37e"]|x});
+    ("networkInterface/schema:index", 42, {x|["wlo9","wwo5","eno1"]|x});
+    ("networkInterface/schema:index", 1337, {x|["eno1","eno4","eno5"]|x});
+    ("networkInterface/schema:index", 7, {x|["eno7","wlo7","wwo5"]|x});
+    ("networkInterface/schema:slot", 42, {x|["wls9","ens1f8","wws0"]|x});
+    ("networkInterface/schema:slot", 1337, {x|["ens1f4d5","ens9d3","wls1d7"]|x});
+    ("networkInterface/schema:slot", 7, {x|["ens7f7","wls5f2d6","wws3f2"]|x});
+    ( "networkInterface/schema:mac",
+      42,
+      {x|["wlxfb9220d9b0fd","enx22486492457c","enx890921ffc41a"]|x} );
+    ( "networkInterface/schema:mac",
+      1337,
+      {x|["enx247584fb16a2","wwx7cc569c34a72","wlx38d2f6880bf2"]|x} );
+    ( "networkInterface/schema:mac",
+      7,
+      {x|["enxc7bf88147ac6","enx4e37e09f38e2","wlxca737575dc59"]|x} );
+    ( "networkInterface/schema:pci",
+      42,
+      {x|["wlp7s5f1d8","wlp0s9d1","P5enp4s2d2"]|x} );
+    ( "networkInterface/schema:pci",
+      1337,
+      {x|["P2enp4s3d9","P3wwp6s1d7","P4wwp5s7f2"]|x} );
+    ("networkInterface/schema:pci", 7, {x|["enp4s7","P2wlp4s6d0","enp2s4d6"]|x});
+    ("networkInterface/both", 42, {x|["P9wlp7s5f1d8","wlp7s0","P1wlp1s3d2"]|x});
+    ( "networkInterface/both",
+      1337,
+      {x|["P1wlp2s4f5d9","wlp1s3d9","P7wlp7s3f5"]|x} );
+    ("networkInterface/both", 7, {x|["P7wlp4s7","wlp0s2f6","P0wlp2s9f4"]|x});
+    ("cron", 42, {x|["* * ? 8 ?","* 4 6 4 WED","* * ? 1 4"]|x});
+    ("cron", 1337, {x|["* * 9 6 *","* 10 25 * TUE","* * 17 * ?"]|x});
+    ("cron", 7, {x|["4 18 * * ?","* * 29 * ?","31 18 ? * WED"]|x});
+    ("cron/year", 42, {x|["* * ? 8 ? *","* 4 6 4 WED *","* * ? 1 4 *"]|x});
+    ( "cron/year",
+      1337,
+      {x|["* * 9 6 * 2004","* 10 25 * TUE 2045","* * 17 * ? 2025"]|x} );
+    ( "cron/year",
+      7,
+      {x|["4 18 * * ? 2035","* * 29 * ? 1973","31 18 ? * WED *"]|x} );
+    ("cron/nonstandard", 42, {x|["* * ? 8 ?","@reboot","2 14 ? 1 6"]|x});
+    ("cron/nonstandard", 1337, {x|["@monthly","@weekly","* 22 14 7 *"]|x});
+    ("cron/nonstandard", 7, {x|["4 18 * * ?","@reboot","@hourly"]|x});
+    ("cron/both", 42, {x|["* * ? 8 ? *","@reboot","2 14 ? 1 6 2075"]|x});
+    ("cron/both", 1337, {x|["@monthly","@weekly","* 22 14 7 * 2065"]|x});
+    ("cron/both", 7, {x|["4 18 * * ? 2035","@reboot","@hourly"]|x});
+    ("cron/false", 42, {x|["* * ? 8 ?","* 4 6 4 WED","* * ? 1 4"]|x});
+    ("cron/false", 1337, {x|["* * 9 6 *","* 10 25 * TUE","* * 17 * ?"]|x});
+    ("cron/false", 7, {x|["4 18 * * ?","* * 29 * ?","31 18 ? * WED"]|x});
+    ( "fake/misc",
+      42,
+      {x|["unnaturally_dreamily.mar|fun.jpg|application/vnd.ms-fontobject|image|gif|application|mp2a|/etc/defaults|/System/amidst_or_passionate.ts|0.4.0|ens2d2|32 * ? * ?","fencing_when.kar|quirkily_astride_sundae.m1v|video/3gpp|image|mpg|audio|dist|/etc/periodic|/opt/include/brr_white_in.jsonld|2.19.5|ens9f6|* 17 12 8 *","versus.dms|object_flat.png|image/jpeg|application|mpeg|image|bpk|/etc|/usr/src/unless_though.mjs|6.11.1|wls2d8|37 19 * 7 ?"]|x}
+    );
+    ( "fake/misc",
+      1337,
+      {x|["wallaby.jpg|seal.png|application/x-freearc|image|mp4|audio|otf|/private|/etc/defaults/maul_jaggedly.woff2|0.7.1|wws7f9|* 13 * * 0","redress_where_unpleasant.7z|round_oh.wav|image/png|application|gif|font|conf|/var/yp|/home/user/dir/unto_fast.ttf|4.19.12|eno3|* 1 ? 1 *","after_testimonial_crest.ogg|openly.gif|application/vnd.apple.installer+xml|text|png|image|rmi|/usr/ports|/usr/bin/frenetically_to.3g2|7.9.17|wwo7|* * ? 12 4"]|x}
+    );
+    ( "fake/misc",
+      7,
+      {x|["bleak.xla|for_often.htm|audio/3gpp2|text|mp4v|audio|xht|/net|/opt/share/forswear_delicious.png|4.8.13|wls0f7|* * ? 1 ?","beneath.img|unhappy_meaningfully.mpeg|application/vnd.amazon.ebook|text|pdf|font|csv|/opt/include|/sbin/provided_but_moralise.ifb|9.5.3|P4wwp7s8f6|32 3 2 4 *","abaft_trustworthy.jar|fuss.png|application/vnd.ms-excel|image|jpe|text|exe|/etc/mail|/mnt/nor_skeletal.doc|7.19.12|enxba2ff690fdac|11 7 ? * *"]|x}
+    );
+    ( "fake/args",
+      42,
+      {x|["unnaturally_dreamily.mar.xlw|following_huzzah.pdf|gif|wws0|@daily","enormously_ew_cycle.epub.csv|than_underneath_given.pdf|gif|wws5f0d0|@yearly","carpool_except_unless.pptx.mpeg|in_without_pretend.pdf|gif|wws6d8|19 * 2 * SUN *"]|x}
+    );
+    ( "fake/args",
+      1337,
+      {x|["wallaby.jpg.distz|circa_masquerade.pdf|gif|wws1f1|* * 30 6 WED *","snoop_versus.mpg.xht|thunderbolt_boohoo.pdf|gif|wws4f3|@monthly","oh_yellow_jellyfish.map.3gp|duh_lazily_sans.pdf|gif|wws3d5|@monthly"]|x}
+    );
+    ( "fake/args",
+      7,
+      {x|["bleak.xla.xhtml|drat_who_jungle.pdf|gif|wws3f3|@hourly","misreport_furthermore.mpeg.m1v|jet_drat_reflecting.pdf|gif|wws8d8|@annually","amidst_whenever.conf.war|fooey_navigate.pdf|gif|wws1f2|@daily"]|x}
+    );
+    ( "fake/fileExtErr",
+      42,
+      {x|[{"error":"MIME type nope/nope is not supported."},{"error":"MIME type nope/nope is not supported."},{"error":"MIME type nope/nope is not supported."}]|x}
+    );
+    ( "fake/fileExtErr",
+      1337,
+      {x|[{"error":"MIME type nope/nope is not supported."},{"error":"MIME type nope/nope is not supported."},{"error":"MIME type nope/nope is not supported."}]|x}
+    );
+    ( "fake/fileExtErr",
+      7,
+      {x|[{"error":"MIME type nope/nope is not supported."},{"error":"MIME type nope/nope is not supported."},{"error":"MIME type nope/nope is not supported."}]|x}
+    );
+  ]

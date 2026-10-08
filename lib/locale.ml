@@ -6,17 +6,18 @@ let base = Locale_base.def
 let missing path =
   Core.error
     "The locale data for '%s' are missing in this locale.\n\
-    \  If this is a custom Faker instance, please make sure all required locales are used e.g. \
-     '[de_AT, de, en, base]'.\n\
-    \  Please contribute the missing data to the project or use a locale/Faker instance that has \
-     these data.\n\
+    \  If this is a custom Faker instance, please make sure all required \
+     locales are used e.g. '[de_AT, de, en, base]'.\n\
+    \  Please contribute the missing data to the project or use a locale/Faker \
+     instance that has these data.\n\
     \  For more information see https://fakerjs.dev/guide/localization.html"
     path
 
 let not_applicable path =
   Core.error
     "The locale data for '%s' aren't applicable to this locale.\n\
-    \  If you think this is a bug, please report it at: https://github.com/faker-js/faker"
+    \  If you think this is a bug, please report it at: \
+     https://github.com/faker-js/faker"
     path
 
 (** [get f category entry] is [faker.definitions.<category>.<entry>]. *)

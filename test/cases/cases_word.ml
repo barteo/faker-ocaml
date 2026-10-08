@@ -42,7 +42,10 @@ let fake p f = s (Faker.Helpers.fake p f)
 let cases : case list =
   List.concat_map
     (fun (name, (m : m)) ->
-      List.map (fun (suffix, length, strategy) -> (name ^ suffix, fun f -> s (m ?length ?strategy f))) variants)
+      List.map
+        (fun (suffix, length, strategy) ->
+          (name ^ suffix, fun f -> s (m ?length ?strategy f)))
+        variants)
     methods
   @ [
       ("words", fun f -> s (W.words f));
@@ -51,8 +54,13 @@ let cases : case list =
       ("words/range", fun f -> s (W.words ~count:(`Range (2, 7)) f));
       ("words/0", fun f -> s (W.words ~count:(`N 0) f));
       ( "fake/noun",
-        fake {|{{word.noun}} {{word.verb(5)}} {{word.adjective({"length":{"min":3,"max":4}})}}|} );
-      ("fake/sample", fake {|{{word.sample}} {{word.sample({"length":40,"strategy":"closest"})}}|});
+        fake
+          {|{{word.noun}} {{word.verb(5)}} {{word.adjective({"length":{"min":3,"max":4}})}}|}
+      );
+      ( "fake/sample",
+        fake
+          {|{{word.sample}} {{word.sample({"length":40,"strategy":"closest"})}}|}
+      );
       ( "fake/misc",
         fake
           {|{{word.adverb}}|{{word.conjunction}}|{{word.interjection}}|{{word.preposition}}|{{word.words(4)}}|{{word.words({"count":{"min":1,"max":2}})}}|}

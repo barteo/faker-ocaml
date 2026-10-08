@@ -35,7 +35,8 @@ let pick_obj entry f =
   | Json.Arr a -> Fk_helpers.array_element a f
   | v -> v
 
-let field o k = match Json.member k o with Some v -> Locale.to_string v | None -> ""
+let field o k =
+  match Json.member k o with Some v -> Locale.to_string v | None -> ""
 
 let airport f : airport =
   let o = pick_obj "airport" f in
@@ -49,9 +50,13 @@ let airplane f : airplane =
   let o = pick_obj "airplane" f in
   { name = field o "name"; iata_type_code = field o "iataTypeCode" }
 
-let record_locator ?(allow_numerics = false) ?(allow_visually_similar_characters = false) f =
-  let excluded = (if allow_numerics then [] else numerics)
-    @ if allow_visually_similar_characters then [] else visually_similar_characters
+let record_locator ?(allow_numerics = false)
+    ?(allow_visually_similar_characters = false) f =
+  let excluded =
+    (if allow_numerics then [] else numerics)
+    @
+    if allow_visually_similar_characters then []
+    else visually_similar_characters
   in
   Fk_string.alphanumeric ~length:(`N 6) ~casing:`Upper ~exclude:excluded f
 
@@ -71,11 +76,15 @@ let flight_number ?(length = `Range (1, 4)) ?(add_leading_zeros = false) f =
   if add_leading_zeros then Js.pad_start flight_number 4 '0' else flight_number
 
 (* JSON views (JS key order). *)
-let airline_to_json (a : airline) = Json.Obj [ ("name", Json.Str a.name); ("iataCode", Json.Str a.iata_code) ]
-let airport_to_json (a : airport) = Json.Obj [ ("name", Json.Str a.name); ("iataCode", Json.Str a.iata_code) ]
+let airline_to_json (a : airline) =
+  Json.Obj [ ("name", Json.Str a.name); ("iataCode", Json.Str a.iata_code) ]
+
+let airport_to_json (a : airport) =
+  Json.Obj [ ("name", Json.Str a.name); ("iataCode", Json.Str a.iata_code) ]
 
 let airplane_to_json (a : airplane) =
-  Json.Obj [ ("name", Json.Str a.name); ("iataTypeCode", Json.Str a.iata_type_code) ]
+  Json.Obj
+    [ ("name", Json.Str a.name); ("iataTypeCode", Json.Str a.iata_type_code) ]
 
 let registry : (string * Registry.fn) list =
   let open Args in
@@ -88,15 +97,21 @@ let registry : (string * Registry.fn) list =
         let o = opts a in
         str
           (record_locator ?allow_numerics:(bool o "allowNumerics")
-             ?allow_visually_similar_characters:(bool o "allowVisuallySimilarCharacters") f) );
+             ?allow_visually_similar_characters:
+               (bool o "allowVisuallySimilarCharacters")
+             f) );
     ( "seat",
       fun f a ->
         let o = opts a in
-        let aircraft_type = Option.bind (string o "aircraftType") aircraft_type_of_string in
+        let aircraft_type =
+          Option.bind (string o "aircraftType") aircraft_type_of_string
+        in
         str (seat ?aircraft_type f) );
     ("aircraftType", fun f _ -> str (aircraft_type_to_string (aircraft_type f)));
     ( "flightNumber",
       fun f a ->
         let o = opts a in
-        str (flight_number ?length:(range o "length") ?add_leading_zeros:(bool o "addLeadingZeros") f) );
+        str
+          (flight_number ?length:(range o "length")
+             ?add_leading_zeros:(bool o "addLeadingZeros") f) );
   ]

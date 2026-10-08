@@ -2,167 +2,360 @@
 
 let locale = "he"
 
-let cases = [
-  ("person.firstName(\"female\")", 42, {x|["שרה","מיכל"]|x});
-  ("person.firstName(\"female\")", 1337, {x|["אסנת","יעלה"]|x});
-  ("person.firstName(\"female\")", 7, {x|["צאלה","עדנה"]|x});
-  ("person.firstName(\"male\")", 42, {x|["שגיא","יצחק"]|x});
-  ("person.firstName(\"male\")", 1337, {x|["אליאב","חיים"]|x});
-  ("person.firstName(\"male\")", 7, {x|["סער","ניסן"]|x});
-  ("person.lastName(\"female\")", 42, {x|["שמשי","לחמן"]|x});
-  ("person.lastName(\"female\")", 1337, {x|["אשבל","חזן"]|x});
-  ("person.lastName(\"female\")", 7, {x|["פלאי","סתיו"]|x});
-  ("person.lastName(\"male\")", 42, {x|["שמשי","לחמן"]|x});
-  ("person.lastName(\"male\")", 1337, {x|["אשבל","חזן"]|x});
-  ("person.lastName(\"male\")", 7, {x|["פלאי","סתיו"]|x});
-  ("person.middleName(\"female\")", 42, {x|["Venus","Kali"]|x});
-  ("person.middleName(\"female\")", 1337, {x|["Brielle","Hippolyta"]|x});
-  ("person.middleName(\"female\")", 7, {x|["Michelle","Maddie"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 42, {x|["שרה לחמן","אופל לידור"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 1337, {x|["אסנת חזן","גלית עובדיהו"]|x});
-  ("person.fullName({\"sex\":\"female\"})", 7, {x|["צאלה סתיו","ליאורה בר"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 42, {x|["שגיא לחמן","אדיר לידור"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 1337, {x|["אליאב חזן","ארז עובדיהו"]|x});
-  ("person.fullName({\"sex\":\"male\"})", 7, {x|["סער סתיו","יגל בר"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 42, {x|["Anna עובדיהו","Anna אוהד"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 1337, {x|["Anna בר שלום","Anna בנאי"]|x});
-  ("person.fullName({\"firstName\":\"Anna\"})", 7, {x|["Anna זכות","מר Anna יאיר"]|x});
-  ("person.prefix(\"female\")", 42, {x|["גברת","עו\"ד"]|x});
-  ("person.prefix(\"female\")", 1337, {x|["גברת","גברת"]|x});
-  ("person.prefix(\"female\")", 7, {x|["גברת","ד\"ר"]|x});
-  ("person.prefix(\"male\")", 42, {x|["מר","עו\"ד"]|x});
-  ("person.prefix(\"male\")", 1337, {x|["מר","מר"]|x});
-  ("person.prefix(\"male\")", 7, {x|["מר","ד\"ר"]|x});
-  ("person.suffix()", 42, {x|["III","DVM"]|x});
-  ("person.suffix()", 1337, {x|["I","Sr."]|x});
-  ("person.suffix()", 7, {x|["Jr.","DDS"]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 42, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 1337, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"CA\"})", 7, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 42, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 1337, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode({\"state\":\"ON\"})", 7, {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x});
-  ("location.zipCode(\"###\")", 42, {x|["397","511"]|x});
-  ("location.zipCode(\"###\")", 1337, {x|["212","435"]|x});
-  ("location.zipCode(\"###\")", 7, {x|["074","795"]|x});
-  ("location.state({\"abbreviated\":true})", 42, {x|["ME","WV"]|x});
-  ("location.state({\"abbreviated\":true})", 1337, {x|["IN","DE"]|x});
-  ("location.state({\"abbreviated\":true})", 7, {x|["AR","RI"]|x});
-  ("location.streetAddress(true)", 42, {x|["שדרות רבי תנחום 'א6 2 דירה","רחוב סומו יהודה 'א70 82 חדר"]|x});
-  ("location.streetAddress(true)", 1337, {x|["שדרות מכולות 53 3 חדר","סמטת זעירא מרדכי 461 47 חדר"]|x});
-  ("location.streetAddress(true)", 7, {x|["רחוב כהן הרמן 'ב79 5 חדר","רחוב א-זייאן 'ב78 12 דירה"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 42, {x|["שדרות רבי תנחום 'א6 2 דירה","רחוב סומו יהודה 'א70 82 חדר"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 1337, {x|["שדרות מכולות 53 3 חדר","סמטת זעירא מרדכי 461 47 חדר"]|x});
-  ("location.streetAddress({\"useFullAddress\":true})", 7, {x|["רחוב כהן הרמן 'ב79 5 חדר","רחוב א-זייאן 'ב78 12 דירה"]|x});
-  ("location.countryCode(\"alpha-3\")", 42, {x|["GUY","VCT"]|x});
-  ("location.countryCode(\"alpha-3\")", 1337, {x|["ESH","COD"]|x});
-  ("location.countryCode(\"alpha-3\")", 7, {x|["BEL","SYC"]|x});
-  ("location.countryCode(\"numeric\")", 42, {x|["328","670"]|x});
-  ("location.countryCode(\"numeric\")", 1337, {x|["732","180"]|x});
-  ("location.countryCode(\"numeric\")", 7, {x|["056","690"]|x});
-  ("location.timeZone()", 42, {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x});
-  ("location.timeZone()", 1337, {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x});
-  ("location.timeZone()", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
-  ("date.month({\"abbreviated\":true})", 42, {x|["Jan","Sep"]|x});
-  ("date.month({\"abbreviated\":true})", 1337, {x|["Feb","Aug"]|x});
-  ("date.month({\"abbreviated\":true})", 7, {x|["Apr","Nov"]|x});
-  ("date.month({\"context\":true})", 42, {x|["יולי","פברואר"]|x});
-  ("date.month({\"context\":true})", 1337, {x|["דצמבר","אוקטובר"]|x});
-  ("date.month({\"context\":true})", 7, {x|["אוגוסט","נובמבר"]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 42, {x|["Jan","Sep"]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 1337, {x|["Feb","Aug"]|x});
-  ("date.month({\"abbreviated\":true,\"context\":true})", 7, {x|["Apr","Nov"]|x});
-  ("date.weekday({\"abbreviated\":true})", 42, {x|["יום ג׳","שבת"]|x});
-  ("date.weekday({\"abbreviated\":true})", 1337, {x|["יום ב׳","יום ב׳"]|x});
-  ("date.weekday({\"abbreviated\":true})", 7, {x|["יום א׳","יום ו׳"]|x});
-  ("date.weekday({\"context\":true})", 42, {x|["יום רביעי","שבת"]|x});
-  ("date.weekday({\"context\":true})", 1337, {x|["יום ראשון","יום ראשון"]|x});
-  ("date.weekday({\"context\":true})", 7, {x|["יום חמישי","יום שני"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 42, {x|["יום ג׳","שבת"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 1337, {x|["יום ב׳","יום ב׳"]|x});
-  ("date.weekday({\"abbreviated\":true,\"context\":true})", 7, {x|["יום א׳","יום ו׳"]|x});
-  ("phone.number({\"style\":\"human\"})", 42, {x|["+972-8-9751108","03-7098211"]|x});
-  ("phone.number({\"style\":\"human\"})", 1337, {x|["+972-77-1243529","04-1361947"]|x});
-  ("phone.number({\"style\":\"human\"})", 7, {x|["+972-2-7479550","+972-77-4683029"]|x});
-  ("phone.number({\"style\":\"national\"})", 42, {x|["04-975-1108","077-709-8211"]|x});
-  ("phone.number({\"style\":\"national\"})", 1337, {x|["03-124-3529","08-136-1947"]|x});
-  ("phone.number({\"style\":\"national\"})", 7, {x|["02-747-9550","03-468-3029"]|x});
-  ("phone.number({\"style\":\"international\"})", 42, {x|["+97249751108","+972777098211"]|x});
-  ("phone.number({\"style\":\"international\"})", 1337, {x|["+97231243529","+97281361947"]|x});
-  ("phone.number({\"style\":\"international\"})", 7, {x|["+97227479550","+97234683029"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 42, {x|["jagged","whole"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 1337, {x|["french","dapper"]|x});
-  ("word.adjective({\"length\":{\"min\":3,\"max\":6}})", 7, {x|["bogus","stale"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 42, {x|["guide","whack"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 1337, {x|["equal","daddy"]|x});
-  ("word.noun({\"length\":5,\"strategy\":\"closest\"})", 7, {x|["brief","stall"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 42, {x|["jot","veg"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 1337, {x|["gad","cow"]|x});
-  ("word.verb({\"length\":20,\"strategy\":\"shortest\"})", 7, {x|["bus","sit"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 42, {x|["even","deer"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 1337, {x|["once","when"]|x});
-  ("word.sample({\"length\":4,\"strategy\":\"any-length\"})", 7, {x|["lend","anti"]|x});
-  ("word.words(5)", 42, {x|["bleakly custody gee psst why","meh ugh utilized wherever without"]|x});
-  ("word.words(5)", 1337, {x|["how yet smooth councilman including","safely junior actually accredit vaguely"]|x});
-  ("word.words(5)", 7, {x|["masticate afore eek requirement circa","forswear delicious yuck bank linear"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 42, {x|["קינץ","סטום"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 1337, {x|["נפקט","ננבי"]|x});
-  ("lorem.word({\"length\":4,\"strategy\":\"closest\"})", 7, {x|["בליא","איבן"]|x});
-  ("lorem.sentences(3)", 42, {x|["נונסטי איבן מנק סאפיאן סאפיאן. קראס הבקיץ קולהע. סטום וולופטה אודיפו.","אקווזמן תתיח שמחויט גדדיש. אפאח נולום בלוף למרקל ליאמום. במר היושבב מנק אדיפיסינג הבקיץ קוויס צש נונסטי בריקנה."]|x});
-  ("lorem.sentences(3)", 1337, {x|["סאפיאן לפרומי ליאמום לת שערש. סטום איבן צמוקו דול יבש. לפריקך קוויז אלמנקום ניסי.","ברשג ערששף כלרשט קוואזי בלוף. מנת אקווזמן לפתיעם במר שלושע וולופטה קוואזי קלובר. הועניב היושבב דולור איבן לרטי פוסיליס."]|x});
-  ("lorem.sentences(3)", 7, {x|["סת גדדיש למרקוח. ותלברו הועניב בליא בלרק מנת שנרא נון לכימפו צש בלוף. אודיפו דומור קורוס סיט הבקיץ נונסטי מונופץ חשלו טידום ברורק.","ברומץ תוק בלינך מודוף מוסן אס לפמעט. וולופטה מיחוצים לרעח נובש וענוף. תצטנפל שהכים אס ליאמום צופעט לפתיעם."]|x});
-  ("lorem.paragraphs(2)", 42, {x|["נונסטי איבן מנק סאפיאן סאפיאן. קראס הבקיץ קולהע. סטום וולופטה אודיפו.\nאקווזמן תתיח שמחויט גדדיש. אפאח נולום בלוף למרקל ליאמום. במר היושבב מנק אדיפיסינג הבקיץ קוויס צש נונסטי בריקנה.","תתיח לביקו שנרא קוויז בלוקריה מנת אמט טידום למסון. לרעח שערש חשלו קוואזי סטום קלאצי בליקרה אאוגו. בעליק צמלח במר קונסקטורר צשחמי דול וענוף.\nבלינדו לפרומי ותלברו נולום נון בליא תצטריק קלאצי במר. דס וק למרקוח. בליא בלינדו בלוקריה קראס יבש סחטיר צש לרעח צשחמי."]|x});
-  ("lorem.paragraphs(2)", 1337, {x|["סאפיאן לפרומי ליאמום לת שערש. סטום איבן צמוקו דול יבש. לפריקך קוויז אלמנקום ניסי.\nברשג ערששף כלרשט קוואזי בלוף. מנת אקווזמן לפתיעם במר שלושע וולופטה קוואזי קלובר. הועניב היושבב דולור איבן לרטי פוסיליס.","אס הכייר לורם למרקל. אלמנקום תצטנפל וק. סטום וולופטה אפאח וחאית לרטי למסון.\nצמלח בליקרה סטום. בלובק צופעט איפסום כלרשט הדש קוואזי. טידום פוסיליס טידום צשחמי וק בלרק שערש אקווזמן."]|x});
-  ("lorem.paragraphs(2)", 7, {x|["סת גדדיש למרקוח. ותלברו הועניב בליא בלרק מנת שנרא נון לכימפו צש בלוף. אודיפו דומור קורוס סיט הבקיץ נונסטי מונופץ חשלו טידום ברורק.\nברומץ תוק בלינך מודוף מוסן אס לפמעט. וולופטה מיחוצים לרעח נובש וענוף. תצטנפל שהכים אס ליאמום צופעט לפתיעם.","אקווזמן איף ברשג ולתיעם כאנה שערש לפתיעם לורם צמלח קולהע. הכייר קלובר שנרא אדיפיסינג לרעח מנק קליר. בליקרה וסטיבולום רוגצה דיאם ברורק לרעח בלינך איף מוסן ברורק.\nצשחמי תתיח פוסיליס לפתיעם דומור. ניסי שערש ליאמום סת וואל הדש נון בליקרה קונסקטורר. וענוף רוגצה ניסי צופעט ארווס שהכים בליא בלינדו ניבאה ולתיעם."]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 42, {x|["Jurgen_60degard@hotmail.com","Jurgen.60degard@gmail.com"]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 1337, {x|["Jurgen.60degard27@gmail.com","Jurgen_60degard@gmail.com"]|x});
-  ("internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})", 7, {x|["Jurgen_60degard@gmail.com","Jurgen_60degard50@yahoo.com"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 42, {x|["Anna.8xukasz","Anna_8xukasz15"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 1337, {x|["Anna.8xukasz15","Anna.8xukasz"]|x});
-  ("internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})", 7, {x|["Anna.8xukasz77","Anna_8xukasz"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 42, {x|["Zoë15","Zoë_לידור2"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 1337, {x|["Zoë.ברשלום","Zoë.עובדיהו"]|x});
-  ("internet.displayName({\"firstName\":\"Zoë\"})", 7, {x|["Zoë_זכות","Zoë.בר67"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 42, {x|["ytschk60@hotmail.com","aryalh*zvra61@yahoo.com"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 1337, {x|["yalh?bnay73@gmail.com","abry_hrtvb76@gmail.com"]|x});
-  ("internet.email({\"allowSpecialCharacters\":true})", 7, {x|["nysn.yayr@gmail.com","shyrh60@hotmail.com"]|x});
-  ("internet.domainWord()", 42, {x|["hospitable-unit","shameful-negotiation"]|x});
-  ("internet.domainWord()", 1337, {x|["fatal-co-producer","flickering-in-joke"]|x});
-  ("internet.domainWord()", 7, {x|["blushing-saw","jittery-puritan"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 42, {x|["€375.15","€599.09"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 1337, {x|["€262.79","€459.85"]|x});
-  ("commerce.price({\"symbol\":\"€\"})", 7, {x|["€77.29","€723.75"]|x});
-  ("commerce.productName()", 42, {x|["כובע קטן מצַח","מקלדת גנרית מגומי"]|x});
-  ("commerce.productName()", 1337, {x|["טונה גנרית מכותנה","מגבות כפרי מעץ"]|x});
-  ("commerce.productName()", 7, {x|["אופניים מעשי ממתכת","סבון קטן מעץ"]|x});
-  ("company.name()", 42, {x|["לחמן בע״מ","לידור - שריג"]|x});
-  ("company.name()", 1337, {x|["חזן - בנאי","דורי, תדמור ופרץ"]|x});
-  ("company.name()", 7, {x|["סתיו - יאיר","נחום - אוריאל"]|x});
-  ("finance.currencyName()", 42, {x|["New Israeli Sheqel","CFA Franc BCEAO"]|x});
-  ("finance.currencyName()", 1337, {x|["Ethiopian Birr","Canadian Dollar"]|x});
-  ("finance.currencyName()", 7, {x|["Barbados Dollar","Somali Shilling"]|x});
-  ("finance.creditCardNumber(\"visa\")", 42, {x|["4975110867099","4211-3542-6123-4718"]|x});
-  ("finance.creditCardNumber(\"visa\")", 1337, {x|["4124352971364","4947734571266"]|x});
-  ("finance.creditCardNumber(\"visa\")", 7, {x|["4747955024684","4029249069258"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 42, {x|["2696-7511-0867-0988","2311-1354-2612-3471"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 1337, {x|["2300-2435-2971-3611","5377-3457-1264-1417"]|x});
-  ("finance.creditCardNumber(\"mastercard\")", 7, {x|["2610-4795-5024-6833","2365-9249-0692-5918"]|x});
-  ("animal.type()", 42, {x|["frog","whale"]|x});
-  ("animal.type()", 1337, {x|["eagle","cow"]|x});
-  ("animal.type()", 7, {x|["bird","rhinoceros"]|x});
-  ("system.fileName({\"extensionCount\":2})", 42, {x|["unnaturally_dreamily.mar.xlw","following_huzzah.dot.m1v"]|x});
-  ("system.fileName({\"extensionCount\":2})", 1337, {x|["wallaby.jpg.distz","circa_masquerade.lrf.vsw"]|x});
-  ("system.fileName({\"extensionCount\":2})", 7, {x|["bleak.xla.xhtml","drat_who_jungle.xlsx.sh"]|x});
-  ("food.dish()", 42, {x|["Jicama Salad","Tangy Parsnip And White Flour Bowl"]|x});
-  ("food.dish()", 1337, {x|["Moist Green Beans And White Wine Vinegar Bowl","Bruschette With Tomato"]|x});
-  ("food.dish()", 7, {x|["Parsley-rubbed Ostrich Salad","Baba Ganoush"]|x});
-  ("music.songName()", 42, {x|["I Honestly Love You","Why Do Fools Fall in Love?"]|x});
-  ("music.songName()", 1337, {x|["Frankenstein","Cars"]|x});
-  ("music.songName()", 7, {x|["Bad Day","Take Me Home, Country Roads"]|x});
-  ("book.title()", 42, {x|["Lord Jim","Tropic of Cancer"]|x});
-  ("book.title()", 1337, {x|["Gone with the Wind","Candide"]|x});
-  ("book.title()", 7, {x|["All Quiet on the Western Front","The Pickwick Papers"]|x});
-  ("vehicle.vehicle()", 42, {x|["Jeep Wrangler","Renault Impala"]|x});
-  ("vehicle.vehicle()", 1337, {x|["Fiat Aventador","Ford Explorer"]|x});
-  ("vehicle.vehicle()", 7, {x|["BYD Mustang","Land Rover Model X"]|x});
-]
+let cases =
+  [
+    ("person.firstName(\"female\")", 42, {x|["שרה","מיכל"]|x});
+    ("person.firstName(\"female\")", 1337, {x|["אסנת","יעלה"]|x});
+    ("person.firstName(\"female\")", 7, {x|["צאלה","עדנה"]|x});
+    ("person.firstName(\"male\")", 42, {x|["שגיא","יצחק"]|x});
+    ("person.firstName(\"male\")", 1337, {x|["אליאב","חיים"]|x});
+    ("person.firstName(\"male\")", 7, {x|["סער","ניסן"]|x});
+    ("person.lastName(\"female\")", 42, {x|["שמשי","לחמן"]|x});
+    ("person.lastName(\"female\")", 1337, {x|["אשבל","חזן"]|x});
+    ("person.lastName(\"female\")", 7, {x|["פלאי","סתיו"]|x});
+    ("person.lastName(\"male\")", 42, {x|["שמשי","לחמן"]|x});
+    ("person.lastName(\"male\")", 1337, {x|["אשבל","חזן"]|x});
+    ("person.lastName(\"male\")", 7, {x|["פלאי","סתיו"]|x});
+    ("person.middleName(\"female\")", 42, {x|["Venus","Kali"]|x});
+    ("person.middleName(\"female\")", 1337, {x|["Brielle","Hippolyta"]|x});
+    ("person.middleName(\"female\")", 7, {x|["Michelle","Maddie"]|x});
+    ( "person.fullName({\"sex\":\"female\"})",
+      42,
+      {x|["שרה לחמן","אופל לידור"]|x} );
+    ( "person.fullName({\"sex\":\"female\"})",
+      1337,
+      {x|["אסנת חזן","גלית עובדיהו"]|x} );
+    ("person.fullName({\"sex\":\"female\"})", 7, {x|["צאלה סתיו","ליאורה בר"]|x});
+    ("person.fullName({\"sex\":\"male\"})", 42, {x|["שגיא לחמן","אדיר לידור"]|x});
+    ( "person.fullName({\"sex\":\"male\"})",
+      1337,
+      {x|["אליאב חזן","ארז עובדיהו"]|x} );
+    ("person.fullName({\"sex\":\"male\"})", 7, {x|["סער סתיו","יגל בר"]|x});
+    ( "person.fullName({\"firstName\":\"Anna\"})",
+      42,
+      {x|["Anna עובדיהו","Anna אוהד"]|x} );
+    ( "person.fullName({\"firstName\":\"Anna\"})",
+      1337,
+      {x|["Anna בר שלום","Anna בנאי"]|x} );
+    ( "person.fullName({\"firstName\":\"Anna\"})",
+      7,
+      {x|["Anna זכות","מר Anna יאיר"]|x} );
+    ("person.prefix(\"female\")", 42, {x|["גברת","עו\"ד"]|x});
+    ("person.prefix(\"female\")", 1337, {x|["גברת","גברת"]|x});
+    ("person.prefix(\"female\")", 7, {x|["גברת","ד\"ר"]|x});
+    ("person.prefix(\"male\")", 42, {x|["מר","עו\"ד"]|x});
+    ("person.prefix(\"male\")", 1337, {x|["מר","מר"]|x});
+    ("person.prefix(\"male\")", 7, {x|["מר","ד\"ר"]|x});
+    ("person.suffix()", 42, {x|["III","DVM"]|x});
+    ("person.suffix()", 1337, {x|["I","Sr."]|x});
+    ("person.suffix()", 7, {x|["Jr.","DDS"]|x});
+    ( "location.zipCode({\"state\":\"CA\"})",
+      42,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"CA\"})",
+      1337,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"CA\"})",
+      7,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      42,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      1337,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ( "location.zipCode({\"state\":\"ON\"})",
+      7,
+      {x|[{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"},{"error":"The locale data for 'location.postcode_by_state' are missing in this locale.\n  If this is a custom Faker instance, please make sure all required locales are used e.g. '[de_AT, de, en, base]'.\n  Please contribute the missing data to the project or use a locale/Faker instance that has these data.\n  For more information see https://fakerjs.dev/guide/localization.html"}]|x}
+    );
+    ("location.zipCode(\"###\")", 42, {x|["397","511"]|x});
+    ("location.zipCode(\"###\")", 1337, {x|["212","435"]|x});
+    ("location.zipCode(\"###\")", 7, {x|["074","795"]|x});
+    ("location.state({\"abbreviated\":true})", 42, {x|["ME","WV"]|x});
+    ("location.state({\"abbreviated\":true})", 1337, {x|["IN","DE"]|x});
+    ("location.state({\"abbreviated\":true})", 7, {x|["AR","RI"]|x});
+    ( "location.streetAddress(true)",
+      42,
+      {x|["שדרות רבי תנחום 'א6 2 דירה","רחוב סומו יהודה 'א70 82 חדר"]|x} );
+    ( "location.streetAddress(true)",
+      1337,
+      {x|["שדרות מכולות 53 3 חדר","סמטת זעירא מרדכי 461 47 חדר"]|x} );
+    ( "location.streetAddress(true)",
+      7,
+      {x|["רחוב כהן הרמן 'ב79 5 חדר","רחוב א-זייאן 'ב78 12 דירה"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      42,
+      {x|["שדרות רבי תנחום 'א6 2 דירה","רחוב סומו יהודה 'א70 82 חדר"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      1337,
+      {x|["שדרות מכולות 53 3 חדר","סמטת זעירא מרדכי 461 47 חדר"]|x} );
+    ( "location.streetAddress({\"useFullAddress\":true})",
+      7,
+      {x|["רחוב כהן הרמן 'ב79 5 חדר","רחוב א-זייאן 'ב78 12 דירה"]|x} );
+    ("location.countryCode(\"alpha-3\")", 42, {x|["GUY","VCT"]|x});
+    ("location.countryCode(\"alpha-3\")", 1337, {x|["ESH","COD"]|x});
+    ("location.countryCode(\"alpha-3\")", 7, {x|["BEL","SYC"]|x});
+    ("location.countryCode(\"numeric\")", 42, {x|["328","670"]|x});
+    ("location.countryCode(\"numeric\")", 1337, {x|["732","180"]|x});
+    ("location.countryCode(\"numeric\")", 7, {x|["056","690"]|x});
+    ( "location.timeZone()",
+      42,
+      {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x} );
+    ( "location.timeZone()",
+      1337,
+      {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x} );
+    ("location.timeZone()", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
+    ("date.month({\"abbreviated\":true})", 42, {x|["Jan","Sep"]|x});
+    ("date.month({\"abbreviated\":true})", 1337, {x|["Feb","Aug"]|x});
+    ("date.month({\"abbreviated\":true})", 7, {x|["Apr","Nov"]|x});
+    ("date.month({\"context\":true})", 42, {x|["יולי","פברואר"]|x});
+    ("date.month({\"context\":true})", 1337, {x|["דצמבר","אוקטובר"]|x});
+    ("date.month({\"context\":true})", 7, {x|["אוגוסט","נובמבר"]|x});
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      42,
+      {x|["Jan","Sep"]|x} );
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      1337,
+      {x|["Feb","Aug"]|x} );
+    ( "date.month({\"abbreviated\":true,\"context\":true})",
+      7,
+      {x|["Apr","Nov"]|x} );
+    ("date.weekday({\"abbreviated\":true})", 42, {x|["יום ג׳","שבת"]|x});
+    ("date.weekday({\"abbreviated\":true})", 1337, {x|["יום ב׳","יום ב׳"]|x});
+    ("date.weekday({\"abbreviated\":true})", 7, {x|["יום א׳","יום ו׳"]|x});
+    ("date.weekday({\"context\":true})", 42, {x|["יום רביעי","שבת"]|x});
+    ("date.weekday({\"context\":true})", 1337, {x|["יום ראשון","יום ראשון"]|x});
+    ("date.weekday({\"context\":true})", 7, {x|["יום חמישי","יום שני"]|x});
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      42,
+      {x|["יום ג׳","שבת"]|x} );
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      1337,
+      {x|["יום ב׳","יום ב׳"]|x} );
+    ( "date.weekday({\"abbreviated\":true,\"context\":true})",
+      7,
+      {x|["יום א׳","יום ו׳"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      42,
+      {x|["+972-8-9751108","03-7098211"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      1337,
+      {x|["+972-77-1243529","04-1361947"]|x} );
+    ( "phone.number({\"style\":\"human\"})",
+      7,
+      {x|["+972-2-7479550","+972-77-4683029"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      42,
+      {x|["04-975-1108","077-709-8211"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      1337,
+      {x|["03-124-3529","08-136-1947"]|x} );
+    ( "phone.number({\"style\":\"national\"})",
+      7,
+      {x|["02-747-9550","03-468-3029"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      42,
+      {x|["+97249751108","+972777098211"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      1337,
+      {x|["+97231243529","+97281361947"]|x} );
+    ( "phone.number({\"style\":\"international\"})",
+      7,
+      {x|["+97227479550","+97234683029"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      42,
+      {x|["jagged","whole"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      1337,
+      {x|["french","dapper"]|x} );
+    ( "word.adjective({\"length\":{\"min\":3,\"max\":6}})",
+      7,
+      {x|["bogus","stale"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      42,
+      {x|["guide","whack"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      1337,
+      {x|["equal","daddy"]|x} );
+    ( "word.noun({\"length\":5,\"strategy\":\"closest\"})",
+      7,
+      {x|["brief","stall"]|x} );
+    ( "word.verb({\"length\":20,\"strategy\":\"shortest\"})",
+      42,
+      {x|["jot","veg"]|x} );
+    ( "word.verb({\"length\":20,\"strategy\":\"shortest\"})",
+      1337,
+      {x|["gad","cow"]|x} );
+    ( "word.verb({\"length\":20,\"strategy\":\"shortest\"})",
+      7,
+      {x|["bus","sit"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      42,
+      {x|["even","deer"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      1337,
+      {x|["once","when"]|x} );
+    ( "word.sample({\"length\":4,\"strategy\":\"any-length\"})",
+      7,
+      {x|["lend","anti"]|x} );
+    ( "word.words(5)",
+      42,
+      {x|["bleakly custody gee psst why","meh ugh utilized wherever without"]|x}
+    );
+    ( "word.words(5)",
+      1337,
+      {x|["how yet smooth councilman including","safely junior actually accredit vaguely"]|x}
+    );
+    ( "word.words(5)",
+      7,
+      {x|["masticate afore eek requirement circa","forswear delicious yuck bank linear"]|x}
+    );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      42,
+      {x|["קינץ","סטום"]|x} );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      1337,
+      {x|["נפקט","ננבי"]|x} );
+    ( "lorem.word({\"length\":4,\"strategy\":\"closest\"})",
+      7,
+      {x|["בליא","איבן"]|x} );
+    ( "lorem.sentences(3)",
+      42,
+      {x|["נונסטי איבן מנק סאפיאן סאפיאן. קראס הבקיץ קולהע. סטום וולופטה אודיפו.","אקווזמן תתיח שמחויט גדדיש. אפאח נולום בלוף למרקל ליאמום. במר היושבב מנק אדיפיסינג הבקיץ קוויס צש נונסטי בריקנה."]|x}
+    );
+    ( "lorem.sentences(3)",
+      1337,
+      {x|["סאפיאן לפרומי ליאמום לת שערש. סטום איבן צמוקו דול יבש. לפריקך קוויז אלמנקום ניסי.","ברשג ערששף כלרשט קוואזי בלוף. מנת אקווזמן לפתיעם במר שלושע וולופטה קוואזי קלובר. הועניב היושבב דולור איבן לרטי פוסיליס."]|x}
+    );
+    ( "lorem.sentences(3)",
+      7,
+      {x|["סת גדדיש למרקוח. ותלברו הועניב בליא בלרק מנת שנרא נון לכימפו צש בלוף. אודיפו דומור קורוס סיט הבקיץ נונסטי מונופץ חשלו טידום ברורק.","ברומץ תוק בלינך מודוף מוסן אס לפמעט. וולופטה מיחוצים לרעח נובש וענוף. תצטנפל שהכים אס ליאמום צופעט לפתיעם."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      42,
+      {x|["נונסטי איבן מנק סאפיאן סאפיאן. קראס הבקיץ קולהע. סטום וולופטה אודיפו.\nאקווזמן תתיח שמחויט גדדיש. אפאח נולום בלוף למרקל ליאמום. במר היושבב מנק אדיפיסינג הבקיץ קוויס צש נונסטי בריקנה.","תתיח לביקו שנרא קוויז בלוקריה מנת אמט טידום למסון. לרעח שערש חשלו קוואזי סטום קלאצי בליקרה אאוגו. בעליק צמלח במר קונסקטורר צשחמי דול וענוף.\nבלינדו לפרומי ותלברו נולום נון בליא תצטריק קלאצי במר. דס וק למרקוח. בליא בלינדו בלוקריה קראס יבש סחטיר צש לרעח צשחמי."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      1337,
+      {x|["סאפיאן לפרומי ליאמום לת שערש. סטום איבן צמוקו דול יבש. לפריקך קוויז אלמנקום ניסי.\nברשג ערששף כלרשט קוואזי בלוף. מנת אקווזמן לפתיעם במר שלושע וולופטה קוואזי קלובר. הועניב היושבב דולור איבן לרטי פוסיליס.","אס הכייר לורם למרקל. אלמנקום תצטנפל וק. סטום וולופטה אפאח וחאית לרטי למסון.\nצמלח בליקרה סטום. בלובק צופעט איפסום כלרשט הדש קוואזי. טידום פוסיליס טידום צשחמי וק בלרק שערש אקווזמן."]|x}
+    );
+    ( "lorem.paragraphs(2)",
+      7,
+      {x|["סת גדדיש למרקוח. ותלברו הועניב בליא בלרק מנת שנרא נון לכימפו צש בלוף. אודיפו דומור קורוס סיט הבקיץ נונסטי מונופץ חשלו טידום ברורק.\nברומץ תוק בלינך מודוף מוסן אס לפמעט. וולופטה מיחוצים לרעח נובש וענוף. תצטנפל שהכים אס ליאמום צופעט לפתיעם.","אקווזמן איף ברשג ולתיעם כאנה שערש לפתיעם לורם צמלח קולהע. הכייר קלובר שנרא אדיפיסינג לרעח מנק קליר. בליקרה וסטיבולום רוגצה דיאם ברורק לרעח בלינך איף מוסן ברורק.\nצשחמי תתיח פוסיליס לפתיעם דומור. ניסי שערש ליאמום סת וואל הדש נון בליקרה קונסקטורר. וענוף רוגצה ניסי צופעט ארווס שהכים בליא בלינדו ניבאה ולתיעם."]|x}
+    );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      42,
+      {x|["Jurgen_60degard@hotmail.com","Jurgen.60degard@gmail.com"]|x} );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      1337,
+      {x|["Jurgen.60degard27@gmail.com","Jurgen_60degard@gmail.com"]|x} );
+    ( "internet.email({\"firstName\":\"Jürgen\",\"lastName\":\"Ødegård\"})",
+      7,
+      {x|["Jurgen_60degard@gmail.com","Jurgen_60degard50@yahoo.com"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      42,
+      {x|["Anna.8xukasz","Anna_8xukasz15"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      1337,
+      {x|["Anna.8xukasz15","Anna.8xukasz"]|x} );
+    ( "internet.username({\"firstName\":\"Анна\",\"lastName\":\"Łukasz\"})",
+      7,
+      {x|["Anna.8xukasz77","Anna_8xukasz"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      42,
+      {x|["Zoë15","Zoë_לידור2"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      1337,
+      {x|["Zoë.ברשלום","Zoë.עובדיהו"]|x} );
+    ( "internet.displayName({\"firstName\":\"Zoë\"})",
+      7,
+      {x|["Zoë_זכות","Zoë.בר67"]|x} );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      42,
+      {x|["ytschk60@hotmail.com","aryalh*zvra61@yahoo.com"]|x} );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      1337,
+      {x|["yalh?bnay73@gmail.com","abry_hrtvb76@gmail.com"]|x} );
+    ( "internet.email({\"allowSpecialCharacters\":true})",
+      7,
+      {x|["nysn.yayr@gmail.com","shyrh60@hotmail.com"]|x} );
+    ( "internet.domainWord()",
+      42,
+      {x|["hospitable-unit","shameful-negotiation"]|x} );
+    ( "internet.domainWord()",
+      1337,
+      {x|["fatal-co-producer","flickering-in-joke"]|x} );
+    ("internet.domainWord()", 7, {x|["blushing-saw","jittery-puritan"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 42, {x|["€375.15","€599.09"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 1337, {x|["€262.79","€459.85"]|x});
+    ("commerce.price({\"symbol\":\"€\"})", 7, {x|["€77.29","€723.75"]|x});
+    ("commerce.productName()", 42, {x|["כובע קטן מצַח","מקלדת גנרית מגומי"]|x});
+    ( "commerce.productName()",
+      1337,
+      {x|["טונה גנרית מכותנה","מגבות כפרי מעץ"]|x} );
+    ("commerce.productName()", 7, {x|["אופניים מעשי ממתכת","סבון קטן מעץ"]|x});
+    ("company.name()", 42, {x|["לחמן בע״מ","לידור - שריג"]|x});
+    ("company.name()", 1337, {x|["חזן - בנאי","דורי, תדמור ופרץ"]|x});
+    ("company.name()", 7, {x|["סתיו - יאיר","נחום - אוריאל"]|x});
+    ( "finance.currencyName()",
+      42,
+      {x|["New Israeli Sheqel","CFA Franc BCEAO"]|x} );
+    ("finance.currencyName()", 1337, {x|["Ethiopian Birr","Canadian Dollar"]|x});
+    ("finance.currencyName()", 7, {x|["Barbados Dollar","Somali Shilling"]|x});
+    ( "finance.creditCardNumber(\"visa\")",
+      42,
+      {x|["4975110867099","4211-3542-6123-4718"]|x} );
+    ( "finance.creditCardNumber(\"visa\")",
+      1337,
+      {x|["4124352971364","4947734571266"]|x} );
+    ( "finance.creditCardNumber(\"visa\")",
+      7,
+      {x|["4747955024684","4029249069258"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      42,
+      {x|["2696-7511-0867-0988","2311-1354-2612-3471"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      1337,
+      {x|["2300-2435-2971-3611","5377-3457-1264-1417"]|x} );
+    ( "finance.creditCardNumber(\"mastercard\")",
+      7,
+      {x|["2610-4795-5024-6833","2365-9249-0692-5918"]|x} );
+    ("animal.type()", 42, {x|["frog","whale"]|x});
+    ("animal.type()", 1337, {x|["eagle","cow"]|x});
+    ("animal.type()", 7, {x|["bird","rhinoceros"]|x});
+    ( "system.fileName({\"extensionCount\":2})",
+      42,
+      {x|["unnaturally_dreamily.mar.xlw","following_huzzah.dot.m1v"]|x} );
+    ( "system.fileName({\"extensionCount\":2})",
+      1337,
+      {x|["wallaby.jpg.distz","circa_masquerade.lrf.vsw"]|x} );
+    ( "system.fileName({\"extensionCount\":2})",
+      7,
+      {x|["bleak.xla.xhtml","drat_who_jungle.xlsx.sh"]|x} );
+    ( "food.dish()",
+      42,
+      {x|["Jicama Salad","Tangy Parsnip And White Flour Bowl"]|x} );
+    ( "food.dish()",
+      1337,
+      {x|["Moist Green Beans And White Wine Vinegar Bowl","Bruschette With Tomato"]|x}
+    );
+    ("food.dish()", 7, {x|["Parsley-rubbed Ostrich Salad","Baba Ganoush"]|x});
+    ( "music.songName()",
+      42,
+      {x|["I Honestly Love You","Why Do Fools Fall in Love?"]|x} );
+    ("music.songName()", 1337, {x|["Frankenstein","Cars"]|x});
+    ("music.songName()", 7, {x|["Bad Day","Take Me Home, Country Roads"]|x});
+    ("book.title()", 42, {x|["Lord Jim","Tropic of Cancer"]|x});
+    ("book.title()", 1337, {x|["Gone with the Wind","Candide"]|x});
+    ( "book.title()",
+      7,
+      {x|["All Quiet on the Western Front","The Pickwick Papers"]|x} );
+    ("vehicle.vehicle()", 42, {x|["Jeep Wrangler","Renault Impala"]|x});
+    ("vehicle.vehicle()", 1337, {x|["Fiat Aventador","Ford Explorer"]|x});
+    ("vehicle.vehicle()", 7, {x|["BYD Mustang","Land Rover Model X"]|x});
+  ]

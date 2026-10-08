@@ -248,4 +248,5 @@ let all_fakers : (string * (unit -> Core.t)) list =
     ("zu_ZA", Locale_zu_ZA.faker);
   ]
 
-let find_chain code = Option.map (fun c -> c ()) (List.assoc_opt code all_chains)
+let find_chain code =
+  Option.map (fun c -> c ()) (List.assoc_opt code all_chains)

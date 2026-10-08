@@ -2,56 +2,109 @@
 
 let locale = "en"
 
-let cases = [
-  ("dog", 42, {x|["Garafian Shepherd","Tyrolean Hound","Pshdar Dog"]|x});
-  ("dog", 1337, {x|["Chortai","Boxer","Croatian Sheepdog"]|x});
-  ("dog", 7, {x|["Bakharwal dog","Russian Toy","Griffon Nivernais"]|x});
-  ("cat", 42, {x|["Himalayan","Toyger","Scottish Fold"]|x});
-  ("cat", 1337, {x|["Devon Rex","Bombay","Donskoy"]|x});
-  ("cat", 7, {x|["American Wirehair","Serengeti","LaPerm"]|x});
-  ("snake", 42, {x|["Grand Canyon rattlesnake","Western coral snake","Red-headed krait"]|x});
-  ("snake", 1337, {x|["Cuban wood snake","Buff striped keelback","Down's tiger snake"]|x});
-  ("snake", 7, {x|["Barred wolf snake","Schultze's pitviper","Horned viper"]|x});
-  ("bear", 42, {x|["Brown bear","Sun bear","Sloth bear"]|x});
-  ("bear", 1337, {x|["Brown bear","Asian black bear","Brown bear"]|x});
-  ("bear", 7, {x|["American black bear","Spectacled bear","Giant panda"]|x});
-  ("lion", 42, {x|["Cape lion","West African Lion","Transvaal lion"]|x});
-  ("lion", 1337, {x|["Barbary Lion","Barbary Lion","Barbary Lion"]|x});
-  ("lion", 7, {x|["Asiatic Lion","Transvaal lion","Masai Lion"]|x});
-  ("cetacean", 42, {x|["Fraser’s Dolphin","Striped Dolphin","Pantropical Spotted Dolphin"]|x});
-  ("cetacean", 1337, {x|["Clymene Dolphin","Bottlenose Dolphin","Commerson’s Dolphin"]|x});
-  ("cetacean", 7, {x|["Atlantic White-Sided Dolphin","Risso’s Dolphin","Heaviside’s Dolphin"]|x});
-  ("horse", 42, {x|["Furioso-North Star","Vyatka","Pottok"]|x});
-  ("horse", 1337, {x|["Colorado Ranger","Blazer Horse","Criollo Horse"]|x});
-  ("horse", 7, {x|["Asian wild Horse","Russian Heavy Draft","Icelandic Horse"]|x});
-  ("bird", 42, {x|["Golden Eagle","Wild Turkey","Rose-throated Becard"]|x});
-  ("bird", 1337, {x|["Common Poorwill","Broad-billed Hummingbird","Cory's Shearwater"]|x});
-  ("bird", 7, {x|["Bicknell's Thrush","Sharp-tailed Grouse","Gull-billed Tern"]|x});
-  ("cow", 42, {x|["Estonian Holstein","Vestland Red Polled","Pineywoods"]|x});
-  ("cow", 1337, {x|["Butana cattle","Balancer","Canadienne"]|x});
-  ("cow", 7, {x|["Andalusian Blond","Raya","Gobra"]|x});
-  ("fish", 42, {x|["European anchovy","Wuchang bream","Pacific anchoveta"]|x});
-  ("fish", 1337, {x|["Capelin","Bighead carp","Channel catfish"]|x});
-  ("fish", 7, {x|["Atlantic cod","Pacific saury","Grass carp"]|x});
-  ("crocodilia", 42, {x|["Cuvier’s Dwarf Caiman","West African Crocodile","Saltwater Crocodile"]|x});
-  ("crocodilia", 1337, {x|["Chinese Alligator","Australian Freshwater Crocodile","Chinese Alligator"]|x});
-  ("crocodilia", 7, {x|["Alligator mississippiensis","Schneider’s Smooth-fronted Caiman","Gharial"]|x});
-  ("insect", 42, {x|["Gouty oak gall","White-horned horntail","Red wood ant"]|x});
-  ("insect", 1337, {x|["Erythrina gall wasp","Carpenter ant","European hornet"]|x});
-  ("insect", 7, {x|["Asian paper wasp","Silky ant","Hunting wasp"]|x});
-  ("rabbit", 42, {x|["English Spot","Standard Chinchilla","Netherland Dwarf"]|x});
-  ("rabbit", 1337, {x|["Cinnamon","Blanc de Hotot","Crème D’Argent"]|x});
-  ("rabbit", 7, {x|["American Sable","Polish","French Angora"]|x});
-  ("rodent", 42, {x|["Famatina chinchilla rat","Talas tuco-tuco","Olallamys edax"]|x});
-  ("rodent", 1337, {x|["Crested porcupine","Bridge's degu","Cryptomys damarensis"]|x});
-  ("rodent", 7, {x|["Bathyergus janetta","Porteous' tuco-tuco","Fukomys micklemi"]|x});
-  ("type", 42, {x|["frog","whale","polar bear"]|x});
-  ("type", 1337, {x|["eagle","cow","elephant"]|x});
-  ("type", 7, {x|["bird","rhinoceros","gorilla"]|x});
-  ("petName", 42, {x|["Ginger","Stella","Milo"]|x});
-  ("petName", 1337, {x|["Cooper","Bruno","Cooper"]|x});
-  ("petName", 7, {x|["Bandit","Murphey","Hank"]|x});
-  ("fake", 42, {x|["Tyrolean Hound|Ojos Azules|Brown water python|Spectacled bear|Northeast Congo Lion|Tucuxi|Canadian Pacer|Bufflehead|Jersey cattle|Chilean jack mackerel|Australian Freshwater Crocodile|Golden paper wasp|Polish|Heliophobius|bee|Louie|","Australian Stumpy Tail Cattle Dog|Turkish Angora|Eastern lyre snake|Sloth bear|Asiatic Lion|Arnoux's Beaked Whale|Colonial Spanish Horse|Eastern Phoebe|Kazakh Whiteheaded|Yellowfin tuna|West African Crocodile|Odorous house ant|Argente Brun|Asiatic brush-tailed porcupine|gecko|Cooper|","Fila Brasileiro|Nebelung|Small-eyed snake|Sun bear|Barbary Lion|Sei Whale|Posavac Horse|Berylline Hummingbird|Australian Braford|Longtail tuna|Alligator mississippiensis|German yellowjacket|Lionhead|Galea|penguin|Molly|"]|x});
-  ("fake", 1337, {x|["Boxer|Maine Coon|Lesser black krait|Sun bear|Asiatic Lion|Long-finned Pilot Whale|Yili Horse|Siberian Accentor|Dølafe|Jumbo flying squid|Black Caiman|Pteromalid wasp|Britannia Petite|Chacoan tuco-tuco|shark|Buddy|","Greek Harehound|Munchkin|Red-headed krait|Asian black bear|Cape lion|Amazon River Dolphin|Appaloosa|Field Sparrow|Iberian cattle|Pond loach|New Guinea Freshwater Crocodile|Encyrtid wasp|Argente Brun|Tucuman tuco-tuco|fox|Milo|","Ratonero Mallorquin|Burmese|Trinket snake|Sun bear|Northeast Congo Lion|Indo-Pacific Hump-backed Dolphin|Kafa|Gray-cheeked Thrush|Icelandic|Pacific thread herring|Tomistoma|Velvet ant|French Lop|Mexican agouti|dolphin|Stella|"]|x});
-  ("fake", 7, {x|["Russian Toy|Savannah|Madagascar ground boa|American black bear|Masai Lion|Rough-Toothed Dolphin|Arabian Horse|Whimbrel|Guzerá|Amur catfish|West African Crocodile|Mossyrose gall wasp|Beveren|Pearson's tuco-tuco|hamster|Charlie|","Galician Shepherd Dog|Himalayan|San Francisco garter snake|Polar bear|Masai Lion|Melon-headed Whale|Jeju Horse|Great Kiskadee|Begayt|Goldstripe sardinella|Orinoco Crocodile|Honey bee|Argente Brun|Heterocephalus|wolf|Max|","Dogo Argentino|Chausie|West Indian racer|Giant panda|Asiatic Lion|Hourglass Dolphin|Karossier|Eyebrowed Thrush|Chillingham cattle|Gazami crab|Schneider’s Smooth-fronted Caiman|Macao paper wasp|Polish|Mountain paca|whale|Archie|"]|x});
-]
+let cases =
+  [
+    ("dog", 42, {x|["Garafian Shepherd","Tyrolean Hound","Pshdar Dog"]|x});
+    ("dog", 1337, {x|["Chortai","Boxer","Croatian Sheepdog"]|x});
+    ("dog", 7, {x|["Bakharwal dog","Russian Toy","Griffon Nivernais"]|x});
+    ("cat", 42, {x|["Himalayan","Toyger","Scottish Fold"]|x});
+    ("cat", 1337, {x|["Devon Rex","Bombay","Donskoy"]|x});
+    ("cat", 7, {x|["American Wirehair","Serengeti","LaPerm"]|x});
+    ( "snake",
+      42,
+      {x|["Grand Canyon rattlesnake","Western coral snake","Red-headed krait"]|x}
+    );
+    ( "snake",
+      1337,
+      {x|["Cuban wood snake","Buff striped keelback","Down's tiger snake"]|x} );
+    ( "snake",
+      7,
+      {x|["Barred wolf snake","Schultze's pitviper","Horned viper"]|x} );
+    ("bear", 42, {x|["Brown bear","Sun bear","Sloth bear"]|x});
+    ("bear", 1337, {x|["Brown bear","Asian black bear","Brown bear"]|x});
+    ("bear", 7, {x|["American black bear","Spectacled bear","Giant panda"]|x});
+    ("lion", 42, {x|["Cape lion","West African Lion","Transvaal lion"]|x});
+    ("lion", 1337, {x|["Barbary Lion","Barbary Lion","Barbary Lion"]|x});
+    ("lion", 7, {x|["Asiatic Lion","Transvaal lion","Masai Lion"]|x});
+    ( "cetacean",
+      42,
+      {x|["Fraser’s Dolphin","Striped Dolphin","Pantropical Spotted Dolphin"]|x}
+    );
+    ( "cetacean",
+      1337,
+      {x|["Clymene Dolphin","Bottlenose Dolphin","Commerson’s Dolphin"]|x} );
+    ( "cetacean",
+      7,
+      {x|["Atlantic White-Sided Dolphin","Risso’s Dolphin","Heaviside’s Dolphin"]|x}
+    );
+    ("horse", 42, {x|["Furioso-North Star","Vyatka","Pottok"]|x});
+    ("horse", 1337, {x|["Colorado Ranger","Blazer Horse","Criollo Horse"]|x});
+    ( "horse",
+      7,
+      {x|["Asian wild Horse","Russian Heavy Draft","Icelandic Horse"]|x} );
+    ("bird", 42, {x|["Golden Eagle","Wild Turkey","Rose-throated Becard"]|x});
+    ( "bird",
+      1337,
+      {x|["Common Poorwill","Broad-billed Hummingbird","Cory's Shearwater"]|x}
+    );
+    ( "bird",
+      7,
+      {x|["Bicknell's Thrush","Sharp-tailed Grouse","Gull-billed Tern"]|x} );
+    ("cow", 42, {x|["Estonian Holstein","Vestland Red Polled","Pineywoods"]|x});
+    ("cow", 1337, {x|["Butana cattle","Balancer","Canadienne"]|x});
+    ("cow", 7, {x|["Andalusian Blond","Raya","Gobra"]|x});
+    ("fish", 42, {x|["European anchovy","Wuchang bream","Pacific anchoveta"]|x});
+    ("fish", 1337, {x|["Capelin","Bighead carp","Channel catfish"]|x});
+    ("fish", 7, {x|["Atlantic cod","Pacific saury","Grass carp"]|x});
+    ( "crocodilia",
+      42,
+      {x|["Cuvier’s Dwarf Caiman","West African Crocodile","Saltwater Crocodile"]|x}
+    );
+    ( "crocodilia",
+      1337,
+      {x|["Chinese Alligator","Australian Freshwater Crocodile","Chinese Alligator"]|x}
+    );
+    ( "crocodilia",
+      7,
+      {x|["Alligator mississippiensis","Schneider’s Smooth-fronted Caiman","Gharial"]|x}
+    );
+    ( "insect",
+      42,
+      {x|["Gouty oak gall","White-horned horntail","Red wood ant"]|x} );
+    ( "insect",
+      1337,
+      {x|["Erythrina gall wasp","Carpenter ant","European hornet"]|x} );
+    ("insect", 7, {x|["Asian paper wasp","Silky ant","Hunting wasp"]|x});
+    ( "rabbit",
+      42,
+      {x|["English Spot","Standard Chinchilla","Netherland Dwarf"]|x} );
+    ("rabbit", 1337, {x|["Cinnamon","Blanc de Hotot","Crème D’Argent"]|x});
+    ("rabbit", 7, {x|["American Sable","Polish","French Angora"]|x});
+    ( "rodent",
+      42,
+      {x|["Famatina chinchilla rat","Talas tuco-tuco","Olallamys edax"]|x} );
+    ( "rodent",
+      1337,
+      {x|["Crested porcupine","Bridge's degu","Cryptomys damarensis"]|x} );
+    ( "rodent",
+      7,
+      {x|["Bathyergus janetta","Porteous' tuco-tuco","Fukomys micklemi"]|x} );
+    ("type", 42, {x|["frog","whale","polar bear"]|x});
+    ("type", 1337, {x|["eagle","cow","elephant"]|x});
+    ("type", 7, {x|["bird","rhinoceros","gorilla"]|x});
+    ("petName", 42, {x|["Ginger","Stella","Milo"]|x});
+    ("petName", 1337, {x|["Cooper","Bruno","Cooper"]|x});
+    ("petName", 7, {x|["Bandit","Murphey","Hank"]|x});
+    ( "fake",
+      42,
+      {x|["Tyrolean Hound|Ojos Azules|Brown water python|Spectacled bear|Northeast Congo Lion|Tucuxi|Canadian Pacer|Bufflehead|Jersey cattle|Chilean jack mackerel|Australian Freshwater Crocodile|Golden paper wasp|Polish|Heliophobius|bee|Louie|","Australian Stumpy Tail Cattle Dog|Turkish Angora|Eastern lyre snake|Sloth bear|Asiatic Lion|Arnoux's Beaked Whale|Colonial Spanish Horse|Eastern Phoebe|Kazakh Whiteheaded|Yellowfin tuna|West African Crocodile|Odorous house ant|Argente Brun|Asiatic brush-tailed porcupine|gecko|Cooper|","Fila Brasileiro|Nebelung|Small-eyed snake|Sun bear|Barbary Lion|Sei Whale|Posavac Horse|Berylline Hummingbird|Australian Braford|Longtail tuna|Alligator mississippiensis|German yellowjacket|Lionhead|Galea|penguin|Molly|"]|x}
+    );
+    ( "fake",
+      1337,
+      {x|["Boxer|Maine Coon|Lesser black krait|Sun bear|Asiatic Lion|Long-finned Pilot Whale|Yili Horse|Siberian Accentor|Dølafe|Jumbo flying squid|Black Caiman|Pteromalid wasp|Britannia Petite|Chacoan tuco-tuco|shark|Buddy|","Greek Harehound|Munchkin|Red-headed krait|Asian black bear|Cape lion|Amazon River Dolphin|Appaloosa|Field Sparrow|Iberian cattle|Pond loach|New Guinea Freshwater Crocodile|Encyrtid wasp|Argente Brun|Tucuman tuco-tuco|fox|Milo|","Ratonero Mallorquin|Burmese|Trinket snake|Sun bear|Northeast Congo Lion|Indo-Pacific Hump-backed Dolphin|Kafa|Gray-cheeked Thrush|Icelandic|Pacific thread herring|Tomistoma|Velvet ant|French Lop|Mexican agouti|dolphin|Stella|"]|x}
+    );
+    ( "fake",
+      7,
+      {x|["Russian Toy|Savannah|Madagascar ground boa|American black bear|Masai Lion|Rough-Toothed Dolphin|Arabian Horse|Whimbrel|Guzerá|Amur catfish|West African Crocodile|Mossyrose gall wasp|Beveren|Pearson's tuco-tuco|hamster|Charlie|","Galician Shepherd Dog|Himalayan|San Francisco garter snake|Polar bear|Masai Lion|Melon-headed Whale|Jeju Horse|Great Kiskadee|Begayt|Goldstripe sardinella|Orinoco Crocodile|Honey bee|Argente Brun|Heterocephalus|wolf|Max|","Dogo Argentino|Chausie|West Indian racer|Giant panda|Asiatic Lion|Hourglass Dolphin|Karossier|Eyebrowed Thrush|Chillingham cattle|Gazami crab|Schneider’s Smooth-fronted Caiman|Macao paper wasp|Polish|Mountain paca|whale|Archie|"]|x}
+    );
+  ]

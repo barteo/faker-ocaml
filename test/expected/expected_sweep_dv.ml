@@ -2,728 +2,1239 @@
 
 let locale = "dv"
 
-let cases = [
-  ("airline.aircraftType", 42, {x|["regional","widebody"]|x});
-  ("airline.aircraftType", 1337, {x|["narrowbody","narrowbody"]|x});
-  ("airline.aircraftType", 7, {x|["narrowbody","widebody"]|x});
-  ("airline.airline", 42, {x|[{"name":"Etihad Airways","iataCode":"EY"},{"name":"Virgin Australia","iataCode":"VA"}]|x});
-  ("airline.airline", 1337, {x|[{"name":"Cebu Pacific Air","iataCode":"5J"},{"name":"Aircalin","iataCode":"SB"}]|x});
-  ("airline.airline", 7, {x|[{"name":"Air France","iataCode":"AF"},{"name":"South African Airways","iataCode":"SA"}]|x});
-  ("airline.airplane", 42, {x|[{"name":"Boeing 737-900","iataTypeCode":"739"},{"name":"McDonnell Douglas MD88","iataTypeCode":"M88"}]|x});
-  ("airline.airplane", 1337, {x|[{"name":"Boeing 717","iataTypeCode":"717"},{"name":"Airbus A350-1000","iataTypeCode":"351"}]|x});
-  ("airline.airplane", 7, {x|[{"name":"Airbus A321neo","iataTypeCode":"32Q"},{"name":"Embraer 195","iataTypeCode":"E95"}]|x});
-  ("airline.airport", 42, {x|[{"name":"Hartsfield-Jackson Atlanta International Airport","iataCode":"ATL"},{"name":"Viracopos International Airport","iataCode":"VCP"}]|x});
-  ("airline.airport", 1337, {x|[{"name":"Denver International Airport","iataCode":"DEN"},{"name":"Canberra Airport","iataCode":"CBR"}]|x});
-  ("airline.airport", 7, {x|[{"name":"Belem Val de Cans International Airport","iataCode":"BEL"},{"name":"San Francisco International Airport","iataCode":"SFO"}]|x});
-  ("airline.flightNumber", 42, {x|["97","210"]|x});
-  ("airline.flightNumber", 1337, {x|["22","35"]|x});
-  ("airline.flightNumber", 7, {x|["8","79"]|x});
-  ("airline.recordLocator", 42, {x|["JYTQDD","BWQTAZ"]|x});
-  ("airline.recordLocator", 1337, {x|["GDGMHN","GZTCJR"]|x});
-  ("airline.recordLocator", 7, {x|["BUMTZP","NBGNSV"]|x});
-  ("airline.seat", 42, {x|["14F","26D"]|x});
-  ("airline.seat", 1337, {x|["10A","10C"]|x});
-  ("airline.seat", 7, {x|["3E","16E"]|x});
-  ("animal.bear", 42, {x|["Brown bear","Sun bear"]|x});
-  ("animal.bear", 1337, {x|["Brown bear","Asian black bear"]|x});
-  ("animal.bear", 7, {x|["American black bear","Spectacled bear"]|x});
-  ("animal.bird", 42, {x|["Golden Eagle","Wild Turkey"]|x});
-  ("animal.bird", 1337, {x|["Common Poorwill","Broad-billed Hummingbird"]|x});
-  ("animal.bird", 7, {x|["Bicknell's Thrush","Sharp-tailed Grouse"]|x});
-  ("animal.cat", 42, {x|["Himalayan","Toyger"]|x});
-  ("animal.cat", 1337, {x|["Devon Rex","Bombay"]|x});
-  ("animal.cat", 7, {x|["American Wirehair","Serengeti"]|x});
-  ("animal.cetacean", 42, {x|["Fraser’s Dolphin","Striped Dolphin"]|x});
-  ("animal.cetacean", 1337, {x|["Clymene Dolphin","Bottlenose Dolphin"]|x});
-  ("animal.cetacean", 7, {x|["Atlantic White-Sided Dolphin","Risso’s Dolphin"]|x});
-  ("animal.cow", 42, {x|["Estonian Holstein","Vestland Red Polled"]|x});
-  ("animal.cow", 1337, {x|["Butana cattle","Balancer"]|x});
-  ("animal.cow", 7, {x|["Andalusian Blond","Raya"]|x});
-  ("animal.crocodilia", 42, {x|["Cuvier’s Dwarf Caiman","West African Crocodile"]|x});
-  ("animal.crocodilia", 1337, {x|["Chinese Alligator","Australian Freshwater Crocodile"]|x});
-  ("animal.crocodilia", 7, {x|["Alligator mississippiensis","Schneider’s Smooth-fronted Caiman"]|x});
-  ("animal.dog", 42, {x|["Garafian Shepherd","Tyrolean Hound"]|x});
-  ("animal.dog", 1337, {x|["Chortai","Boxer"]|x});
-  ("animal.dog", 7, {x|["Bakharwal dog","Russian Toy"]|x});
-  ("animal.fish", 42, {x|["European anchovy","Wuchang bream"]|x});
-  ("animal.fish", 1337, {x|["Capelin","Bighead carp"]|x});
-  ("animal.fish", 7, {x|["Atlantic cod","Pacific saury"]|x});
-  ("animal.horse", 42, {x|["Furioso-North Star","Vyatka"]|x});
-  ("animal.horse", 1337, {x|["Colorado Ranger","Blazer Horse"]|x});
-  ("animal.horse", 7, {x|["Asian wild Horse","Russian Heavy Draft"]|x});
-  ("animal.insect", 42, {x|["Gouty oak gall","White-horned horntail"]|x});
-  ("animal.insect", 1337, {x|["Erythrina gall wasp","Carpenter ant"]|x});
-  ("animal.insect", 7, {x|["Asian paper wasp","Silky ant"]|x});
-  ("animal.lion", 42, {x|["Cape lion","West African Lion"]|x});
-  ("animal.lion", 1337, {x|["Barbary Lion","Barbary Lion"]|x});
-  ("animal.lion", 7, {x|["Asiatic Lion","Transvaal lion"]|x});
-  ("animal.petName", 42, {x|["Ginger","Stella"]|x});
-  ("animal.petName", 1337, {x|["Cooper","Bruno"]|x});
-  ("animal.petName", 7, {x|["Bandit","Murphey"]|x});
-  ("animal.rabbit", 42, {x|["English Spot","Standard Chinchilla"]|x});
-  ("animal.rabbit", 1337, {x|["Cinnamon","Blanc de Hotot"]|x});
-  ("animal.rabbit", 7, {x|["American Sable","Polish"]|x});
-  ("animal.rodent", 42, {x|["Famatina chinchilla rat","Talas tuco-tuco"]|x});
-  ("animal.rodent", 1337, {x|["Crested porcupine","Bridge's degu"]|x});
-  ("animal.rodent", 7, {x|["Bathyergus janetta","Porteous' tuco-tuco"]|x});
-  ("animal.snake", 42, {x|["Grand Canyon rattlesnake","Western coral snake"]|x});
-  ("animal.snake", 1337, {x|["Cuban wood snake","Buff striped keelback"]|x});
-  ("animal.snake", 7, {x|["Barred wolf snake","Schultze's pitviper"]|x});
-  ("animal.type", 42, {x|["frog","whale"]|x});
-  ("animal.type", 1337, {x|["eagle","cow"]|x});
-  ("animal.type", 7, {x|["bird","rhinoceros"]|x});
-  ("book.author", 42, {x|["Henry David Thoreau","W.K. Marriott"]|x});
-  ("book.author", 1337, {x|["Frances Hodgson Burnett","Clifford R. Adams"]|x});
-  ("book.author", 7, {x|["Aylmer Maude","Richard Wright"]|x});
-  ("book.format", 42, {x|["Ebook","Paperback"]|x});
-  ("book.format", 1337, {x|["Ebook","Audiobook"]|x});
-  ("book.format", 7, {x|["Audiobook","Paperback"]|x});
-  ("book.genre", 42, {x|["Fantasy","Western"]|x});
-  ("book.genre", 1337, {x|["Comic","Children's Literature"]|x});
-  ("book.genre", 7, {x|["Biography","Religion"]|x});
-  ("book.publisher", 42, {x|["Flame Tree Publishing","University of Nebraska Press"]|x});
-  ("book.publisher", 1337, {x|["City Lights Publishers","Borgo Press"]|x});
-  ("book.publisher", 7, {x|["Bantam Books","Parragon"]|x});
-  ("book.series", 42, {x|["Sherlock Holmes","Twilight"]|x});
-  ("book.series", 1337, {x|["Jane Austen Murder Mysteries","Harry Potter"]|x});
-  ("book.series", 7, {x|["Colonel Race","The Maze Runner"]|x});
-  ("book.title", 42, {x|["Lord Jim","Tropic of Cancer"]|x});
-  ("book.title", 1337, {x|["Gone with the Wind","Candide"]|x});
-  ("book.title", 7, {x|["All Quiet on the Western Front","The Pickwick Papers"]|x});
-  ("color.cmyk", 42, {x|[[0.37,0.96,0.73,0.6],[0.15,0.15,0.05,0.87]]|x});
-  ("color.cmyk", 1337, {x|[[0.26,0.16,0.28,0.46],[0.32,0.52,0.26,0.98]]|x});
-  ("color.cmyk", 7, {x|[[0.07,0.78,0.44,0.73],[0.98,0.54,0.5,0.07]]|x});
-  ("color.colorByCSSColorSpace", 42, {x|[[0.3745,0.9508,0.732],[0.5987,0.156,0.156]]|x});
-  ("color.colorByCSSColorSpace", 1337, {x|[[0.262,0.1586,0.2781],[0.4593,0.321,0.5184]]|x});
-  ("color.colorByCSSColorSpace", 7, {x|[[0.0763,0.7799,0.4384],[0.7235,0.978,0.5385]]|x});
-  ("color.cssSupportedFunction", 42, {x|["hsla","color"]|x});
-  ("color.cssSupportedFunction", 1337, {x|["hsl","rgba"]|x});
-  ("color.cssSupportedFunction", 7, {x|["rgb","lch"]|x});
-  ("color.cssSupportedSpace", 42, {x|["display-p3","prophoto-rgb"]|x});
-  ("color.cssSupportedSpace", 1337, {x|["display-p3","sRGB"]|x});
-  ("color.cssSupportedSpace", 7, {x|["sRGB","a98-rgb"]|x});
-  ("color.hsl", 42, {x|[[135,0.96,0.73],[216,0.15,0.15]]|x});
-  ("color.hsl", 1337, {x|[[94,0.16,0.28],[165,0.32,0.52]]|x});
-  ("color.hsl", 7, {x|[[27,0.78,0.44],[261,0.98,0.54]]|x});
-  ("color.human", 42, {x|["ރިހިކުލަ","ދަނބުކުލަ"]|x});
-  ("color.human", 1337, {x|["ރަންކުލަ","ނޫ"]|x});
-  ("color.human", 7, {x|["ނާރިނގުކުލަ","މުށިކުލަ"]|x});
-  ("color.hwb", 42, {x|[[135,0.96,0.73],[216,0.15,0.15]]|x});
-  ("color.hwb", 1337, {x|[[94,0.16,0.28],[165,0.32,0.52]]|x});
-  ("color.hwb", 7, {x|[[27,0.78,0.44],[261,0.98,0.54]]|x});
-  ("color.lab", 42, {x|[[0.37454,90.1429,46.3988],[0.598659,-68.7963,-68.8011]]|x});
-  ("color.lab", 1337, {x|[[0.262024,-68.2632,-44.3747],[0.459317,-35.7999,3.6786]]|x});
-  ("color.lab", 7, {x|[[0.076308,55.9838,-12.3182],[0.723465,95.598,7.6992]]|x});
-  ("color.lch", 42, {x|[[0.37454,218.7,263.5],[0.598659,35.8,56.1]]|x});
-  ("color.lch", 1337, {x|[[0.262024,36.5,100.1],[0.459317,73.8,186.6]]|x});
-  ("color.lch", 7, {x|[[0.076308,179.4,157.8],[0.723465,225,193.9]]|x});
-  ("color.rgb", 42, {x|["#8ead33","#1ddf0f"]|x});
-  ("color.rgb", 1337, {x|["#536a7b","#5fa28d"]|x});
-  ("color.rgb", 7, {x|["#1b9ffb","#b15aeb"]|x});
-  ("color.space", 42, {x|["HSLA","sYCC"]|x});
-  ("color.space", 1337, {x|["DCI-P3","CIELUV"]|x});
-  ("color.space", 7, {x|["British Standard Colour (BS)","Rec. 601"]|x});
-  ("commerce.department", 42, {x|["Garden","Tools"]|x});
-  ("commerce.department", 1337, {x|["Computers","Books"]|x});
-  ("commerce.department", 7, {x|["Baby","Outdoors"]|x});
-  ("commerce.isbn", 42, {x|["978-0-9751108-6-7","978-1-0982-1135-6"]|x});
-  ("commerce.isbn", 1337, {x|["978-0-12-435297-1","978-0-361-94773-2"]|x});
-  ("commerce.isbn", 7, {x|["978-0-7479-5502-3","978-0-683-02924-6"]|x});
-  ("commerce.price", 42, {x|["375.15","599.09"]|x});
-  ("commerce.price", 1337, {x|["262.79","459.85"]|x});
-  ("commerce.price", 7, {x|["77.29","723.75"]|x});
-  ("commerce.product", 42, {x|["Computer","Towels"]|x});
-  ("commerce.product", 1337, {x|["Chicken","Car"]|x});
-  ("commerce.product", 7, {x|["Ball","Shirt"]|x});
-  ("commerce.productAdjective", 42, {x|["Handcrafted","Tasty"]|x});
-  ("commerce.productAdjective", 1337, {x|["Frozen","Ergonomic"]|x});
-  ("commerce.productAdjective", 7, {x|["Electronic","Rustic"]|x});
-  ("commerce.productDescription", 42, {x|["New މަޑުފެހި Pants with ergonomic design for crushing comfort","Discover the perfumed new Salad with an exciting mix of Aluminum ingredients"]|x});
-  ("commerce.productDescription", 1337, {x|["Innovative Car featuring lawful technology and Concrete construction","Our zesty-inspired Sausages brings a taste of luxury to your ignorant lifestyle"]|x});
-  ("commerce.productDescription", 7, {x|["Discover the jittery new Sausages with an exciting mix of Wooden ingredients","Our creamy-inspired Chicken brings a taste of luxury to your repentant lifestyle"]|x});
-  ("commerce.productMaterial", 42, {x|["Cotton","Wooden"]|x});
-  ("commerce.productMaterial", 1337, {x|["Ceramic","Bronze"]|x});
-  ("commerce.productMaterial", 7, {x|["Bamboo","Rubber"]|x});
-  ("commerce.productName", 42, {x|["Handcrafted Wooden Sausages","Modern Bronze Car"]|x});
-  ("commerce.productName", 1337, {x|["Frozen Bronze Chicken","Incredible Concrete Keyboard"]|x});
-  ("commerce.productName", 7, {x|["Electronic Rubber Gloves","Recycled Wooden Keyboard"]|x});
-  ("commerce.upc", 42, {x|["397511086709","982113542618"]|x});
-  ("commerce.upc", 1337, {x|["212435297133","619477345714"]|x});
-  ("commerce.upc", 7, {x|["074795502469","830292490698"]|x});
-  ("company.buzzAdjective", 42, {x|["global","viral"]|x});
-  ("company.buzzAdjective", 1337, {x|["efficient","cross-platform"]|x});
-  ("company.buzzAdjective", 7, {x|["back-end","smart"]|x});
-  ("company.buzzNoun", 42, {x|["initiatives","users"]|x});
-  ("company.buzzNoun", 1337, {x|["deliverables","communities"]|x});
-  ("company.buzzNoun", 7, {x|["applications","schemas"]|x});
-  ("company.buzzPhrase", 42, {x|["facilitate viral platforms","mesh cross-media channels"]|x});
-  ("company.buzzPhrase", 1337, {x|["engineer cross-platform e-commerce","implement frictionless methodologies"]|x});
-  ("company.buzzPhrase", 7, {x|["collaborate smart large language models","repurpose visionary metrics"]|x});
-  ("company.buzzVerb", 42, {x|["facilitate","utilize"]|x});
-  ("company.buzzVerb", 1337, {x|["engineer","disintermediate"]|x});
-  ("company.buzzVerb", 7, {x|["collaborate","seize"]|x});
-  ("company.catchPhrase", 42, {x|["ބޮޑު well-modulated ފޮތި","މޮޅު cloud-native ބަކަރި"]|x});
-  ("company.catchPhrase", 1337, {x|["ނުފެންނަ coherent ކަނޑު","އަލި empowering މަގޫ"]|x});
-  ("company.catchPhrase", 7, {x|["ހިރަފުސް responsive ވަޑައިންގެ","ފޫހި zero tolerance މަސް"]|x});
-  ("company.catchPhraseAdjective", 42, {x|["ބޮޑު","ސަމާލު"]|x});
-  ("company.catchPhraseAdjective", 1337, {x|["ނުފެންނަ","ހުތުރު"]|x});
-  ("company.catchPhraseAdjective", 7, {x|["ހިރަފުސް","ދަށް"]|x});
-  ("company.catchPhraseDescriptor", 42, {x|["fault-tolerant","well-modulated"]|x});
-  ("company.catchPhraseDescriptor", 1337, {x|["directional","coherent"]|x});
-  ("company.catchPhraseDescriptor", 7, {x|["asynchronous","responsive"]|x});
-  ("company.catchPhraseNoun", 42, {x|["ކުޑަމަސް","ގޮނޑުދޮށް"]|x});
-  ("company.catchPhraseNoun", 1337, {x|["ކަނބިލި","ބަކަރި"]|x});
-  ("company.catchPhraseNoun", 7, {x|["ހޮޅުއަށި","ދޯނި"]|x});
-  ("company.name", 42, {x|["ސަމާލު ބުހްލޫލް ޡަހީރާ ގުރޫޕް","ޟިފާފް & ބަތްނާ ކަނޑުމަސް ގުރޫޕް"]|x});
-  ("company.name", 1337, {x|["ހުތުރު މަލަދު ޤާބޫސް ޕަބްލިކް ލިމިޓެޑް","ކުޑަ މޫދު .ޕބލކ. ލޓޑ"]|x});
-  ("company.name", 7, {x|["ދަށް ވަޑައިންގެ ޕަބްލިކް ލިމިޓެޑް","ނުސައިބު .ޕވޓ. ލޓޑ"]|x});
-  ("database.collation", 42, {x|["cp1250_bin","utf8_unicode_ci"]|x});
-  ("database.collation", 1337, {x|["ascii_general_ci","ascii_general_ci"]|x});
-  ("database.collation", 7, {x|["ascii_bin","utf8_general_ci"]|x});
-  ("database.column", 42, {x|["group","updatedAt"]|x});
-  ("database.column", 1337, {x|["createdAt","comment"]|x});
-  ("database.column", 7, {x|["category","status"]|x});
-  ("database.engine", 42, {x|["CSV","MyISAM"]|x});
-  ("database.engine", 1337, {x|["BLACKHOLE","ARCHIVE"]|x});
-  ("database.engine", 7, {x|["ARCHIVE","MEMORY"]|x});
-  ("database.mongodbObjectId", 42, {x|["8ead331ddf0fc4446b96d368","ab4bd1d31efb62f92a0e5e6b"]|x});
-  ("database.mongodbObjectId", 1337, {x|["536a7b5fa28d2f9bb79ca46e","a394bc4f9bb0af328f081b7f"]|x});
-  ("database.mongodbObjectId", 7, {x|["1b9ffbb15aeb816e49e0de5c","e2baea4a8a8ca6c697e8af9d"]|x});
-  ("database.type", 42, {x|["double","tinyint"]|x});
-  ("database.type", 1337, {x|["datetime","blob"]|x});
-  ("database.type", 7, {x|["binary","smallint"]|x});
-  ("datatype.boolean", 42, {x|[true,false]|x});
-  ("datatype.boolean", 1337, {x|[true,true]|x});
-  ("datatype.boolean", 7, {x|[true,false]|x});
-  ("date.anytime", 42, {x|["2024-10-01T09:56:34.376Z","2025-11-26T00:30:52.734Z"]|x});
-  ("date.anytime", 1337, {x|["2024-07-11T06:40:20.302Z","2024-04-26T20:08:35.491Z"]|x});
-  ("date.anytime", 7, {x|["2024-02-26T16:55:16.427Z","2025-07-24T08:10:38.064Z"]|x});
-  ("date.birthdate", 42, {x|["1967-08-07T04:02:06.836Z","2003-11-23T22:28:06.859Z"]|x});
-  ("date.birthdate", 1337, {x|["1960-07-05T04:30:23.510Z","1953-12-31T07:38:12.417Z"]|x});
-  ("date.birthdate", 7, {x|["1948-10-22T20:29:23.006Z","1993-02-18T22:21:13.776Z"]|x});
-  ("date.future", 42, {x|["2025-05-17T16:58:17.813Z","2025-12-14T00:15:26.417Z"]|x});
-  ("date.future", 1337, {x|["2025-04-06T15:20:10.889Z","2025-02-27T22:04:18.587Z"]|x});
-  ("date.future", 7, {x|["2025-01-28T20:27:39.137Z","2025-10-12T16:05:19.252Z"]|x});
-  ("date.month", 42, {x|["މާރިޗު","ޝަޢުބާން"]|x});
-  ("date.month", 1337, {x|["އޮކްޓޫބަރު","ރަމަޞާން"]|x});
-  ("date.month", 7, {x|["ރަބީޢުލްއައްވަލް","ޖޫން"]|x});
-  ("date.past", 42, {x|["2024-05-17T01:57:37.080Z","2024-12-13T23:04:27.133Z"]|x});
-  ("date.past", 1337, {x|["2024-04-05T21:37:28.821Z","2024-02-28T01:52:47.882Z"]|x});
-  ("date.past", 7, {x|["2024-01-28T22:17:31.173Z","2024-10-12T10:48:23.236Z"]|x});
-  ("date.recent", 42, {x|["2024-12-31T08:59:19.892Z","2024-12-31T22:49:00.766Z"]|x});
-  ("date.recent", 1337, {x|["2024-12-31T06:17:18.670Z","2024-12-31T03:48:30.136Z"]|x});
-  ("date.recent", 7, {x|["2024-12-31T01:49:52.959Z","2024-12-31T18:43:04.204Z"]|x});
-  ("date.soon", 42, {x|["2025-01-01T08:59:20.892Z","2025-01-01T22:49:01.766Z"]|x});
-  ("date.soon", 1337, {x|["2025-01-01T06:17:19.670Z","2025-01-01T03:48:31.136Z"]|x});
-  ("date.soon", 7, {x|["2025-01-01T01:49:53.959Z","2025-01-01T18:43:05.204Z"]|x});
-  ("date.timeZone", 42, {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x});
-  ("date.timeZone", 1337, {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x});
-  ("date.timeZone", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
-  ("date.weekday", 42, {x|["ހޯމަ","އާދީއްތަ"]|x});
-  ("date.weekday", 1337, {x|["ހޮނިހިރު","ހޮނިހިރު"]|x});
-  ("date.weekday", 7, {x|["ހުކުރު","އަންގާރަ"]|x});
-  ("finance.accountName", 42, {x|["Credit Card Account","Savings Account"]|x});
-  ("finance.accountName", 1337, {x|["Credit Card Account","Checking Account"]|x});
-  ("finance.accountName", 7, {x|["Auto Loan Account","Personal Loan Account"]|x});
-  ("finance.accountNumber", 42, {x|["39751108","67098211"]|x});
-  ("finance.accountNumber", 1337, {x|["21243529","71361947"]|x});
-  ("finance.accountNumber", 7, {x|["07479550","24683029"]|x});
-  ("finance.amount", 42, {x|["374.54","950.72"]|x});
-  ("finance.amount", 1337, {x|["262.02","158.68"]|x});
-  ("finance.amount", 7, {x|["76.30","779.92"]|x});
-  ("finance.bic", 42, {x|["YTPECC2VXXX","AZVFCL6A"]|x});
-  ("finance.bic", 1337, {x|["EHLILK9ZXXX","KQDZJESSELR"]|x});
-  ("finance.bic", 7, {x|["ULSZLVI2HOS","BHXFJPX0XXX"]|x});
-  ("finance.bitcoinAddress", 42, {x|["3JAaa4SAH2YQdbbiwrhB9hnsMcvA3Ba4XY","bc1pa4pg4h2x9pajk6zsywmx372ce9ud9k5t3zs70uqrs3d4vmc3acrnwh4qsk"]|x});
-  ("finance.bitcoinAddress", 1337, {x|["3hsjwgYJ7oC8ZrMNmqzLbhEubpc","bc1u6yfjj0rz65dq0d2tdqhzumlz903yzhcr0sp7px"]|x});
-  ("finance.bitcoinAddress", 7, {x|["1rHYxv5guFNo4hUdsW2AXexU8wKEtcunt","3LjzhsmEnsHpUbJqqCwq16HwGXF4iAeXW"]|x});
-  ("finance.creditCardCVV", 42, {x|["397","511"]|x});
-  ("finance.creditCardCVV", 1337, {x|["212","435"]|x});
-  ("finance.creditCardCVV", 7, {x|["074","795"]|x});
-  ("finance.creditCardIssuer", 42, {x|["discover","visa"]|x});
-  ("finance.creditCardIssuer", 1337, {x|["diners_club","american_express"]|x});
-  ("finance.creditCardIssuer", 7, {x|["american_express","mastercard"]|x});
-  ("finance.creditCardNumber", 42, {x|["6575-1108-6709-8211","3034-261234-7153"]|x});
-  ("finance.creditCardNumber", 1337, {x|["3014-352971-3614","4773457126413"]|x});
-  ("finance.creditCardNumber", 7, {x|["3747-955024-68302","3624-906925-9159"]|x});
-  ("finance.currency", 42, {x|[{"name":"New Israeli Sheqel","code":"ILS","symbol":"₪","numericCode":"376"},{"name":"CFA Franc BCEAO","code":"XOF","symbol":"","numericCode":"952"}]|x});
-  ("finance.currency", 1337, {x|[{"name":"Ethiopian Birr","code":"ETB","symbol":"","numericCode":"230"},{"name":"Canadian Dollar","code":"CAD","symbol":"$","numericCode":"124"}]|x});
-  ("finance.currency", 7, {x|[{"name":"Barbados Dollar","code":"BBD","symbol":"$","numericCode":"052"},{"name":"Somali Shilling","code":"SOS","symbol":"S","numericCode":"706"}]|x});
-  ("finance.currencyCode", 42, {x|["ILS","XOF"]|x});
-  ("finance.currencyCode", 1337, {x|["ETB","CAD"]|x});
-  ("finance.currencyCode", 7, {x|["BBD","SOS"]|x});
-  ("finance.currencyName", 42, {x|["New Israeli Sheqel","CFA Franc BCEAO"]|x});
-  ("finance.currencyName", 1337, {x|["Ethiopian Birr","Canadian Dollar"]|x});
-  ("finance.currencyName", 7, {x|["Barbados Dollar","Somali Shilling"]|x});
-  ("finance.currencyNumericCode", 42, {x|["376","952"]|x});
-  ("finance.currencyNumericCode", 1337, {x|["230","124"]|x});
-  ("finance.currencyNumericCode", 7, {x|["052","706"]|x});
-  ("finance.currencySymbol", 42, {x|["₪","﷼"]|x});
-  ("finance.currencySymbol", 1337, {x|["$","$"]|x});
-  ("finance.currencySymbol", 7, {x|["$","S"]|x});
-  ("finance.ethereumAddress", 42, {x|["0x8ead331ddf0fc4446b96d368ab4bd1d31efb62f9","0x2a0e5e6bc4fbedde140785c76b3b1fa40bfaa172"]|x});
-  ("finance.ethereumAddress", 1337, {x|["0x536a7b5fa28d2f9bb79ca46ea394bc4f9bb0af32","0x8f081b7fafcdcf501efa7f0ae4ee3e7f5b3a98ba"]|x});
-  ("finance.ethereumAddress", 7, {x|["0x1b9ffbb15aeb816e49e0de5ce2baea4a8a8ca6c6","0x97e8af9d3a99db902fbfff16d5fecac26aaa3776"]|x});
-  ("finance.iban", 42, {x|["GT69T10P0V1346241560ZH610G35","CZ5078900130421070087031"]|x});
-  ("finance.iban", 1337, {x|["FI1300552916047457","CZ8005002804550900400374"]|x});
-  ("finance.iban", 7, {x|["BE61479500580024","TN7109091740043750043749"]|x});
-  ("finance.litecoinAddress", 42, {x|["3JAaa4SAH2YQdbbiwrhB9hnsMcvA","Ma4XYNi6Fr8u2UgEjwxbYLWTAV"]|x});
-  ("finance.litecoinAddress", 1337, {x|["LhsjwgYJ7oC8ZrMNmqzLbhEubpcw","LXqvv1JZa8nG1n4MmGuYQByZf16WYukH"]|x});
-  ("finance.litecoinAddress", 7, {x|["3rHYxv5guFNo4hUdsW2AXexU8w","3tcuntnQLjzhsmEnsHpUbJqqCwq16HwG"]|x});
-  ("finance.pin", 42, {x|["3975","1108"]|x});
-  ("finance.pin", 1337, {x|["2124","3529"]|x});
-  ("finance.pin", 7, {x|["0747","9550"]|x});
-  ("finance.routingNumber", 42, {x|["062197511","031308674"]|x});
-  ("finance.routingNumber", 1337, {x|["051412430","074029716"]|x});
-  ("finance.routingNumber", 7, {x|["021274792","075950240"]|x});
-  ("finance.transactionDescription", 42, {x|["You made a withdrawal of SAR 598.66 at ހުތުރު ހެލިކޮޕްޓަރު ޕުރައިވެޓް ލިމިޓެޑް using card ending in ****6709 from account ***8211.","Transaction alert: payment at ސާރާ .ޕބލކ. ލޓޑ using card ending ****2347 for an amount of CRC 514.23 on account ***5061."]|x});
-  ("finance.transactionDescription", 1337, {x|["Payment of CAD 278.12 for invoice at އެއްވަނަ ޚުލަސާ ޖަލްވާ .ޕބލކ. ލޓޑ, processed with card ending ****9477 linked to account ***3457.","Payment of GBP 670.22 for invoice at ކުޑަ ބިއްލޫރި ގުރޫޕް, processed with card ending ****8194 linked to account ***5507."]|x});
-  ("finance.transactionDescription", 7, {x|["A withdrawal for KGS 723.47 was made at ނުސައިބު .ޕވޓ. ލޓޑ via card ending ****4683 on account ***0292.","You made a withdrawal of AMD 600.55 at ޢަދުލިއްޔާ .ޕބލކ. ލޓޑ using card ending in ****5764 from account ***2434."]|x});
-  ("finance.transactionType", 42, {x|["invoice","withdrawal"]|x});
-  ("finance.transactionType", 1337, {x|["invoice","deposit"]|x});
-  ("finance.transactionType", 7, {x|["deposit","withdrawal"]|x});
-  ("food.adjective", 42, {x|["golden","zesty"]|x});
-  ("food.adjective", 1337, {x|["fluffy","crunchy"]|x});
-  ("food.adjective", 7, {x|["creamy","spicy"]|x});
-  ("food.description", 42, {x|["An exquisite quail roast, infused with the essence of butternut pumpkin, slow-roasted to bring out its natural flavors and served with a side of creamy asparagus","Stuffed parsnip baked with white flour and cayenne pepper."]|x});
-  ("food.description", 1337, {x|["A special ރަތް dill from Egypt. To support the strong flavor it is sided with a tablespoon of pepper.","A delightful tart combining savory turnips and sweet passionfruit, set in a buttery pastry shell and finished with a hint of curry."]|x});
-  ("food.description", 7, {x|["A comforting bowl of juicy whiting wild rice and garlic, slow-cooked until tender.","A comforting bowl of moist sesame oil and bean shoots, slow-cooked until tender."]|x});
-  ("food.dish", 42, {x|["Jicama Salad","Tangy Parsnip And White Flour Bowl"]|x});
-  ("food.dish", 1337, {x|["Moist Green Beans And White Wine Vinegar Bowl","Bruschette With Tomato"]|x});
-  ("food.dish", 7, {x|["Parsley-rubbed Ostrich Salad","Baba Ganoush"]|x});
-  ("food.ethnicCategory", 42, {x|["Gujarati","Udupi"]|x});
-  ("food.ethnicCategory", 1337, {x|["Czech","British"]|x});
-  ("food.ethnicCategory", 7, {x|["Awadhi","Rajasthani"]|x});
-  ("food.fruit", 42, {x|["fig","strawberry"]|x});
-  ("food.fruit", 1337, {x|["cumquat","butternut pumpkin"]|x});
-  ("food.fruit", 7, {x|["berry","passionfruit"]|x});
-  ("food.ingredient", 42, {x|["flathead","warehou"]|x});
-  ("food.ingredient", 1337, {x|["coconut water","bulghur"]|x});
-  ("food.ingredient", 7, {x|["banana","rye bread"]|x});
-  ("food.meat", 42, {x|["goose","venison"]|x});
-  ("food.meat", 1337, {x|["emu","crocodile"]|x});
-  ("food.meat", 7, {x|["chicken","rabbit"]|x});
-  ("food.spice", 42, {x|["dhansak","thyme"]|x});
-  ("food.spice", 1337, {x|["chilli pepper","bay leaves"]|x});
-  ("food.spice", 7, {x|["aniseed","pot marjoram"]|x});
-  ("food.vegetable", 42, {x|["cos lettuce","sweet potato"]|x});
-  ("food.vegetable", 1337, {x|["carrot","broccolini"]|x});
-  ("food.vegetable", 7, {x|["bean shoots","pumpkin"]|x});
-  ("git.branch", 42, {x|["driver-transmit","pixel-navigate"]|x});
-  ("git.branch", 1337, {x|["card-calculate","card-index"]|x});
-  ("git.branch", 7, {x|["application-quantify","firewall-program"]|x});
-  ("git.commitDate", 42, {x|["Tue Dec 31 08:59:19 2024 +1100","Tue Dec 31 17:34:03 2024 +0300"]|x});
-  ("git.commitDate", 1337, {x|["Tue Dec 31 06:17:18 2024 -0800","Tue Dec 31 06:40:29 2024 +0000"]|x});
-  ("git.commitDate", 7, {x|["Tue Dec 31 01:49:52 2024 +0700","Tue Dec 31 10:31:18 2024 +0600"]|x});
-  ("git.commitEntry", 42, {x|["commit ead331ddf0fc4446b96d368ab4bd1d31efb62f92\r\nAuthor: 1hc1if1hy1ie1hf1ii_1i11if1hm1ig1hn1ii <1hc1if1hy1ie1hf1ii_1i11if1hm1ig1hn1ii@yahoo.com>\r\nDate: Tue Dec 31 02:07:25 2024 -0700\r\n\r\n    back up digital feed\r\n","commit c76b3b1fa40bfaa172cd7167aeda2facaab9020e\r\nAuthor: 1hm1if1i81ig1hl1if.1ho1ie1hj1io1hl1if1hl1io28 <1hm1if1i81ig1hl1if_1ho1ie1hj1io1hl1if1hl1io@yahoo.com>\r\nDate: Tue Dec 31 04:28:39 2024 +1000\r\n\r\n    input redundant sensor\r\n"]|x});
-  ("git.commitEntry", 1337, {x|["commit 36a7b5fa28d2f9bb79ca46ea394bc4f9bb0af328\r\nAuthor: 1hj1ie1hg1ij1hg1ie1hi1io1hf1ii.1i51if1hj1ig1ic1if <1hj1ie1hg1ij1hg1ie1hi1io1hf1ii_1i51if1hj1ig1ic1if2@hotmail.com>\r\nDate: Tue Dec 31 02:08:13 2024 +1100\r\n\r\n    transmit multi-byte driver\r\n","commit 0ae4ee3e7f5b3a98bafb7efd9addb5eca598b2f0\r\nAuthor: ޙައްވާ ތައްމާމް <1i11ie1hj1io1hk1if.1ho1ie1hj1io1hl1if1hl1io48@gmail.com>\r\nDate: Tue Dec 31 21:57:37 2024 +0600\r\n\r\n    program auxiliary alarm\r\n"]|x});
-  ("git.commitEntry", 7, {x|["commit b9ffbb15aeb816e49e0de5ce2baea4a8a8ca6c69\r\nMerge: 7e8af9d 3a99db9\r\nAuthor: ނަވާރު ޚާފިޤާނި <1he1ie1hk1if1hf1ii_1i21if1hm1ig1ic1if1he1ig84@yahoo.com>\r\nDate: Tue Dec 31 20:11:42 2024 -0800\r\n\r\n    copy multi-byte pixel\r\n","commit 3776399bbbabdebe0d6abf3e17b9daca09a1bdce\r\nAuthor: 1hf1ii1ic1ie1hj1io1hw1if_1hk1ie1hc1io1hg1ii85 <1hf1ii1ic1ie1hj1io1hw1if_1hk1ie1hc1io1hg1ii27@yahoo.com>\r\nDate: Tue Dec 31 21:02:26 2024 +1000\r\n\r\n    compress mobile pixel\r\n"]|x});
-  ("git.commitMessage", 42, {x|["generate wireless pixel","navigate back-end bandwidth"]|x});
-  ("git.commitMessage", 1337, {x|["connect back-end card","index digital interface"]|x});
-  ("git.commitMessage", 7, {x|["bypass redundant firewall","program wireless interface"]|x});
-  ("git.commitSha", 42, {x|["8ead331ddf0fc4446b96d368ab4bd1d31efb62f9","2a0e5e6bc4fbedde140785c76b3b1fa40bfaa172"]|x});
-  ("git.commitSha", 1337, {x|["536a7b5fa28d2f9bb79ca46ea394bc4f9bb0af32","8f081b7fafcdcf501efa7f0ae4ee3e7f5b3a98ba"]|x});
-  ("git.commitSha", 7, {x|["1b9ffbb15aeb816e49e0de5ce2baea4a8a8ca6c6","97e8af9d3a99db902fbfff16d5fecac26aaa3776"]|x});
-  ("hacker.abbreviation", 42, {x|["HTTP","VGA"]|x});
-  ("hacker.abbreviation", 1337, {x|["FTP","COM"]|x});
-  ("hacker.abbreviation", 7, {x|["API","SSL"]|x});
-  ("hacker.adjective", 42, {x|["haptic","wireless"]|x});
-  ("hacker.adjective", 1337, {x|["cross-platform","back-end"]|x});
-  ("hacker.adjective", 7, {x|["auxiliary","redundant"]|x});
-  ("hacker.ingverb", 42, {x|["copying","transmitting"]|x});
-  ("hacker.ingverb", 1337, {x|["connecting","calculating"]|x});
-  ("hacker.ingverb", 7, {x|["bypassing","programming"]|x});
-  ("hacker.noun", 42, {x|["driver","system"]|x});
-  ("hacker.noun", 1337, {x|["card","bandwidth"]|x});
-  ("hacker.noun", 7, {x|["application","port"]|x});
-  ("hacker.phrase", 42, {x|["The SQL bandwidth is down, bypass the online alarm so we can quantify the CSS circuit!","Use the digital CLI driver, then you can quantify the neural application!"]|x});
-  ("hacker.phrase", 1337, {x|["The FTP circuit is down, connect the primary feed so we can calculate the JBOD program!","The RSS bus is down, parse the bluetooth bus so we can quantify the XML interface!"]|x});
-  ("hacker.phrase", 7, {x|["I'll hack the wireless PCI card, that should panel the HTTP card!","hacking the alarm won't do anything, we need to transmit the neural CLI port!"]|x});
-  ("hacker.verb", 42, {x|["generate","transmit"]|x});
-  ("hacker.verb", 1337, {x|["connect","calculate"]|x});
-  ("hacker.verb", 7, {x|["bypass","quantify"]|x});
-  ("image.avatar", 42, {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/73.jpg","https://avatars.githubusercontent.com/u/15601864"]|x});
-  ("image.avatar", 1337, {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/27.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/51.jpg"]|x});
-  ("image.avatar", 7, {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/43.jpg","https://avatars.githubusercontent.com/u/97798952"]|x});
-  ("image.avatarGitHub", 42, {x|["https://avatars.githubusercontent.com/u/37454012","https://avatars.githubusercontent.com/u/95071431"]|x});
-  ("image.avatarGitHub", 1337, {x|["https://avatars.githubusercontent.com/u/26202467","https://avatars.githubusercontent.com/u/15868397"]|x});
-  ("image.avatarGitHub", 7, {x|["https://avatars.githubusercontent.com/u/7630829","https://avatars.githubusercontent.com/u/77991880"]|x});
-  ("image.dataUri", 42, {x|["data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImZ1bGwiIHdpZHRoPSIxNDk4IiBoZWlnaHQ9IjM4MDIiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNhZDMzMWQiLz48dGV4dCB4PSI3NDkiIHk9IjE5MDEiIGZvbnQtc2l6ZT0iMjAiIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSI+MTQ5OHgzODAyPC90ZXh0Pjwvc3ZnPg==","data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImZ1bGwiIHdpZHRoPSIyODMyIiBoZWlnaHQ9IjgzIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmM0NDQ2Ii8+PHRleHQgeD0iMTQxNiIgeT0iNDEuNSIgZm9udC1zaXplPSIyMCIgYWxpZ25tZW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIj4yODMyeDgzPC90ZXh0Pjwvc3ZnPg=="]|x});
-  ("image.dataUri", 1337, {x|["data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImZ1bGwiIHdpZHRoPSIxMDQ4IiBoZWlnaHQ9IjYzNSI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzZhN2I1ZiIvPjx0ZXh0IHg9IjUyNCIgeT0iMzE3LjUiIGZvbnQtc2l6ZT0iMjAiIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSI+MTA0OHg2MzU8L3RleHQ+PC9zdmc+","data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22461%22%20height%3D%221545%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23d2f9bb%22%2F%3E%3Ctext%20x%3D%22230.5%22%20y%3D%22772.5%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E461x1545%3C%2Ftext%3E%3C%2Fsvg%3E"]|x});
-  ("image.dataUri", 7, {x|["data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22306%22%20height%3D%223119%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%239ffbb1%22%2F%3E%3Ctext%20x%3D%22153%22%20y%3D%221559.5%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E306x3119%3C%2Ftext%3E%3C%2Fsvg%3E","data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%222000%22%20height%3D%222717%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23b816e4%22%2F%3E%3Ctext%20x%3D%221000%22%20y%3D%221358.5%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E2000x2717%3C%2Ftext%3E%3C%2Fsvg%3E"]|x});
-  ("image.personPortrait", 42, {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/95.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/59.jpg"]|x});
-  ("image.personPortrait", 1337, {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/15.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/45.jpg"]|x});
-  ("image.personPortrait", 7, {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/77.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/72.jpg"]|x});
-  ("image.url", 42, {x|["https://picsum.photos/seed/B993RBH1Y/1498/3802","https://picsum.photos/seed/biwqiB/3329/850"]|x});
-  ("image.url", 1337, {x|["https://picsum.photos/seed/sjwgYJ/1048/635","https://picsum.photos/seed/7YrMNmpA/461/1545"]|x});
-  ("image.url", 7, {x|["https://picsum.photos/seed/IYxv4gu/306/3119","https://picsum.photos/seed/4hUdsV1/2717/3215"]|x});
-  ("image.urlPicsumPhotos", 42, {x|["https://picsum.photos/seed/93RBH/1498/3802?blur=6","https://picsum.photos/seed/biwqiB/83/3879?blur=2"]|x});
-  ("image.urlPicsumPhotos", 1337, {x|["https://picsum.photos/seed/wgYJ7n/1048/635?grayscale&blur=5","https://picsum.photos/seed/NmpALbhFu/2514/501?blur=4"]|x});
-  ("image.urlPicsumPhotos", 7, {x|["https://picsum.photos/seed/xv4guGNn4h/306/3119?grayscale&blur=7","https://picsum.photos/seed/BWeyU/3638/854?grayscale&blur=10"]|x});
-  ("internet.displayName", 42, {x|["ޢާއިޝާ.ބުހްލޫލް5","ދާއޫދު18"]|x});
-  ("internet.displayName", 1337, {x|["ރަމްލާ_މަލަދު26","އަލީ_ރާފިޢާ44"]|x});
-  ("internet.displayName", 7, {x|["ޙަލީމާ50","ފާޠިމާ.ދިރްފިސް28"]|x});
-  ("internet.domainName", 42, {x|["hospitable-unit.net","pastel-cleaner.biz"]|x});
-  ("internet.domainName", 1337, {x|["fatal-co-producer.com","lawful-feather.name"]|x});
-  ("internet.domainName", 7, {x|["blushing-saw.info","separate-warming.name"]|x});
-  ("internet.domainSuffix", 42, {x|["info","org"]|x});
-  ("internet.domainSuffix", 1337, {x|["com","biz"]|x});
-  ("internet.domainSuffix", 7, {x|["biz","net"]|x});
-  ("internet.domainWord", 42, {x|["hospitable-unit","shameful-negotiation"]|x});
-  ("internet.domainWord", 1337, {x|["fatal-co-producer","flickering-in-joke"]|x});
-  ("internet.domainWord", 7, {x|["blushing-saw","jittery-puritan"]|x});
-  ("internet.email", 42, {x|["1hw1ij1hs1ii1hm1io.1hg1ii1hc1io1hp1ij1hp1io@hotmail.com","1ia1if1ho1ig1hi1if.1hi1ie1hj1ii1i01ie1hf1ii@yahoo.com"]|x});
-  ("internet.email", 1337, {x|["1hg1ie1hp1io1ic1ih1hs1io97@gmail.com","1hs1ii1hl1ie1hj1io1hw1if_1hn1if1hy1ig1he1if@gmail.com"]|x});
-  ("internet.email", 7, {x|["1hj1ii1hs1if1hl1if_1hw1ie1hq1io1i91if1he1io7@gmail.com","1ia1ie1i81if_1hk1ie1hc1ig1hj1io1hw1if@hotmail.com"]|x});
-  ("internet.emoji", 42, {x|["🦮","🔗"]|x});
-  ("internet.emoji", 1337, {x|["👩‍🎤","💆🏿"]|x});
-  ("internet.emoji", 7, {x|["🤎","🥤"]|x});
-  ("internet.exampleEmail", 42, {x|["1hw1ij1hs1ii1hm1io.1hg1ii1hc1io1hp1ij1hp1io@example.net","1ia1if1ho1ig1hi1if.1hi1ie1hj1ii1i01ie1hf1ii@example.org"]|x});
-  ("internet.exampleEmail", 1337, {x|["1hg1ie1hp1io1ic1ih1hs1io97@example.com","1hs1ii1hl1ie1hj1io1hw1if_1hn1if1hy1ig1he1if@example.com"]|x});
-  ("internet.exampleEmail", 7, {x|["1hj1ii1hs1if1hl1if_1hw1ie1hq1io1i91if1he1io7@example.com","1ia1ie1i81if_1hk1ie1hc1ig1hj1io1hw1if@example.net"]|x});
-  ("internet.httpMethod", 42, {x|["POST","PATCH"]|x});
-  ("internet.httpMethod", 1337, {x|["POST","GET"]|x});
-  ("internet.httpMethod", 7, {x|["GET","DELETE"]|x});
-  ("internet.httpStatusCode", 42, {x|[226,417]|x});
-  ("internet.httpStatusCode", 1337, {x|[201,204]|x});
-  ("internet.httpStatusCode", 7, {x|[103,306]|x});
-  ("internet.ip", 42, {x|["243.98.3.69","d331:ddf0:fc44:46b9:6d36:8ab4:bd1d:31ef"]|x});
-  ("internet.ip", 1337, {x|["40.159.131.70","117.149.202.161"]|x});
-  ("internet.ip", 7, {x|["199.168.194.10","185.53.3.142"]|x});
-  ("internet.ipv4", 42, {x|["95.225.220.121","243.98.3.69"]|x});
-  ("internet.ipv4", 1337, {x|["67.20.12.145","40.159.131.70"]|x});
-  ("internet.ipv4", 7, {x|["19.136.240.167","199.168.194.10"]|x});
-  ("internet.ipv6", 42, {x|["8ead:331d:df0f:c444:6b96:d368:ab4b:d1d3","1efb:62f9:2a0e:5e6b:c4fb:edde:1407:85c7"]|x});
-  ("internet.ipv6", 1337, {x|["536a:7b5f:a28d:2f9b:b79c:a46e:a394:bc4f","9bb0:af32:8f08:1b7f:afcd:cf50:1efa:7f0a"]|x});
-  ("internet.ipv6", 7, {x|["1b9f:fbb1:5aeb:816e:49e0:de5c:e2ba:ea4a","8a8c:a6c6:97e8:af9d:3a99:db90:2fbf:ff16"]|x});
-  ("internet.jwt", 42, {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE3MzU2MzU1NjAsImV4cCI6MTczNTY5ODgwNCwibmJmIjoxNzQxOTEyMTg4LCJpc3MiOiLegN6q3ozeqt6D3qog3oDerN6N3qjeht6u3pXesN6T3qbeg96qIN6V3qreg96m3ofeqN6I3qzek96wIN6N3qjeid6o3pPerN6R3rAiLCJzdWIiOiI5YjBmZDMyMi00ODY0LTQ5MjQtYTU3Yy0zODkwOTIxZmZjNDEiLCJhdWQiOiI3MTcwZTRhNC04ODJmLTRjZmUtYjllMS0zMDU2NGQ1NDgyYzEiLCJqdGkiOiJjMzBkYmJjMS01MWQ5LTQ1MTQtODViYS1lNzFiYzhjNzg2MDEifQ.DjvUfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5","eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2NzUzNjksImV4cCI6MTczNTY5MTQ4NSwibmJmIjoxNzA2NzI1MzcwLCJpc3MiOiLeh96m3oTeq96E3qbeht6w3oPeqiDejt6q3oPeq96V3rAiLCJzdWIiOiIzYTJiNmUyNS0xZWU0LTRhZDgtYjgzMS1lZWE1NWJlZWNhMTIiLCJhdWQiOiI5MDFhMDI4Yi1hM2IzLTQ1YmEtOGRhOS0xNTQzZjZlYWM4OTciLCJqdGkiOiJiNDBhMmZmZS01MGU2LTRmZmQtYTQ2ZC01MjhlYjkxOWYyOGUifQ.HHmiOORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqf"]|x});
-  ("internet.jwt", 1337, {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MjU4MzksImV4cCI6MTczNTY0OTg3MCwibmJmIjoxNzMzMTIzNjM1LCJpc3MiOiLeh96s3ofesN6I3qbegt6mIN6a3qrejd6m3pDepyDelt6m3o3esN6I3qcgLt6V3oTejd6GLiDejd6T3pEiLCJzdWIiOiJmN2NjNTY5Yy0zNGE3LTQyNjMtOThkMi1mNjg4MGJmMjI1YjAiLCJhdWQiOiIwYzViN2ZkOS05ZjQwLTQxZmYtODc1Yi0wY2EzYWUyZTViNDgiLCJqdGkiOiI3NzZjN2JjNS1lYmU2LTQ3ZWEtYTgzZi04YzM2NjgyYTAzYmUifQ.pQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cDhr","eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MzMwODksImV4cCI6MTczNTY4OTY4OCwibmJmIjoxNzY0MDM1MDk4LCJpc3MiOiLeid6m3pbepyDeid6t3ojepyAu3pXehN6N3oYuIN6N3pPekSIsInN1YiI6ImI2ODlkYmEwLTA4Y2ItNDM0My1iNmE0LTRjZDhiNmRkMGJiYiIsImF1ZCI6ImVhMmJmZWQwLTBiYmItNDIxMi05ZDYyLWEwMTFiOTlkYjMxOCIsImp0aSI6IjQ4YmU3OGM2LWJmMzktNGIyZC04YmJkLWJiYWFkZDNhMmQwMCJ9.Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBypPA"]|x});
-  ("internet.jwt", 7, {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDk3OTMsImV4cCI6MTczNTY0NzY3MiwibmJmIjoxNzQ5NzgzOTk2LCJpc3MiOiLegt6q3pDept6H3qjehN6qIC7eld6I3pMuIN6N3pPekSIsInN1YiI6IjdhYzYxNGUzLTdlMDktNGYzOC05ZTI4LWNhNzM3NTc1ZGM1OSIsImF1ZCI6Ijc1YTU3YjZlLTJiNjYtNGE4Ni1iMDFiLThiZmEwNDkzZmZkNyIsImp0aSI6IjI0N2I3MjU1LTQyNjctNGNjOC05N2NlLWFjZjBlNDdjYjJhMSJ9.OqBJOL0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLR","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2NTU4NzAsImV4cCI6MTczNTY1NzkzNiwibmJmIjoxNzIxMjgzNjU0LCJpc3MiOiLegN6q3oHeqN6U3qfeg96qIN6Z3qrekN6w3oLeqSDei96m3oPesN6k3qcgLt6V3ojeky4g3o3ek96RIiwic3ViIjoiODg1YjIzNTYtM2VkMS00NTM3LTg0OGUtNmE5YzBiZjk0YWJhIiwiYXVkIjoiZmY2OTBmZGEtYzM0My00OTFlLWI3NzEtYWRhM2MyZDk0OGE0IiwianRpIjoiNmVkMWE0YzgtN2UwOC00NTBjLTg4ZTktNWYxMGI1NWU1ZWE1In0.fYp9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P"]|x});
-  ("internet.jwtAlgorithm", 42, {x|["HS384","none"]|x});
-  ("internet.jwtAlgorithm", 1337, {x|["HS256","ES512"]|x});
-  ("internet.jwtAlgorithm", 7, {x|["ES256","RS384"]|x});
-  ("internet.mac", 42, {x|["5f:b9:22:0d:9b:0f","d3:22:48:64:92:45"]|x});
-  ("internet.mac", 1337, {x|["42:47:58:4f:b1:6a","2f:7c:c5:69:c3:4a"]|x});
-  ("internet.mac", 7, {x|["1c:7b:f8:81:47:ac","61:4e:37:e0:9f:38"]|x});
-  ("internet.password", 42, {x|["DfYsZdp522RJCLk","3QYZ1mbJPw9_RT2"]|x});
-  ("internet.password", 1337, {x|["90LR9fEKllCHXi2","P1H3Sp2IPQf0DbD"]|x});
-  ("internet.password", 7, {x|["kJeTPPamEw5KyZ6","UwRhM4ODNCpjWLB"]|x});
-  ("internet.port", 42, {x|[24546,62306]|x});
-  ("internet.port", 1337, {x|[17172,10400]|x});
-  ("internet.port", 7, {x|[5001,51112]|x});
-  ("internet.protocol", 42, {x|["http","https"]|x});
-  ("internet.protocol", 1337, {x|["http","http"]|x});
-  ("internet.protocol", 7, {x|["http","https"]|x});
-  ("internet.url", 42, {x|["https://weird-rawhide.name/","https://crushing-backburn.org/"]|x});
-  ("internet.url", 1337, {x|["https://cumbersome-duster.info/","https://minty-diver.org/"]|x});
-  ("internet.url", 7, {x|["https://sparkling-hundred.net/","https://narrow-knight.biz"]|x});
-  ("internet.userAgent", 42, {x|["Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/118.0","Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_15_7) AppleWebKit/546.15.5 (KHTML, like Gecko) Chrome/121.6.14.0 Safari/603.83.21"]|x});
-  ("internet.userAgent", 1337, {x|["Mozilla/5.0 (Linux; Android 6; SM-G998B) AppleWebKit/568.32 (KHTML, like Gecko) Chrome/94.2.20.15 Mobile Safari/544.38","Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/604.44 (KHTML, like Gecko) Chrome/115.7.7.8 Safari/576.76 Edg/114.2.14.10"]|x});
-  ("internet.userAgent", 7, {x|["FakerBot/7.9.15","Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/541.26.49 (KHTML, like Gecko) Version/16_4 Mobile/15E148 Safari/562.6"]|x});
-  ("internet.username", 42, {x|["1ia1if1hj1ig1i51if5","1hn1if1hj1ij1hn1ii.1i71ig1hm1if1hm1io18"]|x});
-  ("internet.username", 1337, {x|["1hf1ie1hl1io1hp1if26","1hj1ie1hp1ih44"]|x});
-  ("internet.username", 7, {x|["1i11ie1hp1ih1hl1if_1ic1ie1hl1ih1he1io50","1hm1if1i81ig1hl1if28"]|x});
-  ("location.buildingNumber", 42, {x|["9751","18670"]|x});
-  ("location.buildingNumber", 1337, {x|["22435","97136"]|x});
-  ("location.buildingNumber", 7, {x|["84795","1246"]|x});
-  ("location.cardinalDirection", 42, {x|["East","West"]|x});
-  ("location.cardinalDirection", 1337, {x|["East","North"]|x});
-  ("location.cardinalDirection", 7, {x|["North","West"]|x});
-  ("location.city", 42, {x|["ދެ މޫސާ","އިރުމަތި ހެލިކޮޕްޓަރުކޮޑި"]|x});
-  ("location.city", 1337, {x|["ހުތުރުކަނޑުފަރު","އެއްވަނަކަނބިލިކޮޑި"]|x});
-  ("location.city", 7, {x|["އުތުރު ވަޑައިންގެރަށް","އަލަނާސި"]|x});
-  ("location.continent", 42, {x|["Asia","South America"]|x});
-  ("location.continent", 1337, {x|["Antarctica","Antarctica"]|x});
-  ("location.continent", 7, {x|["Africa","North America"]|x});
-  ("location.country", 42, {x|["Guinea","United States Minor Outlying Islands"]|x});
-  ("location.country", 1337, {x|["Egypt","Canada"]|x});
-  ("location.country", 7, {x|["Barbados","Sao Tome and Principe"]|x});
-  ("location.countryCode", 42, {x|["GY","VC"]|x});
-  ("location.countryCode", 1337, {x|["EH","CD"]|x});
-  ("location.countryCode", 7, {x|["BE","SC"]|x});
-  ("location.county", 42, {x|["Borders","West Glamorgan"]|x});
-  ("location.county", 1337, {x|["Morgan County","Johnson County"]|x});
-  ("location.county", 7, {x|["Franklin County","North Yorkshire"]|x});
-  ("location.direction", 42, {x|["South","Southwest"]|x});
-  ("location.direction", 1337, {x|["South","East"]|x});
-  ("location.direction", 7, {x|["North","Southeast"]|x});
-  ("location.language", 42, {x|[{"name":"Gujarati","alpha2":"gu","alpha3":"guj"},{"name":"Tajik","alpha2":"tg","alpha3":"tgk"}]|x});
-  ("location.language", 1337, {x|[{"name":"Russian","alpha2":"ru","alpha3":"rus"},{"name":"English","alpha2":"en","alpha3":"eng"}]|x});
-  ("location.language", 7, {x|[{"name":"Indonesian","alpha2":"id","alpha3":"ind"},{"name":"Maltese","alpha2":"mt","alpha3":"mlt"}]|x});
-  ("location.latitude", 42, {x|[-22.5828,81.1286]|x});
-  ("location.latitude", 1337, {x|[-42.8356,-61.4369]|x});
-  ("location.latitude", 7, {x|[-76.2646,50.3854]|x});
-  ("location.longitude", 42, {x|[-45.1656,162.2572]|x});
-  ("location.longitude", 1337, {x|[-85.6711,-122.8738]|x});
-  ("location.longitude", 7, {x|[-152.5291,100.7708]|x});
-  ("location.nearbyGPSCoordinate", 42, {x|[[-22.5828,162.2572],[41.7589,35.5171]]|x});
-  ("location.nearbyGPSCoordinate", 1337, {x|[[-42.8356,-122.8738],[-39.9372,-14.6459]]|x});
-  ("location.nearbyGPSCoordinate", 7, {x|[[-76.2646,100.7708],[-11.0863,80.4475]]|x});
-  ("location.ordinalDirection", 42, {x|["Northwest","Southwest"]|x});
-  ("location.ordinalDirection", 1337, {x|["Northwest","Northeast"]|x});
-  ("location.ordinalDirection", 7, {x|["Northeast","Southwest"]|x});
-  ("location.postalAddress", 42, {x|["751 ޚަދީޖާ މަގު\nޟިފާފްދޫ\nGeorgia\n35426","44715 ބަރުޢުމް ހިނގުން\nކެކުރި\nKansas\n06414"]|x});
-  ("location.postalAddress", 1337, {x|["34352 ފޫހި ރަތަފަ މަގު\nޤައިލާފަރު\nSouth Carolina\n34571","514 ޢަޠާ ހިނގުން\nބޮޑު\nMontana\n07911"]|x});
-  ("location.postalAddress", 7, {x|["479 މަބްޞަރު މަގު\nނުސައިބުދޫ\nHawaii\n49069","9157 އަލި ބިއްލޫރި މަގު\nދެކުނު ޚަވްލާ\nKansas\n52436"]|x});
-  ("location.secondaryAddress", 42, {x|["Apt. 975","Apt. 208"]|x});
-  ("location.secondaryAddress", 1337, {x|["Apt. 224","Apt. 529"]|x});
-  ("location.secondaryAddress", 7, {x|["Apt. 847","Suite 550"]|x});
-  ("location.state", 42, {x|["Maine","West Virginia"]|x});
-  ("location.state", 1337, {x|["Indiana","Delaware"]|x});
-  ("location.state", 7, {x|["Arkansas","Rhode Island"]|x});
-  ("location.street", 42, {x|["ޘަރިއްޔު ހިނގުން","ޚަދީޖާ މަގު"]|x});
-  ("location.street", 1337, {x|["ބަލްޤީސް މަގު","އިބްރާހީމް ގޯޅި"]|x});
-  ("location.street", 7, {x|["އުސާމާ ގޯޅި","އެއްވަނަ މަތިންދާބޯޓު ހިނގުން"]|x});
-  ("location.streetAddress", 42, {x|["9751 ޚަދީޖާ މަގު","198 ރަޤީޤާ ހިނގުން"]|x});
-  ("location.streetAddress", 1337, {x|["22435 ޔޫސުފް ހިނގުން","6194 ދެވަނަ ކުކުޅު މަގު"]|x});
-  ("location.streetAddress", 7, {x|["84795 ލުއްޖާ ގޯޅި","402 ނުރައްކާ ވިލު ގޯޅި"]|x});
-  ("location.timeZone", 42, {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x});
-  ("location.timeZone", 1337, {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x});
-  ("location.timeZone", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
-  ("location.zipCode", 42, {x|["39751","10867"]|x});
-  ("location.zipCode", 1337, {x|["21243","52971"]|x});
-  ("location.zipCode", 7, {x|["07479","55024"]|x});
-  ("lorem.lines", 42, {x|["ވެރިކަން ޕްރިންސިޕަލް ކުރާ ކުރާ ބޮޑު ތަންފުކެއް ޕްރިންސިޕަލް ވަސީލަތްތަކާއި ޓޫރިޒަމް ބައުންޑަރީ.\nއެއްގޮތަށް ވިދާޅުވެއްޖެ ވިދާޅުވެއްޖެ ކުންފުންޏާއި ކަންކަން ފުރަތަމަ ފެންވަރުގެ ތަކެތި ތަރައްގީ.","މިލިއަން ފުރުސަތު އެއްގޮތަށް ކަންކަން ޕްރިންސިޕަލް.\nޕްރިންސިޕަލް ކުރާ ބޮޑު."]|x});
-  ("lorem.lines", 1337, {x|["ފެންވަރުގެ މިލިއަން ނާގޯށި ކަންކަން.\nއިނގިރޭސިވިލާތް ވެރިކަން ގޮތުގައި ޖޮއިންޓް ތަކެތި.","މިލިއަން ފުރުސަތު ފުރުސަތު ޕަސެންޓެވެ ފުރަތަމަ ސިޓީ ގެއްލުންނުވާ ވިދާޅުވެއްޖެ ފެންވަރުގެ އަހައްމިޔަތު."]|x});
-  ("lorem.lines", 7, {x|["ފުރަތަމަ ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ޖަލާލުއްދީން އެހެނިހެން ބޮޑު ފެންވަރުގެ އެހެނިހެން އަހައްމިޔަތު.","ބޮޑު ފެންވަރުގެ މިކަންކުރަން އެއްގޮތަށް މިލިއަން ފޯޅަވަހީ.\nޕްރިންސިޕަލް ފޯޅަވަހީ ރިސޯޓުތަކާ.\nމިކަންކުރަން ތަރައްގީ ކަންކަން ވެރިކަން އަހައްމިޔަތު ފަހުރުވެރިވާ އެއްގޮތަށް.\nޖޮއިންޓް ފަހުރުވެރިވާ ޖޮއިންޓް އެންމެ ގެއްލުންނުވާ ކުންފުންޏާއި.\nފެންވަރުގެ މިލިއަން ޕަސެންޓެވެ ކުޑަކުދިންނަށް ޖޮއިންޓް މިލިއަން ވަސީލަތްތަކާއި."]|x});
-  ("lorem.paragraph", 42, {x|["ފޯޅަވަހީ ވެރިކަން ޕްރިންސިޕަލް ކުރާ ކުރާ. ތަންފުކެއް ޕްރިންސިޕަލް ވަސީލަތްތަކާއި. ބައުންޑަރީ އެންމެ އެއްގޮތަށް.","ވިދާޅުވެއްޖެ ކުންފުންޏާއި ކަންކަން ފުރަތަމަ. ތަކެތި ތަރައްގީ ފެންވަރުގެ ޖޮއިންޓް މިލިއަން. އެއްގޮތަށް ކަންކަން ޕްރިންސިޕަލް ދާއިރާ ޕްރިންސިޕަލް ކުރާ ބޮޑު ފޯޅަވަހީ ބައުންޑަރީ."]|x});
-  ("lorem.paragraph", 1337, {x|["ކުރާ ފެންވަރުގެ މިލިއަން ނާގޯށި ކަންކަން. އިނގިރޭސިވިލާތް ވެރިކަން ގޮތުގައި ޖޮއިންޓް ތަކެތި. އިނގިރޭސިވިލާތް މިލިއަން ފުރުސަތު ފުރުސަތު.","ފުރަތަމަ ސިޓީ ގެއްލުންނުވާ ވިދާޅުވެއްޖެ ފެންވަރުގެ. އެހެނިހެން ވިދާޅުވެއްޖެ ވެންޗާއެއްގެ އެއްގޮތަށް ކަންކަން އެންމެ ވިދާޅުވެއްޖެ ބައުންޑަރީ. އެހެނިހެން އެހެނިހެން ޓޫރިޒަމް ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ކުރާ."]|x});
-  ("lorem.paragraph", 7, {x|["ގެއްލުންނުވާ ފުރަތަމަ ވަސީލަތްތަކާއި. ޖަލާލުއްދީން އެހެނިހެން ބޮޑު ފެންވަރުގެ އެހެނިހެން އަހައްމިޔަތު ފުރުސަތު ޖޮއިންޓް ބޮޑު ފެންވަރުގެ. އެއްގޮތަށް މިލިއަން ފޯޅަވަހީ ދާއިރާ ޕްރިންސިޕަލް ފޯޅަވަހީ ރިސޯޓުތަކާ ޖަލާލުއްދީން މިކަންކުރަން ތަރައްގީ.","ވެރިކަން އަހައްމިޔަތު ފަހުރުވެރިވާ އެއްގޮތަށް އެހެނިހެން ޖޮއިންޓް ފަހުރުވެރިވާ. އެންމެ ގެއްލުންނުވާ ކުންފުންޏާއި ސިޓީ ފެންވަރުގެ. ޕަސެންޓެވެ ކުޑަކުދިންނަށް ޖޮއިންޓް މިލިއަން ވަސީލަތްތަކާއި ވެންޗާއެއްގެ."]|x});
-  ("lorem.paragraphs", 42, {x|["ފޯޅަވަހީ ވެރިކަން ޕްރިންސިޕަލް ކުރާ ކުރާ. ތަންފުކެއް ޕްރިންސިޕަލް ވަސީލަތްތަކާއި. ބައުންޑަރީ އެންމެ އެއްގޮތަށް.\nވިދާޅުވެއްޖެ ކުންފުންޏާއި ކަންކަން ފުރަތަމަ. ތަކެތި ތަރައްގީ ފެންވަރުގެ ޖޮއިންޓް މިލިއަން. އެއްގޮތަށް ކަންކަން ޕްރިންސިޕަލް ދާއިރާ ޕްރިންސިޕަލް ކުރާ ބޮޑު ފޯޅަވަހީ ބައުންޑަރީ.\nކުންފުންޏާއި ގޮތުގައި މުސްތަގުބަލަށް މިލިއަން ތަރައްގީ އެހެނިހެން ދާއިރާ މިކަންކުރަން މުޅިން. ކުންފުންޏާއި ކަންކަން ޖަލާލުއްދީން ވިދާޅުވެއްޖެ ބައުންޑަރީ ގެއްލުންނުވާ ފޯޅަވަހީ އިމުގެ. މިކަންކުރަން އިންގިލާބެއް އެއްގޮތަށް ދާއިރާ ނާގޯށި ޖޮއިންޓް ފެންވަރުގެ.","ޕަސެންޓެވެ ފެންވަރުގެ ޖަލާލުއްދީން ތަރައްގީ ފުރުސަތު އިންގިލާބެއް އިނގިރޭސިވިލާތް ގެއްލުންނުވާ އެއްގޮތަށް. ކަންބޮޑުވުން މުސްތަގުބަލަށް ވަސީލަތްތަކާއި. އިންގިލާބެއް ޕަސެންޓެވެ ގޮތުގައި ތަންފުކެއް ތަކެތި ނާގޯށި ބޮޑު ކުންފުންޏާއި ނާގޯށި.\nކުޑަކުދިންނަށް އިމުގެ ފަހުރުވެރިވާ ގޮތުގައި ވަސީލަތްތަކާއި ގެއްލުންނުވާ ސިޓީ ގެއްލުންނުވާ. ކަންކަން ފުރަތަމަ ދާއިރާ ގޮތުގައި ދާއިރާ ކުޑަކުދިންނަށް. އެހެނިހެން މިކަންކުރަން މުޅިން ވެންޗާއެއްގެ ވެރިކަން.\nއިންގިލާބެއް ފެންވަރުގެ ކުރާ ފޯޅަވަހީ. ތަކެތި ތަންފުކެއް ފުރުސަތު ވިދާޅުވެއްޖެ އިމުގެ ޖަލާލުއްދީން ކަންބޮޑުވުން އިމުގެ ނާގޯށި. ރިސޯޓުތަކާ ފުރަތަމަ ކަންބޮޑުވުން."]|x});
-  ("lorem.paragraphs", 1337, {x|["ކުރާ ފެންވަރުގެ މިލިއަން ނާގޯށި ކަންކަން. އިނގިރޭސިވިލާތް ވެރިކަން ގޮތުގައި ޖޮއިންޓް ތަކެތި. އިނގިރޭސިވިލާތް މިލިއަން ފުރުސަތު ފުރުސަތު.\nފުރަތަމަ ސިޓީ ގެއްލުންނުވާ ވިދާޅުވެއްޖެ ފެންވަރުގެ. އެހެނިހެން ވިދާޅުވެއްޖެ ވެންޗާއެއްގެ އެއްގޮތަށް ކަންކަން އެންމެ ވިދާޅުވެއްޖެ ބައުންޑަރީ. އެހެނިހެން އެހެނިހެން ޓޫރިޒަމް ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ކުރާ.\nޖޮއިންޓް މުސްތަގުބަލަށް ޓޫރިޒަމް ޖޮއިންޓް. ފުރުސަތު ޕަސެންޓެވެ މުސްތަގުބަލަށް. ބައުންޑަރީ އެންމެ ތަކެތި ސިޓީ އިނގިރޭސިވިލާތް މުޅިން.","އިންގިލާބެއް ފޯޅަވަހީ ބައުންޑަރީ. ނާގޯށި ވަސީލަތްތަކާއި ޓޫރިޒަމް ގެއްލުންނުވާ އަހައްމިޔަތު ވިދާޅުވެއްޖެ. މިކަންކުރަން ކުރާ މިކަންކުރަން ނާގޯށި މުސްތަގުބަލަށް މުޅިން ކަންކަން ވިދާޅުވެއްޖެ.\nމިލިއަން ވެންޗާއެއްގެ ފުރުސަތު އެހެނިހެން ވަސީލަތްތަކާއި ފުރުސަތު. މިކަންކުރަން ވަސީލަތްތަކާއި އިމުގެ ފުރަތަމަ ފަހުރުވެރިވާ. ތަކެތި ކަންކަން ރިސޯޓުތަކާ ފޯޅަވަހީ ޖަލާލުއްދީން ގެއްލުންނުވާ ރިސޯޓުތަކާ ފުރަތަމަ ވެންޗާއެއްގެ އެހެނިހެން.\nމުސްތަގުބަލަށް ދާއިރާ ރިސޯޓުތަކާ ވެރިކަން. ތަކެތި ވެންޗާއެއްގެ ތަންފުކެއް އިނގިރޭސިވިލާތް ކުންފުންޏާއި ޖޮއިންޓް މުސްތަގުބަލަށް ޕަސެންޓެވެ ދާއިރާ ޕަސެންޓެވެ. ދާއިރާ މިކަންކުރަން ވަސީލަތްތަކާއި ގެއްލުންނުވާ އިންގިލާބެއް ދާއިރާ."]|x});
-  ("lorem.paragraphs", 7, {x|["ގެއްލުންނުވާ ފުރަތަމަ ވަސީލަތްތަކާއި. ޖަލާލުއްދީން އެހެނިހެން ބޮޑު ފެންވަރުގެ އެހެނިހެން އަހައްމިޔަތު ފުރުސަތު ޖޮއިންޓް ބޮޑު ފެންވަރުގެ. އެއްގޮތަށް މިލިއަން ފޯޅަވަހީ ދާއިރާ ޕްރިންސިޕަލް ފޯޅަވަހީ ރިސޯޓުތަކާ ޖަލާލުއްދީން މިކަންކުރަން ތަރައްގީ.\nވެރިކަން އަހައްމިޔަތު ފަހުރުވެރިވާ އެއްގޮތަށް އެހެނިހެން ޖޮއިންޓް ފަހުރުވެރިވާ. އެންމެ ގެއްލުންނުވާ ކުންފުންޏާއި ސިޓީ ފެންވަރުގެ. ޕަސެންޓެވެ ކުޑަކުދިންނަށް ޖޮއިންޓް މިލިއަން ވަސީލަތްތަކާއި ވެންޗާއެއްގެ.\nވިދާޅުވެއްޖެ ވެރިކަން ފުރަތަމަ ފުރަތަމަ ކުޑަކުދިންނަށް ކަންކަން ފުރަތަމަ ޓޫރިޒަމް އިންގިލާބެއް ވަސީލަތްތަކާއި. މުސްތަގުބަލަށް ބައުންޑަރީ އަހައްމިޔަތު ބޮޑު ކުންފުންޏާއި ޕްރިންސިޕަލް ރިސޯޓުތަކާ. ފޯޅަވަހީ އެންމެ ފަހުރުވެރިވާ އެންމެ ތަރައްގީ ކުންފުންޏާއި މިލިއަން ވެރިކަން ފަހުރުވެރިވާ ތަރައްގީ.","ނާގޯށި ކުންފުންޏާއި ކުރާ ފުރަތަމަ މިލިއަން. ފުރުސަތު ކަންކަން މިލިއަން ގެއްލުންނުވާ އިމުގެ އަހައްމިޔަތު ފުރުސަތު ފޯޅަވަހީ ދާއިރާ. ފެންވަރުގެ ފަހުރުވެރިވާ ފުރުސަތު ވަސީލަތްތަކާއި ކުރާ އަހައްމިޔަތު ބޮޑު ޕަސެންޓެވެ ކަންބޮޑުވުން ފުރަތަމަ.\nވަސީލަތްތަކާއި ކަންބޮޑުވުން ގެއްލުންނުވާ ޓޫރިޒަމް ފުރަތަމަ މިލިއަން ބޮޑު. ޕްރިންސިޕަލް ކަންބޮޑުވުން ފޯޅަވަހީ ތަރައްގީ ރިސޯޓުތަކާ އަހައްމިޔަތު ތަރައްގީ. ސިޓީ ކުރާ ފުރުސަތު ތަންފުކެއް.\nކަންކަން ފުރުސަތު ބައުންޑަރީ. ކުރާ ތަންފުކެއް މިކަންކުރަން އެއްގޮތަށް މިލިއަން. އެންމެ ކުރާ އަހައްމިޔަތު ކަންބޮޑުވުން ޖަލާލުއްދީން ކުރާ ދާއިރާ ފެންވަރުގެ."]|x});
-  ("lorem.sentence", 42, {x|["ފޯޅަވަހީ ވެރިކަން ޕްރިންސިޕަލް ކުރާ ކުރާ.","ތަންފުކެއް ޕްރިންސިޕަލް ވަސީލަތްތަކާއި."]|x});
-  ("lorem.sentence", 1337, {x|["ކުރާ ފެންވަރުގެ މިލިއަން ނާގޯށި ކަންކަން.","އިނގިރޭސިވިލާތް ވެރިކަން ގޮތުގައި ޖޮއިންޓް ތަކެތި."]|x});
-  ("lorem.sentence", 7, {x|["ގެއްލުންނުވާ ފުރަތަމަ ވަސީލަތްތަކާއި.","ޖަލާލުއްދީން އެހެނިހެން ބޮޑު ފެންވަރުގެ އެހެނިހެން އަހައްމިޔަތު ފުރުސަތު ޖޮއިންޓް ބޮޑު ފެންވަރުގެ."]|x});
-  ("lorem.sentences", 42, {x|["ވެރިކަން ޕްރިންސިޕަލް ކުރާ ކުރާ ބޮޑު ތަންފުކެއް ޕްރިންސިޕަލް ވަސީލަތްތަކާއި ޓޫރިޒަމް ބައުންޑަރީ. އެއްގޮތަށް ވިދާޅުވެއްޖެ ވިދާޅުވެއްޖެ ކުންފުންޏާއި ކަންކަން ފުރަތަމަ ފެންވަރުގެ ތަކެތި ތަރައްގީ. ޖޮއިންޓް މިލިއަން ފުރުސަތު އެއްގޮތަށް ކަންކަން.","ޕްރިންސިޕަލް ކުރާ ބޮޑު. ބައުންޑަރީ ކަންބޮޑުވުން ކުންފުންޏާއި ގޮތުގައި މުސްތަގުބަލަށް މިލިއަން ތަރައްގީ އެހެނިހެން ދާއިރާ މިކަންކުރަން. އަހައްމިޔަތު ކުންފުންޏާއި ކަންކަން ޖަލާލުއްދީން ވިދާޅުވެއްޖެ. ގެއްލުންނުވާ ފޯޅަވަހީ އިމުގެ ޕްރިންސިޕަލް މިކަންކުރަން އިންގިލާބެއް އެއްގޮތަށް ދާއިރާ ނާގޯށި ޖޮއިންޓް."]|x});
-  ("lorem.sentences", 1337, {x|["ފެންވަރުގެ މިލިއަން ނާގޯށި ކަންކަން. އިނގިރޭސިވިލާތް ވެރިކަން ގޮތުގައި ޖޮއިންޓް ތަކެތި. އިނގިރޭސިވިލާތް މިލިއަން ފުރުސަތު ފުރުސަތު.","ސިޓީ ގެއްލުންނުވާ ވިދާޅުވެއްޖެ ފެންވަރުގެ އަހައްމިޔަތު އެހެނިހެން. ވެންޗާއެއްގެ އެއްގޮތަށް ކަންކަން އެންމެ. ބައުންޑަރީ ފުރަތަމަ އެހެނިހެން އެހެނިހެން."]|x});
-  ("lorem.sentences", 7, {x|["ފުރަތަމަ ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ޖަލާލުއްދީން އެހެނިހެން ބޮޑު ފެންވަރުގެ އެހެނިހެން އަހައްމިޔަތު. ޖޮއިންޓް ބޮޑު ފެންވަރުގެ މިކަންކުރަން އެއްގޮތަށް މިލިއަން ފޯޅަވަހީ ދާއިރާ ޕްރިންސިޕަލް.","ޖަލާލުއްދީން މިކަންކުރަން ތަރައްގީ ކަންކަން. އަހައްމިޔަތު ފަހުރުވެރިވާ އެއްގޮތަށް އެހެނިހެން ޖޮއިންޓް ފަހުރުވެރިވާ ޖޮއިންޓް އެންމެ ގެއްލުންނުވާ. ސިޓީ ފެންވަރުގެ މިލިއަން ޕަސެންޓެވެ ކުޑަކުދިންނަށް. މިލިއަން ވަސީލަތްތަކާއި ވެންޗާއެއްގެ މިކަންކުރަން ވިދާޅުވެއްޖެ. ފުރަތަމަ ފުރަތަމަ ކުޑަކުދިންނަށް ކަންކަން ފުރަތަމަ ޓޫރިޒަމް އިންގިލާބެއް ވަސީލަތްތަކާއި. މުސްތަގުބަލަށް ބައުންޑަރީ އަހައްމިޔަތު ބޮޑު ކުންފުންޏާއި ޕްރިންސިޕަލް ރިސޯޓުތަކާ."]|x});
-  ("lorem.slug", 42, {x|["--","--"]|x});
-  ("lorem.slug", 1337, {x|["--","--"]|x});
-  ("lorem.slug", 7, {x|["--","--"]|x});
-  ("lorem.text", 42, {x|["ޕްރިންސިޕަލް ކުރާ ކުރާ ބޮޑު ތަންފުކެއް ޕްރިންސިޕަލް ވަސީލަތްތަކާއި ޓޫރިޒަމް. އެންމެ އެއްގޮތަށް ވިދާޅުވެއްޖެ ވިދާޅުވެއްޖެ ކުންފުންޏާއި ކަންކަން ފުރަތަމަ ފެންވަރުގެ ތަކެތި ތަރައްގީ. ޖޮއިންޓް މިލިއަން ފުރުސަތު އެއްގޮތަށް ކަންކަން. ދާއިރާ ޕްރިންސިޕަލް ކުރާ ބޮޑު ފޯޅަވަހީ ބައުންޑަރީ ކަންބޮޑުވުން. ގޮތުގައި މުސްތަގުބަލަށް މިލިއަން ތަރައްގީ އެހެނިހެން. މިކަންކުރަން މުޅިން އަހައްމިޔަތު.","ވިދާޅުވެއްޖެ ބައުންޑަރީ ގެއްލުންނުވާ ފޯޅަވަހީ އިމުގެ ޕްރިންސިޕަލް މިކަންކުރަން. އެއްގޮތަށް ދާއިރާ ނާގޯށި. ފެންވަރުގެ ކަންބޮޑުވުން ޕަސެންޓެވެ ފެންވަރުގެ ޖަލާލުއްދީން ތަރައްގީ. އިންގިލާބެއް އިނގިރޭސިވިލާތް ގެއްލުންނުވާ އެއްގޮތަށް ޓޫރިޒަމް ކަންބޮޑުވުން މުސްތަގުބަލަށް ވަސީލަތްތަކާއި ގެއްލުންނުވާ."]|x});
-  ("lorem.text", 1337, {x|["މިލިއަން ނާގޯށި ކަންކަން މުޅިން އިނގިރޭސިވިލާތް. ގޮތުގައި ޖޮއިންޓް ތަކެތި ތަރައްގީ އިނގިރޭސިވިލާތް މިލިއަން ފުރުސަތު ފުރުސަތު.","ގެއްލުންނުވާ ވިދާޅުވެއްޖެ ފެންވަރުގެ އަހައްމިޔަތު އެހެނިހެން ވިދާޅުވެއްޖެ ވެންޗާއެއްގެ. ކަންކަން އެންމެ ވިދާޅުވެއްޖެ ބައުންޑަރީ. އެހެނިހެން އެހެނިހެން ޓޫރިޒަމް ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ކުރާ. ޖޮއިންޓް މުސްތަގުބަލަށް ޓޫރިޒަމް ޖޮއިންޓް."]|x});
-  ("lorem.text", 7, {x|["ފުރަތަމަ ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ޖަލާލުއްދީން އެހެނިހެން ބޮޑު ފެންވަރުގެ އެހެނިހެން އަހައްމިޔަތު.","ފެންވަރުގެ މިކަންކުރަން އެއްގޮތަށް.\nފޯޅަވަހީ ދާއިރާ ޕްރިންސިޕަލް ފޯޅަވަހީ ރިސޯޓުތަކާ ޖަލާލުއްދީން."]|x});
-  ("lorem.word", 42, {x|["ޖޮއިންޓް","ފޯޅަވަހީ"]|x});
-  ("lorem.word", 1337, {x|["މުޅިން","ކުރާ"]|x});
-  ("lorem.word", 7, {x|["އިންގިލާބެއް","ގެއްލުންނުވާ"]|x});
-  ("lorem.words", 42, {x|["ޖޮއިންޓް ފޯޅަވަހީ ވެރިކަން","ޕްރިންސިޕަލް ކުރާ ކުރާ"]|x});
-  ("lorem.words", 1337, {x|["މުޅިން ކުރާ ފެންވަރުގެ","މިލިއަން ނާގޯށި ކަންކަން"]|x});
-  ("lorem.words", 7, {x|["އިންގިލާބެއް ގެއްލުންނުވާ ފުރަތަމަ","ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ޖަލާލުއްދީން"]|x});
-  ("music.album", 42, {x|["Heard It In A Past Life","Vida"]|x});
-  ("music.album", 1337, {x|["Dulce Beat","Carnival"]|x});
-  ("music.album", 7, {x|["Aura","Stay Dangerous"]|x});
-  ("music.artist", 42, {x|["James TW","Vanessa Carlton"]|x});
-  ("music.artist", 1337, {x|["Evanescence","Cher"]|x});
-  ("music.artist", 7, {x|["Bachman-Turner Overdrive","Smokey Robinson"]|x});
-  ("music.genre", 42, {x|["German Folk","Tex-Mex"]|x});
-  ("music.genre", 1337, {x|["Drinking Songs","Chicago House"]|x});
-  ("music.genre", 7, {x|["Bebop","Qawwali"]|x});
-  ("music.songName", 42, {x|["I Honestly Love You","Why Do Fools Fall in Love?"]|x});
-  ("music.songName", 1337, {x|["Frankenstein","Cars"]|x});
-  ("music.songName", 7, {x|["Bad Day","Take Me Home, Country Roads"]|x});
-  ("number.bigInt", 42, {x|["975110867098211","542612347155061"]|x});
-  ("number.bigInt", 1337, {x|["124352971361947","345712641415819"]|x});
-  ("number.bigInt", 7, {x|["747955024683029","490692591576424"]|x});
-  ("number.binary", 42, {x|["0","1"]|x});
-  ("number.binary", 1337, {x|["0","0"]|x});
-  ("number.binary", 7, {x|["0","1"]|x});
-  ("number.float", 42, {x|[0.3745401188473625,0.9507143064099162]|x});
-  ("number.float", 1337, {x|[0.2620246750155817,0.1586839721544656]|x});
-  ("number.float", 7, {x|[0.07630828937395717,0.7799187922401146]|x});
-  ("number.hex", 42, {x|["5","f"]|x});
-  ("number.hex", 1337, {x|["4","2"]|x});
-  ("number.hex", 7, {x|["1","c"]|x});
-  ("number.int", 42, {x|[3373557479352566,8563273192166996]|x});
-  ("number.int", 1337, {x|[2360108457524098,1429298155729043]|x});
-  ("number.int", 7, {x|[687323967179667,7024883964223655]|x});
-  ("number.octal", 42, {x|["2","7"]|x});
-  ("number.octal", 1337, {x|["2","1"]|x});
-  ("number.octal", 7, {x|["0","6"]|x});
-  ("number.romanNumeral", 42, {x|["MCDXCVIII","MMMDCCCII"]|x});
-  ("number.romanNumeral", 1337, {x|["MXLVIII","DCXXXV"]|x});
-  ("number.romanNumeral", 7, {x|["CCCVI","MMMCXIX"]|x});
-  ("person.bio", 42, {x|["traveler, philosopher, model","creator, author"]|x});
-  ("person.bio", 1337, {x|["creator, engineer, friend","grad, educator, writer"]|x});
-  ("person.bio", 7, {x|["photographer","person, writer, inventor ⛄"]|x});
-  ("person.firstName", 42, {x|["ޢާއިޝާ","މޫސާ"]|x});
-  ("person.firstName", 1337, {x|["ރަމްލާ","މާރިޔާ"]|x});
-  ("person.firstName", 7, {x|["ޙަލީމާ","ޖުވައިރިއްޔާ"]|x});
-  ("person.fullName", 42, {x|["ޢާއިޝާ ޒުބައިދާ","ހިންދު ޒުމުއްރުދާ"]|x});
-  ("person.fullName", 1337, {x|["ރަމްލާ ތަޙައްޝުމު","އިބްރާހީމް ޛުއްނޫރު"]|x});
-  ("person.fullName", 7, {x|["ޙަލީމާ ޚަވްޟާ","މުޙައްމަދު މަބްޞަރު"]|x});
-  ("person.gender", 42, {x|["Gender nonconforming","Two-spirit person"]|x});
-  ("person.gender", 1337, {x|["Demigender","Cisgender woman"]|x});
-  ("person.gender", 7, {x|["Cis male","Trans woman"]|x});
-  ("person.jobArea", 42, {x|["Identity","Usability"]|x});
-  ("person.jobArea", 1337, {x|["Functionality","Marketing"]|x});
-  ("person.jobArea", 7, {x|["Brand","Accounts"]|x});
-  ("person.jobDescriptor", 42, {x|["National","Chief"]|x});
-  ("person.jobDescriptor", 1337, {x|["Future","Corporate"]|x});
-  ("person.jobDescriptor", 7, {x|["Senior","Forward"]|x});
-  ("person.jobTitle", 42, {x|["National Usability Producer","Customer Marketing Liaison"]|x});
-  ("person.jobTitle", 1337, {x|["Future Marketing Engineer","District Paradigm Analyst"]|x});
-  ("person.jobTitle", 7, {x|["Senior Accounts Administrator","Legacy Metrics Designer"]|x});
-  ("person.jobType", 42, {x|["Coordinator","Representative"]|x});
-  ("person.jobType", 1337, {x|["Engineer","Liaison"]|x});
-  ("person.jobType", 7, {x|["Associate","Consultant"]|x});
-  ("person.lastName", 42, {x|["ޚާލިޞާ","ބުހްލޫލް"]|x});
-  ("person.lastName", 1337, {x|["އިބާ","ސަޢުދިއްޔާ"]|x});
-  ("person.lastName", 7, {x|["ދާއިޙާ","ޔަގްޡާން"]|x});
-  ("person.middleName", 42, {x|["Rebel","Cameron"]|x});
-  ("person.middleName", 1337, {x|["Dawn","Isla"]|x});
-  ("person.middleName", 7, {x|["Gwen","London"]|x});
-  ("person.prefix", 42, {x|["އަމީރު","އަމީރާ"]|x});
-  ("person.prefix", 1337, {x|["ބަނޑޭރި","ބޮޑު"]|x});
-  ("person.prefix", 7, {x|["އަމީރު","އަމީރާ"]|x});
-  ("person.sex", 42, {x|["އަންހެން","ފިރިހެން"]|x});
-  ("person.sex", 1337, {x|["އަންހެން","އަންހެން"]|x});
-  ("person.sex", 7, {x|["އަންހެން","ފިރިހެން"]|x});
-  ("person.sexType", 42, {x|["female","male"]|x});
-  ("person.sexType", 1337, {x|["female","female"]|x});
-  ("person.sexType", 7, {x|["female","male"]|x});
-  ("person.suffix", 42, {x|["III","DVM"]|x});
-  ("person.suffix", 1337, {x|["I","Sr."]|x});
-  ("person.suffix", 7, {x|["Jr.","DDS"]|x});
-  ("person.zodiacSign", 42, {x|["Gemini","Capricorn"]|x});
-  ("person.zodiacSign", 1337, {x|["Taurus","Pisces"]|x});
-  ("person.zodiacSign", 7, {x|["Aquarius","Scorpio"]|x});
-  ("phone.imei", 42, {x|["39-751108-670982-8","11-354261-234715-8"]|x});
-  ("phone.imei", 1337, {x|["21-243529-713619-6","47-734571-264141-7"]|x});
-  ("phone.imei", 7, {x|["07-479550-246830-5","29-249069-259157-1"]|x});
-  ("phone.number", 42, {x|["+960-7975110","767 0982"]|x});
-  ("phone.number", 1337, {x|["+960-5124352","971 3619"]|x});
-  ("phone.number", 7, {x|["+960 674 7955","+960 624 6830"]|x});
-  ("science.chemicalElement", 42, {x|[{"symbol":"Rh","name":"Rhodium","atomicNumber":45},{"symbol":"Nh","name":"Nihonium","atomicNumber":113}]|x});
-  ("science.chemicalElement", 1337, {x|[{"symbol":"Ga","name":"Gallium","atomicNumber":31},{"symbol":"K","name":"Potassium","atomicNumber":19}]|x});
-  ("science.chemicalElement", 7, {x|[{"symbol":"Ne","name":"Neon","atomicNumber":10},{"symbol":"Np","name":"Neptunium","atomicNumber":93}]|x});
-  ("science.unit", 42, {x|[{"name":"pascal","symbol":"Pa"},{"name":"lux","symbol":"lx"}]|x});
-  ("science.unit", 1337, {x|[{"name":"radian","symbol":"rad"},{"name":"kelvin","symbol":"K"}]|x});
-  ("science.unit", 7, {x|[{"name":"mole","symbol":"mol"},{"name":"steradian","symbol":"sr"}]|x});
-  ("string.alpha", 42, {x|["t","X"]|x});
-  ("string.alpha", 1337, {x|["n","i"]|x});
-  ("string.alpha", 7, {x|["d","O"]|x});
-  ("string.alphanumeric", 42, {x|["n","W"]|x});
-  ("string.alphanumeric", 1337, {x|["g","9"]|x});
-  ("string.alphanumeric", 7, {x|["4","M"]|x});
-  ("string.binary", 42, {x|["0b0","0b1"]|x});
-  ("string.binary", 1337, {x|["0b0","0b0"]|x});
-  ("string.binary", 7, {x|["0b0","0b1"]|x});
-  ("string.hexadecimal", 42, {x|["0x8","0xE"]|x});
-  ("string.hexadecimal", 1337, {x|["0x5","0x3"]|x});
-  ("string.hexadecimal", 7, {x|["0x1","0xB"]|x});
-  ("string.nanoid", 42, {x|["WB9RHYdbwi8mMv2aWO6ru","UFwb-TVckgmxNZcOJ47C3"]|x});
-  ("string.nanoid", 1337, {x|["9swY7CYMmAbFbcPXv0Z7G","mMHYBZ0W_ILbUUHwtouNU"]|x});
-  ("string.nanoid", 7, {x|["MI-4uN4Us1Wy8KtutPjhl","mIUJqw0HHGjeWt8sulipM"]|x});
-  ("string.numeric", 42, {x|["3","9"]|x});
-  ("string.numeric", 1337, {x|["2","1"]|x});
-  ("string.numeric", 7, {x|["0","7"]|x});
-  ("string.octal", 42, {x|["0o2","0o7"]|x});
-  ("string.octal", 1337, {x|["0o2","0o1"]|x});
-  ("string.octal", 7, {x|["0o0","0o6"]|x});
-  ("string.sample", 42, {x|["CyeX//&qXb","\"{n412=QI<"]|x});
-  ("string.sample", 1337, {x|["9/:K>Q9{e+","D[,|JjjBGW"]|x});
-  ("string.sample", 7, {x|["(iId{SO'9O","`kD';u4Kw#"]|x});
-  ("string.symbol", 42, {x|[",","}"]|x});
-  ("string.symbol", 1337, {x|[")","&"]|x});
-  ("string.symbol", 7, {x|["#","]"]|x});
-  ("string.ulid", 42, {x|["01JGFJJZ00BYQK441VKP0ZT655","01JGFJJZ009GD9K49BES6GJ1K5"]|x});
-  ("string.ulid", 1337, {x|["01JGFJJZ00858EAG8ZQ3CM4ZES","01JGFJJZ00SBDJR69NF5D6HT5Y"]|x});
-  ("string.ulid", 7, {x|["01JGFJJZ002REQZHG28FNSC29X","01JGFJJZ006EX0KY7HX4GRNE6F"]|x});
-  ("string.uuid", 42, {x|["5fb9220d-9b0f-4d32-a248-6492457c3890","21ffc41a-7170-4e4a-9488-2fcfe9e13056"]|x});
-  ("string.uuid", 1337, {x|["4247584f-b16a-42f7-8cc5-69c34a72638d","f6880bf2-25b0-450c-a5b7-fd99f401ff75"]|x});
-  ("string.uuid", 7, {x|["1c7bf881-47ac-4614-8e37-e09f38e28ca7","7575dc59-475a-457b-a6e2-b66a8601b8bf"]|x});
-  ("system.commonFileExt", 42, {x|["png","shtml"]|x});
-  ("system.commonFileExt", 1337, {x|["wav","m3a"]|x});
-  ("system.commonFileExt", 7, {x|["pdf","mpe"]|x});
-  ("system.commonFileName", 42, {x|["unnaturally_dreamily.m3a","following_huzzah.pdf"]|x});
-  ("system.commonFileName", 1337, {x|["wallaby.mp4","circa_masquerade.mp2"]|x});
-  ("system.commonFileName", 7, {x|["bleak.wav","for_often.htm"]|x});
-  ("system.commonFileType", 42, {x|["audio","application"]|x});
-  ("system.commonFileType", 1337, {x|["audio","video"]|x});
-  ("system.commonFileType", 7, {x|["video","text"]|x});
-  ("system.cron", 42, {x|["* * ? 8 ?","* 4 6 4 WED"]|x});
-  ("system.cron", 1337, {x|["* * 9 6 *","* 10 25 * TUE"]|x});
-  ("system.cron", 7, {x|["4 18 * * ?","* * 29 * ?"]|x});
-  ("system.directoryPath", 42, {x|["/net","/var/spool"]|x});
-  ("system.directoryPath", 1337, {x|["/home","/etc"]|x});
-  ("system.directoryPath", 7, {x|["/Users","/usr/libexec"]|x});
-  ("system.fileExt", 42, {x|["docx","m2v"]|x});
-  ("system.fileExt", 1337, {x|["xul","exe"]|x});
-  ("system.fileExt", 7, {x|["bin","ico"]|x});
-  ("system.fileName", 42, {x|["unnaturally_dreamily.mar","fun.csh"]|x});
-  ("system.fileName", 1337, {x|["wallaby.jpg","seal.pptx"]|x});
-  ("system.fileName", 7, {x|["bleak.xla","for_often.3gp"]|x});
-  ("system.filePath", 42, {x|["/net/supposing_dreamily_embarrassment.xlsx","/opt/sbin/baseboard_meanwhile_beside.xsd"]|x});
-  ("system.filePath", 1337, {x|["/home/mmm.distz","/opt/knavishly_boohoo.vsw"]|x});
-  ("system.filePath", 7, {x|["/Users/drowse_task_geez.3g2","/var/concerning.sh"]|x});
-  ("system.fileType", 42, {x|["font","video"]|x});
-  ("system.fileType", 1337, {x|["audio","application"]|x});
-  ("system.fileType", 7, {x|["application","text"]|x});
-  ("system.mimeType", 42, {x|["application/x-bzip","video/mpeg"]|x});
-  ("system.mimeType", 1337, {x|["application/vnd.oasis.opendocument.text","application/vnd.apple.installer+xml"]|x});
-  ("system.mimeType", 7, {x|["application/msword","image/vnd.microsoft.icon"]|x});
-  ("system.networkInterface", 42, {x|["wlp5s1f0","wlx0fd322486492"]|x});
-  ("system.networkInterface", 1337, {x|["eno2","wls5f9"]|x});
-  ("system.networkInterface", 7, {x|["P7enp9s5d2","wlxc614e37e09f3"]|x});
-  ("system.semver", 42, {x|["3.19.15","5.3.3"]|x});
-  ("system.semver", 1337, {x|["2.3.5","4.6.10"]|x});
-  ("system.semver", 7, {x|["0.16.9","7.20.11"]|x});
-  ("vehicle.bicycle", 42, {x|["Fitness Bicycle","Tricycle"]|x});
-  ("vehicle.bicycle", 1337, {x|["Cyclocross Bicycle","City Bicycle"]|x});
-  ("vehicle.bicycle", 7, {x|["BMX Bicycle","Touring Bicycle"]|x});
-  ("vehicle.color", 42, {x|["ރިހިކުލަ","ދަނބުކުލަ"]|x});
-  ("vehicle.color", 1337, {x|["ރަންކުލަ","ނޫ"]|x});
-  ("vehicle.color", 7, {x|["ނާރިނގުކުލަ","މުށިކުލަ"]|x});
-  ("vehicle.fuel", 42, {x|["Electric","Hybrid"]|x});
-  ("vehicle.fuel", 1337, {x|["Electric","Diesel"]|x});
-  ("vehicle.fuel", 7, {x|["Diesel","Hybrid"]|x});
-  ("vehicle.manufacturer", 42, {x|["Jeep","Vauxhall"]|x});
-  ("vehicle.manufacturer", 1337, {x|["Fiat","Chevrolet"]|x});
-  ("vehicle.manufacturer", 7, {x|["BYD","Rolls Royce"]|x});
-  ("vehicle.model", 42, {x|["Durango","Wrangler"]|x});
-  ("vehicle.model", 1337, {x|["Challenger","Aventador"]|x});
-  ("vehicle.model", 7, {x|["A8","Mustang"]|x});
-  ("vehicle.type", 42, {x|["Extended Cab Pickup","Wagon"]|x});
-  ("vehicle.type", 1337, {x|["Coupe","Convertible"]|x});
-  ("vehicle.type", 7, {x|["Cargo Van","SUV"]|x});
-  ("vehicle.vehicle", 42, {x|["Jeep Wrangler","Renault Impala"]|x});
-  ("vehicle.vehicle", 1337, {x|["Fiat Aventador","Ford Explorer"]|x});
-  ("vehicle.vehicle", 7, {x|["BYD Mustang","Land Rover Model X"]|x});
-  ("vehicle.vin", 42, {x|["CYRK551V7PAZ82113","HE9L49CF06MK06109"]|x});
-  ("vehicle.vin", 1337, {x|["859FAH8Z23JL19477","BDKS69NG0DEH81945"]|x});
-  ("vehicle.vin", 7, {x|["2SEPZHG25GST30292","EX0KY7JX1HUN42434"]|x});
-  ("vehicle.vrm", 42, {x|["JY75EEB","WP70ZVF"]|x});
-  ("vehicle.vrm", 1337, {x|["GE24ING","ZT13QDZ"]|x});
-  ("vehicle.vrm", 7, {x|["BU47ZON","BG46UJB"]|x});
-  ("word.adjective", 42, {x|["hospitable","weird"]|x});
-  ("word.adjective", 1337, {x|["fatal","cumbersome"]|x});
-  ("word.adjective", 7, {x|["blushing","sparkling"]|x});
-  ("word.adverb", 42, {x|["jaggedly","wearily"]|x});
-  ("word.adverb", 1337, {x|["frankly","deceivingly"]|x});
-  ("word.adverb", 7, {x|["briefly","successfully"]|x});
-  ("word.conjunction", 42, {x|["instead","whose"]|x});
-  ("word.conjunction", 1337, {x|["how","even"]|x});
-  ("word.conjunction", 7, {x|["as","whenever"]|x});
-  ("word.interjection", 42, {x|["yahoo","ick"]|x});
-  ("word.interjection", 1337, {x|["ew","huzzah"]|x});
-  ("word.interjection", 7, {x|["blah","phew"]|x});
-  ("word.noun", 42, {x|["gerbil","unit"]|x});
-  ("word.noun", 1337, {x|["diversity","co-producer"]|x});
-  ("word.noun", 7, {x|["best-seller","saw"]|x});
-  ("word.preposition", 42, {x|["concerning","via"]|x});
-  ("word.preposition", 1337, {x|["barring","anenst"]|x});
-  ("word.preposition", 7, {x|["after","since"]|x});
-  ("word.sample", 42, {x|["bleakly","custody"]|x});
-  ("word.sample", 1337, {x|["how","yet"]|x});
-  ("word.sample", 7, {x|["masticate","afore"]|x});
-  ("word.verb", 42, {x|["glow","unfurl"]|x});
-  ("word.verb", 1337, {x|["downshift","condense"]|x});
-  ("word.verb", 7, {x|["bludgeon","scuffle"]|x});
-  ("word.words", 42, {x|["unnaturally dreamily","embarrassment"]|x});
-  ("word.words", 1337, {x|["wallaby","suspiciously generously till"]|x});
-  ("word.words", 7, {x|["bleak","task"]|x});
-  ("faker.getMetadata", 42, {x|[{"title":"Maldivian","code":"dv","language":"dv","endonym":"ދިވެހި","dir":"rtl","script":"Thaa"},{"title":"Maldivian","code":"dv","language":"dv","endonym":"ދިވެހި","dir":"rtl","script":"Thaa"}]|x});
-  ("faker.getMetadata", 1337, {x|[{"title":"Maldivian","code":"dv","language":"dv","endonym":"ދިވެހި","dir":"rtl","script":"Thaa"},{"title":"Maldivian","code":"dv","language":"dv","endonym":"ދިވެހި","dir":"rtl","script":"Thaa"}]|x});
-  ("faker.getMetadata", 7, {x|[{"title":"Maldivian","code":"dv","language":"dv","endonym":"ދިވެހި","dir":"rtl","script":"Thaa"},{"title":"Maldivian","code":"dv","language":"dv","endonym":"ދިވެހި","dir":"rtl","script":"Thaa"}]|x});
-]
+let cases =
+  [
+    ("airline.aircraftType", 42, {x|["regional","widebody"]|x});
+    ("airline.aircraftType", 1337, {x|["narrowbody","narrowbody"]|x});
+    ("airline.aircraftType", 7, {x|["narrowbody","widebody"]|x});
+    ( "airline.airline",
+      42,
+      {x|[{"name":"Etihad Airways","iataCode":"EY"},{"name":"Virgin Australia","iataCode":"VA"}]|x}
+    );
+    ( "airline.airline",
+      1337,
+      {x|[{"name":"Cebu Pacific Air","iataCode":"5J"},{"name":"Aircalin","iataCode":"SB"}]|x}
+    );
+    ( "airline.airline",
+      7,
+      {x|[{"name":"Air France","iataCode":"AF"},{"name":"South African Airways","iataCode":"SA"}]|x}
+    );
+    ( "airline.airplane",
+      42,
+      {x|[{"name":"Boeing 737-900","iataTypeCode":"739"},{"name":"McDonnell Douglas MD88","iataTypeCode":"M88"}]|x}
+    );
+    ( "airline.airplane",
+      1337,
+      {x|[{"name":"Boeing 717","iataTypeCode":"717"},{"name":"Airbus A350-1000","iataTypeCode":"351"}]|x}
+    );
+    ( "airline.airplane",
+      7,
+      {x|[{"name":"Airbus A321neo","iataTypeCode":"32Q"},{"name":"Embraer 195","iataTypeCode":"E95"}]|x}
+    );
+    ( "airline.airport",
+      42,
+      {x|[{"name":"Hartsfield-Jackson Atlanta International Airport","iataCode":"ATL"},{"name":"Viracopos International Airport","iataCode":"VCP"}]|x}
+    );
+    ( "airline.airport",
+      1337,
+      {x|[{"name":"Denver International Airport","iataCode":"DEN"},{"name":"Canberra Airport","iataCode":"CBR"}]|x}
+    );
+    ( "airline.airport",
+      7,
+      {x|[{"name":"Belem Val de Cans International Airport","iataCode":"BEL"},{"name":"San Francisco International Airport","iataCode":"SFO"}]|x}
+    );
+    ("airline.flightNumber", 42, {x|["97","210"]|x});
+    ("airline.flightNumber", 1337, {x|["22","35"]|x});
+    ("airline.flightNumber", 7, {x|["8","79"]|x});
+    ("airline.recordLocator", 42, {x|["JYTQDD","BWQTAZ"]|x});
+    ("airline.recordLocator", 1337, {x|["GDGMHN","GZTCJR"]|x});
+    ("airline.recordLocator", 7, {x|["BUMTZP","NBGNSV"]|x});
+    ("airline.seat", 42, {x|["14F","26D"]|x});
+    ("airline.seat", 1337, {x|["10A","10C"]|x});
+    ("airline.seat", 7, {x|["3E","16E"]|x});
+    ("animal.bear", 42, {x|["Brown bear","Sun bear"]|x});
+    ("animal.bear", 1337, {x|["Brown bear","Asian black bear"]|x});
+    ("animal.bear", 7, {x|["American black bear","Spectacled bear"]|x});
+    ("animal.bird", 42, {x|["Golden Eagle","Wild Turkey"]|x});
+    ("animal.bird", 1337, {x|["Common Poorwill","Broad-billed Hummingbird"]|x});
+    ("animal.bird", 7, {x|["Bicknell's Thrush","Sharp-tailed Grouse"]|x});
+    ("animal.cat", 42, {x|["Himalayan","Toyger"]|x});
+    ("animal.cat", 1337, {x|["Devon Rex","Bombay"]|x});
+    ("animal.cat", 7, {x|["American Wirehair","Serengeti"]|x});
+    ("animal.cetacean", 42, {x|["Fraser’s Dolphin","Striped Dolphin"]|x});
+    ("animal.cetacean", 1337, {x|["Clymene Dolphin","Bottlenose Dolphin"]|x});
+    ( "animal.cetacean",
+      7,
+      {x|["Atlantic White-Sided Dolphin","Risso’s Dolphin"]|x} );
+    ("animal.cow", 42, {x|["Estonian Holstein","Vestland Red Polled"]|x});
+    ("animal.cow", 1337, {x|["Butana cattle","Balancer"]|x});
+    ("animal.cow", 7, {x|["Andalusian Blond","Raya"]|x});
+    ( "animal.crocodilia",
+      42,
+      {x|["Cuvier’s Dwarf Caiman","West African Crocodile"]|x} );
+    ( "animal.crocodilia",
+      1337,
+      {x|["Chinese Alligator","Australian Freshwater Crocodile"]|x} );
+    ( "animal.crocodilia",
+      7,
+      {x|["Alligator mississippiensis","Schneider’s Smooth-fronted Caiman"]|x}
+    );
+    ("animal.dog", 42, {x|["Garafian Shepherd","Tyrolean Hound"]|x});
+    ("animal.dog", 1337, {x|["Chortai","Boxer"]|x});
+    ("animal.dog", 7, {x|["Bakharwal dog","Russian Toy"]|x});
+    ("animal.fish", 42, {x|["European anchovy","Wuchang bream"]|x});
+    ("animal.fish", 1337, {x|["Capelin","Bighead carp"]|x});
+    ("animal.fish", 7, {x|["Atlantic cod","Pacific saury"]|x});
+    ("animal.horse", 42, {x|["Furioso-North Star","Vyatka"]|x});
+    ("animal.horse", 1337, {x|["Colorado Ranger","Blazer Horse"]|x});
+    ("animal.horse", 7, {x|["Asian wild Horse","Russian Heavy Draft"]|x});
+    ("animal.insect", 42, {x|["Gouty oak gall","White-horned horntail"]|x});
+    ("animal.insect", 1337, {x|["Erythrina gall wasp","Carpenter ant"]|x});
+    ("animal.insect", 7, {x|["Asian paper wasp","Silky ant"]|x});
+    ("animal.lion", 42, {x|["Cape lion","West African Lion"]|x});
+    ("animal.lion", 1337, {x|["Barbary Lion","Barbary Lion"]|x});
+    ("animal.lion", 7, {x|["Asiatic Lion","Transvaal lion"]|x});
+    ("animal.petName", 42, {x|["Ginger","Stella"]|x});
+    ("animal.petName", 1337, {x|["Cooper","Bruno"]|x});
+    ("animal.petName", 7, {x|["Bandit","Murphey"]|x});
+    ("animal.rabbit", 42, {x|["English Spot","Standard Chinchilla"]|x});
+    ("animal.rabbit", 1337, {x|["Cinnamon","Blanc de Hotot"]|x});
+    ("animal.rabbit", 7, {x|["American Sable","Polish"]|x});
+    ("animal.rodent", 42, {x|["Famatina chinchilla rat","Talas tuco-tuco"]|x});
+    ("animal.rodent", 1337, {x|["Crested porcupine","Bridge's degu"]|x});
+    ("animal.rodent", 7, {x|["Bathyergus janetta","Porteous' tuco-tuco"]|x});
+    ( "animal.snake",
+      42,
+      {x|["Grand Canyon rattlesnake","Western coral snake"]|x} );
+    ("animal.snake", 1337, {x|["Cuban wood snake","Buff striped keelback"]|x});
+    ("animal.snake", 7, {x|["Barred wolf snake","Schultze's pitviper"]|x});
+    ("animal.type", 42, {x|["frog","whale"]|x});
+    ("animal.type", 1337, {x|["eagle","cow"]|x});
+    ("animal.type", 7, {x|["bird","rhinoceros"]|x});
+    ("book.author", 42, {x|["Henry David Thoreau","W.K. Marriott"]|x});
+    ("book.author", 1337, {x|["Frances Hodgson Burnett","Clifford R. Adams"]|x});
+    ("book.author", 7, {x|["Aylmer Maude","Richard Wright"]|x});
+    ("book.format", 42, {x|["Ebook","Paperback"]|x});
+    ("book.format", 1337, {x|["Ebook","Audiobook"]|x});
+    ("book.format", 7, {x|["Audiobook","Paperback"]|x});
+    ("book.genre", 42, {x|["Fantasy","Western"]|x});
+    ("book.genre", 1337, {x|["Comic","Children's Literature"]|x});
+    ("book.genre", 7, {x|["Biography","Religion"]|x});
+    ( "book.publisher",
+      42,
+      {x|["Flame Tree Publishing","University of Nebraska Press"]|x} );
+    ("book.publisher", 1337, {x|["City Lights Publishers","Borgo Press"]|x});
+    ("book.publisher", 7, {x|["Bantam Books","Parragon"]|x});
+    ("book.series", 42, {x|["Sherlock Holmes","Twilight"]|x});
+    ("book.series", 1337, {x|["Jane Austen Murder Mysteries","Harry Potter"]|x});
+    ("book.series", 7, {x|["Colonel Race","The Maze Runner"]|x});
+    ("book.title", 42, {x|["Lord Jim","Tropic of Cancer"]|x});
+    ("book.title", 1337, {x|["Gone with the Wind","Candide"]|x});
+    ( "book.title",
+      7,
+      {x|["All Quiet on the Western Front","The Pickwick Papers"]|x} );
+    ("color.cmyk", 42, {x|[[0.37,0.96,0.73,0.6],[0.15,0.15,0.05,0.87]]|x});
+    ("color.cmyk", 1337, {x|[[0.26,0.16,0.28,0.46],[0.32,0.52,0.26,0.98]]|x});
+    ("color.cmyk", 7, {x|[[0.07,0.78,0.44,0.73],[0.98,0.54,0.5,0.07]]|x});
+    ( "color.colorByCSSColorSpace",
+      42,
+      {x|[[0.3745,0.9508,0.732],[0.5987,0.156,0.156]]|x} );
+    ( "color.colorByCSSColorSpace",
+      1337,
+      {x|[[0.262,0.1586,0.2781],[0.4593,0.321,0.5184]]|x} );
+    ( "color.colorByCSSColorSpace",
+      7,
+      {x|[[0.0763,0.7799,0.4384],[0.7235,0.978,0.5385]]|x} );
+    ("color.cssSupportedFunction", 42, {x|["hsla","color"]|x});
+    ("color.cssSupportedFunction", 1337, {x|["hsl","rgba"]|x});
+    ("color.cssSupportedFunction", 7, {x|["rgb","lch"]|x});
+    ("color.cssSupportedSpace", 42, {x|["display-p3","prophoto-rgb"]|x});
+    ("color.cssSupportedSpace", 1337, {x|["display-p3","sRGB"]|x});
+    ("color.cssSupportedSpace", 7, {x|["sRGB","a98-rgb"]|x});
+    ("color.hsl", 42, {x|[[135,0.96,0.73],[216,0.15,0.15]]|x});
+    ("color.hsl", 1337, {x|[[94,0.16,0.28],[165,0.32,0.52]]|x});
+    ("color.hsl", 7, {x|[[27,0.78,0.44],[261,0.98,0.54]]|x});
+    ("color.human", 42, {x|["ރިހިކުލަ","ދަނބުކުލަ"]|x});
+    ("color.human", 1337, {x|["ރަންކުލަ","ނޫ"]|x});
+    ("color.human", 7, {x|["ނާރިނގުކުލަ","މުށިކުލަ"]|x});
+    ("color.hwb", 42, {x|[[135,0.96,0.73],[216,0.15,0.15]]|x});
+    ("color.hwb", 1337, {x|[[94,0.16,0.28],[165,0.32,0.52]]|x});
+    ("color.hwb", 7, {x|[[27,0.78,0.44],[261,0.98,0.54]]|x});
+    ( "color.lab",
+      42,
+      {x|[[0.37454,90.1429,46.3988],[0.598659,-68.7963,-68.8011]]|x} );
+    ( "color.lab",
+      1337,
+      {x|[[0.262024,-68.2632,-44.3747],[0.459317,-35.7999,3.6786]]|x} );
+    ( "color.lab",
+      7,
+      {x|[[0.076308,55.9838,-12.3182],[0.723465,95.598,7.6992]]|x} );
+    ("color.lch", 42, {x|[[0.37454,218.7,263.5],[0.598659,35.8,56.1]]|x});
+    ("color.lch", 1337, {x|[[0.262024,36.5,100.1],[0.459317,73.8,186.6]]|x});
+    ("color.lch", 7, {x|[[0.076308,179.4,157.8],[0.723465,225,193.9]]|x});
+    ("color.rgb", 42, {x|["#8ead33","#1ddf0f"]|x});
+    ("color.rgb", 1337, {x|["#536a7b","#5fa28d"]|x});
+    ("color.rgb", 7, {x|["#1b9ffb","#b15aeb"]|x});
+    ("color.space", 42, {x|["HSLA","sYCC"]|x});
+    ("color.space", 1337, {x|["DCI-P3","CIELUV"]|x});
+    ("color.space", 7, {x|["British Standard Colour (BS)","Rec. 601"]|x});
+    ("commerce.department", 42, {x|["Garden","Tools"]|x});
+    ("commerce.department", 1337, {x|["Computers","Books"]|x});
+    ("commerce.department", 7, {x|["Baby","Outdoors"]|x});
+    ("commerce.isbn", 42, {x|["978-0-9751108-6-7","978-1-0982-1135-6"]|x});
+    ("commerce.isbn", 1337, {x|["978-0-12-435297-1","978-0-361-94773-2"]|x});
+    ("commerce.isbn", 7, {x|["978-0-7479-5502-3","978-0-683-02924-6"]|x});
+    ("commerce.price", 42, {x|["375.15","599.09"]|x});
+    ("commerce.price", 1337, {x|["262.79","459.85"]|x});
+    ("commerce.price", 7, {x|["77.29","723.75"]|x});
+    ("commerce.product", 42, {x|["Computer","Towels"]|x});
+    ("commerce.product", 1337, {x|["Chicken","Car"]|x});
+    ("commerce.product", 7, {x|["Ball","Shirt"]|x});
+    ("commerce.productAdjective", 42, {x|["Handcrafted","Tasty"]|x});
+    ("commerce.productAdjective", 1337, {x|["Frozen","Ergonomic"]|x});
+    ("commerce.productAdjective", 7, {x|["Electronic","Rustic"]|x});
+    ( "commerce.productDescription",
+      42,
+      {x|["New މަޑުފެހި Pants with ergonomic design for crushing comfort","Discover the perfumed new Salad with an exciting mix of Aluminum ingredients"]|x}
+    );
+    ( "commerce.productDescription",
+      1337,
+      {x|["Innovative Car featuring lawful technology and Concrete construction","Our zesty-inspired Sausages brings a taste of luxury to your ignorant lifestyle"]|x}
+    );
+    ( "commerce.productDescription",
+      7,
+      {x|["Discover the jittery new Sausages with an exciting mix of Wooden ingredients","Our creamy-inspired Chicken brings a taste of luxury to your repentant lifestyle"]|x}
+    );
+    ("commerce.productMaterial", 42, {x|["Cotton","Wooden"]|x});
+    ("commerce.productMaterial", 1337, {x|["Ceramic","Bronze"]|x});
+    ("commerce.productMaterial", 7, {x|["Bamboo","Rubber"]|x});
+    ( "commerce.productName",
+      42,
+      {x|["Handcrafted Wooden Sausages","Modern Bronze Car"]|x} );
+    ( "commerce.productName",
+      1337,
+      {x|["Frozen Bronze Chicken","Incredible Concrete Keyboard"]|x} );
+    ( "commerce.productName",
+      7,
+      {x|["Electronic Rubber Gloves","Recycled Wooden Keyboard"]|x} );
+    ("commerce.upc", 42, {x|["397511086709","982113542618"]|x});
+    ("commerce.upc", 1337, {x|["212435297133","619477345714"]|x});
+    ("commerce.upc", 7, {x|["074795502469","830292490698"]|x});
+    ("company.buzzAdjective", 42, {x|["global","viral"]|x});
+    ("company.buzzAdjective", 1337, {x|["efficient","cross-platform"]|x});
+    ("company.buzzAdjective", 7, {x|["back-end","smart"]|x});
+    ("company.buzzNoun", 42, {x|["initiatives","users"]|x});
+    ("company.buzzNoun", 1337, {x|["deliverables","communities"]|x});
+    ("company.buzzNoun", 7, {x|["applications","schemas"]|x});
+    ( "company.buzzPhrase",
+      42,
+      {x|["facilitate viral platforms","mesh cross-media channels"]|x} );
+    ( "company.buzzPhrase",
+      1337,
+      {x|["engineer cross-platform e-commerce","implement frictionless methodologies"]|x}
+    );
+    ( "company.buzzPhrase",
+      7,
+      {x|["collaborate smart large language models","repurpose visionary metrics"]|x}
+    );
+    ("company.buzzVerb", 42, {x|["facilitate","utilize"]|x});
+    ("company.buzzVerb", 1337, {x|["engineer","disintermediate"]|x});
+    ("company.buzzVerb", 7, {x|["collaborate","seize"]|x});
+    ( "company.catchPhrase",
+      42,
+      {x|["ބޮޑު well-modulated ފޮތި","މޮޅު cloud-native ބަކަރި"]|x} );
+    ("company.catchPhrase", 1337, {x|["ނުފެންނަ coherent ކަނޑު","އަލި empowering މަގޫ"]|x});
+    ( "company.catchPhrase",
+      7,
+      {x|["ހިރަފުސް responsive ވަޑައިންގެ","ފޫހި zero tolerance މަސް"]|x} );
+    ("company.catchPhraseAdjective", 42, {x|["ބޮޑު","ސަމާލު"]|x});
+    ("company.catchPhraseAdjective", 1337, {x|["ނުފެންނަ","ހުތުރު"]|x});
+    ("company.catchPhraseAdjective", 7, {x|["ހިރަފުސް","ދަށް"]|x});
+    ( "company.catchPhraseDescriptor",
+      42,
+      {x|["fault-tolerant","well-modulated"]|x} );
+    ("company.catchPhraseDescriptor", 1337, {x|["directional","coherent"]|x});
+    ("company.catchPhraseDescriptor", 7, {x|["asynchronous","responsive"]|x});
+    ("company.catchPhraseNoun", 42, {x|["ކުޑަމަސް","ގޮނޑުދޮށް"]|x});
+    ("company.catchPhraseNoun", 1337, {x|["ކަނބިލި","ބަކަރި"]|x});
+    ("company.catchPhraseNoun", 7, {x|["ހޮޅުއަށި","ދޯނި"]|x});
+    ("company.name", 42, {x|["ސަމާލު ބުހްލޫލް ޡަހީރާ ގުރޫޕް","ޟިފާފް & ބަތްނާ ކަނޑުމަސް ގުރޫޕް"]|x});
+    ("company.name", 1337, {x|["ހުތުރު މަލަދު ޤާބޫސް ޕަބްލިކް ލިމިޓެޑް","ކުޑަ މޫދު .ޕބލކ. ލޓޑ"]|x});
+    ("company.name", 7, {x|["ދަށް ވަޑައިންގެ ޕަބްލިކް ލިމިޓެޑް","ނުސައިބު .ޕވޓ. ލޓޑ"]|x});
+    ("database.collation", 42, {x|["cp1250_bin","utf8_unicode_ci"]|x});
+    ("database.collation", 1337, {x|["ascii_general_ci","ascii_general_ci"]|x});
+    ("database.collation", 7, {x|["ascii_bin","utf8_general_ci"]|x});
+    ("database.column", 42, {x|["group","updatedAt"]|x});
+    ("database.column", 1337, {x|["createdAt","comment"]|x});
+    ("database.column", 7, {x|["category","status"]|x});
+    ("database.engine", 42, {x|["CSV","MyISAM"]|x});
+    ("database.engine", 1337, {x|["BLACKHOLE","ARCHIVE"]|x});
+    ("database.engine", 7, {x|["ARCHIVE","MEMORY"]|x});
+    ( "database.mongodbObjectId",
+      42,
+      {x|["8ead331ddf0fc4446b96d368","ab4bd1d31efb62f92a0e5e6b"]|x} );
+    ( "database.mongodbObjectId",
+      1337,
+      {x|["536a7b5fa28d2f9bb79ca46e","a394bc4f9bb0af328f081b7f"]|x} );
+    ( "database.mongodbObjectId",
+      7,
+      {x|["1b9ffbb15aeb816e49e0de5c","e2baea4a8a8ca6c697e8af9d"]|x} );
+    ("database.type", 42, {x|["double","tinyint"]|x});
+    ("database.type", 1337, {x|["datetime","blob"]|x});
+    ("database.type", 7, {x|["binary","smallint"]|x});
+    ("datatype.boolean", 42, {x|[true,false]|x});
+    ("datatype.boolean", 1337, {x|[true,true]|x});
+    ("datatype.boolean", 7, {x|[true,false]|x});
+    ( "date.anytime",
+      42,
+      {x|["2024-10-01T09:56:34.376Z","2025-11-26T00:30:52.734Z"]|x} );
+    ( "date.anytime",
+      1337,
+      {x|["2024-07-11T06:40:20.302Z","2024-04-26T20:08:35.491Z"]|x} );
+    ( "date.anytime",
+      7,
+      {x|["2024-02-26T16:55:16.427Z","2025-07-24T08:10:38.064Z"]|x} );
+    ( "date.birthdate",
+      42,
+      {x|["1967-08-07T04:02:06.836Z","2003-11-23T22:28:06.859Z"]|x} );
+    ( "date.birthdate",
+      1337,
+      {x|["1960-07-05T04:30:23.510Z","1953-12-31T07:38:12.417Z"]|x} );
+    ( "date.birthdate",
+      7,
+      {x|["1948-10-22T20:29:23.006Z","1993-02-18T22:21:13.776Z"]|x} );
+    ( "date.future",
+      42,
+      {x|["2025-05-17T16:58:17.813Z","2025-12-14T00:15:26.417Z"]|x} );
+    ( "date.future",
+      1337,
+      {x|["2025-04-06T15:20:10.889Z","2025-02-27T22:04:18.587Z"]|x} );
+    ( "date.future",
+      7,
+      {x|["2025-01-28T20:27:39.137Z","2025-10-12T16:05:19.252Z"]|x} );
+    ("date.month", 42, {x|["މާރިޗު","ޝަޢުބާން"]|x});
+    ("date.month", 1337, {x|["އޮކްޓޫބަރު","ރަމަޞާން"]|x});
+    ("date.month", 7, {x|["ރަބީޢުލްއައްވަލް","ޖޫން"]|x});
+    ( "date.past",
+      42,
+      {x|["2024-05-17T01:57:37.080Z","2024-12-13T23:04:27.133Z"]|x} );
+    ( "date.past",
+      1337,
+      {x|["2024-04-05T21:37:28.821Z","2024-02-28T01:52:47.882Z"]|x} );
+    ( "date.past",
+      7,
+      {x|["2024-01-28T22:17:31.173Z","2024-10-12T10:48:23.236Z"]|x} );
+    ( "date.recent",
+      42,
+      {x|["2024-12-31T08:59:19.892Z","2024-12-31T22:49:00.766Z"]|x} );
+    ( "date.recent",
+      1337,
+      {x|["2024-12-31T06:17:18.670Z","2024-12-31T03:48:30.136Z"]|x} );
+    ( "date.recent",
+      7,
+      {x|["2024-12-31T01:49:52.959Z","2024-12-31T18:43:04.204Z"]|x} );
+    ( "date.soon",
+      42,
+      {x|["2025-01-01T08:59:20.892Z","2025-01-01T22:49:01.766Z"]|x} );
+    ( "date.soon",
+      1337,
+      {x|["2025-01-01T06:17:19.670Z","2025-01-01T03:48:31.136Z"]|x} );
+    ( "date.soon",
+      7,
+      {x|["2025-01-01T01:49:53.959Z","2025-01-01T18:43:05.204Z"]|x} );
+    ("date.timeZone", 42, {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x});
+    ( "date.timeZone",
+      1337,
+      {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x} );
+    ("date.timeZone", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
+    ("date.weekday", 42, {x|["ހޯމަ","އާދީއްތަ"]|x});
+    ("date.weekday", 1337, {x|["ހޮނިހިރު","ހޮނިހިރު"]|x});
+    ("date.weekday", 7, {x|["ހުކުރު","އަންގާރަ"]|x});
+    ("finance.accountName", 42, {x|["Credit Card Account","Savings Account"]|x});
+    ( "finance.accountName",
+      1337,
+      {x|["Credit Card Account","Checking Account"]|x} );
+    ( "finance.accountName",
+      7,
+      {x|["Auto Loan Account","Personal Loan Account"]|x} );
+    ("finance.accountNumber", 42, {x|["39751108","67098211"]|x});
+    ("finance.accountNumber", 1337, {x|["21243529","71361947"]|x});
+    ("finance.accountNumber", 7, {x|["07479550","24683029"]|x});
+    ("finance.amount", 42, {x|["374.54","950.72"]|x});
+    ("finance.amount", 1337, {x|["262.02","158.68"]|x});
+    ("finance.amount", 7, {x|["76.30","779.92"]|x});
+    ("finance.bic", 42, {x|["YTPECC2VXXX","AZVFCL6A"]|x});
+    ("finance.bic", 1337, {x|["EHLILK9ZXXX","KQDZJESSELR"]|x});
+    ("finance.bic", 7, {x|["ULSZLVI2HOS","BHXFJPX0XXX"]|x});
+    ( "finance.bitcoinAddress",
+      42,
+      {x|["3JAaa4SAH2YQdbbiwrhB9hnsMcvA3Ba4XY","bc1pa4pg4h2x9pajk6zsywmx372ce9ud9k5t3zs70uqrs3d4vmc3acrnwh4qsk"]|x}
+    );
+    ( "finance.bitcoinAddress",
+      1337,
+      {x|["3hsjwgYJ7oC8ZrMNmqzLbhEubpc","bc1u6yfjj0rz65dq0d2tdqhzumlz903yzhcr0sp7px"]|x}
+    );
+    ( "finance.bitcoinAddress",
+      7,
+      {x|["1rHYxv5guFNo4hUdsW2AXexU8wKEtcunt","3LjzhsmEnsHpUbJqqCwq16HwGXF4iAeXW"]|x}
+    );
+    ("finance.creditCardCVV", 42, {x|["397","511"]|x});
+    ("finance.creditCardCVV", 1337, {x|["212","435"]|x});
+    ("finance.creditCardCVV", 7, {x|["074","795"]|x});
+    ("finance.creditCardIssuer", 42, {x|["discover","visa"]|x});
+    ("finance.creditCardIssuer", 1337, {x|["diners_club","american_express"]|x});
+    ("finance.creditCardIssuer", 7, {x|["american_express","mastercard"]|x});
+    ( "finance.creditCardNumber",
+      42,
+      {x|["6575-1108-6709-8211","3034-261234-7153"]|x} );
+    ( "finance.creditCardNumber",
+      1337,
+      {x|["3014-352971-3614","4773457126413"]|x} );
+    ( "finance.creditCardNumber",
+      7,
+      {x|["3747-955024-68302","3624-906925-9159"]|x} );
+    ( "finance.currency",
+      42,
+      {x|[{"name":"New Israeli Sheqel","code":"ILS","symbol":"₪","numericCode":"376"},{"name":"CFA Franc BCEAO","code":"XOF","symbol":"","numericCode":"952"}]|x}
+    );
+    ( "finance.currency",
+      1337,
+      {x|[{"name":"Ethiopian Birr","code":"ETB","symbol":"","numericCode":"230"},{"name":"Canadian Dollar","code":"CAD","symbol":"$","numericCode":"124"}]|x}
+    );
+    ( "finance.currency",
+      7,
+      {x|[{"name":"Barbados Dollar","code":"BBD","symbol":"$","numericCode":"052"},{"name":"Somali Shilling","code":"SOS","symbol":"S","numericCode":"706"}]|x}
+    );
+    ("finance.currencyCode", 42, {x|["ILS","XOF"]|x});
+    ("finance.currencyCode", 1337, {x|["ETB","CAD"]|x});
+    ("finance.currencyCode", 7, {x|["BBD","SOS"]|x});
+    ("finance.currencyName", 42, {x|["New Israeli Sheqel","CFA Franc BCEAO"]|x});
+    ("finance.currencyName", 1337, {x|["Ethiopian Birr","Canadian Dollar"]|x});
+    ("finance.currencyName", 7, {x|["Barbados Dollar","Somali Shilling"]|x});
+    ("finance.currencyNumericCode", 42, {x|["376","952"]|x});
+    ("finance.currencyNumericCode", 1337, {x|["230","124"]|x});
+    ("finance.currencyNumericCode", 7, {x|["052","706"]|x});
+    ("finance.currencySymbol", 42, {x|["₪","﷼"]|x});
+    ("finance.currencySymbol", 1337, {x|["$","$"]|x});
+    ("finance.currencySymbol", 7, {x|["$","S"]|x});
+    ( "finance.ethereumAddress",
+      42,
+      {x|["0x8ead331ddf0fc4446b96d368ab4bd1d31efb62f9","0x2a0e5e6bc4fbedde140785c76b3b1fa40bfaa172"]|x}
+    );
+    ( "finance.ethereumAddress",
+      1337,
+      {x|["0x536a7b5fa28d2f9bb79ca46ea394bc4f9bb0af32","0x8f081b7fafcdcf501efa7f0ae4ee3e7f5b3a98ba"]|x}
+    );
+    ( "finance.ethereumAddress",
+      7,
+      {x|["0x1b9ffbb15aeb816e49e0de5ce2baea4a8a8ca6c6","0x97e8af9d3a99db902fbfff16d5fecac26aaa3776"]|x}
+    );
+    ( "finance.iban",
+      42,
+      {x|["GT69T10P0V1346241560ZH610G35","CZ5078900130421070087031"]|x} );
+    ( "finance.iban",
+      1337,
+      {x|["FI1300552916047457","CZ8005002804550900400374"]|x} );
+    ("finance.iban", 7, {x|["BE61479500580024","TN7109091740043750043749"]|x});
+    ( "finance.litecoinAddress",
+      42,
+      {x|["3JAaa4SAH2YQdbbiwrhB9hnsMcvA","Ma4XYNi6Fr8u2UgEjwxbYLWTAV"]|x} );
+    ( "finance.litecoinAddress",
+      1337,
+      {x|["LhsjwgYJ7oC8ZrMNmqzLbhEubpcw","LXqvv1JZa8nG1n4MmGuYQByZf16WYukH"]|x}
+    );
+    ( "finance.litecoinAddress",
+      7,
+      {x|["3rHYxv5guFNo4hUdsW2AXexU8w","3tcuntnQLjzhsmEnsHpUbJqqCwq16HwG"]|x} );
+    ("finance.pin", 42, {x|["3975","1108"]|x});
+    ("finance.pin", 1337, {x|["2124","3529"]|x});
+    ("finance.pin", 7, {x|["0747","9550"]|x});
+    ("finance.routingNumber", 42, {x|["062197511","031308674"]|x});
+    ("finance.routingNumber", 1337, {x|["051412430","074029716"]|x});
+    ("finance.routingNumber", 7, {x|["021274792","075950240"]|x});
+    ( "finance.transactionDescription",
+      42,
+      {x|["You made a withdrawal of SAR 598.66 at ހުތުރު ހެލިކޮޕްޓަރު ޕުރައިވެޓް ލިމިޓެޑް using card ending in ****6709 from account ***8211.","Transaction alert: payment at ސާރާ .ޕބލކ. ލޓޑ using card ending ****2347 for an amount of CRC 514.23 on account ***5061."]|x}
+    );
+    ( "finance.transactionDescription",
+      1337,
+      {x|["Payment of CAD 278.12 for invoice at އެއްވަނަ ޚުލަސާ ޖަލްވާ .ޕބލކ. ލޓޑ, processed with card ending ****9477 linked to account ***3457.","Payment of GBP 670.22 for invoice at ކުޑަ ބިއްލޫރި ގުރޫޕް, processed with card ending ****8194 linked to account ***5507."]|x}
+    );
+    ( "finance.transactionDescription",
+      7,
+      {x|["A withdrawal for KGS 723.47 was made at ނުސައިބު .ޕވޓ. ލޓޑ via card ending ****4683 on account ***0292.","You made a withdrawal of AMD 600.55 at ޢަދުލިއްޔާ .ޕބލކ. ލޓޑ using card ending in ****5764 from account ***2434."]|x}
+    );
+    ("finance.transactionType", 42, {x|["invoice","withdrawal"]|x});
+    ("finance.transactionType", 1337, {x|["invoice","deposit"]|x});
+    ("finance.transactionType", 7, {x|["deposit","withdrawal"]|x});
+    ("food.adjective", 42, {x|["golden","zesty"]|x});
+    ("food.adjective", 1337, {x|["fluffy","crunchy"]|x});
+    ("food.adjective", 7, {x|["creamy","spicy"]|x});
+    ( "food.description",
+      42,
+      {x|["An exquisite quail roast, infused with the essence of butternut pumpkin, slow-roasted to bring out its natural flavors and served with a side of creamy asparagus","Stuffed parsnip baked with white flour and cayenne pepper."]|x}
+    );
+    ( "food.description",
+      1337,
+      {x|["A special ރަތް dill from Egypt. To support the strong flavor it is sided with a tablespoon of pepper.","A delightful tart combining savory turnips and sweet passionfruit, set in a buttery pastry shell and finished with a hint of curry."]|x}
+    );
+    ( "food.description",
+      7,
+      {x|["A comforting bowl of juicy whiting wild rice and garlic, slow-cooked until tender.","A comforting bowl of moist sesame oil and bean shoots, slow-cooked until tender."]|x}
+    );
+    ( "food.dish",
+      42,
+      {x|["Jicama Salad","Tangy Parsnip And White Flour Bowl"]|x} );
+    ( "food.dish",
+      1337,
+      {x|["Moist Green Beans And White Wine Vinegar Bowl","Bruschette With Tomato"]|x}
+    );
+    ("food.dish", 7, {x|["Parsley-rubbed Ostrich Salad","Baba Ganoush"]|x});
+    ("food.ethnicCategory", 42, {x|["Gujarati","Udupi"]|x});
+    ("food.ethnicCategory", 1337, {x|["Czech","British"]|x});
+    ("food.ethnicCategory", 7, {x|["Awadhi","Rajasthani"]|x});
+    ("food.fruit", 42, {x|["fig","strawberry"]|x});
+    ("food.fruit", 1337, {x|["cumquat","butternut pumpkin"]|x});
+    ("food.fruit", 7, {x|["berry","passionfruit"]|x});
+    ("food.ingredient", 42, {x|["flathead","warehou"]|x});
+    ("food.ingredient", 1337, {x|["coconut water","bulghur"]|x});
+    ("food.ingredient", 7, {x|["banana","rye bread"]|x});
+    ("food.meat", 42, {x|["goose","venison"]|x});
+    ("food.meat", 1337, {x|["emu","crocodile"]|x});
+    ("food.meat", 7, {x|["chicken","rabbit"]|x});
+    ("food.spice", 42, {x|["dhansak","thyme"]|x});
+    ("food.spice", 1337, {x|["chilli pepper","bay leaves"]|x});
+    ("food.spice", 7, {x|["aniseed","pot marjoram"]|x});
+    ("food.vegetable", 42, {x|["cos lettuce","sweet potato"]|x});
+    ("food.vegetable", 1337, {x|["carrot","broccolini"]|x});
+    ("food.vegetable", 7, {x|["bean shoots","pumpkin"]|x});
+    ("git.branch", 42, {x|["driver-transmit","pixel-navigate"]|x});
+    ("git.branch", 1337, {x|["card-calculate","card-index"]|x});
+    ("git.branch", 7, {x|["application-quantify","firewall-program"]|x});
+    ( "git.commitDate",
+      42,
+      {x|["Tue Dec 31 08:59:19 2024 +1100","Tue Dec 31 17:34:03 2024 +0300"]|x}
+    );
+    ( "git.commitDate",
+      1337,
+      {x|["Tue Dec 31 06:17:18 2024 -0800","Tue Dec 31 06:40:29 2024 +0000"]|x}
+    );
+    ( "git.commitDate",
+      7,
+      {x|["Tue Dec 31 01:49:52 2024 +0700","Tue Dec 31 10:31:18 2024 +0600"]|x}
+    );
+    ( "git.commitEntry",
+      42,
+      {x|["commit ead331ddf0fc4446b96d368ab4bd1d31efb62f92\r\nAuthor: 1hc1if1hy1ie1hf1ii_1i11if1hm1ig1hn1ii <1hc1if1hy1ie1hf1ii_1i11if1hm1ig1hn1ii@yahoo.com>\r\nDate: Tue Dec 31 02:07:25 2024 -0700\r\n\r\n    back up digital feed\r\n","commit c76b3b1fa40bfaa172cd7167aeda2facaab9020e\r\nAuthor: 1hm1if1i81ig1hl1if.1ho1ie1hj1io1hl1if1hl1io28 <1hm1if1i81ig1hl1if_1ho1ie1hj1io1hl1if1hl1io@yahoo.com>\r\nDate: Tue Dec 31 04:28:39 2024 +1000\r\n\r\n    input redundant sensor\r\n"]|x}
+    );
+    ( "git.commitEntry",
+      1337,
+      {x|["commit 36a7b5fa28d2f9bb79ca46ea394bc4f9bb0af328\r\nAuthor: 1hj1ie1hg1ij1hg1ie1hi1io1hf1ii.1i51if1hj1ig1ic1if <1hj1ie1hg1ij1hg1ie1hi1io1hf1ii_1i51if1hj1ig1ic1if2@hotmail.com>\r\nDate: Tue Dec 31 02:08:13 2024 +1100\r\n\r\n    transmit multi-byte driver\r\n","commit 0ae4ee3e7f5b3a98bafb7efd9addb5eca598b2f0\r\nAuthor: ޙައްވާ ތައްމާމް <1i11ie1hj1io1hk1if.1ho1ie1hj1io1hl1if1hl1io48@gmail.com>\r\nDate: Tue Dec 31 21:57:37 2024 +0600\r\n\r\n    program auxiliary alarm\r\n"]|x}
+    );
+    ( "git.commitEntry",
+      7,
+      {x|["commit b9ffbb15aeb816e49e0de5ce2baea4a8a8ca6c69\r\nMerge: 7e8af9d 3a99db9\r\nAuthor: ނަވާރު ޚާފިޤާނި <1he1ie1hk1if1hf1ii_1i21if1hm1ig1ic1if1he1ig84@yahoo.com>\r\nDate: Tue Dec 31 20:11:42 2024 -0800\r\n\r\n    copy multi-byte pixel\r\n","commit 3776399bbbabdebe0d6abf3e17b9daca09a1bdce\r\nAuthor: 1hf1ii1ic1ie1hj1io1hw1if_1hk1ie1hc1io1hg1ii85 <1hf1ii1ic1ie1hj1io1hw1if_1hk1ie1hc1io1hg1ii27@yahoo.com>\r\nDate: Tue Dec 31 21:02:26 2024 +1000\r\n\r\n    compress mobile pixel\r\n"]|x}
+    );
+    ( "git.commitMessage",
+      42,
+      {x|["generate wireless pixel","navigate back-end bandwidth"]|x} );
+    ( "git.commitMessage",
+      1337,
+      {x|["connect back-end card","index digital interface"]|x} );
+    ( "git.commitMessage",
+      7,
+      {x|["bypass redundant firewall","program wireless interface"]|x} );
+    ( "git.commitSha",
+      42,
+      {x|["8ead331ddf0fc4446b96d368ab4bd1d31efb62f9","2a0e5e6bc4fbedde140785c76b3b1fa40bfaa172"]|x}
+    );
+    ( "git.commitSha",
+      1337,
+      {x|["536a7b5fa28d2f9bb79ca46ea394bc4f9bb0af32","8f081b7fafcdcf501efa7f0ae4ee3e7f5b3a98ba"]|x}
+    );
+    ( "git.commitSha",
+      7,
+      {x|["1b9ffbb15aeb816e49e0de5ce2baea4a8a8ca6c6","97e8af9d3a99db902fbfff16d5fecac26aaa3776"]|x}
+    );
+    ("hacker.abbreviation", 42, {x|["HTTP","VGA"]|x});
+    ("hacker.abbreviation", 1337, {x|["FTP","COM"]|x});
+    ("hacker.abbreviation", 7, {x|["API","SSL"]|x});
+    ("hacker.adjective", 42, {x|["haptic","wireless"]|x});
+    ("hacker.adjective", 1337, {x|["cross-platform","back-end"]|x});
+    ("hacker.adjective", 7, {x|["auxiliary","redundant"]|x});
+    ("hacker.ingverb", 42, {x|["copying","transmitting"]|x});
+    ("hacker.ingverb", 1337, {x|["connecting","calculating"]|x});
+    ("hacker.ingverb", 7, {x|["bypassing","programming"]|x});
+    ("hacker.noun", 42, {x|["driver","system"]|x});
+    ("hacker.noun", 1337, {x|["card","bandwidth"]|x});
+    ("hacker.noun", 7, {x|["application","port"]|x});
+    ( "hacker.phrase",
+      42,
+      {x|["The SQL bandwidth is down, bypass the online alarm so we can quantify the CSS circuit!","Use the digital CLI driver, then you can quantify the neural application!"]|x}
+    );
+    ( "hacker.phrase",
+      1337,
+      {x|["The FTP circuit is down, connect the primary feed so we can calculate the JBOD program!","The RSS bus is down, parse the bluetooth bus so we can quantify the XML interface!"]|x}
+    );
+    ( "hacker.phrase",
+      7,
+      {x|["I'll hack the wireless PCI card, that should panel the HTTP card!","hacking the alarm won't do anything, we need to transmit the neural CLI port!"]|x}
+    );
+    ("hacker.verb", 42, {x|["generate","transmit"]|x});
+    ("hacker.verb", 1337, {x|["connect","calculate"]|x});
+    ("hacker.verb", 7, {x|["bypass","quantify"]|x});
+    ( "image.avatar",
+      42,
+      {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/73.jpg","https://avatars.githubusercontent.com/u/15601864"]|x}
+    );
+    ( "image.avatar",
+      1337,
+      {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/27.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/51.jpg"]|x}
+    );
+    ( "image.avatar",
+      7,
+      {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/43.jpg","https://avatars.githubusercontent.com/u/97798952"]|x}
+    );
+    ( "image.avatarGitHub",
+      42,
+      {x|["https://avatars.githubusercontent.com/u/37454012","https://avatars.githubusercontent.com/u/95071431"]|x}
+    );
+    ( "image.avatarGitHub",
+      1337,
+      {x|["https://avatars.githubusercontent.com/u/26202467","https://avatars.githubusercontent.com/u/15868397"]|x}
+    );
+    ( "image.avatarGitHub",
+      7,
+      {x|["https://avatars.githubusercontent.com/u/7630829","https://avatars.githubusercontent.com/u/77991880"]|x}
+    );
+    ( "image.dataUri",
+      42,
+      {x|["data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImZ1bGwiIHdpZHRoPSIxNDk4IiBoZWlnaHQ9IjM4MDIiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNhZDMzMWQiLz48dGV4dCB4PSI3NDkiIHk9IjE5MDEiIGZvbnQtc2l6ZT0iMjAiIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSI+MTQ5OHgzODAyPC90ZXh0Pjwvc3ZnPg==","data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImZ1bGwiIHdpZHRoPSIyODMyIiBoZWlnaHQ9IjgzIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmM0NDQ2Ii8+PHRleHQgeD0iMTQxNiIgeT0iNDEuNSIgZm9udC1zaXplPSIyMCIgYWxpZ25tZW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIj4yODMyeDgzPC90ZXh0Pjwvc3ZnPg=="]|x}
+    );
+    ( "image.dataUri",
+      1337,
+      {x|["data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImZ1bGwiIHdpZHRoPSIxMDQ4IiBoZWlnaHQ9IjYzNSI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzZhN2I1ZiIvPjx0ZXh0IHg9IjUyNCIgeT0iMzE3LjUiIGZvbnQtc2l6ZT0iMjAiIGFsaWdubWVudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSI+MTA0OHg2MzU8L3RleHQ+PC9zdmc+","data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22461%22%20height%3D%221545%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23d2f9bb%22%2F%3E%3Ctext%20x%3D%22230.5%22%20y%3D%22772.5%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E461x1545%3C%2Ftext%3E%3C%2Fsvg%3E"]|x}
+    );
+    ( "image.dataUri",
+      7,
+      {x|["data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%22306%22%20height%3D%223119%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%239ffbb1%22%2F%3E%3Ctext%20x%3D%22153%22%20y%3D%221559.5%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E306x3119%3C%2Ftext%3E%3C%2Fsvg%3E","data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20baseProfile%3D%22full%22%20width%3D%222000%22%20height%3D%222717%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23b816e4%22%2F%3E%3Ctext%20x%3D%221000%22%20y%3D%221358.5%22%20font-size%3D%2220%22%20alignment-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%3E2000x2717%3C%2Ftext%3E%3C%2Fsvg%3E"]|x}
+    );
+    ( "image.personPortrait",
+      42,
+      {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/95.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/59.jpg"]|x}
+    );
+    ( "image.personPortrait",
+      1337,
+      {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/15.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/45.jpg"]|x}
+    );
+    ( "image.personPortrait",
+      7,
+      {x|["https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/77.jpg","https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/72.jpg"]|x}
+    );
+    ( "image.url",
+      42,
+      {x|["https://picsum.photos/seed/B993RBH1Y/1498/3802","https://picsum.photos/seed/biwqiB/3329/850"]|x}
+    );
+    ( "image.url",
+      1337,
+      {x|["https://picsum.photos/seed/sjwgYJ/1048/635","https://picsum.photos/seed/7YrMNmpA/461/1545"]|x}
+    );
+    ( "image.url",
+      7,
+      {x|["https://picsum.photos/seed/IYxv4gu/306/3119","https://picsum.photos/seed/4hUdsV1/2717/3215"]|x}
+    );
+    ( "image.urlPicsumPhotos",
+      42,
+      {x|["https://picsum.photos/seed/93RBH/1498/3802?blur=6","https://picsum.photos/seed/biwqiB/83/3879?blur=2"]|x}
+    );
+    ( "image.urlPicsumPhotos",
+      1337,
+      {x|["https://picsum.photos/seed/wgYJ7n/1048/635?grayscale&blur=5","https://picsum.photos/seed/NmpALbhFu/2514/501?blur=4"]|x}
+    );
+    ( "image.urlPicsumPhotos",
+      7,
+      {x|["https://picsum.photos/seed/xv4guGNn4h/306/3119?grayscale&blur=7","https://picsum.photos/seed/BWeyU/3638/854?grayscale&blur=10"]|x}
+    );
+    ("internet.displayName", 42, {x|["ޢާއިޝާ.ބުހްލޫލް5","ދާއޫދު18"]|x});
+    ("internet.displayName", 1337, {x|["ރަމްލާ_މަލަދު26","އަލީ_ރާފިޢާ44"]|x});
+    ("internet.displayName", 7, {x|["ޙަލީމާ50","ފާޠިމާ.ދިރްފިސް28"]|x});
+    ( "internet.domainName",
+      42,
+      {x|["hospitable-unit.net","pastel-cleaner.biz"]|x} );
+    ( "internet.domainName",
+      1337,
+      {x|["fatal-co-producer.com","lawful-feather.name"]|x} );
+    ( "internet.domainName",
+      7,
+      {x|["blushing-saw.info","separate-warming.name"]|x} );
+    ("internet.domainSuffix", 42, {x|["info","org"]|x});
+    ("internet.domainSuffix", 1337, {x|["com","biz"]|x});
+    ("internet.domainSuffix", 7, {x|["biz","net"]|x});
+    ("internet.domainWord", 42, {x|["hospitable-unit","shameful-negotiation"]|x});
+    ( "internet.domainWord",
+      1337,
+      {x|["fatal-co-producer","flickering-in-joke"]|x} );
+    ("internet.domainWord", 7, {x|["blushing-saw","jittery-puritan"]|x});
+    ( "internet.email",
+      42,
+      {x|["1hw1ij1hs1ii1hm1io.1hg1ii1hc1io1hp1ij1hp1io@hotmail.com","1ia1if1ho1ig1hi1if.1hi1ie1hj1ii1i01ie1hf1ii@yahoo.com"]|x}
+    );
+    ( "internet.email",
+      1337,
+      {x|["1hg1ie1hp1io1ic1ih1hs1io97@gmail.com","1hs1ii1hl1ie1hj1io1hw1if_1hn1if1hy1ig1he1if@gmail.com"]|x}
+    );
+    ( "internet.email",
+      7,
+      {x|["1hj1ii1hs1if1hl1if_1hw1ie1hq1io1i91if1he1io7@gmail.com","1ia1ie1i81if_1hk1ie1hc1ig1hj1io1hw1if@hotmail.com"]|x}
+    );
+    ("internet.emoji", 42, {x|["🦮","🔗"]|x});
+    ("internet.emoji", 1337, {x|["👩‍🎤","💆🏿"]|x});
+    ("internet.emoji", 7, {x|["🤎","🥤"]|x});
+    ( "internet.exampleEmail",
+      42,
+      {x|["1hw1ij1hs1ii1hm1io.1hg1ii1hc1io1hp1ij1hp1io@example.net","1ia1if1ho1ig1hi1if.1hi1ie1hj1ii1i01ie1hf1ii@example.org"]|x}
+    );
+    ( "internet.exampleEmail",
+      1337,
+      {x|["1hg1ie1hp1io1ic1ih1hs1io97@example.com","1hs1ii1hl1ie1hj1io1hw1if_1hn1if1hy1ig1he1if@example.com"]|x}
+    );
+    ( "internet.exampleEmail",
+      7,
+      {x|["1hj1ii1hs1if1hl1if_1hw1ie1hq1io1i91if1he1io7@example.com","1ia1ie1i81if_1hk1ie1hc1ig1hj1io1hw1if@example.net"]|x}
+    );
+    ("internet.httpMethod", 42, {x|["POST","PATCH"]|x});
+    ("internet.httpMethod", 1337, {x|["POST","GET"]|x});
+    ("internet.httpMethod", 7, {x|["GET","DELETE"]|x});
+    ("internet.httpStatusCode", 42, {x|[226,417]|x});
+    ("internet.httpStatusCode", 1337, {x|[201,204]|x});
+    ("internet.httpStatusCode", 7, {x|[103,306]|x});
+    ( "internet.ip",
+      42,
+      {x|["243.98.3.69","d331:ddf0:fc44:46b9:6d36:8ab4:bd1d:31ef"]|x} );
+    ("internet.ip", 1337, {x|["40.159.131.70","117.149.202.161"]|x});
+    ("internet.ip", 7, {x|["199.168.194.10","185.53.3.142"]|x});
+    ("internet.ipv4", 42, {x|["95.225.220.121","243.98.3.69"]|x});
+    ("internet.ipv4", 1337, {x|["67.20.12.145","40.159.131.70"]|x});
+    ("internet.ipv4", 7, {x|["19.136.240.167","199.168.194.10"]|x});
+    ( "internet.ipv6",
+      42,
+      {x|["8ead:331d:df0f:c444:6b96:d368:ab4b:d1d3","1efb:62f9:2a0e:5e6b:c4fb:edde:1407:85c7"]|x}
+    );
+    ( "internet.ipv6",
+      1337,
+      {x|["536a:7b5f:a28d:2f9b:b79c:a46e:a394:bc4f","9bb0:af32:8f08:1b7f:afcd:cf50:1efa:7f0a"]|x}
+    );
+    ( "internet.ipv6",
+      7,
+      {x|["1b9f:fbb1:5aeb:816e:49e0:de5c:e2ba:ea4a","8a8c:a6c6:97e8:af9d:3a99:db90:2fbf:ff16"]|x}
+    );
+    ( "internet.jwt",
+      42,
+      {x|["eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJpYXQiOjE3MzU2MzU1NjAsImV4cCI6MTczNTY5ODgwNCwibmJmIjoxNzQxOTEyMTg4LCJpc3MiOiLegN6q3ozeqt6D3qog3oDerN6N3qjeht6u3pXesN6T3qbeg96qIN6V3qreg96m3ofeqN6I3qzek96wIN6N3qjeid6o3pPerN6R3rAiLCJzdWIiOiI5YjBmZDMyMi00ODY0LTQ5MjQtYTU3Yy0zODkwOTIxZmZjNDEiLCJhdWQiOiI3MTcwZTRhNC04ODJmLTRjZmUtYjllMS0zMDU2NGQ1NDgyYzEiLCJqdGkiOiJjMzBkYmJjMS01MWQ5LTQ1MTQtODViYS1lNzFiYzhjNzg2MDEifQ.DjvUfpKe4h9VODSNbTxOTj6eqOR0vpd7kWkwHmYXfuih2Bv3hUe8uZfFLeJmDDx5","eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2NzUzNjksImV4cCI6MTczNTY5MTQ4NSwibmJmIjoxNzA2NzI1MzcwLCJpc3MiOiLeh96m3oTeq96E3qbeht6w3oPeqiDejt6q3oPeq96V3rAiLCJzdWIiOiIzYTJiNmUyNS0xZWU0LTRhZDgtYjgzMS1lZWE1NWJlZWNhMTIiLCJhdWQiOiI5MDFhMDI4Yi1hM2IzLTQ1YmEtOGRhOS0xNTQzZjZlYWM4OTciLCJqdGkiOiJiNDBhMmZmZS01MGU2LTRmZmQtYTQ2ZC01MjhlYjkxOWYyOGUifQ.HHmiOORUvvNEHNTkn5z2sxhA12Pm7wLdC53wxDJYwkNgr41XPHpa9fyIEhXJyBqf"]|x}
+    );
+    ( "internet.jwt",
+      1337,
+      {x|["eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MjU4MzksImV4cCI6MTczNTY0OTg3MCwibmJmIjoxNzMzMTIzNjM1LCJpc3MiOiLeh96s3ofesN6I3qbegt6mIN6a3qrejd6m3pDepyDelt6m3o3esN6I3qcgLt6V3oTejd6GLiDejd6T3pEiLCJzdWIiOiJmN2NjNTY5Yy0zNGE3LTQyNjMtOThkMi1mNjg4MGJmMjI1YjAiLCJhdWQiOiIwYzViN2ZkOS05ZjQwLTQxZmYtODc1Yi0wY2EzYWUyZTViNDgiLCJqdGkiOiI3NzZjN2JjNS1lYmU2LTQ3ZWEtYTgzZi04YzM2NjgyYTAzYmUifQ.pQZioHm1lu2UIL52g7eGtWAbbkq4D3IE0LkMkzaQgKyTx14Xs9FCyUTgIuh3cDhr","eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MzMwODksImV4cCI6MTczNTY4OTY4OCwibmJmIjoxNzY0MDM1MDk4LCJpc3MiOiLeid6m3pbepyDeid6t3ojepyAu3pXehN6N3oYuIN6N3pPekSIsInN1YiI6ImI2ODlkYmEwLTA4Y2ItNDM0My1iNmE0LTRjZDhiNmRkMGJiYiIsImF1ZCI6ImVhMmJmZWQwLTBiYmItNDIxMi05ZDYyLWEwMTFiOTlkYjMxOCIsImp0aSI6IjQ4YmU3OGM2LWJmMzktNGIyZC04YmJkLWJiYWFkZDNhMmQwMCJ9.Ew11KKeMQPyGLJpFHOlwbfxiD36KrY7mVPYcmEh2AbMnkECjKoL2UEs1cCVBypPA"]|x}
+    );
+    ( "internet.jwt",
+      7,
+      {x|["eyJhbGciOiJSUzM4NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2MDk3OTMsImV4cCI6MTczNTY0NzY3MiwibmJmIjoxNzQ5NzgzOTk2LCJpc3MiOiLegt6q3pDept6H3qjehN6qIC7eld6I3pMuIN6N3pPekSIsInN1YiI6IjdhYzYxNGUzLTdlMDktNGYzOC05ZTI4LWNhNzM3NTc1ZGM1OSIsImF1ZCI6Ijc1YTU3YjZlLTJiNjYtNGE4Ni1iMDFiLThiZmEwNDkzZmZkNyIsImp0aSI6IjI0N2I3MjU1LTQyNjctNGNjOC05N2NlLWFjZjBlNDdjYjJhMSJ9.OqBJOL0qs3xBPW7eE8dzaMR2xNYhaSUcrIQaFOya2hO20m391wHq8kAWZe0PVsLR","eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzU2NTU4NzAsImV4cCI6MTczNTY1NzkzNiwibmJmIjoxNzIxMjgzNjU0LCJpc3MiOiLegN6q3oHeqN6U3qfeg96qIN6Z3qrekN6w3oLeqSDei96m3oPesN6k3qcgLt6V3ojeky4g3o3ek96RIiwic3ViIjoiODg1YjIzNTYtM2VkMS00NTM3LTg0OGUtNmE5YzBiZjk0YWJhIiwiYXVkIjoiZmY2OTBmZGEtYzM0My00OTFlLWI3NzEtYWRhM2MyZDk0OGE0IiwianRpIjoiNmVkMWE0YzgtN2UwOC00NTBjLTg4ZTktNWYxMGI1NWU1ZWE1In0.fYp9iTaM8Xw2VmJw569932W5v7dLWt0Z2oxTPBoPRSI6iuvPeFnMct6dVjTw2N3P"]|x}
+    );
+    ("internet.jwtAlgorithm", 42, {x|["HS384","none"]|x});
+    ("internet.jwtAlgorithm", 1337, {x|["HS256","ES512"]|x});
+    ("internet.jwtAlgorithm", 7, {x|["ES256","RS384"]|x});
+    ("internet.mac", 42, {x|["5f:b9:22:0d:9b:0f","d3:22:48:64:92:45"]|x});
+    ("internet.mac", 1337, {x|["42:47:58:4f:b1:6a","2f:7c:c5:69:c3:4a"]|x});
+    ("internet.mac", 7, {x|["1c:7b:f8:81:47:ac","61:4e:37:e0:9f:38"]|x});
+    ("internet.password", 42, {x|["DfYsZdp522RJCLk","3QYZ1mbJPw9_RT2"]|x});
+    ("internet.password", 1337, {x|["90LR9fEKllCHXi2","P1H3Sp2IPQf0DbD"]|x});
+    ("internet.password", 7, {x|["kJeTPPamEw5KyZ6","UwRhM4ODNCpjWLB"]|x});
+    ("internet.port", 42, {x|[24546,62306]|x});
+    ("internet.port", 1337, {x|[17172,10400]|x});
+    ("internet.port", 7, {x|[5001,51112]|x});
+    ("internet.protocol", 42, {x|["http","https"]|x});
+    ("internet.protocol", 1337, {x|["http","http"]|x});
+    ("internet.protocol", 7, {x|["http","https"]|x});
+    ( "internet.url",
+      42,
+      {x|["https://weird-rawhide.name/","https://crushing-backburn.org/"]|x} );
+    ( "internet.url",
+      1337,
+      {x|["https://cumbersome-duster.info/","https://minty-diver.org/"]|x} );
+    ( "internet.url",
+      7,
+      {x|["https://sparkling-hundred.net/","https://narrow-knight.biz"]|x} );
+    ( "internet.userAgent",
+      42,
+      {x|["Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/118.0","Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_15_7) AppleWebKit/546.15.5 (KHTML, like Gecko) Chrome/121.6.14.0 Safari/603.83.21"]|x}
+    );
+    ( "internet.userAgent",
+      1337,
+      {x|["Mozilla/5.0 (Linux; Android 6; SM-G998B) AppleWebKit/568.32 (KHTML, like Gecko) Chrome/94.2.20.15 Mobile Safari/544.38","Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/604.44 (KHTML, like Gecko) Chrome/115.7.7.8 Safari/576.76 Edg/114.2.14.10"]|x}
+    );
+    ( "internet.userAgent",
+      7,
+      {x|["FakerBot/7.9.15","Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/541.26.49 (KHTML, like Gecko) Version/16_4 Mobile/15E148 Safari/562.6"]|x}
+    );
+    ( "internet.username",
+      42,
+      {x|["1ia1if1hj1ig1i51if5","1hn1if1hj1ij1hn1ii.1i71ig1hm1if1hm1io18"]|x} );
+    ("internet.username", 1337, {x|["1hf1ie1hl1io1hp1if26","1hj1ie1hp1ih44"]|x});
+    ( "internet.username",
+      7,
+      {x|["1i11ie1hp1ih1hl1if_1ic1ie1hl1ih1he1io50","1hm1if1i81ig1hl1if28"]|x}
+    );
+    ("location.buildingNumber", 42, {x|["9751","18670"]|x});
+    ("location.buildingNumber", 1337, {x|["22435","97136"]|x});
+    ("location.buildingNumber", 7, {x|["84795","1246"]|x});
+    ("location.cardinalDirection", 42, {x|["East","West"]|x});
+    ("location.cardinalDirection", 1337, {x|["East","North"]|x});
+    ("location.cardinalDirection", 7, {x|["North","West"]|x});
+    ("location.city", 42, {x|["ދެ މޫސާ","އިރުމަތި ހެލިކޮޕްޓަރުކޮޑި"]|x});
+    ("location.city", 1337, {x|["ހުތުރުކަނޑުފަރު","އެއްވަނަކަނބިލިކޮޑި"]|x});
+    ("location.city", 7, {x|["އުތުރު ވަޑައިންގެރަށް","އަލަނާސި"]|x});
+    ("location.continent", 42, {x|["Asia","South America"]|x});
+    ("location.continent", 1337, {x|["Antarctica","Antarctica"]|x});
+    ("location.continent", 7, {x|["Africa","North America"]|x});
+    ( "location.country",
+      42,
+      {x|["Guinea","United States Minor Outlying Islands"]|x} );
+    ("location.country", 1337, {x|["Egypt","Canada"]|x});
+    ("location.country", 7, {x|["Barbados","Sao Tome and Principe"]|x});
+    ("location.countryCode", 42, {x|["GY","VC"]|x});
+    ("location.countryCode", 1337, {x|["EH","CD"]|x});
+    ("location.countryCode", 7, {x|["BE","SC"]|x});
+    ("location.county", 42, {x|["Borders","West Glamorgan"]|x});
+    ("location.county", 1337, {x|["Morgan County","Johnson County"]|x});
+    ("location.county", 7, {x|["Franklin County","North Yorkshire"]|x});
+    ("location.direction", 42, {x|["South","Southwest"]|x});
+    ("location.direction", 1337, {x|["South","East"]|x});
+    ("location.direction", 7, {x|["North","Southeast"]|x});
+    ( "location.language",
+      42,
+      {x|[{"name":"Gujarati","alpha2":"gu","alpha3":"guj"},{"name":"Tajik","alpha2":"tg","alpha3":"tgk"}]|x}
+    );
+    ( "location.language",
+      1337,
+      {x|[{"name":"Russian","alpha2":"ru","alpha3":"rus"},{"name":"English","alpha2":"en","alpha3":"eng"}]|x}
+    );
+    ( "location.language",
+      7,
+      {x|[{"name":"Indonesian","alpha2":"id","alpha3":"ind"},{"name":"Maltese","alpha2":"mt","alpha3":"mlt"}]|x}
+    );
+    ("location.latitude", 42, {x|[-22.5828,81.1286]|x});
+    ("location.latitude", 1337, {x|[-42.8356,-61.4369]|x});
+    ("location.latitude", 7, {x|[-76.2646,50.3854]|x});
+    ("location.longitude", 42, {x|[-45.1656,162.2572]|x});
+    ("location.longitude", 1337, {x|[-85.6711,-122.8738]|x});
+    ("location.longitude", 7, {x|[-152.5291,100.7708]|x});
+    ( "location.nearbyGPSCoordinate",
+      42,
+      {x|[[-22.5828,162.2572],[41.7589,35.5171]]|x} );
+    ( "location.nearbyGPSCoordinate",
+      1337,
+      {x|[[-42.8356,-122.8738],[-39.9372,-14.6459]]|x} );
+    ( "location.nearbyGPSCoordinate",
+      7,
+      {x|[[-76.2646,100.7708],[-11.0863,80.4475]]|x} );
+    ("location.ordinalDirection", 42, {x|["Northwest","Southwest"]|x});
+    ("location.ordinalDirection", 1337, {x|["Northwest","Northeast"]|x});
+    ("location.ordinalDirection", 7, {x|["Northeast","Southwest"]|x});
+    ( "location.postalAddress",
+      42,
+      {x|["751 ޚަދީޖާ މަގު\nޟިފާފްދޫ\nGeorgia\n35426","44715 ބަރުޢުމް ހިނގުން\nކެކުރި\nKansas\n06414"]|x}
+    );
+    ( "location.postalAddress",
+      1337,
+      {x|["34352 ފޫހި ރަތަފަ މަގު\nޤައިލާފަރު\nSouth Carolina\n34571","514 ޢަޠާ ހިނގުން\nބޮޑު\nMontana\n07911"]|x}
+    );
+    ( "location.postalAddress",
+      7,
+      {x|["479 މަބްޞަރު މަގު\nނުސައިބުދޫ\nHawaii\n49069","9157 އަލި ބިއްލޫރި މަގު\nދެކުނު ޚަވްލާ\nKansas\n52436"]|x}
+    );
+    ("location.secondaryAddress", 42, {x|["Apt. 975","Apt. 208"]|x});
+    ("location.secondaryAddress", 1337, {x|["Apt. 224","Apt. 529"]|x});
+    ("location.secondaryAddress", 7, {x|["Apt. 847","Suite 550"]|x});
+    ("location.state", 42, {x|["Maine","West Virginia"]|x});
+    ("location.state", 1337, {x|["Indiana","Delaware"]|x});
+    ("location.state", 7, {x|["Arkansas","Rhode Island"]|x});
+    ("location.street", 42, {x|["ޘަރިއްޔު ހިނގުން","ޚަދީޖާ މަގު"]|x});
+    ("location.street", 1337, {x|["ބަލްޤީސް މަގު","އިބްރާހީމް ގޯޅި"]|x});
+    ("location.street", 7, {x|["އުސާމާ ގޯޅި","އެއްވަނަ މަތިންދާބޯޓު ހިނގުން"]|x});
+    ("location.streetAddress", 42, {x|["9751 ޚަދީޖާ މަގު","198 ރަޤީޤާ ހިނގުން"]|x});
+    ("location.streetAddress", 1337, {x|["22435 ޔޫސުފް ހިނގުން","6194 ދެވަނަ ކުކުޅު މަގު"]|x});
+    ("location.streetAddress", 7, {x|["84795 ލުއްޖާ ގޯޅި","402 ނުރައްކާ ވިލު ގޯޅި"]|x});
+    ( "location.timeZone",
+      42,
+      {x|["America/North_Dakota/Center","Pacific/Kosrae"]|x} );
+    ( "location.timeZone",
+      1337,
+      {x|["America/Guadeloupe","America/Argentina/San_Luis"]|x} );
+    ("location.timeZone", 7, {x|["Africa/Libreville","Europe/Gibraltar"]|x});
+    ("location.zipCode", 42, {x|["39751","10867"]|x});
+    ("location.zipCode", 1337, {x|["21243","52971"]|x});
+    ("location.zipCode", 7, {x|["07479","55024"]|x});
+    ( "lorem.lines",
+      42,
+      {x|["ވެރިކަން ޕްރިންސިޕަލް ކުރާ ކުރާ ބޮޑު ތަންފުކެއް ޕްރިންސިޕަލް ވަސީލަތްތަކާއި ޓޫރިޒަމް ބައުންޑަރީ.\nއެއްގޮތަށް ވިދާޅުވެއްޖެ ވިދާޅުވެއްޖެ ކުންފުންޏާއި ކަންކަން ފުރަތަމަ ފެންވަރުގެ ތަކެތި ތަރައްގީ.","މިލިއަން ފުރުސަތު އެއްގޮތަށް ކަންކަން ޕްރިންސިޕަލް.\nޕްރިންސިޕަލް ކުރާ ބޮޑު."]|x}
+    );
+    ( "lorem.lines",
+      1337,
+      {x|["ފެންވަރުގެ މިލިއަން ނާގޯށި ކަންކަން.\nއިނގިރޭސިވިލާތް ވެރިކަން ގޮތުގައި ޖޮއިންޓް ތަކެތި.","މިލިއަން ފުރުސަތު ފުރުސަތު ޕަސެންޓެވެ ފުރަތަމަ ސިޓީ ގެއްލުންނުވާ ވިދާޅުވެއްޖެ ފެންވަރުގެ އަހައްމިޔަތު."]|x}
+    );
+    ( "lorem.lines",
+      7,
+      {x|["ފުރަތަމަ ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ޖަލާލުއްދީން އެހެނިހެން ބޮޑު ފެންވަރުގެ އެހެނިހެން އަހައްމިޔަތު.","ބޮޑު ފެންވަރުގެ މިކަންކުރަން އެއްގޮތަށް މިލިއަން ފޯޅަވަހީ.\nޕްރިންސިޕަލް ފޯޅަވަހީ ރިސޯޓުތަކާ.\nމިކަންކުރަން ތަރައްގީ ކަންކަން ވެރިކަން އަހައްމިޔަތު ފަހުރުވެރިވާ އެއްގޮތަށް.\nޖޮއިންޓް ފަހުރުވެރިވާ ޖޮއިންޓް އެންމެ ގެއްލުންނުވާ ކުންފުންޏާއި.\nފެންވަރުގެ މިލިއަން ޕަސެންޓެވެ ކުޑަކުދިންނަށް ޖޮއިންޓް މިލިއަން ވަސީލަތްތަކާއި."]|x}
+    );
+    ( "lorem.paragraph",
+      42,
+      {x|["ފޯޅަވަހީ ވެރިކަން ޕްރިންސިޕަލް ކުރާ ކުރާ. ތަންފުކެއް ޕްރިންސިޕަލް ވަސީލަތްތަކާއި. ބައުންޑަރީ އެންމެ އެއްގޮތަށް.","ވިދާޅުވެއްޖެ ކުންފުންޏާއި ކަންކަން ފުރަތަމަ. ތަކެތި ތަރައްގީ ފެންވަރުގެ ޖޮއިންޓް މިލިއަން. އެއްގޮތަށް ކަންކަން ޕްރިންސިޕަލް ދާއިރާ ޕްރިންސިޕަލް ކުރާ ބޮޑު ފޯޅަވަހީ ބައުންޑަރީ."]|x}
+    );
+    ( "lorem.paragraph",
+      1337,
+      {x|["ކުރާ ފެންވަރުގެ މިލިއަން ނާގޯށި ކަންކަން. އިނގިރޭސިވިލާތް ވެރިކަން ގޮތުގައި ޖޮއިންޓް ތަކެތި. އިނގިރޭސިވިލާތް މިލިއަން ފުރުސަތު ފުރުސަތު.","ފުރަތަމަ ސިޓީ ގެއްލުންނުވާ ވިދާޅުވެއްޖެ ފެންވަރުގެ. އެހެނިހެން ވިދާޅުވެއްޖެ ވެންޗާއެއްގެ އެއްގޮތަށް ކަންކަން އެންމެ ވިދާޅުވެއްޖެ ބައުންޑަރީ. އެހެނިހެން އެހެނިހެން ޓޫރިޒަމް ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ކުރާ."]|x}
+    );
+    ( "lorem.paragraph",
+      7,
+      {x|["ގެއްލުންނުވާ ފުރަތަމަ ވަސީލަތްތަކާއި. ޖަލާލުއްދީން އެހެނިހެން ބޮޑު ފެންވަރުގެ އެހެނިހެން އަހައްމިޔަތު ފުރުސަތު ޖޮއިންޓް ބޮޑު ފެންވަރުގެ. އެއްގޮތަށް މިލިއަން ފޯޅަވަހީ ދާއިރާ ޕްރިންސިޕަލް ފޯޅަވަހީ ރިސޯޓުތަކާ ޖަލާލުއްދީން މިކަންކުރަން ތަރައްގީ.","ވެރިކަން އަހައްމިޔަތު ފަހުރުވެރިވާ އެއްގޮތަށް އެހެނިހެން ޖޮއިންޓް ފަހުރުވެރިވާ. އެންމެ ގެއްލުންނުވާ ކުންފުންޏާއި ސިޓީ ފެންވަރުގެ. ޕަސެންޓެވެ ކުޑަކުދިންނަށް ޖޮއިންޓް މިލިއަން ވަސީލަތްތަކާއި ވެންޗާއެއްގެ."]|x}
+    );
+    ( "lorem.paragraphs",
+      42,
+      {x|["ފޯޅަވަހީ ވެރިކަން ޕްރިންސިޕަލް ކުރާ ކުރާ. ތަންފުކެއް ޕްރިންސިޕަލް ވަސީލަތްތަކާއި. ބައުންޑަރީ އެންމެ އެއްގޮތަށް.\nވިދާޅުވެއްޖެ ކުންފުންޏާއި ކަންކަން ފުރަތަމަ. ތަކެތި ތަރައްގީ ފެންވަރުގެ ޖޮއިންޓް މިލިއަން. އެއްގޮތަށް ކަންކަން ޕްރިންސިޕަލް ދާއިރާ ޕްރިންސިޕަލް ކުރާ ބޮޑު ފޯޅަވަހީ ބައުންޑަރީ.\nކުންފުންޏާއި ގޮތުގައި މުސްތަގުބަލަށް މިލިއަން ތަރައްގީ އެހެނިހެން ދާއިރާ މިކަންކުރަން މުޅިން. ކުންފުންޏާއި ކަންކަން ޖަލާލުއްދީން ވިދާޅުވެއްޖެ ބައުންޑަރީ ގެއްލުންނުވާ ފޯޅަވަހީ އިމުގެ. މިކަންކުރަން އިންގިލާބެއް އެއްގޮތަށް ދާއިރާ ނާގޯށި ޖޮއިންޓް ފެންވަރުގެ.","ޕަސެންޓެވެ ފެންވަރުގެ ޖަލާލުއްދީން ތަރައްގީ ފުރުސަތު އިންގިލާބެއް އިނގިރޭސިވިލާތް ގެއްލުންނުވާ އެއްގޮތަށް. ކަންބޮޑުވުން މުސްތަގުބަލަށް ވަސީލަތްތަކާއި. އިންގިލާބެއް ޕަސެންޓެވެ ގޮތުގައި ތަންފުކެއް ތަކެތި ނާގޯށި ބޮޑު ކުންފުންޏާއި ނާގޯށި.\nކުޑަކުދިންނަށް އިމުގެ ފަހުރުވެރިވާ ގޮތުގައި ވަސީލަތްތަކާއި ގެއްލުންނުވާ ސިޓީ ގެއްލުންނުވާ. ކަންކަން ފުރަތަމަ ދާއިރާ ގޮތުގައި ދާއިރާ ކުޑަކުދިންނަށް. އެހެނިހެން މިކަންކުރަން މުޅިން ވެންޗާއެއްގެ ވެރިކަން.\nއިންގިލާބެއް ފެންވަރުގެ ކުރާ ފޯޅަވަހީ. ތަކެތި ތަންފުކެއް ފުރުސަތު ވިދާޅުވެއްޖެ އިމުގެ ޖަލާލުއްދީން ކަންބޮޑުވުން އިމުގެ ނާގޯށި. ރިސޯޓުތަކާ ފުރަތަމަ ކަންބޮޑުވުން."]|x}
+    );
+    ( "lorem.paragraphs",
+      1337,
+      {x|["ކުރާ ފެންވަރުގެ މިލިއަން ނާގޯށި ކަންކަން. އިނގިރޭސިވިލާތް ވެރިކަން ގޮތުގައި ޖޮއިންޓް ތަކެތި. އިނގިރޭސިވިލާތް މިލިއަން ފުރުސަތު ފުރުސަތު.\nފުރަތަމަ ސިޓީ ގެއްލުންނުވާ ވިދާޅުވެއްޖެ ފެންވަރުގެ. އެހެނިހެން ވިދާޅުވެއްޖެ ވެންޗާއެއްގެ އެއްގޮތަށް ކަންކަން އެންމެ ވިދާޅުވެއްޖެ ބައުންޑަރީ. އެހެނިހެން އެހެނިހެން ޓޫރިޒަމް ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ކުރާ.\nޖޮއިންޓް މުސްތަގުބަލަށް ޓޫރިޒަމް ޖޮއިންޓް. ފުރުސަތު ޕަސެންޓެވެ މުސްތަގުބަލަށް. ބައުންޑަރީ އެންމެ ތަކެތި ސިޓީ އިނގިރޭސިވިލާތް މުޅިން.","އިންގިލާބެއް ފޯޅަވަހީ ބައުންޑަރީ. ނާގޯށި ވަސީލަތްތަކާއި ޓޫރިޒަމް ގެއްލުންނުވާ އަހައްމިޔަތު ވިދާޅުވެއްޖެ. މިކަންކުރަން ކުރާ މިކަންކުރަން ނާގޯށި މުސްތަގުބަލަށް މުޅިން ކަންކަން ވިދާޅުވެއްޖެ.\nމިލިއަން ވެންޗާއެއްގެ ފުރުސަތު އެހެނިހެން ވަސީލަތްތަކާއި ފުރުސަތު. މިކަންކުރަން ވަސީލަތްތަކާއި އިމުގެ ފުރަތަމަ ފަހުރުވެރިވާ. ތަކެތި ކަންކަން ރިސޯޓުތަކާ ފޯޅަވަހީ ޖަލާލުއްދީން ގެއްލުންނުވާ ރިސޯޓުތަކާ ފުރަތަމަ ވެންޗާއެއްގެ އެހެނިހެން.\nމުސްތަގުބަލަށް ދާއިރާ ރިސޯޓުތަކާ ވެރިކަން. ތަކެތި ވެންޗާއެއްގެ ތަންފުކެއް އިނގިރޭސިވިލާތް ކުންފުންޏާއި ޖޮއިންޓް މުސްތަގުބަލަށް ޕަސެންޓެވެ ދާއިރާ ޕަސެންޓެވެ. ދާއިރާ މިކަންކުރަން ވަސީލަތްތަކާއި ގެއްލުންނުވާ އިންގިލާބެއް ދާއިރާ."]|x}
+    );
+    ( "lorem.paragraphs",
+      7,
+      {x|["ގެއްލުންނުވާ ފުރަތަމަ ވަސީލަތްތަކާއި. ޖަލާލުއްދީން އެހެނިހެން ބޮޑު ފެންވަރުގެ އެހެނިހެން އަހައްމިޔަތު ފުރުސަތު ޖޮއިންޓް ބޮޑު ފެންވަރުގެ. އެއްގޮތަށް މިލިއަން ފޯޅަވަހީ ދާއިރާ ޕްރިންސިޕަލް ފޯޅަވަހީ ރިސޯޓުތަކާ ޖަލާލުއްދީން މިކަންކުރަން ތަރައްގީ.\nވެރިކަން އަހައްމިޔަތު ފަހުރުވެރިވާ އެއްގޮތަށް އެހެނިހެން ޖޮއިންޓް ފަހުރުވެރިވާ. އެންމެ ގެއްލުންނުވާ ކުންފުންޏާއި ސިޓީ ފެންވަރުގެ. ޕަސެންޓެވެ ކުޑަކުދިންނަށް ޖޮއިންޓް މިލިއަން ވަސީލަތްތަކާއި ވެންޗާއެއްގެ.\nވިދާޅުވެއްޖެ ވެރިކަން ފުރަތަމަ ފުރަތަމަ ކުޑަކުދިންނަށް ކަންކަން ފުރަތަމަ ޓޫރިޒަމް އިންގިލާބެއް ވަސީލަތްތަކާއި. މުސްތަގުބަލަށް ބައުންޑަރީ އަހައްމިޔަތު ބޮޑު ކުންފުންޏާއި ޕްރިންސިޕަލް ރިސޯޓުތަކާ. ފޯޅަވަހީ އެންމެ ފަހުރުވެރިވާ އެންމެ ތަރައްގީ ކުންފުންޏާއި މިލިއަން ވެރިކަން ފަހުރުވެރިވާ ތަރައްގީ.","ނާގޯށި ކުންފުންޏާއި ކުރާ ފުރަތަމަ މިލިއަން. ފުރުސަތު ކަންކަން މިލިއަން ގެއްލުންނުވާ އިމުގެ އަހައްމިޔަތު ފުރުސަތު ފޯޅަވަހީ ދާއިރާ. ފެންވަރުގެ ފަހުރުވެރިވާ ފުރުސަތު ވަސީލަތްތަކާއި ކުރާ އަހައްމިޔަތު ބޮޑު ޕަސެންޓެވެ ކަންބޮޑުވުން ފުރަތަމަ.\nވަސީލަތްތަކާއި ކަންބޮޑުވުން ގެއްލުންނުވާ ޓޫރިޒަމް ފުރަތަމަ މިލިއަން ބޮޑު. ޕްރިންސިޕަލް ކަންބޮޑުވުން ފޯޅަވަހީ ތަރައްގީ ރިސޯޓުތަކާ އަހައްމިޔަތު ތަރައްގީ. ސިޓީ ކުރާ ފުރުސަތު ތަންފުކެއް.\nކަންކަން ފުރުސަތު ބައުންޑަރީ. ކުރާ ތަންފުކެއް މިކަންކުރަން އެއްގޮތަށް މިލިއަން. އެންމެ ކުރާ އަހައްމިޔަތު ކަންބޮޑުވުން ޖަލާލުއްދީން ކުރާ ދާއިރާ ފެންވަރުގެ."]|x}
+    );
+    ( "lorem.sentence",
+      42,
+      {x|["ފޯޅަވަހީ ވެރިކަން ޕްރިންސިޕަލް ކުރާ ކުރާ.","ތަންފުކެއް ޕްރިންސިޕަލް ވަސީލަތްތަކާއި."]|x} );
+    ( "lorem.sentence",
+      1337,
+      {x|["ކުރާ ފެންވަރުގެ މިލިއަން ނާގޯށި ކަންކަން.","އިނގިރޭސިވިލާތް ވެރިކަން ގޮތުގައި ޖޮއިންޓް ތަކެތި."]|x} );
+    ( "lorem.sentence",
+      7,
+      {x|["ގެއްލުންނުވާ ފުރަތަމަ ވަސީލަތްތަކާއި.","ޖަލާލުއްދީން އެހެނިހެން ބޮޑު ފެންވަރުގެ އެހެނިހެން އަހައްމިޔަތު ފުރުސަތު ޖޮއިންޓް ބޮޑު ފެންވަރުގެ."]|x}
+    );
+    ( "lorem.sentences",
+      42,
+      {x|["ވެރިކަން ޕްރިންސިޕަލް ކުރާ ކުރާ ބޮޑު ތަންފުކެއް ޕްރިންސިޕަލް ވަސީލަތްތަކާއި ޓޫރިޒަމް ބައުންޑަރީ. އެއްގޮތަށް ވިދާޅުވެއްޖެ ވިދާޅުވެއްޖެ ކުންފުންޏާއި ކަންކަން ފުރަތަމަ ފެންވަރުގެ ތަކެތި ތަރައްގީ. ޖޮއިންޓް މިލިއަން ފުރުސަތު އެއްގޮތަށް ކަންކަން.","ޕްރިންސިޕަލް ކުރާ ބޮޑު. ބައުންޑަރީ ކަންބޮޑުވުން ކުންފުންޏާއި ގޮތުގައި މުސްތަގުބަލަށް މިލިއަން ތަރައްގީ އެހެނިހެން ދާއިރާ މިކަންކުރަން. އަހައްމިޔަތު ކުންފުންޏާއި ކަންކަން ޖަލާލުއްދީން ވިދާޅުވެއްޖެ. ގެއްލުންނުވާ ފޯޅަވަހީ އިމުގެ ޕްރިންސިޕަލް މިކަންކުރަން އިންގިލާބެއް އެއްގޮތަށް ދާއިރާ ނާގޯށި ޖޮއިންޓް."]|x}
+    );
+    ( "lorem.sentences",
+      1337,
+      {x|["ފެންވަރުގެ މިލިއަން ނާގޯށި ކަންކަން. އިނގިރޭސިވިލާތް ވެރިކަން ގޮތުގައި ޖޮއިންޓް ތަކެތި. އިނގިރޭސިވިލާތް މިލިއަން ފުރުސަތު ފުރުސަތު.","ސިޓީ ގެއްލުންނުވާ ވިދާޅުވެއްޖެ ފެންވަރުގެ އަހައްމިޔަތު އެހެނިހެން. ވެންޗާއެއްގެ އެއްގޮތަށް ކަންކަން އެންމެ. ބައުންޑަރީ ފުރަތަމަ އެހެނިހެން އެހެނިހެން."]|x}
+    );
+    ( "lorem.sentences",
+      7,
+      {x|["ފުރަތަމަ ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ޖަލާލުއްދީން އެހެނިހެން ބޮޑު ފެންވަރުގެ އެހެނިހެން އަހައްމިޔަތު. ޖޮއިންޓް ބޮޑު ފެންވަރުގެ މިކަންކުރަން އެއްގޮތަށް މިލިއަން ފޯޅަވަހީ ދާއިރާ ޕްރިންސިޕަލް.","ޖަލާލުއްދީން މިކަންކުރަން ތަރައްގީ ކަންކަން. އަހައްމިޔަތު ފަހުރުވެރިވާ އެއްގޮތަށް އެހެނިހެން ޖޮއިންޓް ފަހުރުވެރިވާ ޖޮއިންޓް އެންމެ ގެއްލުންނުވާ. ސިޓީ ފެންވަރުގެ މިލިއަން ޕަސެންޓެވެ ކުޑަކުދިންނަށް. މިލިއަން ވަސީލަތްތަކާއި ވެންޗާއެއްގެ މިކަންކުރަން ވިދާޅުވެއްޖެ. ފުރަތަމަ ފުރަތަމަ ކުޑަކުދިންނަށް ކަންކަން ފުރަތަމަ ޓޫރިޒަމް އިންގިލާބެއް ވަސީލަތްތަކާއި. މުސްތަގުބަލަށް ބައުންޑަރީ އަހައްމިޔަތު ބޮޑު ކުންފުންޏާއި ޕްރިންސިޕަލް ރިސޯޓުތަކާ."]|x}
+    );
+    ("lorem.slug", 42, {x|["--","--"]|x});
+    ("lorem.slug", 1337, {x|["--","--"]|x});
+    ("lorem.slug", 7, {x|["--","--"]|x});
+    ( "lorem.text",
+      42,
+      {x|["ޕްރިންސިޕަލް ކުރާ ކުރާ ބޮޑު ތަންފުކެއް ޕްރިންސިޕަލް ވަސީލަތްތަކާއި ޓޫރިޒަމް. އެންމެ އެއްގޮތަށް ވިދާޅުވެއްޖެ ވިދާޅުވެއްޖެ ކުންފުންޏާއި ކަންކަން ފުރަތަމަ ފެންވަރުގެ ތަކެތި ތަރައްގީ. ޖޮއިންޓް މިލިއަން ފުރުސަތު އެއްގޮތަށް ކަންކަން. ދާއިރާ ޕްރިންސިޕަލް ކުރާ ބޮޑު ފޯޅަވަހީ ބައުންޑަރީ ކަންބޮޑުވުން. ގޮތުގައި މުސްތަގުބަލަށް މިލިއަން ތަރައްގީ އެހެނިހެން. މިކަންކުރަން މުޅިން އަހައްމިޔަތު.","ވިދާޅުވެއްޖެ ބައުންޑަރީ ގެއްލުންނުވާ ފޯޅަވަހީ އިމުގެ ޕްރިންސިޕަލް މިކަންކުރަން. އެއްގޮތަށް ދާއިރާ ނާގޯށި. ފެންވަރުގެ ކަންބޮޑުވުން ޕަސެންޓެވެ ފެންވަރުގެ ޖަލާލުއްދީން ތަރައްގީ. އިންގިލާބެއް އިނގިރޭސިވިލާތް ގެއްލުންނުވާ އެއްގޮތަށް ޓޫރިޒަމް ކަންބޮޑުވުން މުސްތަގުބަލަށް ވަސީލަތްތަކާއި ގެއްލުންނުވާ."]|x}
+    );
+    ( "lorem.text",
+      1337,
+      {x|["މިލިއަން ނާގޯށި ކަންކަން މުޅިން އިނގިރޭސިވިލާތް. ގޮތުގައި ޖޮއިންޓް ތަކެތި ތަރައްގީ އިނގިރޭސިވިލާތް މިލިއަން ފުރުސަތު ފުރުސަތު.","ގެއްލުންނުވާ ވިދާޅުވެއްޖެ ފެންވަރުގެ އަހައްމިޔަތު އެހެނިހެން ވިދާޅުވެއްޖެ ވެންޗާއެއްގެ. ކަންކަން އެންމެ ވިދާޅުވެއްޖެ ބައުންޑަރީ. އެހެނިހެން އެހެނިހެން ޓޫރިޒަމް ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ކުރާ. ޖޮއިންޓް މުސްތަގުބަލަށް ޓޫރިޒަމް ޖޮއިންޓް."]|x}
+    );
+    ( "lorem.text",
+      7,
+      {x|["ފުރަތަމަ ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ޖަލާލުއްދީން އެހެނިހެން ބޮޑު ފެންވަރުގެ އެހެނިހެން އަހައްމިޔަތު.","ފެންވަރުގެ މިކަންކުރަން އެއްގޮތަށް.\nފޯޅަވަހީ ދާއިރާ ޕްރިންސިޕަލް ފޯޅަވަހީ ރިސޯޓުތަކާ ޖަލާލުއްދީން."]|x}
+    );
+    ("lorem.word", 42, {x|["ޖޮއިންޓް","ފޯޅަވަހީ"]|x});
+    ("lorem.word", 1337, {x|["މުޅިން","ކުރާ"]|x});
+    ("lorem.word", 7, {x|["އިންގިލާބެއް","ގެއްލުންނުވާ"]|x});
+    ("lorem.words", 42, {x|["ޖޮއިންޓް ފޯޅަވަހީ ވެރިކަން","ޕްރިންސިޕަލް ކުރާ ކުރާ"]|x});
+    ("lorem.words", 1337, {x|["މުޅިން ކުރާ ފެންވަރުގެ","މިލިއަން ނާގޯށި ކަންކަން"]|x});
+    ("lorem.words", 7, {x|["އިންގިލާބެއް ގެއްލުންނުވާ ފުރަތަމަ","ވަސީލަތްތަކާއި އިނގިރޭސިވިލާތް ޖަލާލުއްދީން"]|x});
+    ("music.album", 42, {x|["Heard It In A Past Life","Vida"]|x});
+    ("music.album", 1337, {x|["Dulce Beat","Carnival"]|x});
+    ("music.album", 7, {x|["Aura","Stay Dangerous"]|x});
+    ("music.artist", 42, {x|["James TW","Vanessa Carlton"]|x});
+    ("music.artist", 1337, {x|["Evanescence","Cher"]|x});
+    ("music.artist", 7, {x|["Bachman-Turner Overdrive","Smokey Robinson"]|x});
+    ("music.genre", 42, {x|["German Folk","Tex-Mex"]|x});
+    ("music.genre", 1337, {x|["Drinking Songs","Chicago House"]|x});
+    ("music.genre", 7, {x|["Bebop","Qawwali"]|x});
+    ( "music.songName",
+      42,
+      {x|["I Honestly Love You","Why Do Fools Fall in Love?"]|x} );
+    ("music.songName", 1337, {x|["Frankenstein","Cars"]|x});
+    ("music.songName", 7, {x|["Bad Day","Take Me Home, Country Roads"]|x});
+    ("number.bigInt", 42, {x|["975110867098211","542612347155061"]|x});
+    ("number.bigInt", 1337, {x|["124352971361947","345712641415819"]|x});
+    ("number.bigInt", 7, {x|["747955024683029","490692591576424"]|x});
+    ("number.binary", 42, {x|["0","1"]|x});
+    ("number.binary", 1337, {x|["0","0"]|x});
+    ("number.binary", 7, {x|["0","1"]|x});
+    ("number.float", 42, {x|[0.3745401188473625,0.9507143064099162]|x});
+    ("number.float", 1337, {x|[0.2620246750155817,0.1586839721544656]|x});
+    ("number.float", 7, {x|[0.07630828937395717,0.7799187922401146]|x});
+    ("number.hex", 42, {x|["5","f"]|x});
+    ("number.hex", 1337, {x|["4","2"]|x});
+    ("number.hex", 7, {x|["1","c"]|x});
+    ("number.int", 42, {x|[3373557479352566,8563273192166996]|x});
+    ("number.int", 1337, {x|[2360108457524098,1429298155729043]|x});
+    ("number.int", 7, {x|[687323967179667,7024883964223655]|x});
+    ("number.octal", 42, {x|["2","7"]|x});
+    ("number.octal", 1337, {x|["2","1"]|x});
+    ("number.octal", 7, {x|["0","6"]|x});
+    ("number.romanNumeral", 42, {x|["MCDXCVIII","MMMDCCCII"]|x});
+    ("number.romanNumeral", 1337, {x|["MXLVIII","DCXXXV"]|x});
+    ("number.romanNumeral", 7, {x|["CCCVI","MMMCXIX"]|x});
+    ("person.bio", 42, {x|["traveler, philosopher, model","creator, author"]|x});
+    ( "person.bio",
+      1337,
+      {x|["creator, engineer, friend","grad, educator, writer"]|x} );
+    ("person.bio", 7, {x|["photographer","person, writer, inventor ⛄"]|x});
+    ("person.firstName", 42, {x|["ޢާއިޝާ","މޫސާ"]|x});
+    ("person.firstName", 1337, {x|["ރަމްލާ","މާރިޔާ"]|x});
+    ("person.firstName", 7, {x|["ޙަލީމާ","ޖުވައިރިއްޔާ"]|x});
+    ("person.fullName", 42, {x|["ޢާއިޝާ ޒުބައިދާ","ހިންދު ޒުމުއްރުދާ"]|x});
+    ("person.fullName", 1337, {x|["ރަމްލާ ތަޙައްޝުމު","އިބްރާހީމް ޛުއްނޫރު"]|x});
+    ("person.fullName", 7, {x|["ޙަލީމާ ޚަވްޟާ","މުޙައްމަދު މަބްޞަރު"]|x});
+    ("person.gender", 42, {x|["Gender nonconforming","Two-spirit person"]|x});
+    ("person.gender", 1337, {x|["Demigender","Cisgender woman"]|x});
+    ("person.gender", 7, {x|["Cis male","Trans woman"]|x});
+    ("person.jobArea", 42, {x|["Identity","Usability"]|x});
+    ("person.jobArea", 1337, {x|["Functionality","Marketing"]|x});
+    ("person.jobArea", 7, {x|["Brand","Accounts"]|x});
+    ("person.jobDescriptor", 42, {x|["National","Chief"]|x});
+    ("person.jobDescriptor", 1337, {x|["Future","Corporate"]|x});
+    ("person.jobDescriptor", 7, {x|["Senior","Forward"]|x});
+    ( "person.jobTitle",
+      42,
+      {x|["National Usability Producer","Customer Marketing Liaison"]|x} );
+    ( "person.jobTitle",
+      1337,
+      {x|["Future Marketing Engineer","District Paradigm Analyst"]|x} );
+    ( "person.jobTitle",
+      7,
+      {x|["Senior Accounts Administrator","Legacy Metrics Designer"]|x} );
+    ("person.jobType", 42, {x|["Coordinator","Representative"]|x});
+    ("person.jobType", 1337, {x|["Engineer","Liaison"]|x});
+    ("person.jobType", 7, {x|["Associate","Consultant"]|x});
+    ("person.lastName", 42, {x|["ޚާލިޞާ","ބުހްލޫލް"]|x});
+    ("person.lastName", 1337, {x|["އިބާ","ސަޢުދިއްޔާ"]|x});
+    ("person.lastName", 7, {x|["ދާއިޙާ","ޔަގްޡާން"]|x});
+    ("person.middleName", 42, {x|["Rebel","Cameron"]|x});
+    ("person.middleName", 1337, {x|["Dawn","Isla"]|x});
+    ("person.middleName", 7, {x|["Gwen","London"]|x});
+    ("person.prefix", 42, {x|["އަމީރު","އަމީރާ"]|x});
+    ("person.prefix", 1337, {x|["ބަނޑޭރި","ބޮޑު"]|x});
+    ("person.prefix", 7, {x|["އަމީރު","އަމީރާ"]|x});
+    ("person.sex", 42, {x|["އަންހެން","ފިރިހެން"]|x});
+    ("person.sex", 1337, {x|["އަންހެން","އަންހެން"]|x});
+    ("person.sex", 7, {x|["އަންހެން","ފިރިހެން"]|x});
+    ("person.sexType", 42, {x|["female","male"]|x});
+    ("person.sexType", 1337, {x|["female","female"]|x});
+    ("person.sexType", 7, {x|["female","male"]|x});
+    ("person.suffix", 42, {x|["III","DVM"]|x});
+    ("person.suffix", 1337, {x|["I","Sr."]|x});
+    ("person.suffix", 7, {x|["Jr.","DDS"]|x});
+    ("person.zodiacSign", 42, {x|["Gemini","Capricorn"]|x});
+    ("person.zodiacSign", 1337, {x|["Taurus","Pisces"]|x});
+    ("person.zodiacSign", 7, {x|["Aquarius","Scorpio"]|x});
+    ("phone.imei", 42, {x|["39-751108-670982-8","11-354261-234715-8"]|x});
+    ("phone.imei", 1337, {x|["21-243529-713619-6","47-734571-264141-7"]|x});
+    ("phone.imei", 7, {x|["07-479550-246830-5","29-249069-259157-1"]|x});
+    ("phone.number", 42, {x|["+960-7975110","767 0982"]|x});
+    ("phone.number", 1337, {x|["+960-5124352","971 3619"]|x});
+    ("phone.number", 7, {x|["+960 674 7955","+960 624 6830"]|x});
+    ( "science.chemicalElement",
+      42,
+      {x|[{"symbol":"Rh","name":"Rhodium","atomicNumber":45},{"symbol":"Nh","name":"Nihonium","atomicNumber":113}]|x}
+    );
+    ( "science.chemicalElement",
+      1337,
+      {x|[{"symbol":"Ga","name":"Gallium","atomicNumber":31},{"symbol":"K","name":"Potassium","atomicNumber":19}]|x}
+    );
+    ( "science.chemicalElement",
+      7,
+      {x|[{"symbol":"Ne","name":"Neon","atomicNumber":10},{"symbol":"Np","name":"Neptunium","atomicNumber":93}]|x}
+    );
+    ( "science.unit",
+      42,
+      {x|[{"name":"pascal","symbol":"Pa"},{"name":"lux","symbol":"lx"}]|x} );
+    ( "science.unit",
+      1337,
+      {x|[{"name":"radian","symbol":"rad"},{"name":"kelvin","symbol":"K"}]|x} );
+    ( "science.unit",
+      7,
+      {x|[{"name":"mole","symbol":"mol"},{"name":"steradian","symbol":"sr"}]|x}
+    );
+    ("string.alpha", 42, {x|["t","X"]|x});
+    ("string.alpha", 1337, {x|["n","i"]|x});
+    ("string.alpha", 7, {x|["d","O"]|x});
+    ("string.alphanumeric", 42, {x|["n","W"]|x});
+    ("string.alphanumeric", 1337, {x|["g","9"]|x});
+    ("string.alphanumeric", 7, {x|["4","M"]|x});
+    ("string.binary", 42, {x|["0b0","0b1"]|x});
+    ("string.binary", 1337, {x|["0b0","0b0"]|x});
+    ("string.binary", 7, {x|["0b0","0b1"]|x});
+    ("string.hexadecimal", 42, {x|["0x8","0xE"]|x});
+    ("string.hexadecimal", 1337, {x|["0x5","0x3"]|x});
+    ("string.hexadecimal", 7, {x|["0x1","0xB"]|x});
+    ( "string.nanoid",
+      42,
+      {x|["WB9RHYdbwi8mMv2aWO6ru","UFwb-TVckgmxNZcOJ47C3"]|x} );
+    ( "string.nanoid",
+      1337,
+      {x|["9swY7CYMmAbFbcPXv0Z7G","mMHYBZ0W_ILbUUHwtouNU"]|x} );
+    ("string.nanoid", 7, {x|["MI-4uN4Us1Wy8KtutPjhl","mIUJqw0HHGjeWt8sulipM"]|x});
+    ("string.numeric", 42, {x|["3","9"]|x});
+    ("string.numeric", 1337, {x|["2","1"]|x});
+    ("string.numeric", 7, {x|["0","7"]|x});
+    ("string.octal", 42, {x|["0o2","0o7"]|x});
+    ("string.octal", 1337, {x|["0o2","0o1"]|x});
+    ("string.octal", 7, {x|["0o0","0o6"]|x});
+    ("string.sample", 42, {x|["CyeX//&qXb","\"{n412=QI<"]|x});
+    ("string.sample", 1337, {x|["9/:K>Q9{e+","D[,|JjjBGW"]|x});
+    ("string.sample", 7, {x|["(iId{SO'9O","`kD';u4Kw#"]|x});
+    ("string.symbol", 42, {x|[",","}"]|x});
+    ("string.symbol", 1337, {x|[")","&"]|x});
+    ("string.symbol", 7, {x|["#","]"]|x});
+    ( "string.ulid",
+      42,
+      {x|["01JGFJJZ00BYQK441VKP0ZT655","01JGFJJZ009GD9K49BES6GJ1K5"]|x} );
+    ( "string.ulid",
+      1337,
+      {x|["01JGFJJZ00858EAG8ZQ3CM4ZES","01JGFJJZ00SBDJR69NF5D6HT5Y"]|x} );
+    ( "string.ulid",
+      7,
+      {x|["01JGFJJZ002REQZHG28FNSC29X","01JGFJJZ006EX0KY7HX4GRNE6F"]|x} );
+    ( "string.uuid",
+      42,
+      {x|["5fb9220d-9b0f-4d32-a248-6492457c3890","21ffc41a-7170-4e4a-9488-2fcfe9e13056"]|x}
+    );
+    ( "string.uuid",
+      1337,
+      {x|["4247584f-b16a-42f7-8cc5-69c34a72638d","f6880bf2-25b0-450c-a5b7-fd99f401ff75"]|x}
+    );
+    ( "string.uuid",
+      7,
+      {x|["1c7bf881-47ac-4614-8e37-e09f38e28ca7","7575dc59-475a-457b-a6e2-b66a8601b8bf"]|x}
+    );
+    ("system.commonFileExt", 42, {x|["png","shtml"]|x});
+    ("system.commonFileExt", 1337, {x|["wav","m3a"]|x});
+    ("system.commonFileExt", 7, {x|["pdf","mpe"]|x});
+    ( "system.commonFileName",
+      42,
+      {x|["unnaturally_dreamily.m3a","following_huzzah.pdf"]|x} );
+    ("system.commonFileName", 1337, {x|["wallaby.mp4","circa_masquerade.mp2"]|x});
+    ("system.commonFileName", 7, {x|["bleak.wav","for_often.htm"]|x});
+    ("system.commonFileType", 42, {x|["audio","application"]|x});
+    ("system.commonFileType", 1337, {x|["audio","video"]|x});
+    ("system.commonFileType", 7, {x|["video","text"]|x});
+    ("system.cron", 42, {x|["* * ? 8 ?","* 4 6 4 WED"]|x});
+    ("system.cron", 1337, {x|["* * 9 6 *","* 10 25 * TUE"]|x});
+    ("system.cron", 7, {x|["4 18 * * ?","* * 29 * ?"]|x});
+    ("system.directoryPath", 42, {x|["/net","/var/spool"]|x});
+    ("system.directoryPath", 1337, {x|["/home","/etc"]|x});
+    ("system.directoryPath", 7, {x|["/Users","/usr/libexec"]|x});
+    ("system.fileExt", 42, {x|["docx","m2v"]|x});
+    ("system.fileExt", 1337, {x|["xul","exe"]|x});
+    ("system.fileExt", 7, {x|["bin","ico"]|x});
+    ("system.fileName", 42, {x|["unnaturally_dreamily.mar","fun.csh"]|x});
+    ("system.fileName", 1337, {x|["wallaby.jpg","seal.pptx"]|x});
+    ("system.fileName", 7, {x|["bleak.xla","for_often.3gp"]|x});
+    ( "system.filePath",
+      42,
+      {x|["/net/supposing_dreamily_embarrassment.xlsx","/opt/sbin/baseboard_meanwhile_beside.xsd"]|x}
+    );
+    ( "system.filePath",
+      1337,
+      {x|["/home/mmm.distz","/opt/knavishly_boohoo.vsw"]|x} );
+    ( "system.filePath",
+      7,
+      {x|["/Users/drowse_task_geez.3g2","/var/concerning.sh"]|x} );
+    ("system.fileType", 42, {x|["font","video"]|x});
+    ("system.fileType", 1337, {x|["audio","application"]|x});
+    ("system.fileType", 7, {x|["application","text"]|x});
+    ("system.mimeType", 42, {x|["application/x-bzip","video/mpeg"]|x});
+    ( "system.mimeType",
+      1337,
+      {x|["application/vnd.oasis.opendocument.text","application/vnd.apple.installer+xml"]|x}
+    );
+    ( "system.mimeType",
+      7,
+      {x|["application/msword","image/vnd.microsoft.icon"]|x} );
+    ("system.networkInterface", 42, {x|["wlp5s1f0","wlx0fd322486492"]|x});
+    ("system.networkInterface", 1337, {x|["eno2","wls5f9"]|x});
+    ("system.networkInterface", 7, {x|["P7enp9s5d2","wlxc614e37e09f3"]|x});
+    ("system.semver", 42, {x|["3.19.15","5.3.3"]|x});
+    ("system.semver", 1337, {x|["2.3.5","4.6.10"]|x});
+    ("system.semver", 7, {x|["0.16.9","7.20.11"]|x});
+    ("vehicle.bicycle", 42, {x|["Fitness Bicycle","Tricycle"]|x});
+    ("vehicle.bicycle", 1337, {x|["Cyclocross Bicycle","City Bicycle"]|x});
+    ("vehicle.bicycle", 7, {x|["BMX Bicycle","Touring Bicycle"]|x});
+    ("vehicle.color", 42, {x|["ރިހިކުލަ","ދަނބުކުލަ"]|x});
+    ("vehicle.color", 1337, {x|["ރަންކުލަ","ނޫ"]|x});
+    ("vehicle.color", 7, {x|["ނާރިނގުކުލަ","މުށިކުލަ"]|x});
+    ("vehicle.fuel", 42, {x|["Electric","Hybrid"]|x});
+    ("vehicle.fuel", 1337, {x|["Electric","Diesel"]|x});
+    ("vehicle.fuel", 7, {x|["Diesel","Hybrid"]|x});
+    ("vehicle.manufacturer", 42, {x|["Jeep","Vauxhall"]|x});
+    ("vehicle.manufacturer", 1337, {x|["Fiat","Chevrolet"]|x});
+    ("vehicle.manufacturer", 7, {x|["BYD","Rolls Royce"]|x});
+    ("vehicle.model", 42, {x|["Durango","Wrangler"]|x});
+    ("vehicle.model", 1337, {x|["Challenger","Aventador"]|x});
+    ("vehicle.model", 7, {x|["A8","Mustang"]|x});
+    ("vehicle.type", 42, {x|["Extended Cab Pickup","Wagon"]|x});
+    ("vehicle.type", 1337, {x|["Coupe","Convertible"]|x});
+    ("vehicle.type", 7, {x|["Cargo Van","SUV"]|x});
+    ("vehicle.vehicle", 42, {x|["Jeep Wrangler","Renault Impala"]|x});
+    ("vehicle.vehicle", 1337, {x|["Fiat Aventador","Ford Explorer"]|x});
+    ("vehicle.vehicle", 7, {x|["BYD Mustang","Land Rover Model X"]|x});
+    ("vehicle.vin", 42, {x|["CYRK551V7PAZ82113","HE9L49CF06MK06109"]|x});
+    ("vehicle.vin", 1337, {x|["859FAH8Z23JL19477","BDKS69NG0DEH81945"]|x});
+    ("vehicle.vin", 7, {x|["2SEPZHG25GST30292","EX0KY7JX1HUN42434"]|x});
+    ("vehicle.vrm", 42, {x|["JY75EEB","WP70ZVF"]|x});
+    ("vehicle.vrm", 1337, {x|["GE24ING","ZT13QDZ"]|x});
+    ("vehicle.vrm", 7, {x|["BU47ZON","BG46UJB"]|x});
+    ("word.adjective", 42, {x|["hospitable","weird"]|x});
+    ("word.adjective", 1337, {x|["fatal","cumbersome"]|x});
+    ("word.adjective", 7, {x|["blushing","sparkling"]|x});
+    ("word.adverb", 42, {x|["jaggedly","wearily"]|x});
+    ("word.adverb", 1337, {x|["frankly","deceivingly"]|x});
+    ("word.adverb", 7, {x|["briefly","successfully"]|x});
+    ("word.conjunction", 42, {x|["instead","whose"]|x});
+    ("word.conjunction", 1337, {x|["how","even"]|x});
+    ("word.conjunction", 7, {x|["as","whenever"]|x});
+    ("word.interjection", 42, {x|["yahoo","ick"]|x});
+    ("word.interjection", 1337, {x|["ew","huzzah"]|x});
+    ("word.interjection", 7, {x|["blah","phew"]|x});
+    ("word.noun", 42, {x|["gerbil","unit"]|x});
+    ("word.noun", 1337, {x|["diversity","co-producer"]|x});
+    ("word.noun", 7, {x|["best-seller","saw"]|x});
+    ("word.preposition", 42, {x|["concerning","via"]|x});
+    ("word.preposition", 1337, {x|["barring","anenst"]|x});
+    ("word.preposition", 7, {x|["after","since"]|x});
+    ("word.sample", 42, {x|["bleakly","custody"]|x});
+    ("word.sample", 1337, {x|["how","yet"]|x});
+    ("word.sample", 7, {x|["masticate","afore"]|x});
+    ("word.verb", 42, {x|["glow","unfurl"]|x});
+    ("word.verb", 1337, {x|["downshift","condense"]|x});
+    ("word.verb", 7, {x|["bludgeon","scuffle"]|x});
+    ("word.words", 42, {x|["unnaturally dreamily","embarrassment"]|x});
+    ("word.words", 1337, {x|["wallaby","suspiciously generously till"]|x});
+    ("word.words", 7, {x|["bleak","task"]|x});
+    ( "faker.getMetadata",
+      42,
+      {x|[{"title":"Maldivian","code":"dv","language":"dv","endonym":"ދިވެހި","dir":"rtl","script":"Thaa"},{"title":"Maldivian","code":"dv","language":"dv","endonym":"ދިވެހި","dir":"rtl","script":"Thaa"}]|x}
+    );
+    ( "faker.getMetadata",
+      1337,
+      {x|[{"title":"Maldivian","code":"dv","language":"dv","endonym":"ދިވެހި","dir":"rtl","script":"Thaa"},{"title":"Maldivian","code":"dv","language":"dv","endonym":"ދިވެހި","dir":"rtl","script":"Thaa"}]|x}
+    );
+    ( "faker.getMetadata",
+      7,
+      {x|[{"title":"Maldivian","code":"dv","language":"dv","endonym":"ދިވެހި","dir":"rtl","script":"Thaa"},{"title":"Maldivian","code":"dv","language":"dv","endonym":"ދިވެހި","dir":"rtl","script":"Thaa"}]|x}
+    );
+  ]

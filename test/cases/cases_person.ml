@@ -2,7 +2,12 @@ open T
 module P = Faker.Person
 
 let sexes : (string * Faker.Person.sex_type option) list =
-  [ ("", None); ("/female", Some `Female); ("/male", Some `Male); ("/generic", Some `Generic) ]
+  [
+    ("", None);
+    ("/female", Some `Female);
+    ("/male", Some `Male);
+    ("/generic", Some `Generic);
+  ]
 
 let sexed : (string * (?sex:Faker.Person.sex_type -> Faker.t -> string)) list =
   [
@@ -16,7 +21,10 @@ let fake p f = s (Faker.Helpers.fake p f)
 
 let cases : case list =
   List.concat_map
-    (fun (name, m) -> List.map (fun (suffix, sex) -> (name ^ suffix, fun f -> s (m ?sex f))) sexes)
+    (fun (name, m) ->
+      List.map
+        (fun (suffix, sex) -> (name ^ suffix, fun f -> s (m ?sex f)))
+        sexes)
     sexed
   @ [
       ("fullName", fun f -> s (P.full_name f));
@@ -25,14 +33,21 @@ let cases : case list =
       ("fullName/generic", fun f -> s (P.full_name ~sex:`Generic f));
       ("fullName/first", fun f -> s (P.full_name ~first_name:"Joann" f));
       ("fullName/last", fun f -> s (P.full_name ~last_name:"Doe" f));
-      ("fullName/both", fun f -> s (P.full_name ~first_name:"Jane" ~last_name:"Doe" ~sex:`Female f));
+      ( "fullName/both",
+        fun f ->
+          s (P.full_name ~first_name:"Jane" ~last_name:"Doe" ~sex:`Female f) );
       ("fullName/empty", fun f -> s (P.full_name ~first_name:"" ~last_name:"" f));
-      ("fullName/dollar", fun f -> s (P.full_name ~first_name:"$& $1" ~last_name:"$$" f));
+      ( "fullName/dollar",
+        fun f -> s (P.full_name ~first_name:"$& $1" ~last_name:"$$" f) );
       ("gender", fun f -> s (P.gender f));
       ("sex", fun f -> s (P.sex f));
       ("sexType", fun f -> s (P.sex_type_to_string (P.sex_type f)));
-      ("sexType/generic", fun f -> s (P.sex_type_to_string (P.sex_type ~include_generic:true f)));
-      ("sexType/nogeneric", fun f -> s (P.sex_type_to_string (P.sex_type ~include_generic:false f)));
+      ( "sexType/generic",
+        fun f -> s (P.sex_type_to_string (P.sex_type ~include_generic:true f))
+      );
+      ( "sexType/nogeneric",
+        fun f -> s (P.sex_type_to_string (P.sex_type ~include_generic:false f))
+      );
       ("bio", fun f -> s (P.bio f));
       ("suffix", fun f -> s (P.suffix f));
       ("jobTitle", fun f -> s (P.job_title f));

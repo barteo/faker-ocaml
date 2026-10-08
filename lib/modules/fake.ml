@@ -10,16 +10,23 @@ type value =
 
 let rec resolve_property (f : Core.t) (entry : value) key : value =
   match entry with
-  | Fn g -> ( match g [] with v -> resolve_property f (Data v) key | exception _ -> Undefined)
+  | Fn g -> (
+      match g [] with
+      | v -> resolve_property f (Data v) key
+      | exception _ -> Undefined)
   | Root -> if Registry.find_module key <> None then Module key else Undefined
   | Module m -> (
-      match Registry.find_method m key with Some fn -> Fn (fn f) | None -> Undefined)
+      match Registry.find_method m key with
+      | Some fn -> Fn (fn f)
+      | None -> Undefined)
   | Data (Json.Obj _ as o) -> (
       match Json.member key o with Some v -> Data v | None -> Undefined)
   | Data (Json.Arr a) -> (
       match int_of_string_opt key with
       | Some i when i >= 0 && i < Array.length a -> Data a.(i)
-      | _ -> if key = "length" then Data (Json.int (Array.length a)) else Undefined)
+      | _ ->
+          if key = "length" then Data (Json.int (Array.length a)) else Undefined
+      )
   | Data _ | Undefined -> Undefined
 
 let find_params input : int * Json.t list =
@@ -44,7 +51,9 @@ let find_params input : int * Json.t list =
               | _ -> None
               | exception Json.Parse_error _ -> None
           in
-          match retry with Some r -> r | None -> go (Js.index_of ~from:(index + 1) ~sub:")" input))
+          match retry with
+          | Some r -> r
+          | None -> go (Js.index_of ~from:(index + 1) ~sub:")" input))
   in
   go index
 
@@ -54,28 +63,39 @@ let fake_eval (expression : string) (f : Core.t) : Json.t =
     let index, current =
       if Js.starts_with ~prefix:"(" remaining then begin
         let index, params = find_params remaining in
-        let next = if index + 1 < String.length remaining then Some remaining.[index + 1] else None in
+        let next =
+          if index + 1 < String.length remaining then Some remaining.[index + 1]
+          else None
+        in
         (match next with
         | Some '.' | Some '(' | None -> ()
         | Some c ->
             Core.error
-              "Expected dot ('.'), open parenthesis ('('), or nothing after function call but got \
-               '%c'"
+              "Expected dot ('.'), open parenthesis ('('), or nothing after \
+               function call but got '%c'"
               c);
         ( (index + if next = Some '.' then 2 else 1),
-          List.map (function Fn g -> Data (g params) | _ -> Undefined) current )
+          List.map (function Fn g -> Data (g params) | _ -> Undefined) current
+        )
       end
       else begin
         let len = String.length remaining in
-        let rec find i = if i >= len || remaining.[i] = '.' || remaining.[i] = '(' then i else find (i + 1) in
+        let rec find i =
+          if i >= len || remaining.[i] = '.' || remaining.[i] = '(' then i
+          else find (i + 1)
+        in
         let index = find 0 in
         let dot_match = index < len && remaining.[index] = '.' in
         let key = String.sub remaining 0 index in
-        if key = "" then Core.error "Expression parts cannot be empty in '%s'" remaining;
-        let next = if index + 1 < len then Some remaining.[index + 1] else None in
+        if key = "" then
+          Core.error "Expression parts cannot be empty in '%s'" remaining;
+        let next =
+          if index + 1 < len then Some remaining.[index + 1] else None
+        in
         if dot_match && (next = None || next = Some '.' || next = Some '(') then
           Core.error "Found dot without property name in '%s'" remaining;
-        ((index + if dot_match then 1 else 0), List.map (fun e -> resolve_property f e key) current)
+        ( (index + if dot_match then 1 else 0),
+          List.map (fun e -> resolve_property f e key) current )
       end
     in
     let remaining = Js.substring remaining index (String.length remaining) in
@@ -103,7 +123,11 @@ let search_start pattern =
   let len = String.length pattern in
   let rec go i =
     if i + 2 >= len then -1
-    else if pattern.[i] = '{' && pattern.[i + 1] = '{' && pattern.[i + 2] >= 'a' && pattern.[i + 2] <= 'z'
+    else if
+      pattern.[i] = '{'
+      && pattern.[i + 1] = '{'
+      && pattern.[i + 2] >= 'a'
+      && pattern.[i + 2] <= 'z'
     then i
     else go (i + 1)
   in
@@ -115,7 +139,10 @@ let rec fake (pattern : string) (f : Core.t) : string =
   if start = -1 || end_ = -1 then pattern
   else
     let token = Js.substring pattern (start + 2) (end_ + 2) in
-    let meth = Js.replace_first ~sub:"{{" ~by:"" (Js.replace_first ~sub:"}}" ~by:"" token) in
+    let meth =
+      Js.replace_first ~sub:"{{" ~by:""
+        (Js.replace_first ~sub:"}}" ~by:"" token)
+    in
     let result = fake_eval meth f in
     let patched =
       String.sub pattern 0 start ^ Json.to_js_string result
@@ -123,9 +150,11 @@ let rec fake (pattern : string) (f : Core.t) : string =
     in
     fake patched f
 
-let fake_one_of (patterns : string array) f = fake (Fk_helpers.array_element patterns f) f
+let fake_one_of (patterns : string array) f =
+  fake (Fk_helpers.array_element patterns f) f
 
-(** Picks one of the string patterns of a locale entry (string or array) and fakes it. *)
+(** Picks one of the string patterns of a locale entry (string or array) and
+    fakes it. *)
 let fake_json (patterns : Json.t) f =
   match patterns with
   | Json.Arr a -> fake (Locale.to_string (Fk_helpers.array_element a f)) f
@@ -146,9 +175,14 @@ let mustache (text : string option) (data : (string * mustache_value) list) =
               let b = Buffer.create (String.length text) in
               let sl = String.length sub in
               let rec go i =
-                if i > String.length text - sl then Buffer.add_string b (Js.slice text i)
-                else if String.sub text i sl = sub then (Buffer.add_string b (fn sub); go (i + sl))
-                else (Buffer.add_char b text.[i]; go (i + 1))
+                if i > String.length text - sl then
+                  Buffer.add_string b (Js.slice text i)
+                else if String.sub text i sl = sub then (
+                  Buffer.add_string b (fn sub);
+                  go (i + sl))
+                else (
+                  Buffer.add_char b text.[i];
+                  go (i + 1))
               in
               go 0;
               Buffer.contents b)
