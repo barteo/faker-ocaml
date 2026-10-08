@@ -1,10 +1,18 @@
 (* Prints one value per module. Compare with faker-js:
-     dune exec ./bin/demo.exe -- 42
-     node -e "const {faker}=require('@faker-js/faker');faker.seed(42);..." *)
+     dune exec ./bin/demo.exe -- 42 [locale]
+     node -e "const {allFakers}=require('@faker-js/faker');const f=allFakers.de;f.seed(42);..." *)
 
 let () =
   let seed = if Array.length Sys.argv > 1 then int_of_string Sys.argv.(1) else 42 in
-  let f = Faker.create ~seed () in
+  let locale = if Array.length Sys.argv > 2 then Sys.argv.(2) else "en" in
+  let chain =
+    match Faker.All_locales.find_chain locale with
+    | Some c -> c
+    | None ->
+        prerr_endline ("unknown locale: " ^ locale);
+        exit 2
+  in
+  let f = Faker.create ~locale:chain ~seed () in
   Faker.set_default_ref_date f (Faker.Date_util.of_iso "2025-01-01T00:00:00.000Z");
   let show name v = Printf.printf "%-28s %s\n" name v in
   show "person.fullName" (Faker.Person.full_name f);

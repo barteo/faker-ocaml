@@ -1,7 +1,7 @@
 (* Locale data access, mirroring src/internal/locale-proxy.ts. *)
 
-let en = lazy (Json.parse En_data.json)
-let base = lazy (Json.parse Base_data.json)
+let en = Locale_en.def
+let base = Locale_base.def
 
 let missing path =
   Core.error

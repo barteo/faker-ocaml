@@ -12,6 +12,8 @@ let cases : case list =
     ("arrayElements/3", fun f -> ss (H.array_elements ~count:(`N 3) arr_ f));
     ("arrayElements/range", fun f -> ss (H.array_elements ~count:(`Range (2, 4)) arr_ f));
     ("arrayElements/all", fun f -> ss (H.array_elements ~count:(`N 10) arr_ f));
+    ("arrayElements/0", fun f -> ss (H.array_elements ~count:(`N 0) arr_ f));
+    ("shuffle/inplace", fun f -> ss (H.shuffle ~inplace:true (Array.copy arr_) f));
     ("shuffle", fun f -> ss (H.shuffle arr_ f));
     ( "weightedArrayElement",
       fun f -> s (H.weighted_array_element [| (5.0, "sunny"); (4.0, "rainy"); (1.0, "snowy") |] f) );
@@ -25,6 +27,20 @@ let cases : case list =
     ("objectKey", fun f -> s (H.object_key obj f));
     ("objectValue", fun f -> i (H.object_value obj f));
     ("objectEntry", fun f -> let k, v = H.object_entry obj f in J.Arr [| s k; i v |]);
+    ( "enumValue/string",
+      fun f -> s (H.enum_value [ ("Red", "red"); ("Green", "green"); ("Blue", "blue") ] f) );
+    ( "enumValue/numeric",
+      fun f ->
+        H.enum_value
+          [ ("0", s "Zero"); ("1", s "One"); ("2", s "Two"); ("Zero", i 0); ("One", i 1); ("Two", i 2) ]
+          f );
+    ( "enumValue/mixed",
+      (* Entries in JS property order: integer keys first. *)
+      fun f ->
+        H.enum_value
+          [ ("1", s "A"); ("A", i 1); ("B", s "b"); ("1e3", s "x"); ("0x1f", s "y"); (" ", s "z"); ("NaN", s "n") ]
+          f );
+    ("enumValue/empty", fun f -> H.enum_value [] f);
     ("rangeToNumber", fun f -> i (H.range_to_number (`Range (1, 100)) f));
     ( "slugify",
       fun _ ->
@@ -54,6 +70,13 @@ let cases : case list =
         s
           (H.mustache (Some "I found {{count}} instances of \"{{word}}\".")
              [ ("count", `F (fun _ -> string_of_int (Faker.Number.int ~max:9 f))); ("word", `S "th$is") ]) );
+    ( "fake/registry",
+      fun f ->
+        s
+          (H.fake
+             "{{number.bigInt}} {{number.bigInt(10)}} {{number.bigInt({\"min\":5,\"max\":9})}} \
+              {{helpers.objectEntry({\"a\":1,\"b\":2})}} {{helpers.enumValue({\"A\":\"x\",\"B\":\"y\"})}}"
+             f) );
     ("fake/literal", fun f -> s (H.fake "no tokens here" f));
     ( "fake/number",
       fun f -> s (H.fake "{{number.int}} and {{number.int(5)}} and {{number.int({\"min\":10,\"max\":20})}}" f) );

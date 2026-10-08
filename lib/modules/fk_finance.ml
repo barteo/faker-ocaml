@@ -139,7 +139,7 @@ let credit_card_data f = match Locale.get f "finance" "credit_card" with Json.Ob
     custom format containing ['#']. *)
 let credit_card_number ?(issuer = "") f =
   let local_format = credit_card_data f in
-  let normalized_issuer = String.lowercase_ascii issuer in
+  let normalized_issuer = Unicode.js_lower issuer in
   let format =
     match List.assoc_opt normalized_issuer local_format with
     | Some formats -> Locale.to_string (Fk_helpers.array_element (to_array formats) f)

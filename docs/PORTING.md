@@ -49,10 +49,17 @@ harness converts `Faker.Faker_error msg` in the same way.
   and `a *. b -. c`.
 - JS `Number.toString`, `toFixed`, `parseInt`, `padStart` and so on are in `lib/internal/js.ml`.
   JS `Math.round(x)` is `Float.floor (x +. 0.5)`, not `Float.round`.
-- JS strings are UTF-16 and OCaml strings are UTF-8 bytes. Most en data is ASCII. Where upstream
-  takes `.length`, indexes, slices, spreads (`[...str]` → `Js.code_points`) or calls
-  `toUpperCase`/`toLowerCase` on data that may contain non-ASCII text, check that the result is
-  still identical (`Unicode.js_length`, `Unicode.nfkd`).
+- JS strings are UTF-16 and OCaml strings are UTF-8 bytes. en data is mostly ASCII, but the
+  other 76 locales are not, so never use `String.uppercase_ascii` and friends on locale data.
+  The JS equivalents are in `lib/internal/unicode.ml`:
+  - `toUpperCase` → `Unicode.js_upper`; `toLowerCase` → `Unicode.js_lower` (with the
+    final-sigma rule); `s.charAt(0).toUpperCase() + s.slice(1)` → `Unicode.js_upper_first`.
+  - `.length` → `Unicode.js_length`; spreads (`[...str]`) → `Js.code_points`.
+  - `normalize('NFKD')` → `Fk_internet_nfkd.nfkd` (full table, canonical ordering).
+    `Unicode.nfkd` alone only covers the Latin, Greek and Cyrillic blocks.
+  - `Number(str)` → `Js.to_number`.
+  The tables come from node via `tools/gen_unicode.mjs`. The locale sweeps
+  (`ONLY='sweep_*'`, `ONLY='l10n_*'`) catch most mistakes here.
 - Array spread or copy, `Object.keys` order, and `.at(-1)` all need care. Keep the evaluation
   order of RNG calls exactly as upstream, including JS's left-to-right evaluation of template
   literals and arguments. OCaml evaluates function arguments **right to left**, so bind each

@@ -2,11 +2,9 @@
 
 let pick entry f = Fk_helpers.array_element (Locale.strings f "food" entry) f
 
-(* text.split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ').
-   The en food data (and the person names used by its patterns) only start words with ASCII
-   characters, so an ASCII capitalization of the first byte is equivalent. *)
+(* text.split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') *)
 let to_title_case text =
-  String.concat " " (List.map String.capitalize_ascii (String.split_on_char ' ' text))
+  String.concat " " (List.map Unicode.js_upper_first (String.split_on_char ' ' text))
 
 let adjective f = pick "adjective" f
 let description f = Fake.fake_json (Locale.get f "food" "description_pattern") f
