@@ -1,0 +1,6 @@
+{
+  "name": "faker-ocaml-tools",
+  "private": true,
+  "type": "module",
+  "dependencies": { "@faker-js/faker": "10.6.0" }
+}

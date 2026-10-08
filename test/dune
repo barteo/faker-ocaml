@@ -1,0 +1,6 @@
+(include_subdirs unqualified)
+
+(tests
+ (names test_parity test_props)
+ (modules :standard)
+ (libraries faker alcotest))

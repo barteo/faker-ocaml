@@ -1,0 +1,30 @@
+const R = '2020-02-29T23:59:59.999Z';
+const OLD = '1960-06-15T08:09:10.111Z';
+
+export const cases = [
+  ['branch', (f) => f.git.branch()],
+  ['commitEntry', (f) => f.git.commitEntry()],
+  ['commitEntry/merge', (f) => f.git.commitEntry({ merge: true })],
+  ['commitEntry/nomerge', (f) => f.git.commitEntry({ merge: false })],
+  ['commitEntry/lf', (f) => f.git.commitEntry({ eol: 'LF' })],
+  ['commitEntry/crlf', (f) => f.git.commitEntry({ eol: 'CRLF', merge: true })],
+  ['commitEntry/ref', (f) => f.git.commitEntry({ refDate: R })],
+  ['commitEntry/refnum', (f) => f.git.commitEntry({ refDate: 1600000000123 })],
+  ['commitEntry/old', (f) => f.git.commitEntry({ refDate: OLD, eol: 'LF', merge: true })],
+  ['commitEntry/referr', (f) => f.git.commitEntry({ refDate: NaN })],
+  ['commitMessage', (f) => f.git.commitMessage()],
+  ['commitDate', (f) => f.git.commitDate()],
+  ['commitDate/ref', (f) => f.git.commitDate({ refDate: R })],
+  ['commitDate/refnum', (f) => f.git.commitDate({ refDate: 1600000000123 })],
+  ['commitDate/old', (f) => f.git.commitDate({ refDate: OLD })],
+  ['commitDate/epoch', (f) => f.git.commitDate({ refDate: 86400000 })],
+  ['commitDate/referr', (f) => f.git.commitDate({ refDate: NaN })],
+  ['commitSha', (f) => f.git.commitSha()],
+  ['commitSha/7', (f) => f.git.commitSha({ length: 7 })],
+  ['commitSha/1', (f) => f.git.commitSha({ length: 1 })],
+  ['commitSha/0', (f) => f.git.commitSha({ length: 0 })],
+  ['commitSha/64', (f) => f.git.commitSha({ length: 64 })],
+  ['fake/misc', (f) => f.helpers.fake('{{git.branch}}|{{git.commitMessage}}|{{git.commitDate}}|{{git.commitSha}}|{{git.commitSha({"length":7})}}|{{git.commitDate({"refDate":"2020-01-01T00:00:00.000Z"})}}')],
+  ['fake/entry', (f) => f.helpers.fake('{{git.commitEntry({"merge":true,"eol":"LF","refDate":"2020-01-01T00:00:00.000Z"})}}')],
+  ['fake/entrydefault', (f) => f.helpers.fake('{{git.commitEntry}}')],
+];
