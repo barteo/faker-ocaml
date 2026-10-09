@@ -1,3 +1,12 @@
+## 0.1.1
+
+- Fix the test suite on FreeBSD. `Distributor.exponential` calls the platform's libm `pow`,
+  as faker-js does through `Math.pow`, so its results can differ in the last bit between
+  platforms. The parity tests now compare those cases (`number` `int/exp` and `float/exp`)
+  with a tiny tolerance, and the README lists this under known differences. The library
+  itself is unchanged.
+- CI also runs the tests on FreeBSD.
+
 ## 0.1.0
 
 Initial release: an OCaml port of @faker-js/faker 10.6.0.
