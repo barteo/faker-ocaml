@@ -38,6 +38,9 @@ jobs:
           run: |
             set -e
             export OPAMYES=1 OPAMROOTISOK=1
+            # The VM runs as root, but the synced checkout keeps the runner's
+            # owner, so git (and opam, which runs git ls-files) refuses it.
+            git config --global --add safe.directory "$PWD"
             freebsd-version
             opam init --bare --disable-sandboxing --no-setup
             opam switch create ci ocaml-base-compiler
