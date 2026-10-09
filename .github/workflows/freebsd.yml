@@ -38,14 +38,17 @@ jobs:
           run: |
             set -e
             export OPAMYES=1 OPAMROOTISOK=1
-            # The VM runs as root, but the synced checkout keeps the runner's
-            # owner, so git (and opam, which runs git ls-files) refuses it.
-            git config --global --add safe.directory "$PWD"
             freebsd-version
+            # git rejects the synced checkout in the VM (exit 128), so
+            # `opam install . --deps-only` fails in its `git ls-files`. Log
+            # git's message, then install the dependencies by name (keep in
+            # sync with dune-project) so opam doesn't touch the checkout.
+            git config --global --add safe.directory "$PWD"
+            git ls-files >/dev/null || true
             opam init --bare --disable-sandboxing --no-setup
             opam switch create ci ocaml-base-compiler
             eval "$(opam env --switch=ci)"
             ocaml -version
-            opam install . --deps-only --with-test
+            opam install dune alcotest
             dune build
             dune test
