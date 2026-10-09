@@ -220,6 +220,9 @@ such as FMA contraction on arm64, UTF-16 vs UTF-8, and JS number formatting.
   locale-dependent `Date.toString()`.
 - `location.nearbyGPSCoordinate` uses a port of V8's fdlibm `sin`/`cos`, which is bit-exact
   with node on arm64.
+- `Distributor.exponential` calls the platform's libm `pow`, as node's `Math.pow` does. Its
+  results can differ in the last bit between platforms (e.g. FreeBSD vs Linux/macOS) in
+  faker-js too, so they match faker-js running on the same platform.
 
 ## ✨ Contributing
 
